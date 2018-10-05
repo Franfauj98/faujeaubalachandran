@@ -16,8 +16,6 @@ using namespace state;
 
 int main(int argc,char* argv[])
 {
-    Exemple exemple;
-    exemple.setX(53);
 
     if (argv[1] &&!strcmp(argv[1],"hello")){
       cout << "Bonjour le monde!" << endl;
