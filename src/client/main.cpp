@@ -20,7 +20,7 @@ int main(int argc,char* argv[])
     if (argv[1] &&!strcmp(argv[1],"hello")){
       cout << "Bonjour le monde!" << endl;
     } else {
-      cout << "Please type 'hello'!" << endl;
+      cout << "Please type 'helloo'!" << endl;
     }
 
     return 0;
