@@ -21,7 +21,7 @@ namespace state {
     // Operations
   public:
     Barrack (int capacity, int id, Position position, int level, int idTexture);
-    int getCapacity ();
+    int getCapacity () const;
     void setCapacity (int capacity);
     /// switch case for units level. 
     void createArrow ();

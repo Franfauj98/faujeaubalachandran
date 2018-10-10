@@ -15,9 +15,9 @@ namespace state {
   public:
     UnitCost (int gold, int food);
     void setGold (int gold);
-    int getGold ();
+    int getGold () const;
     void setFood (int food);
-    int getFood ();
+    int getFood () const;
     // Setters and Getters
   };
 
