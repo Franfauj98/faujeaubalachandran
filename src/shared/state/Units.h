@@ -5,12 +5,13 @@
 
 namespace state {
   class Position;
+  class Units;
   class Element;
 }
 
 #include "Position.h"
-#include "Element.h"
 #include "IdTextureUnits.h"
+#include "Element.h"
 
 namespace state {
 
@@ -39,10 +40,10 @@ namespace state {
     int getStrikeRange () const;
     void setMovingRange (int movingRange);
     int getMovingRange () const;
-    virtual void move (Position p1, Position p2);
-    virtual bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
-    virtual void attack (Element unit1, Element unit2);
-    virtual bool attackAllowed (Element unit1, Element unit2, int strikeRange);
+    void move (Position& p2, int moveNumber);
+    bool moveAllowed (Position p2, int moveNumber);
+    void attack (Units& unit2);
+    bool attackAllowed (Units unit2);
     int getLevel () const;
     void setLevel (int level);
     IdTextureUnits getIdTextureUnits () const;

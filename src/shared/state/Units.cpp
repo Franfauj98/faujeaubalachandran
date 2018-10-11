@@ -71,16 +71,42 @@ void Units::setIdUnits (int idUnits){
   this->idUnits = idUnits;
 }
 
-void Units::move (Position p1, Position p2){}
-
-bool Units::moveAllowed (Position p1, Position p2, int movingRange, int moveNumber){
-  return true;
+void Units::move (Position& p2, int moveNumber){
+  if(moveAllowed(p2, moveNumber)) this->position=p2;
 }
 
-void Units::attack (Element unit1, Element unit2){}
+bool Units::moveAllowed (Position p2, int moveNumber){
+  if(moveNumber>0 && p2.getX()>=0 && p2.getY()>=0){
+    if(distance(this->position, p2) <= this -> movingRange){
+      return true;
+    }
+    return false;
+  } else {
+    return false;
+  }
+}
 
-bool Units::attackAllowed (Element unit1, Element unit2, int strikeRange){
-  return true;
+void Units::attack (Units& unit2){
+  if(attackAllowed(unit2)){
+    const int tempLife = unit2.getLife()-this->damage;
+    if(tempLife>0){
+      unit2.setLife(tempLife);
+    } else{
+      unit2.setLife(0);
+    }
+  }
+}
+
+bool Units::attackAllowed (Units unit2){
+  if(unit2.getLife() > 0){
+    if(distance(this->position, unit2.getPosition()) <= this -> strikeRange){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+  return false;
+  }
 }
 
 Units::~Units () {}
