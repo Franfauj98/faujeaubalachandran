@@ -6,13 +6,14 @@ Units::Units () : Element(){
 
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
-  int level, int idTextureUnits) : Element(position){
+  int level, IdTextureUnits idTextureUnits) : Element(position){
   this->idUnits = idUnits;
   this->life = life;
   this->damage = damage;
   this->strikeRange = strikeRange;
   this->movingRange = movingRange;
   this->level = level;
+  this->idTextureUnits=idTextureUnits;
 }
 
 void Units::setLife (int life){

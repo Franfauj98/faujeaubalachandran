@@ -9,6 +9,7 @@ namespace state {
 }
 
 #include "Position.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -17,7 +18,8 @@ namespace state {
   class Palace : public state::Buildings {
     // Operations
   public:
-    Palace (int id, Position position, int level, int idTexture);
+    Palace ();
+    Palace (int id, Position position, int level, IdTexture idTexture);
     // Setters and Getters
   };
 

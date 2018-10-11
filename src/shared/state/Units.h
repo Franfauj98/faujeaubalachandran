@@ -30,7 +30,7 @@ namespace state {
     // Operations
   public:
     Units ();
-    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, int idTextureUnits);
+    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits);
     ~Units ();
     void setLife (int life);
     int getLife () const;

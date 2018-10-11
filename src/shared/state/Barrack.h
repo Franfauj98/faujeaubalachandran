@@ -5,10 +5,19 @@
 
 namespace state {
   class Position;
+  class Arrow;
+  class Cavalier;
+  class Decurion;
+  class Catapult;
   class Buildings;
 }
 
 #include "Position.h"
+#include "IdTexture.h"
+#include "Arrow.h"
+#include "Cavalier.h"
+#include "Decurion.h"
+#include "Catapult.h"
 #include "Buildings.h"
 
 namespace state {
@@ -20,16 +29,26 @@ namespace state {
     int capacity;
     // Operations
   public:
-    Barrack (int capacity, int id, Position position, int level, int idTexture);
+    Barrack ();
+    Barrack (int capacity, int id, Position position, int level, IdTexture idTexture);
     int getCapacity () const;
     void setCapacity (int capacity);
     /// switch case for units level. 
-    void createArrow ();
+    /// @param level		(???) 
+    /// @param position		(???) 
+    /// @param id		(???) 
+    Arrow createArrow (int level, Position position, int id);
     /// switch case for units level. 
-    void createCavalier ();
+    /// @param level		(???) 
+    /// @param position		(???) 
+    /// @param id		(???) 
+    Cavalier createCavalier (int level, Position position, int id);
     /// switch case for units level. 
-    void createDecurion ();
-    void createCatapult ();
+    /// @param level		(???) 
+    /// @param position		(???) 
+    /// @param id		(???) 
+    Decurion createDecurion (int level, Position position, int id);
+    Catapult createCatapult (int level, Position position, int id);
     // Setters and Getters
   };
 

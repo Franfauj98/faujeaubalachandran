@@ -9,8 +9,8 @@ namespace state {
 }
 
 #include "Position.h"
-#include "Element.h"
 #include "IdTexture.h"
+#include "Element.h"
 
 namespace state {
 
@@ -24,11 +24,10 @@ namespace state {
     int level;
     // Operations
   public:
-    Buildings (int id, Position position, int level, int idTexture);
+    Buildings ();
+    Buildings (int id, Position position, int level, IdTexture idTexture);
     int getId () const;
     void setId (int id);
-    Position getPosition () const;
-    void setPosition (Position position);
     int getLevel () const;
     void setLevel (int level);
     // Setters and Getters

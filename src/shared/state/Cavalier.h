@@ -10,6 +10,7 @@ namespace state {
 }
 
 #include "Position.h"
+#include "IdTextureUnits.h"
 #include "Element.h"
 #include "Units.h"
 
@@ -19,7 +20,7 @@ namespace state {
   class Cavalier : public state::Units {
     // Operations
   public:
-    Cavalier (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, int idTextureUnits);
+    Cavalier (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits);
     bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
     void move (Position& p1, Position& p2);
     void attack (Element unit1, Element unit2);

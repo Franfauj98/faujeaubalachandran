@@ -9,6 +9,7 @@ namespace state {
 }
 
 #include "Position.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -20,7 +21,8 @@ namespace state {
     int production;
     // Operations
   public:
-    Ressource (int production, int id, Position position, int level, int idTexture);
+    Ressource ();
+    Ressource (int production, int id, Position position, int level, IdTexture idTexture);
     void ressourceProduction (int gold, int wood, int food);
     int getProduction () const;
     void setProduction (int production);

@@ -9,6 +9,7 @@ namespace state {
 }
 
 #include "Position.h"
+#include "IdTextureUnits.h"
 #include "Units.h"
 
 namespace state {
@@ -17,7 +18,7 @@ namespace state {
   class Arrow : public state::Units {
     // Operations
   public:
-    Arrow (int level, Position p, int id, int life, int damage, int strikeRange, int movingRange, int idTextureUnits);
+    Arrow (int level, int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits);
     // Setters and Getters
   };
 
