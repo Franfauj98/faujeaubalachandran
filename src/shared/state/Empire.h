@@ -46,20 +46,20 @@ namespace state {
     // Operations
   public:
     Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position);
-    int getId ();
+    int getId () const;
     void setName (std::string name);
-    std::string getName ();
+    std::string getName () const;
     void setEmpireLevel (int level);
-    int getEmpireLevel ();
+    int getEmpireLevel () const;
     void setLife (int life);
-    int getLife ();
-    int getGoldRessource ();
+    int getLife () const;
+    int getGoldRessource () const;
     void setGoldRessource (int gold);
-    int getWoodRessource ();
+    int getWoodRessource () const;
     void setWoodRessource (int wood);
-    int getFoodRessource ();
+    int getFoodRessource () const;
     void setFoodRessource (int food);
-    std::vector<Position> getPosition ();
+    std::vector<Position> getPosition () const;
     void setPosition (std::vector<Position> postion);
     // Setters and Getters
   };

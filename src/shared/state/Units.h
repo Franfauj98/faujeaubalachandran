@@ -5,12 +5,13 @@
 
 namespace state {
   class Position;
+  class Units;
   class Element;
 }
 
 #include "Position.h"
-#include "Element.h"
 #include "IdTextureUnits.h"
+#include "Element.h"
 
 namespace state {
 
@@ -23,35 +24,33 @@ namespace state {
     int idUnits;
     int life;
     int damage;
-    int stikeRange;
+    int strikeRange;
     int movingRange     = 1;
     int level;
     // Operations
   public:
-    Units (int id, Position position, int life, int damage, int strikeRange, int movingRange, int level, int idTextureUnits);
-    void setPosition (Position position);
-    Position getPosition ();
+    Units ();
+    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, int idTextureUnits);
+    ~Units ();
     void setLife (int life);
-    int getLife ();
+    int getLife () const;
     void setDamage (int damage);
-    int getDamage ();
+    int getDamage () const;
     void setStrikeRange (int strikeRange);
-    int getStrikeRange ();
+    int getStrikeRange () const;
     void setMovingRange (int movingRange);
-    int getMovingRange ();
-    virtual void move (Position p1, Position p2);
-    virtual bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
-    virtual void attack (Element unit1, Element unit2);
-    virtual bool attackAllowed (Element unit1, Element unit2, int strikeRange);
+    int getMovingRange () const;
+    void move (Position& p2, int moveNumber);
+    bool moveAllowed (Position p2, int moveNumber);
+    void attack (Units& unit2);
+    bool attackAllowed (Units unit2);
+    int getLevel () const;
+    void setLevel (int level);
+    IdTextureUnits getIdTextureUnits () const;
+    void setIdTextureUnits (IdTextureUnits idTextureUnits);
+    int getIdUnits () const;
+    void setIdUnits (int idUnits);
     // Setters and Getters
-    IdTextureUnits getIdTextureUnits() const;
-    void setIdTextureUnits(IdTextureUnits idTextureUnits);
-    int getIdUnits() const;
-    void setIdUnits(int idUnits);
-    int getStikeRange() const;
-    void setStikeRange(int stikeRange);
-    int getLevel() const;
-    void setLevel(int level);
   };
 
 };

@@ -3,8 +3,8 @@
 #define __STATE__H
 
 #include "state/Position.h"
-#include "state/Element.h"
 #include "state/IdTextureUnits.h"
+#include "state/Element.h"
 #include "state/Units.h"
 #include "state/Decurion.h"
 #include "state/Arrow.h"

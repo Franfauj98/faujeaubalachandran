@@ -103,13 +103,6 @@ int main(int argc,char* argv[])
   cout << "Life Arrow 1: " << arrow.getLife() << endl;
   cout << "Life Arrow 2: " << arrow2.getLife() << endl;
 
-<<<<<<< HEAD
-    if (argv[1] &&!strcmp(argv[1],"hello")){
-      cout << "Bonjour le monde!" << endl;
-    } else {
-      cout << "Please type 'helloo'!" << endl;
-    }
-=======
   cout << "-------------------------------------" << endl;
   cout << "TEST LIVRABLE 1.1" << endl;
   cout << "-------------------------------------" << endl;
@@ -118,7 +111,6 @@ int main(int argc,char* argv[])
   } else {
     cout << "Please type 'hello'!" << endl;
   }
->>>>>>> 9a4c960175be46c2474aa9c4f7054d5c9445fa32
 
   return 0;
 }

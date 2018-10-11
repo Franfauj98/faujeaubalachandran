@@ -25,11 +25,11 @@ namespace state {
     // Operations
   public:
     Buildings (int id, Position position, int level, int idTexture);
-    int getId ();
+    int getId () const;
     void setId (int id);
-    Position getPosition ();
+    Position getPosition () const;
     void setPosition (Position position);
-    int getLevel ();
+    int getLevel () const;
     void setLevel (int level);
     // Setters and Getters
     IdTexture getIdTexture() const;

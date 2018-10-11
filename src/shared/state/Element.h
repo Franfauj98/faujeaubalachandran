@@ -19,10 +19,14 @@ namespace state {
     Position position;
     // Operations
   public:
+    Element ();
+    Element (Position position);
+    ~Element ();
     bool isPassable ();
+    Position& getPosition ();
+    void setPosition (Position& position);
+    int distance (Position pos1, Position pos2);
     // Setters and Getters
-    const Position& getPosition() const;
-    void setPosition(const Position& position);
   };
 
 };

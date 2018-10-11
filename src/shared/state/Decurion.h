@@ -21,7 +21,7 @@ namespace state {
   public:
     Decurion (int level, int id, Position position, int life, int dammage, int strikeRange, int movingRange, int idTextureUnits);
     bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
-    void move (Position p1, Position p2);
+    void move (Position& p1, Position& p2);
     void attack (Element unit1, Element unit2);
     bool attackAllowed (Element unit1, Element unit2, int strikeRange);
     // Setters and Getters
