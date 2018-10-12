@@ -27,12 +27,15 @@ namespace state {
     // Attributes
   private:
     int capacity;
+    int unitsNumber;
     // Operations
   public:
     Barrack ();
     Barrack (int capacity, int id, Position position, int level, IdTexture idTexture);
     int getCapacity () const;
     void setCapacity (int capacity);
+    int  getUnitsNumber () const;
+    void setUnitsNumber (int unitsNumber);
     /// switch case for units level. 
     /// @param level		(???) 
     /// @param position		(???) 

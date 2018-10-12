@@ -23,7 +23,10 @@ namespace state {
     bool passable;
     // Operations
   public:
+    Decor ();
     Decor (IdDecor id, Position position);
+    bool getPassable () const;
+    void setPassable (bool passable);
     // Setters and Getters
     IdDecor getIdDecor() const;
     void setIdDecor(IdDecor idDecor);
