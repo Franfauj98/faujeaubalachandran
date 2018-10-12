@@ -18,7 +18,6 @@ namespace state {
     ~Position ();
     int getX () const;
     int getY () const;
-    ~Position ();
     // Setters and Getters
   };
 

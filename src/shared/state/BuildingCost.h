@@ -4,11 +4,6 @@
 
 
 namespace state {
-  class BuildingCost;
-}
-
-
-namespace state {
 
   /// class BuildingCost - 
   class BuildingCost {
@@ -19,11 +14,11 @@ namespace state {
     // Operations
   public:
     BuildingCost (int gold, int wood);
+    ~BuildingCost ();
     void setGold (int gold);
     int getGold () const;
     void setWood (int wood);
     int getWood () const;
-    BuildingCost ~ ();
     // Setters and Getters
   };
 

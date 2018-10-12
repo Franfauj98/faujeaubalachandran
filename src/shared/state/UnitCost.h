@@ -4,11 +4,6 @@
 
 
 namespace state {
-  class UnitCost;
-}
-
-
-namespace state {
 
   /// class UnitCost - 
   class UnitCost {
@@ -19,11 +14,11 @@ namespace state {
     // Operations
   public:
     UnitCost (int gold, int food);
+    ~UnitCost ();
     void setGold (int gold);
     int getGold () const;
     void setFood (int food);
     int getFood () const;
-    UnitCost ~ ();
     // Setters and Getters
   };
 

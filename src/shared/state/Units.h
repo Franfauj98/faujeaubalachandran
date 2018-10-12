@@ -51,7 +51,6 @@ namespace state {
     int getIdUnits () const;
     void setIdUnits (int idUnits);
     bool isPassable ();
-    ~Units ();
     // Setters and Getters
   };
 
