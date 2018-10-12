@@ -36,3 +36,9 @@ int Buildings::getIdBuilding() const{
 void Buildings::setIdBuilding(int idBuilding){
   this->idBuilding=idBuilding;
 }
+bool isPassable(){
+  return false;
+}
+Buildings::~Buildings(){
+
+}

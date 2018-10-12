@@ -18,3 +18,7 @@ void UnitCost::setFood (int food){
 int UnitCost::getFood () const{
   return this->food;
 }
+
+UnitCost::~UnitCost(){
+  
+}

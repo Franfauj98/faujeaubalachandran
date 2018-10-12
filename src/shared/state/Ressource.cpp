@@ -16,3 +16,7 @@ int Ressource::getProduction() const {
 void Ressource::setProduction(int production) {
    this->production=production;
 }
+
+Ressource::~Ressource(){
+  
+}

@@ -27,12 +27,6 @@ Decor::Decor(IdDecor id, Position position):Element(position) {
     case IdDecor::EAU: passable=false;
     break;
   }
-  /*if (id==IdDecor::ARBRE){
-    passable=true;
-  }
-  else{
-    passable=false;
-  }*/
 }
 bool Decor::getPassable() const {
   return this->passable;
