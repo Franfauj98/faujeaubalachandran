@@ -18,3 +18,7 @@ void BuildingCost::setWood (int wood){
 int BuildingCost::getWood () const{
   return this->wood;
 }
+
+BuildingCost::~BuildingCost(){
+
+}

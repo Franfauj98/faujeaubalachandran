@@ -23,9 +23,9 @@ namespace state {
   public:
     Ressource ();
     Ressource (int production, int id, Position position, int level, IdTexture idTexture);
-    void ressourceProduction (int gold, int wood, int food);
     int getProduction () const;
     void setProduction (int production);
+    ~Ressource ();
     // Setters and Getters
   };
 

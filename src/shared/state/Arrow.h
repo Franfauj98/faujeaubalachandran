@@ -18,7 +18,10 @@ namespace state {
   class Arrow : public state::Units {
     // Operations
   public:
+    Arrow ();
     Arrow (int level, int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits);
+    Arrow (int level, Position position, int id);
+    ~Arrow ();
     // Setters and Getters
   };
 

@@ -20,6 +20,7 @@ namespace state {
   public:
     Palace ();
     Palace (int id, Position position, int level, IdTexture idTexture);
+    ~Palace ();
     // Setters and Getters
   };
 

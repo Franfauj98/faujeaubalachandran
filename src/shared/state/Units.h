@@ -50,6 +50,8 @@ namespace state {
     void setIdTextureUnits (IdTextureUnits idTextureUnits);
     int getIdUnits () const;
     void setIdUnits (int idUnits);
+    bool isPassable ();
+    ~Units ();
     // Setters and Getters
   };
 

@@ -30,6 +30,8 @@ namespace state {
     void setId (int id);
     int getLevel () const;
     void setLevel (int level);
+    bool isPassable ();
+    ~Buildings ();
     // Setters and Getters
     IdTexture getIdTexture() const;
     void setIdTexture(IdTexture idTexture);

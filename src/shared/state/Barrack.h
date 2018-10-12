@@ -52,6 +52,7 @@ namespace state {
     /// @param id		(???) 
     Decurion createDecurion (int level, Position position, int id);
     Catapult createCatapult (int level, Position position, int id);
+    ~Barrack ();
     // Setters and Getters
   };
 

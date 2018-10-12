@@ -31,41 +31,41 @@ void Barrack::setUnitsNumber(int unitsNumber){
   this->unitsNumber=unitsNumber;
 }
 
-Arrow Barrack::createArrow(int level,Position position, int id){
-  if (this->unitsNumber<this->capacity){
-    //Arrow arrow();
-    if (level==1) {
-      /*arrow.setLevel(1);
-      arrow.setId(id);
-      arrow.setPosition(position);
-      arrow.setLife(50);
-      arrow.setDamage(10);
-      arrow.setStrikeRange(2);
-      arrow.setMovingRange(1);
-      arrow.setIdTextureUnits(ARROW1);*/
-      Arrow arrow1(1,id,position,50,10,2,1,ARROW1);
-      return arrow1;
-    }
-    else if (level==2) {
-      Arrow arrow2(2,id,position,50,10,2,1,ARROW2);
-      return arrow2;
-    }
-    else if (level==3) {
-      Arrow arrow3(3,id,position,50,10,2,1,ARROW3);
-      return arrow3;
-    }
-    else if (level==4) {
-      Arrow arrow4(4,id,position,50,10,2,1,ARROW4);
-      return arrow4;
-    }
-    else {
-      return null;
-    }
-  }
-  else {
-    return null;
-  }
-}
+// Arrow Barrack::createArrow(int level,Position position, int id){
+//   if (this->unitsNumber<this->capacity){
+//     //Arrow arrow();
+//     if (level==1) {
+//       /*arrow.setLevel(1);
+//       arrow.setId(id);
+//       arrow.setPosition(position);
+//       arrow.setLife(50);
+//       arrow.setDamage(10);
+//       arrow.setStrikeRange(2);
+//       arrow.setMovingRange(1);
+//       arrow.setIdTextureUnits(ARROW1);*/
+//       Arrow arrow1(1,id,position,50,10,2,1,ARROW1);
+//       return arrow1;
+//     }
+//     else if (level==2) {
+//       Arrow arrow2(2,id,position,50,10,2,1,ARROW2);
+//       return arrow2;
+//     }
+//     else if (level==3) {
+//       Arrow arrow3(3,id,position,50,10,2,1,ARROW3);
+//       return arrow3;
+//     }
+//     else if (level==4) {
+//       Arrow arrow4(4,id,position,50,10,2,1,ARROW4);
+//       return arrow4;
+//     }
+//     else {
+//       return null;
+//     }
+//   }
+//   else {
+//     return null;
+//   }
+// }
 
 /*void Barrack::createCavalier (int level, Position position, int id){
   if (level==1) {
@@ -111,3 +111,7 @@ void Barrack::createCatapult (int level, Position position, int id){
     Catapult catapult4(4,id,position,50,10,2,1,CATAPULT4);
   }
 }*/
+
+Barrack::~Barrack(){
+  
+}

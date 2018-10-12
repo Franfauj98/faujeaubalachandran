@@ -61,6 +61,7 @@ namespace state {
     void setFoodRessource (int food);
     std::vector<Position> getPosition () const;
     void setPosition (std::vector<Position> postion);
+    ~Empire ();
     // Setters and Getters
   };
 
