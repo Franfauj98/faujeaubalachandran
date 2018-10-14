@@ -6,7 +6,7 @@ Units::Units () : Element(){
 
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
-  int level, IdTextureUnits idTextureUnits) : Element(position){
+  int level, IdTextureUnits idTextureUnits, UnitCost uniCost) : Element(position){
   this->idUnits = idUnits;
   this->life = life;
   this->damage = damage;
@@ -14,6 +14,7 @@ Units::Units (int idUnits, Position position, int life,
   this->movingRange = movingRange;
   this->level = level;
   this->idTextureUnits=idTextureUnits;
+  this->unitCost=unitCost;
 }
 
 void Units::setLife (int life){
@@ -70,6 +71,14 @@ int Units::getIdUnits () const{
 
 void Units::setIdUnits (int idUnits){
   this->idUnits = idUnits;
+}
+
+UnitCost Units::getUnitCost () const{
+  return this->unitCost;
+}
+
+void Units::setUnitCost (UnitCost uniCost){
+  this->unitCost=uniCost;
 }
 
 void Units::move (Position& p2, int moveNumber){

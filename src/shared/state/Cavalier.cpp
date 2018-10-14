@@ -3,12 +3,12 @@ using namespace state;
 
 Cavalier::Cavalier () : Units() {}
 
-Cavalier::Cavalier (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits) {}
+Cavalier::Cavalier (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost cavalierCost) :
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, cavalierCost) {}
 
 Cavalier::Cavalier (int level, Position p, int id){
   switch(level){
-    case 1 :
+    case 1 :{
       setPosition(p);
       setIdUnits(id);
       setLife(1000);
@@ -17,8 +17,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(CAVALIER1);
-      break;
-    case 2 :
+      UnitCost cavalierCost(50,50);
+      setUnitCost(cavalierCost);
+      break;}
+    case 2 :{
       setPosition(p);
       setIdUnits(id);
       setLife(1500);
@@ -27,8 +29,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(CAVALIER2);
-      break;
-    case 3 :
+      UnitCost cavalierCost(100,100);
+      setUnitCost(cavalierCost);
+      break;}
+    case 3 :{
       setPosition(p);
       setIdUnits(id);
       setLife(2000);
@@ -37,8 +41,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(CAVALIER3);
-      break;
-    case 4 :
+      UnitCost cavalierCost(150,150);
+      setUnitCost(cavalierCost);
+      break;}
+    case 4 :{
       setPosition(p);
       setIdUnits(id);
       setLife(2500);
@@ -47,17 +53,21 @@ Cavalier::Cavalier (int level, Position p, int id){
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(CAVALIER4);
-      break;
-    default :
+      UnitCost cavalierCost(200,200);
+      setUnitCost(cavalierCost);
+      break;}
+    default :{
       setPosition(p);
       setIdUnits(id);
       setLife(1000);
       setDamage(180);
       setStrikeRange(1);
       setMovingRange(1);
-      setLevel(level);
+      setLevel(1);
       setIdTextureUnits(CAVALIER1);
-      break;
+      UnitCost cavalierCost(50,50);
+      setUnitCost(cavalierCost);
+      break;}
   }
 }
 

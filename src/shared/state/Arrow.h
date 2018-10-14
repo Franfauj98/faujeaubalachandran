@@ -5,11 +5,13 @@
 
 namespace state {
   class Position;
+  class UnitCost;
   class Units;
 }
 
 #include "Position.h"
 #include "IdTextureUnits.h"
+#include "UnitCost.h"
 #include "Units.h"
 
 namespace state {
@@ -19,7 +21,7 @@ namespace state {
     // Operations
   public:
     Arrow ();
-    Arrow (int level, int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits);
+    Arrow (int level, int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost);
     Arrow (int level, Position position, int id);
     ~Arrow ();
     // Setters and Getters

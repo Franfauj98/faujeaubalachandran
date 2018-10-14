@@ -31,7 +31,8 @@ int main(int argc,char* argv[])
   cout << "-------------------------------------" << endl;
   Position pos8(10,5);
   Position pos9(5,5);
-  Buildings Bat(1, pos8, 0,HDV0);
+  BuildingCost bc(10,100);
+  Buildings Bat(1, pos8, 0,HDV1,bc);
 
   cout << "id : " << Bat.getId() << endl;
   cout << "Position x : " << Bat.getPosition().getX() << endl;
@@ -53,7 +54,7 @@ int main(int argc,char* argv[])
   cout << "TEST PALACE" << endl;
   cout << "-------------------------------------" << endl;
 
-  Palace P(0, pos8, 0,HDV0);
+  Palace P(0, pos8, 0,HDV1,bc);
 
   cout << "id : " << P.getId() << endl;
   cout << "Position x : " << P.getPosition().getX() << endl;
@@ -75,7 +76,7 @@ int main(int argc,char* argv[])
   cout << "TEST RESSOURCE" << endl;
   cout << "-------------------------------------" << endl;
 
-  Ressource R(5,1, pos8, 0,RESSOURCE);
+  Ressource R(5,1, pos8, 0,RESSOURCE,bc);
 
   cout << "id : " << R.getId() << endl;
   cout << "Position x : " << R.getPosition().getX() << endl;
@@ -98,7 +99,7 @@ int main(int argc,char* argv[])
   cout << "TEST BARRACK" << endl;
   cout << "-------------------------------------" << endl;
 
-  Barrack B(2,3, pos8, 0,BARRACK);
+  Barrack B(2,3, pos8, 0,BARRACK,bc);
 
   cout << "id : " << B.getId() << endl;
   cout << "Position x : " << B.getPosition().getX() << endl;

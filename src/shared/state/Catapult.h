@@ -5,11 +5,13 @@
 
 namespace state {
   class Position;
+  class UnitCost;
   class Units;
 }
 
 #include "Position.h"
 #include "IdTextureUnits.h"
+#include "UnitCost.h"
 #include "Units.h"
 
 namespace state {
@@ -19,7 +21,7 @@ namespace state {
     // Operations
   public:
     Catapult ();
-    Catapult (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits);
+    Catapult (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost catapultCost);
     Catapult (int level, Position position, int id);
     ~Catapult ();
     // Setters and Getters

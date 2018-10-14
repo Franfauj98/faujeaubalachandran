@@ -4,15 +4,72 @@
 #include "Cavalier.h"
 #include "Decurion.h"
 #include "Catapult.h"
+
 using namespace state;
 
 Barrack::Barrack():Buildings(){
 
 }
 
-Barrack::Barrack(int capacity, int id, Position position, int level, IdTexture idTexture):Buildings(id,position,level,idTexture){
+Barrack::Barrack(int capacity, int id, Position position, int level, IdTexture idTexture,BuildingCost barrackCost):Buildings(id,position,level,idTexture,barrackCost){
   this->capacity=capacity;
+  this->unitsNumber=0;
 
+}
+
+Barrack::Barrack (int id, Position position, int level) : Buildings() {
+  switch(level){
+    case 1 : {
+      setCapacity(2);
+      setId(id);
+      setPosition(position);
+      setLevel(1);
+      setIdTexture(BARRACK);
+      BuildingCost barrackCost(50,50);
+      setBuildingCost(barrackCost);
+      setUnitsNumber(0);
+      break;}
+    case 2 :{
+      setCapacity(4);
+      setId(id);
+      setPosition(position);
+      setLevel(2);
+      setIdTexture(BARRACK);
+      BuildingCost barrackCost(100,100);
+      setBuildingCost(barrackCost);
+      setUnitsNumber(0);
+      break;}
+    case 3 :{
+      setCapacity(6);
+      setId(id);
+      setPosition(position);
+      setLevel(3);
+      setIdTexture(BARRACK);
+      BuildingCost barrackCost(150,150);
+      setBuildingCost(barrackCost);
+      setUnitsNumber(0);
+      break;}
+    case 4 :{
+      setCapacity(8);
+      setId(id);
+      setPosition(position);
+      setLevel(4);
+      setIdTexture(BARRACK);
+      BuildingCost barrackCost(200,200);
+      setBuildingCost(barrackCost);
+      setUnitsNumber(0);
+      break;}
+    default :{
+      setCapacity(2);
+      setId(id);
+      setPosition(position);
+      setLevel(1);
+      setIdTexture(BARRACK);
+      BuildingCost barrackCost(50,50);
+      setBuildingCost(barrackCost);
+      setUnitsNumber(0);
+      break;}
+  }
 }
 
 int Barrack::getCapacity() const{
@@ -31,68 +88,52 @@ void Barrack::setUnitsNumber(int unitsNumber){
   this->unitsNumber=unitsNumber;
 }
 
-// Arrow Barrack::createArrow(int level,Position position, int id){
-//   if (this->unitsNumber<this->capacity){
-//
-//     if (level==1) {
-//       Arrow arrow1(1,position,id);
-//       return arrow1;
-//     }
-//     else {
-//       Arrow arrow();
-//       return arrow;
-//     }
-//   }
-//   else {
-//     Arrow arrow();
-//     return arrow;
-//   }
-// }
-
-/*void Barrack::createCavalier (int level, Position position, int id){
-  if (level==1) {
-    Cavalier cavalier1(1,id, position,50,10,2,1,CAVALIER1);
+Arrow* Barrack::createArrow(Arrow* arrowName, int level,Position position, int id){
+  arrowName=0;
+  if (this->unitsNumber<this->capacity){
+     arrowName=new Arrow(level,position,id);
   }
-  else if (level==2) {
-    Cavalier cavalier2(2,id,position,50,10,2,1,CAVALIER2);
-  }
-  else if (level==3) {
-    Cavalier cavalier3(3,id,position,50,10,2,1,CAVALIER3);
-  }
-  else if (level==4) {
-    Cavalier cavalier4(4,id,position,50,10,2,1,CAVALIER4);
-  }
+  return arrowName;
 }
 
-void Barrack::createDecurion (int level, Position position, int id){
-  if (level==1) {
-    Decurion decurion1(1,id, position,50,10,2,1,DECURION1);
+Cavalier* Barrack::createCavalier (Cavalier* cavalierName, int level, Position position, int id){
+  cavalierName=0;
+  if (this->unitsNumber<this->capacity){
+     cavalierName=new Cavalier(level,position,id);
   }
-  else if (level==2) {
-    Decurion decurion2(2,id,position,50,10,2,1,DECURION2);
-  }
-  else if (level==3) {
-    Decurion decurion3(3,id,position,50,10,2,1,DECURION3);
-  }
-  else if (level==4) {
-    Decurion decurion4(4,id,position,50,10,2,1,DECURION4);
-  }
+  return cavalierName;
 }
 
-void Barrack::createCatapult (int level, Position position, int id){
-  if (level==1) {
-    Catapult catapult1(1,id, position,50,10,2,1,CATAPULT1);
+Decurion* Barrack::createDecurion (Decurion* decurionName, int level, Position position, int id){
+  decurionName=0;
+  if (this->unitsNumber<this->capacity){
+     decurionName=new Decurion(level,position,id);
   }
-  else if (level==2) {
-    Catapult catapult2(2,id,position,50,10,2,1,CATAPULT2);
+  return decurionName;
+}
+
+Catapult* Barrack::createCatapult (Catapult* catapultName, int level, Position position, int id){
+  catapultName=0;
+  if (this->unitsNumber<this->capacity){
+     catapultName=new Catapult(level,position,id);
   }
-  else if (level==3) {
-    Catapult catapult3(3,id,position,50,10,2,1,CATAPULT3);
-  }
-  else if (level==4) {
-    Catapult catapult4(4,id,position,50,10,2,1,CATAPULT4);
-  }
-}*/
+  return catapultName;
+}
+
+void Barrack::destructArrow (Arrow* arrow) {
+  delete arrow;
+}
+void Barrack::destructCavalier (Cavalier* cavalier){
+  delete cavalier;
+}
+
+void Barrack::destructDecurion (Decurion* decurion){
+  delete decurion;
+}
+
+void Barrack::destructCatapult (Catapult* catapult){
+  delete catapult;
+}
 
 Barrack::~Barrack(){
 

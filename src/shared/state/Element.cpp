@@ -4,7 +4,7 @@
 using namespace state;
 
 Element::Element() {
-  Position position;
+  
 }
 
 Element::Element(Position position) : position(position){}

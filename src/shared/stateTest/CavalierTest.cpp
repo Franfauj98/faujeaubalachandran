@@ -12,6 +12,7 @@ void cavalierTest(){
   Position pos4(1,2);
   Position pos5(3,2);
   Position pos6(3,3);
+  UnitCost cavalierCost(50,50);
 
   cout << "-------------------------------------" << endl;
   cout << "TEST CAVALIER" << endl;
@@ -31,7 +32,7 @@ void cavalierTest(){
 
 
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
-  Cavalier cavalier2(10,1, pos1, 1000, 70, 3, 1, CAVALIER2);
+  Cavalier cavalier2(10,1, pos1, 1000, 70, 3, 1, CAVALIER2,cavalierCost);
   cout << "Life : " << cavalier2.getLife() << endl;
   cout << "position x : " << cavalier2.getPosition().getX() << endl;
   cout << "position y : " << cavalier2.getPosition().getY() << endl;

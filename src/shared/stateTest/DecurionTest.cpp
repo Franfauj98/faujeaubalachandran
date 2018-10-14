@@ -12,6 +12,7 @@ void decurionTest(){
   Position pos4(1,2);
   Position pos5(3,2);
   Position pos6(3,3);
+  UnitCost decurionCost(50,50);
 
   cout << "-------------------------------------" << endl;
   cout << "TEST DECURION" << endl;
@@ -31,7 +32,7 @@ void decurionTest(){
 
 
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
-  Decurion decurion2(10,1, pos1, 1000, 70, 3, 1, DECURION2);
+  Decurion decurion2(10,1, pos1, 1000, 70, 3, 1, DECURION2, decurionCost);
   cout << "Life : " << decurion2.getLife() << endl;
   cout << "position x : " << decurion2.getPosition().getX() << endl;
   cout << "position y : " << decurion2.getPosition().getY() << endl;

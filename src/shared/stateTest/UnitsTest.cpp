@@ -8,7 +8,8 @@ void unitsTest() {
   cout << "TEST UNITS" << endl;
   cout << "-------------------------------------" << endl;
   Position pos1(1,2);
-  Units unit(1, pos1, 1000, 100, 2, 1, 4, CAVALIER1);
+  UnitCost unitCost(50,50);
+  Units unit(1, pos1, 1000, 100, 2, 1, 4, CAVALIER1,unitCost);
   cout << "Life : " << unit.getLife() << endl;
   cout << "position x : " << unit.getPosition().getX() << endl;
   cout << "position y : " << unit.getPosition().getY() << endl;

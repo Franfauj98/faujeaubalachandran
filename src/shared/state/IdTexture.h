@@ -8,10 +8,10 @@ namespace state {
   enum IdTexture {
     RESSOURCE     = 1,
     BARRACK     = 2,
-    HDV0     = 3,
-    HDV1     = 4,
-    HDV2     = 5,
-    HVD3     = 6
+    HDV1     = 3,
+    HDV2     = 4,
+    HDV3     = 5,
+    HDV4     = 6
   };
 
 };

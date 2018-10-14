@@ -5,10 +5,11 @@ using namespace state;
 Buildings::Buildings() : Element(){
 }
 
-Buildings::Buildings (int id, Position position, int level,IdTexture idTexture) : Element(position){
+Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost) : Element(position){
   this->idBuilding= id;
   this->level=level;
   this->idTexture=idTexture;
+  this->buildingCost=buildingCost;
 }
 int Buildings::getId () const {
   return this->idBuilding;
@@ -22,6 +23,13 @@ int Buildings::getLevel () const {
 }
 void Buildings::setLevel (int level) {
   this->level=level;
+}
+
+BuildingCost Buildings::getBuildingCost () const {
+  return this->buildingCost;
+}
+void Buildings::setBuildingCost (BuildingCost buildingCost) {
+  this->buildingCost=buildingCost;
 }
 // Setters and Getters
 IdTexture Buildings::getIdTexture() const{

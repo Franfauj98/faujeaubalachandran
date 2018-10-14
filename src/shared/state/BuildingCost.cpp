@@ -1,6 +1,11 @@
 #include "BuildingCost.h"
 using namespace state;
 
+BuildingCost::BuildingCost(){
+  this->gold=0;
+  this->wood=0;
+}
+
 BuildingCost::BuildingCost(int gold, int wood){
   this->gold=gold;
   this->wood=wood;

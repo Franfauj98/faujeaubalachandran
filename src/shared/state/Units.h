@@ -4,11 +4,13 @@
 
 
 namespace state {
+  class UnitCost;
   class Position;
   class Units;
   class Element;
 }
 
+#include "UnitCost.h"
 #include "Position.h"
 #include "IdTextureUnits.h"
 #include "Element.h"
@@ -20,6 +22,8 @@ namespace state {
     // Associations
     state::IdTextureUnits idTextureUnits;
     // Attributes
+  private:
+    UnitCost unitCost;
   protected:
     int idUnits;
     int life;
@@ -30,7 +34,7 @@ namespace state {
     // Operations
   public:
     Units ();
-    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits);
+    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost);
     ~Units ();
     void setLife (int life);
     int getLife () const;
@@ -50,6 +54,8 @@ namespace state {
     void setIdTextureUnits (IdTextureUnits idTextureUnits);
     int getIdUnits () const;
     void setIdUnits (int idUnits);
+    UnitCost getUnitCost () const;
+    void setUnitCost (UnitCost unitCost);
     bool isPassable ();
     // Setters and Getters
   };

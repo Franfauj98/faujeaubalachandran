@@ -13,6 +13,7 @@ namespace state {
     int wood;
     // Operations
   public:
+    BuildingCost ();
     BuildingCost (int gold, int wood);
     ~BuildingCost ();
     void setGold (int gold);

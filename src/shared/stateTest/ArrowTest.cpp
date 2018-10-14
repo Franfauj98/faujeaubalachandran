@@ -12,6 +12,7 @@ void arrowTest(){
   Position pos4(1,2);
   Position pos5(3,2);
   Position pos6(3,3);
+  UnitCost arrowCost(50,50);
 
   cout << "-------------------------------------" << endl;
   cout << "TEST ARROW" << endl;
@@ -31,7 +32,7 @@ void arrowTest(){
 
 
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
-  Arrow arrow2(10,1, pos1, 1000, 70, 3, 1, ARROW2);
+  Arrow arrow2(10,1, pos1, 1000, 70, 3, 1, ARROW2,arrowCost);
   cout << "Life : " << arrow2.getLife() << endl;
   cout << "position x : " << arrow2.getPosition().getX() << endl;
   cout << "position y : " << arrow2.getPosition().getY() << endl;
@@ -41,6 +42,7 @@ void arrowTest(){
   cout << "level : " << arrow2.getLevel() << endl;
   cout << "idUnits : " << arrow2.getIdUnits() << endl;
   cout << "idTextureUnits : " << arrow2.getIdTextureUnits() << endl;
+  //cout << "Arrow cost: " << arrow2.getUnitCost() << endl; // ne marche pas surcharge opérateur à faire
   // cout << "level : " << u.getLevel() << endl;
 
   cout << "CONSTRUCTEUR AVEC 3 ARGUMENTS" << endl;

@@ -4,12 +4,12 @@ using namespace state;
 
 Arrow::Arrow () : Units() {}
 
-Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits) {}
+Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost) :
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, arrowCost) {}
 
 Arrow::Arrow (int level, Position p, int id) : Units() {
   switch(level){
-    case 1 :
+    case 1 :{
       setPosition(p);
       setIdUnits(id);
       setLife(400);
@@ -18,8 +18,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(ARROW1);
-      break;
-    case 2 :
+      UnitCost arrowCost(50,50);
+      setUnitCost(arrowCost);
+      break;}
+    case 2 :{
       setPosition(p);
       setIdUnits(id);
       setLife(500);
@@ -28,8 +30,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(ARROW2);
-      break;
-    case 3 :
+      UnitCost arrowCost(100,100);
+      setUnitCost(arrowCost);
+      break;}
+    case 3 :{
       setPosition(p);
       setIdUnits(id);
       setLife(600);
@@ -38,8 +42,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(ARROW3);
-      break;
-    case 4 :
+      UnitCost arrowCost(150,150);
+      setUnitCost(arrowCost);
+      break;}
+    case 4 :{
       setPosition(p);
       setIdUnits(id);
       setLife(700);
@@ -48,17 +54,21 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setMovingRange(1);
       setLevel(level);
       setIdTextureUnits(ARROW4);
-      break;
-    default :
+      UnitCost arrowCost(200,200);
+      setUnitCost(arrowCost);
+      break;}
+    default :{
       setPosition(p);
       setIdUnits(id);
       setLife(400);
       setDamage(100);
       setStrikeRange(2);
       setMovingRange(1);
-      setLevel(level);
+      setLevel(1);
       setIdTextureUnits(ARROW1);
-      break;
+      UnitCost arrowCost(50,50);
+      setUnitCost(arrowCost);
+      break;}
   }
 }
 

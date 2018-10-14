@@ -9,15 +9,10 @@ namespace state {
   class Barrack;
   class Ressource;
   class Palace;
-  class BuildingCost;
   class Position;
   class Buildings;
 }
 
-#include "Barrack.h"
-#include "Ressource.h"
-#include "Palace.h"
-#include "BuildingCost.h"
 #include "Position.h"
 #include "Buildings.h"
 
@@ -28,12 +23,9 @@ namespace state {
     // Associations
     // Attributes
   public:
-    Barrack barrack;
-    Ressource ressource;
-    Palace palace;
-    BuildingCost barrackCost;
-    BuildingCost ressourceCost;
-    BuildingCost palaceCost;
+    Barrack* barrack;
+    Ressource* ressource;
+    Palace* palace;
   private:
     int idEmpire;
     std::string name;
@@ -45,7 +37,8 @@ namespace state {
     std::vector<Position> position;
     // Operations
   public:
-    Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position);
+    Empire ();
+    Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, Barrack* barrack, Ressource* ressource, Palace* palace);
     int getId () const;
     void setName (std::string name);
     std::string getName () const;
@@ -61,6 +54,12 @@ namespace state {
     void setFoodRessource (int food);
     std::vector<Position> getPosition () const;
     void setPosition (std::vector<Position> postion);
+    Barrack* createBarrack (Barrack* barrack, int id, Position position, int level);
+    Ressource* createRessource (Ressource* ressource, int id, Position position, int level);
+    Palace* createPalace (Palace* palace, int id, Position position, int level);
+    void destructBarrack (Barrack* barrack);
+    void destructRessource (Ressource* ressource);
+    void destructPalace (Palace* palace);
     ~Empire ();
     // Setters and Getters
   };

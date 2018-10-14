@@ -5,6 +5,7 @@
 
 namespace state {
   class Position;
+  class BuildingCost;
   class Arrow;
   class Cavalier;
   class Decurion;
@@ -14,10 +15,7 @@ namespace state {
 
 #include "Position.h"
 #include "IdTexture.h"
-#include "Arrow.h"
-#include "Cavalier.h"
-#include "Decurion.h"
-#include "Catapult.h"
+#include "BuildingCost.h"
 #include "Buildings.h"
 
 namespace state {
@@ -31,28 +29,36 @@ namespace state {
     // Operations
   public:
     Barrack ();
-    Barrack (int capacity, int id, Position position, int level, IdTexture idTexture);
+    Barrack (int id, Position position, int level);
+    Barrack (int capacity, int id, Position position, int level, IdTexture idTexture, BuildingCost barrackCost);
+    ~Barrack ();
     int getCapacity () const;
     void setCapacity (int capacity);
     int  getUnitsNumber () const;
     void setUnitsNumber (int unitsNumber);
     /// switch case for units level. 
+    /// @param arrowName		(???) 
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Arrow createArrow (int level, Position position, int id);
+    Arrow* createArrow (Arrow* arrowName, int level, Position position, int id);
     /// switch case for units level. 
+    /// @param cavalierName		(???) 
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Cavalier createCavalier (int level, Position position, int id);
+    Cavalier* createCavalier (Cavalier* cavalierName, int level, Position position, int id);
     /// switch case for units level. 
+    /// @param decurionName		(???) 
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Decurion createDecurion (int level, Position position, int id);
-    Catapult createCatapult (int level, Position position, int id);
-    ~Barrack ();
+    Decurion* createDecurion (Decurion* decurionName, int level, Position position, int id);
+    Catapult* createCatapult (Catapult* catapultName, int level, Position position, int id);
+    void destructArrow (Arrow* arrow);
+    void destructCavalier (Cavalier* cavalier);
+    void destructDecurion (Decurion* decurion);
+    void destructCatapult (Catapult* catapult);
     // Setters and Getters
   };
 

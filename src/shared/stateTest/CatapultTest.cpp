@@ -12,7 +12,7 @@ void catapultTest(){
   Position pos4(1,2);
   Position pos5(3,2);
   Position pos6(3,3);
-
+  UnitCost catapultCost(50,50);
   cout << "-------------------------------------" << endl;
   cout << "TEST CATAPULT" << endl;
   cout << "-------------------------------------" << endl;
@@ -31,7 +31,7 @@ void catapultTest(){
 
 
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
-  Catapult catapult2(10,1, pos1, 1000, 70, 3, 1, CATAPULT2);
+  Catapult catapult2(10,1, pos1, 1000, 70, 3, 1, CATAPULT2,catapultCost);
   cout << "Life : " << catapult2.getLife() << endl;
   cout << "position x : " << catapult2.getPosition().getX() << endl;
   cout << "position y : " << catapult2.getPosition().getY() << endl;

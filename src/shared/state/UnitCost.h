@@ -13,6 +13,7 @@ namespace state {
     int food;
     // Operations
   public:
+    UnitCost ();
     UnitCost (int gold, int food);
     ~UnitCost ();
     void setGold (int gold);
