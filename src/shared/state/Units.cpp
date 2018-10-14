@@ -110,4 +110,8 @@ bool Units::attackAllowed (Units unit2){
   }
 }
 
+bool Units::isPassable(){
+  return false;
+}
+
 Units::~Units () {}

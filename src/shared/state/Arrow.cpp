@@ -1,31 +1,66 @@
 #include "Arrow.h"
+#include <iostream>
 using namespace state;
 
-// Arrow::Arrow () : Units(1, position, life, damage, strikeRange, movingRange, level, idTextureUnits) {}
+Arrow::Arrow () : Units() {}
 
 Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits) :
   Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits) {}
 
-Arrow::Arrow (int level, Position p, int id){
+Arrow::Arrow (int level, Position p, int id) : Units() {
   switch(level){
     case 1 :
-      Units(id, p, 1000, 100, 2, 1, level, ARROW1);
+      setPosition(p);
+      setIdUnits(id);
+      setLife(400);
+      setDamage(100);
+      setStrikeRange(2);
+      setMovingRange(1);
+      setLevel(level);
+      setIdTextureUnits(ARROW1);
       break;
     case 2 :
-      Units(id, p, 2000, 200, 2, 1, level, ARROW2);
+      setPosition(p);
+      setIdUnits(id);
+      setLife(500);
+      setDamage(200);
+      setStrikeRange(2);
+      setMovingRange(1);
+      setLevel(level);
+      setIdTextureUnits(ARROW2);
       break;
     case 3 :
-      Units(id, p, 3000, 300, 3, 1, level, ARROW3);
+      setPosition(p);
+      setIdUnits(id);
+      setLife(600);
+      setDamage(300);
+      setStrikeRange(3);
+      setMovingRange(1);
+      setLevel(level);
+      setIdTextureUnits(ARROW3);
       break;
     case 4 :
-      Units(id, p, 4000, 400, 3, 1, level, ARROW4);
+      setPosition(p);
+      setIdUnits(id);
+      setLife(700);
+      setDamage(400);
+      setStrikeRange(3);
+      setMovingRange(1);
+      setLevel(level);
+      setIdTextureUnits(ARROW4);
       break;
     default :
-      Units(id, p, 1000, 100, 2, 1, 1, ARROW1);
+      setPosition(p);
+      setIdUnits(id);
+      setLife(400);
+      setDamage(100);
+      setStrikeRange(2);
+      setMovingRange(1);
+      setLevel(level);
+      setIdTextureUnits(ARROW1);
       break;
   }
 }
 
 Arrow::~Arrow(){
-
 }
