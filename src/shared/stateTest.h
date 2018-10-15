@@ -5,3 +5,4 @@
 #include "./stateTest/CatapultTest.h"
 #include "./stateTest/CavalierTest.h"
 #include "./stateTest/DecurionTest.h"
+#include "./stateTest/BuildingCostTest.h"

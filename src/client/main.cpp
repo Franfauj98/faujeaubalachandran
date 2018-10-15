@@ -25,6 +25,7 @@ int main(int argc,char* argv[])
   catapultTest();
   cavalierTest();
   decurionTest();
+  BuildingCostTest();
 
   cout << "-------------------------------------" << endl;
   cout << "TEST BUILDINGS" << endl;
