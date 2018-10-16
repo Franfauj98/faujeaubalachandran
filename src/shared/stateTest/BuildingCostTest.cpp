@@ -19,6 +19,7 @@ void BuildingCostTest(){
 
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
   BuildingCost buildingCost2(50,50);
+
   cout << "Gold Cost: " << buildingCost2.getGold() << endl;
   cout << "Wood Cost: " << buildingCost2.getWood() << endl;
   buildingCost2.setGold(100);
