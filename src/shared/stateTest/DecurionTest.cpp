@@ -28,6 +28,7 @@ void decurionTest(){
   cout << "movingRange : " << decurion1.getMovingRange() << endl;
   cout << "level : " << decurion1.getLevel() << endl;
   cout << "idUnits : " << decurion1.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << decurion1.getUnitCost().getGold() << ", food : " << decurion1.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << decurion1.getIdTextureUnits() << endl;
 
 
@@ -41,6 +42,7 @@ void decurionTest(){
   cout << "movingRange : " << decurion2.getMovingRange() << endl;
   cout << "level : " << decurion2.getLevel() << endl;
   cout << "idUnits : " << decurion2.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << decurion2.getUnitCost().getGold() << ", food : " << decurion2.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << decurion2.getIdTextureUnits() << endl;
   // cout << "level : " << u.getLevel() << endl;
 
@@ -54,6 +56,7 @@ void decurionTest(){
   cout << "movingRange : " << decurion3.getMovingRange() << endl;
   cout << "level : " << decurion3.getLevel() << endl;
   cout << "idUnits : " << decurion3.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << decurion3.getUnitCost().getGold() << ", food : " << decurion3.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << decurion3.getIdTextureUnits() << endl;
 
   cout << "TEST MOVEALLOWED & MOVE : " << endl;

@@ -27,6 +27,7 @@ void catapultTest(){
   cout << "movingRange : " << catapult1.getMovingRange() << endl;
   cout << "level : " << catapult1.getLevel() << endl;
   cout << "idUnits : " << catapult1.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << catapult1.getUnitCost().getGold() << ", food : " << catapult1.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << catapult1.getIdTextureUnits() << endl;
 
 
@@ -40,6 +41,7 @@ void catapultTest(){
   cout << "movingRange : " << catapult2.getMovingRange() << endl;
   cout << "level : " << catapult2.getLevel() << endl;
   cout << "idUnits : " << catapult2.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << catapult2.getUnitCost().getGold() << ", food : " << catapult2.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << catapult2.getIdTextureUnits() << endl;
   // cout << "level : " << u.getLevel() << endl;
 
@@ -53,6 +55,7 @@ void catapultTest(){
   cout << "movingRange : " << catapult3.getMovingRange() << endl;
   cout << "level : " << catapult3.getLevel() << endl;
   cout << "idUnits : " << catapult3.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << catapult3.getUnitCost().getGold() << ", food : " << catapult3.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << catapult3.getIdTextureUnits() << endl;
 
   cout << "TEST MOVEALLOWED & MOVE : " << endl;

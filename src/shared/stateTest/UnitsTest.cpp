@@ -19,6 +19,7 @@ void unitsTest() {
   cout << "level : " << unit.getLevel() << endl;
   cout << "idUnits : " << unit.getIdUnits() << endl;
   cout << "idTextureUnits : " << unit.getIdTextureUnits() << endl;
+  cout << "UnitCost : gold : " << unit.getUnitCost().getGold() << ", food : " << unit.getUnitCost().getGold() << endl;
   unit.setLife(3000);
   cout << "Life : " << unit.getLife() << endl;
 

@@ -10,6 +10,7 @@ void positionTest() {
 
   Position pos2(1,2);
   Position pos1;
+  Position pos3(-1,0);
 
   cout << "CONSTRUCTEUR PAR DEFAULT DE POSITION : " << endl;
   cout << "abscisse : " << pos1.getX() << endl;
