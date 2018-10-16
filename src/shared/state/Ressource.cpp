@@ -13,7 +13,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
   switch(level){
     case 1 :{
       setProduction(2);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(1);
       setIdTexture(RESSOURCE);
@@ -23,7 +23,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       break;}
     case 2 :{
       setProduction(4);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(2);
       setIdTexture(RESSOURCE);
@@ -32,7 +32,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       break;}
     case 3 :{
       setProduction(6);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(3);
       setIdTexture(RESSOURCE);
@@ -41,7 +41,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       break;}
     case 4 :{
       setProduction(8);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(4);
       setIdTexture(RESSOURCE);
@@ -50,7 +50,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       break;}
     default :{
       setProduction(2);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(1);
       setIdTexture(RESSOURCE);

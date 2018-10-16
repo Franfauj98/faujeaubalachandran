@@ -12,7 +12,7 @@ Palace::Palace(int id, Position position, int level, IdTexture idTexture, Buildi
 Palace::Palace (int id, Position position, int level) : Buildings() {
   switch(level){
     case 1 :{
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(1);
       setIdTexture(HDV1);
@@ -21,7 +21,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
 
       break;}
     case 2 :{
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(2);
       setIdTexture(HDV2);
@@ -29,7 +29,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setBuildingCost(palaceCost);
       break;}
     case 3 :{
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(3);
       setIdTexture(HDV3);
@@ -37,7 +37,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setBuildingCost(palaceCost);
       break;}
     case 4 :{
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(4);
       setIdTexture(HDV4);
@@ -45,7 +45,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setBuildingCost(palaceCost);
       break;}
     default :{
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(1);
       setIdTexture(HDV1);

@@ -21,7 +21,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
   switch(level){
     case 1 : {
       setCapacity(2);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(1);
       setIdTexture(BARRACK);
@@ -31,7 +31,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       break;}
     case 2 :{
       setCapacity(4);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(2);
       setIdTexture(BARRACK);
@@ -41,7 +41,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       break;}
     case 3 :{
       setCapacity(6);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(3);
       setIdTexture(BARRACK);
@@ -51,7 +51,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       break;}
     case 4 :{
       setCapacity(8);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(4);
       setIdTexture(BARRACK);
@@ -61,7 +61,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       break;}
     default :{
       setCapacity(2);
-      setId(id);
+      setIdBuilding(id);
       setPosition(position);
       setLevel(1);
       setIdTexture(BARRACK);

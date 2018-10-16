@@ -25,10 +25,6 @@ int BuildingCost::getWood () const{
   return this->wood;
 }
 
-void BuildingCost::operator<<(BuildingCost buildingCost){
-  std::cout << "BuildingCost:" << buildingCost.getGold() << "gold," << buildingCost.getWood() <<"wood"<<std::endl;
-}
-
 BuildingCost::~BuildingCost(){
 
 }

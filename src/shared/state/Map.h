@@ -2,7 +2,7 @@
 #ifndef STATE__MAP__H
 #define STATE__MAP__H
 
-#include <map>
+#include <vector>
 #include <memory>
 
 namespace state {
@@ -18,13 +18,13 @@ namespace state {
     // Associations
     // Attributes
   private:
-    std::map<std::unique_ptr<Position>,std::unique_ptr<Element>> playingMap;
+    std::vector<std::unique_ptr<Element>> playingMap;
     // Operations
   public:
     Map ();
     ~Map ();
-    void setMap (std::map<std::unique_ptr<Position>,std::unique_ptr<Element>> playingMap);
-    std::map<std::unique_ptr<Position>,std::unique_ptr<Element>> getMap ();
+    void setMap (std::vector<std::unique_ptr<Element>> playingMap);
+    std::vector<std::unique_ptr<Element>> getMap ();
     // Setters and Getters
   };
 

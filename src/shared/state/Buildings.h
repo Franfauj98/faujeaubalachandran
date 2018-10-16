@@ -29,8 +29,6 @@ namespace state {
   public:
     Buildings ();
     Buildings (int id, Position position, int level, IdTexture idTexture, BuildingCost buildingCost);
-    int getId () const;
-    void setId (int id);
     int getLevel () const;
     void setLevel (int level);
     BuildingCost getBuildingCost () const;

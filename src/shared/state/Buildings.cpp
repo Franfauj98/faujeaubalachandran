@@ -11,12 +11,6 @@ Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, 
   this->idTexture=idTexture;
   this->buildingCost=buildingCost;
 }
-int Buildings::getId () const {
-  return this->idBuilding;
-}
-void Buildings::setId (int id){
-  this->idBuilding=id;
-}
 
 int Buildings::getLevel () const {
   return this->level;
@@ -44,7 +38,7 @@ int Buildings::getIdBuilding() const{
 void Buildings::setIdBuilding(int idBuilding){
   this->idBuilding=idBuilding;
 }
-bool isPassable(){
+bool Buildings::isPassable(){
   return false;
 }
 Buildings::~Buildings(){

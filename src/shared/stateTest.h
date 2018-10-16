@@ -6,3 +6,4 @@
 #include "./stateTest/CavalierTest.h"
 #include "./stateTest/DecurionTest.h"
 #include "./stateTest/BuildingCostTest.h"
+#include "./stateTest/BuildingsTest.h"
