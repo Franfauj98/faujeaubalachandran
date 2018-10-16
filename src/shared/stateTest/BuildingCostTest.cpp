@@ -26,5 +26,10 @@ void BuildingCostTest(){
   cout << endl;
   cout << "New Gold Cost: " << buildingCost2.getGold() << endl;
   cout << "New Wood Cost: " << buildingCost2.getWood() << endl;
+  cout << endl;
 
+  buildingCost2.setGold(-100);
+  buildingCost2.setWood(-200);
+  cout << "New Gold Cost: " << buildingCost2.getGold() << endl;
+  cout << "New Wood Cost: " << buildingCost2.getWood() << endl;
 }

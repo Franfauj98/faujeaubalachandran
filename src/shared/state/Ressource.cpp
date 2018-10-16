@@ -65,7 +65,12 @@ int Ressource::getProduction() const {
 }
 
 void Ressource::setProduction(int production) {
-   this->production=production;
+  if(production>0){
+    this->production=production;
+  }
+  else {
+    this->production=0;
+  }
 }
 
 Ressource::~Ressource(){

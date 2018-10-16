@@ -36,5 +36,19 @@ void BuildingsTest(){
   cout << "New Wood Cost: " << building1.getBuildingCost().getWood() << endl;
   cout << "New Gold Cost: " << building1.getBuildingCost().getGold() << endl;
   cout << "New Passable ?: " << building1.isPassable() << endl;
-
+  cout << endl;
+  BuildingCost buildingCost3(-50,-50);
+  Position position3(-5,-2);
+  building1.setIdBuilding(-10);
+  building1.setPosition(position3);
+  building1.setIdTexture(HDV1);
+  building1.setBuildingCost(buildingCost3);
+  cout << endl;
+  cout << "New Id Building: " << building1.getIdBuilding() << endl;
+  cout << "New Position X: " << building1.getPosition().getX() << endl;
+  cout << "New Position Y: " << building1.getPosition().getY() << endl;
+  cout << "New IdTexture: " << building1.getIdTexture() << endl;
+  cout << "New Wood Cost: " << building1.getBuildingCost().getWood() << endl;
+  cout << "New Gold Cost: " << building1.getBuildingCost().getGold() << endl;
+  cout << "New Passable ?: " << building1.isPassable() << endl;
 }

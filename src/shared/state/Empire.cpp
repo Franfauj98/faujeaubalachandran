@@ -36,7 +36,12 @@ std::string Empire::getName () const{
   return this->name;
 }
 void Empire::setEmpireLevel (int level){
-  this->empireLevel=level;
+  if(level>0){
+    this->empireLevel=level;
+  }
+  else {
+    this->empireLevel=0;
+  }
 }
 
 int Empire::getEmpireLevel () const{
@@ -44,7 +49,12 @@ int Empire::getEmpireLevel () const{
 
 }
 void Empire::setLife (int life){
-  this->life=life;
+  if(life>0){
+    this->life=life;
+  }
+  else {
+    this->life=0;
+  }
 }
 int Empire::getLife () const{
   return this->life;
@@ -53,19 +63,34 @@ int Empire::getGoldRessource () const{
   return this->goldRessource;
 }
 void Empire::setGoldRessource (int gold){
-  this->goldRessource=gold;
+  if(goldRessource>0){
+    this->goldRessource=gold;
+  }
+  else {
+    this->goldRessource=0;
+  }
 }
 int Empire::getWoodRessource () const{
   return this->woodRessource;
 }
 void Empire::setWoodRessource (int wood){
-  this->woodRessource=wood;
+  if(woodRessource>0){
+    this->woodRessource=wood;
+  }
+  else {
+    this->woodRessource=0;
+  }
 }
 int Empire::getFoodRessource () const{
   return this->foodRessource;
 }
 void Empire::setFoodRessource (int food){
-  this->foodRessource=food;
+  if(foodRessource>0){
+    this->foodRessource=food;
+  }
+  else{
+    this->foodRessource=0;
+  }
 }
 std::vector<Position> Empire::getPosition () const{
   return this->position;

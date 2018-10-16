@@ -12,13 +12,23 @@ UnitCost::UnitCost(int gold, int food){
 }
 
 void UnitCost::setGold (int gold){
-  this->gold=gold;
+  if (gold>0){
+    this->gold=gold;
+  }
+  else {
+    this->gold=0;
+  }
 }
 int UnitCost::getGold () const{
   return this->gold;
 }
 void UnitCost::setFood (int food){
-  this->food=food;
+  if (food>0){
+    this->food=food;
+  }
+  else{
+    this->food=0;
+  }
 }
 int UnitCost::getFood () const{
   return this->food;

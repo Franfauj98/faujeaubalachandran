@@ -24,6 +24,7 @@ int main(int argc,char* argv[])
   } else if (argv[1] &&!strcmp(argv[1],"state")) {
     positionTest();
     elementTest();
+    UnitCostTest();
     unitsTest();
     arrowTest();
     catapultTest();

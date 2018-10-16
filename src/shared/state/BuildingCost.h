@@ -9,12 +9,12 @@ namespace state {
   class BuildingCost {
     // Attributes
   private:
-    int gold;
-    int wood;
+    unsigned int gold;
+    unsigned  int wood;
     // Operations
   public:
     BuildingCost ();
-    BuildingCost (int gold, int wood);
+    BuildingCost ( int gold, int wood);
     ~BuildingCost ();
     void setGold (int gold);
     int getGold () const;

@@ -4,7 +4,7 @@
 #include "Cavalier.h"
 #include "Decurion.h"
 #include "Catapult.h"
-
+#include <iostream>
 using namespace state;
 
 Barrack::Barrack():Buildings(){
@@ -12,9 +12,19 @@ Barrack::Barrack():Buildings(){
 }
 
 Barrack::Barrack(int capacity, int id, Position position, int level, IdTexture idTexture,BuildingCost barrackCost):Buildings(id,position,level,idTexture,barrackCost){
-  this->capacity=capacity;
-  this->unitsNumber=0;
+  if (capacity>=0){
+    this->capacity=capacity;
+  } else{
+    std::cerr << "capacity must be positive" <<std::endl;
+    this->capacity=0;
+  }
 
+  if (unitsNumber>=0){
+    this->unitsNumber=unitsNumber;
+  }else{
+    std::cerr << "unitsNumber must be positive" <<std::endl;
+    this->unitsNumber=0;
+  }
 }
 
 Barrack::Barrack (int id, Position position, int level) : Buildings() {
@@ -77,7 +87,13 @@ int Barrack::getCapacity() const{
 }
 
 void Barrack::setCapacity(int capacity){
-  this->capacity=capacity;
+  if (capacity>=0){
+    this->capacity=capacity;
+  }
+  else {
+    std::cerr << "capacity must be positive" <<std::endl;
+    this->capacity=0;
+  }
 }
 
 int Barrack::getUnitsNumber() const{
@@ -85,7 +101,14 @@ int Barrack::getUnitsNumber() const{
 }
 
 void Barrack::setUnitsNumber(int unitsNumber){
-  this->unitsNumber=unitsNumber;
+  if (unitsNumber>=0){
+    this->unitsNumber=unitsNumber;
+  }
+  else {
+    std::cerr << "unitsNumber must be positive" <<std::endl;
+    this->unitsNumber=0;
+  }
+
 }
 
 Arrow* Barrack::createArrow(Arrow* arrowName, int level,Position position, int id){
