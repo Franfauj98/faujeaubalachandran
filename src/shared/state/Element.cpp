@@ -4,7 +4,7 @@
 using namespace state;
 
 Element::Element() {
-  
+
 }
 
 Element::Element(Position position) : position(position){}
@@ -14,7 +14,13 @@ Position& Element::getPosition(){
 }
 
 void Element::setPosition (Position& pos){
-  position = pos;
+  if(pos.getX()>0&&pos.getY()>0){
+    this->position = pos;
+  } else {
+    std::cerr << "Position must be >= 0"<< std::endl;
+    Position p;
+    this->position = p;
+  }
 }
 
 int Element::distance(Position pos1, Position pos2){

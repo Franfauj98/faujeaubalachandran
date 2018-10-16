@@ -28,6 +28,7 @@ void cavalierTest(){
   cout << "movingRange : " << cavalier1.getMovingRange() << endl;
   cout << "level : " << cavalier1.getLevel() << endl;
   cout << "idUnits : " << cavalier1.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << cavalier1.getUnitCost().getGold() << ", food : " << cavalier1.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << cavalier1.getIdTextureUnits() << endl;
 
 
@@ -41,6 +42,7 @@ void cavalierTest(){
   cout << "movingRange : " << cavalier2.getMovingRange() << endl;
   cout << "level : " << cavalier2.getLevel() << endl;
   cout << "idUnits : " << cavalier2.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << cavalier2.getUnitCost().getGold() << ", food : " << cavalier2.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << cavalier2.getIdTextureUnits() << endl;
   // cout << "level : " << u.getLevel() << endl;
 
@@ -54,6 +56,7 @@ void cavalierTest(){
   cout << "movingRange : " << cavalier3.getMovingRange() << endl;
   cout << "level : " << cavalier3.getLevel() << endl;
   cout << "idUnits : " << cavalier3.getIdUnits() << endl;
+  cout << "UnitCost : gold : " << cavalier3.getUnitCost().getGold() << ", food : " << cavalier3.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << cavalier3.getIdTextureUnits() << endl;
 
   cout << "TEST MOVEALLOWED & MOVE : " << endl;

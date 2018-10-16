@@ -28,7 +28,7 @@ void arrowTest(){
   cout << "movingRange : " << arrow1.getMovingRange() << endl;
   cout << "level : " << arrow1.getLevel() << endl;
   cout << "idUnits : " << arrow1.getIdUnits() << endl;
-  cout << "cost : " << arrow1.getUnitCost().getGold() << endl;
+  cout << "UnitCost : gold : " << arrow1.getUnitCost().getGold() << ", food : " << arrow1.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << arrow1.getIdTextureUnits() << endl;
 
 
@@ -42,10 +42,8 @@ void arrowTest(){
   cout << "movingRange : " << arrow2.getMovingRange() << endl;
   cout << "level : " << arrow2.getLevel() << endl;
   cout << "idUnits : " << arrow2.getIdUnits() << endl;
-  cout << "cost : " << arrow2.getUnitCost().getGold() << endl;
+  cout << "UnitCost : gold : " << arrow2.getUnitCost().getGold() << ", food : " << arrow2.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << arrow2.getIdTextureUnits() << endl;
-  //cout << "Arrow cost: " << arrow2.getUnitCost() << endl; // ne marche pas surcharge opérateur à faire
-  // cout << "level : " << u.getLevel() << endl;
 
   cout << "CONSTRUCTEUR AVEC 3 ARGUMENTS" << endl;
   Arrow arrow3(3, pos2, 5);
@@ -57,7 +55,7 @@ void arrowTest(){
   cout << "movingRange : " << arrow3.getMovingRange() << endl;
   cout << "level : " << arrow3.getLevel() << endl;
   cout << "idUnits : " << arrow3.getIdUnits() << endl;
-  cout << "cost : " << arrow3.getUnitCost().getGold() << endl;
+  cout << "UnitCost : gold : " << arrow3.getUnitCost().getGold() << ", food : " << arrow3.getUnitCost().getGold() << endl;
   cout << "idTextureUnits : " << arrow3.getIdTextureUnits() << endl;
 
   cout << "TEST MOVEALLOWED & MOVE : " << endl;

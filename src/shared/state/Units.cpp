@@ -1,4 +1,5 @@
 #include "Units.h"
+#include <iostream>
 using namespace state;
 
 Units::Units () : Element(){
@@ -7,18 +8,53 @@ Units::Units () : Element(){
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
   int level, IdTextureUnits idTextureUnits, UnitCost uniCost) : Element(position){
-  this->idUnits = idUnits;
-  this->life = life;
-  this->damage = damage;
-  this->strikeRange = strikeRange;
-  this->movingRange = movingRange;
-  this->level = level;
+  if(idUnits>0) {
+    this->idUnits = idUnits;
+  } else {
+    std::cerr << "idUnits must be >= 0"<< std::endl;
+    this->idUnits = 0;
+  }
+  if(life>0) {
+    this->life = life;
+  } else {
+    std::cerr << "life must be >= 0"<< std::endl;
+    this->life = 0;
+  }
+  if(damage>0) {
+    this->damage = damage;
+  } else {
+    std::cerr << "damage must be >= 0"<< std::endl;
+    this->damage = 0;
+  }
+  if(strikeRange>0) {
+    this->strikeRange = strikeRange;
+  } else {
+    std::cerr << "strikeRange must be >= 0"<< std::endl;
+    this->strikeRange = 0;
+  }
+  if(movingRange>0) {
+    this->movingRange = movingRange;
+  } else {
+    std::cerr << "movingRange must be >= 0"<< std::endl;
+    this->movingRange = 0;
+  }
+  if(level>0) {
+    this->level = level;
+  } else {
+    std::cerr << "level must be >= 0"<< std::endl;
+    this->level = 0;
+  }
   this->idTextureUnits=idTextureUnits;
   this->unitCost=unitCost;
 }
 
 void Units::setLife (int life){
-  this->life = life;
+  if(life > 0){
+    this->life = life;
+  } else {
+    std::cerr << "life must be >= 0"<< std::endl;
+    this->life = 0;
+  }
 }
 
 int Units::getLife() const{
@@ -26,7 +62,12 @@ int Units::getLife() const{
 }
 
 void Units::setDamage (int damage){
-  this->damage = damage;
+  if(damage>0){
+    this->damage = damage;
+  } else {
+    this->damage = 0;
+    std::cerr << "damage must be >= 0"<< std::endl;
+  }
 }
 
 int Units::getDamage() const{
@@ -34,7 +75,12 @@ int Units::getDamage() const{
 }
 
 void Units::setStrikeRange (int strikeRange){
-  this->strikeRange = strikeRange;
+  if(strikeRange > 0){
+    this->strikeRange = strikeRange;
+  } else {
+    this->strikeRange = 0;
+    std::cerr << "strikeRange must be >= 0"<< std::endl;
+  }
 }
 
 int Units::getStrikeRange() const{
@@ -42,7 +88,12 @@ int Units::getStrikeRange() const{
 }
 
 void Units::setMovingRange (int movingRange){
-  this->movingRange = movingRange;
+  if(movingRange > 0){
+    this->movingRange = movingRange;
+  } else {
+    this->movingRange = 0;
+    std::cerr << "movingRange must be >= 0"<< std::endl;
+  }
 }
 
 int Units::getMovingRange() const{
@@ -50,7 +101,12 @@ int Units::getMovingRange() const{
 }
 
 void Units::setLevel (int level){
-  this->level = level;
+  if(level>0){
+    this->level = level;
+  } else {
+    this->level = 0;
+    std::cerr << "level must be >= 0"<< std::endl;
+  }
 }
 
 int Units::getLevel() const{
@@ -70,7 +126,12 @@ int Units::getIdUnits () const{
 }
 
 void Units::setIdUnits (int idUnits){
-  this->idUnits = idUnits;
+  if(idUnits>0){
+    this->idUnits = idUnits;
+  } else {
+    this->idUnits = 0;
+    std::cerr << "idUnits must be >= 0"<< std::endl;
+  }
 }
 
 UnitCost Units::getUnitCost () const{
