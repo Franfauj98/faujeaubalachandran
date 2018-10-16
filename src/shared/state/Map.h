@@ -2,14 +2,13 @@
 #ifndef STATE__MAP__H
 #define STATE__MAP__H
 
-#include <vector>
+#include <map>
+#include <memory>
 
 namespace state {
-  class Position;
   class Element;
 }
 
-#include "Position.h"
 #include "Element.h"
 
 namespace state {
@@ -18,10 +17,14 @@ namespace state {
   class Map {
     // Associations
     // Attributes
-  public:
-    std::vector<Position> positionList;
   private:
-    std::vector<Element> elementList;
+    std::map<std::unique_ptr<Position>,std::unique_ptr<Element>> playingMap;
+    // Operations
+  public:
+    Map ();
+    ~Map ();
+    void setMap (std::map<std::unique_ptr<Position>,std::unique_ptr<Element>> playingMap);
+    std::map<std::unique_ptr<Position>,std::unique_ptr<Element>> getMap ();
     // Setters and Getters
   };
 

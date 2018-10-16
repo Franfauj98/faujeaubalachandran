@@ -4,6 +4,11 @@
 
 
 namespace state {
+  class UnitCost;
+}
+
+
+namespace state {
 
   /// class UnitCost - 
   class UnitCost {
@@ -20,6 +25,7 @@ namespace state {
     int getGold () const;
     void setFood (int food);
     int getFood () const;
+    void operator<< (UnitCost unitCost);
     // Setters and Getters
   };
 

@@ -7,12 +7,14 @@ namespace state {
   class UnitCost;
   class Position;
   class Units;
+  class Palace;
   class Element;
 }
 
 #include "UnitCost.h"
 #include "Position.h"
 #include "IdTextureUnits.h"
+#include "Palace.h"
 #include "Element.h"
 
 namespace state {
@@ -57,6 +59,7 @@ namespace state {
     UnitCost getUnitCost () const;
     void setUnitCost (UnitCost unitCost);
     bool isPassable ();
+    void attackPalace (Palace palace);
     // Setters and Getters
   };
 

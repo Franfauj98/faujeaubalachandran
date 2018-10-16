@@ -18,12 +18,17 @@ namespace state {
 
   /// class Palace - 
   class Palace : public state::Buildings {
+    // Attributes
+  private:
+    int life;
     // Operations
   public:
     Palace ();
     Palace (int id, Position position, int level, IdTexture idTexture, BuildingCost palaceCost);
     Palace (int id, Position position, int level);
     ~Palace ();
+    int getLife () const;
+    void setLife (int life);
     // Setters and Getters
   };
 
