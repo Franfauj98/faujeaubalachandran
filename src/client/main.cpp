@@ -18,15 +18,6 @@ using namespace state;
 
 int main(int argc,char* argv[])
 {
-  positionTest();
-  elementTest();
-  unitsTest();
-  arrowTest();
-  catapultTest();
-  cavalierTest();
-  decurionTest();
-  BuildingCostTest();
-
   cout << "-------------------------------------" << endl;
   cout << "TEST BUILDINGS" << endl;
   cout << "-------------------------------------" << endl;
@@ -118,8 +109,17 @@ int main(int argc,char* argv[])
 
   if (argv[1] &&!strcmp(argv[1],"hello")){
     cout << "Bonjour le monde!" << endl;
+  } else if (argv[1] &&!strcmp(argv[1],"state")) {
+    positionTest();
+    elementTest();
+    unitsTest();
+    arrowTest();
+    catapultTest();
+    cavalierTest();
+    decurionTest();
+    BuildingCostTest();
   } else {
-    cout << "Please type 'hello'!" << endl;
+    cout << "Please type 'hello' or 'state'" << endl;
   }
 
 
