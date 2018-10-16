@@ -32,6 +32,7 @@ int main(int argc,char* argv[])
     decurionTest();
     BuildingCostTest();
     BuildingsTest();
+    PalaceTest();
 
     cout << "-------------------------------------" << endl;
     cout << "TEST LIVRABLE 1.1" << endl;

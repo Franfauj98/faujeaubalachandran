@@ -22,7 +22,7 @@ void BuildingsTest(){
   cout << "Wood Cost: " << building1.getBuildingCost().getWood() << endl;
   cout << "Gold Cost: " << building1.getBuildingCost().getGold() << endl;
   cout << "Passable ?: " << building1.isPassable() << endl;
-  BuildingCost buildingCost2(50,50);
+  BuildingCost buildingCost2(150,250);
   Position position2(5,2);
   building1.setIdBuilding(10);
   building1.setPosition(position2);
@@ -37,12 +37,23 @@ void BuildingsTest(){
   cout << "New Gold Cost: " << building1.getBuildingCost().getGold() << endl;
   cout << "New Passable ?: " << building1.isPassable() << endl;
   cout << endl;
-  BuildingCost buildingCost3(-50,-50);
-  Position position3(-5,-2);
+  BuildingCost buildingCost3(-50,150);
+  Position position3(-2,5);
+  Buildings building3 (-1, position3,1,BARRACK, buildingCost3);
+  cout << "Id Building: " << building1.getIdBuilding() << endl;
+  cout << "Position X: " << building1.getPosition().getX() << endl;
+  cout << "Position Y: " << building1.getPosition().getY() << endl;
+  cout << "IdTexture: " << building1.getIdTexture() << endl;
+  cout << "Wood Cost: " << building1.getBuildingCost().getWood() << endl;
+  cout << "Gold Cost: " << building1.getBuildingCost().getGold() << endl;
+  cout << "Passable ?: " << building1.isPassable() << endl;
+  cout << endl;
+  BuildingCost buildingCost4(-50,-50);
+  Position position4(-5,-2);
   building1.setIdBuilding(-10);
-  building1.setPosition(position3);
+  building1.setPosition(position4);
   building1.setIdTexture(HDV1);
-  building1.setBuildingCost(buildingCost3);
+  building1.setBuildingCost(buildingCost4);
   cout << endl;
   cout << "New Id Building: " << building1.getIdBuilding() << endl;
   cout << "New Position X: " << building1.getPosition().getX() << endl;
@@ -51,4 +62,5 @@ void BuildingsTest(){
   cout << "New Wood Cost: " << building1.getBuildingCost().getWood() << endl;
   cout << "New Gold Cost: " << building1.getBuildingCost().getGold() << endl;
   cout << "New Passable ?: " << building1.isPassable() << endl;
+
 }

@@ -1,4 +1,5 @@
 #include "Palace.h"
+#include<iostream>
 using namespace state;
 
 Palace::Palace():Buildings() {

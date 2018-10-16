@@ -1,4 +1,5 @@
 #include "Ressource.h"
+#include<iostream>
 using namespace state;
 
 Ressource::Ressource():Buildings(){
@@ -6,7 +7,12 @@ Ressource::Ressource():Buildings(){
 }
 
 Ressource::Ressource(int production, int id, Position position, int level, IdTexture idTexture,BuildingCost ressourceCost):Buildings(id,position,level,idTexture, ressourceCost){
-  this->production=production;
+  if(production>=0){
+    this->production=production;
+  }else{
+    std::cerr<<"production must be positive"<<std::endl;
+    this->production=0;
+  }
 }
 
 Ressource::Ressource (int id, Position position, int level) : Buildings() {
@@ -65,10 +71,11 @@ int Ressource::getProduction() const {
 }
 
 void Ressource::setProduction(int production) {
-  if(production>0){
+  if(production>=0){
     this->production=production;
   }
   else {
+    std::cerr<<"production must be positive"<<std::endl;
     this->production=0;
   }
 }

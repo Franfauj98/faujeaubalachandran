@@ -26,5 +26,13 @@ void UnitCostTest(){
   cout << endl;
   cout << "New Gold Cost: " << unitCost2.getGold() << endl;
   cout << "New Food Cost: " << unitCost2.getFood() << endl;
-
+  cout<<endl;
+  UnitCost unitCost3(50,-50);
+  cout << "Gold Cost: " << unitCost3.getGold() << endl;
+  cout << "Food Cost: " << unitCost3.getFood() << endl;
+  unitCost3.setGold(-100);
+  unitCost3.setFood(-200);
+  cout << endl;
+  cout << "New Gold Cost: " << unitCost3.getGold() << endl;
+  cout << "New Food Cost: " << unitCost3.getFood() << endl;
 }

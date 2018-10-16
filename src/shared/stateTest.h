@@ -8,3 +8,8 @@
 #include "./stateTest/DecurionTest.h"
 #include "./stateTest/BuildingCostTest.h"
 #include "./stateTest/BuildingsTest.h"
+#include "./stateTest/PalaceTest.h"
+#include "./stateTest/RessourceTest.h"
+#include "./stateTest/BarrackTest.h"
+#include "./stateTest/EmpireTest.h"
+#include "./stateTest/DecorTest.h"
