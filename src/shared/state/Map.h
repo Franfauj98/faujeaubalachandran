@@ -7,9 +7,11 @@
 
 namespace state {
   class Element;
+  class Empire;
 }
 
 #include "Element.h"
+#include "Empire.h"
 
 namespace state {
 

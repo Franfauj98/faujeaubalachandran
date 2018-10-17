@@ -6,7 +6,7 @@ using namespace state;
 Buildings::Buildings() : Element(){
 }
 
-Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost) : Element(position){
+Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost, int life) : Element(position){
   if(idBuilding>=0){
     this->idBuilding= id;
   }else{
@@ -48,6 +48,17 @@ void Buildings::setBuildingCost (BuildingCost buildingCost) {
     }
   }
 
+  int Buildings::getLife () const {
+    return this->life;
+  }
+  void Buildings::setLife (const int life) {
+    if(life>=0 && life<1000){
+      this->life=life;
+    }else{
+      std::cerr<<"life must be positive or smaller than 1000"<<std::endl;
+      this->life=0;
+    }
+  }
 
 // Setters and Getters
 IdTexture Buildings::getIdTexture() const{

@@ -6,7 +6,7 @@ Ressource::Ressource():Buildings(){
 
 }
 
-Ressource::Ressource(int production, int id, Position position, int level, IdTexture idTexture,BuildingCost ressourceCost):Buildings(id,position,level,idTexture, ressourceCost){
+Ressource::Ressource(int production, int id, Position position, int level, BuildingCost ressourceCost,IdTexture idTexture,int life):Buildings(id,position,level,idTexture, ressourceCost){
   if(production>=0 && production<1000){
     this->production=production;
   }else{
@@ -25,6 +25,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdTexture(RESSOURCE);
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
+      setLife(0);
 
       break;}
     case 2 :{
@@ -35,6 +36,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdTexture(RESSOURCE);
       BuildingCost ressourceCost(100,100);
       setBuildingCost(ressourceCost);
+      setLife(0);
       break;}
     case 3 :{
       setProduction(6);
@@ -44,6 +46,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdTexture(RESSOURCE);
       BuildingCost ressourceCost(150,150);
       setBuildingCost(ressourceCost);
+      setLife(0);
       break;}
     case 4 :{
       setProduction(8);
@@ -53,6 +56,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdTexture(RESSOURCE);
       BuildingCost ressourceCost(200,200);
       setBuildingCost(ressourceCost);
+      setLife(0);
       break;}
     default :{
       setProduction(2);
@@ -62,6 +66,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdTexture(RESSOURCE);
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
+      setLife(0);
       break;}
   }
 }

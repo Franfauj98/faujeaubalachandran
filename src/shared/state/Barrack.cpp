@@ -11,7 +11,7 @@ Barrack::Barrack():Buildings(){
 
 }
 
-Barrack::Barrack(int capacity, int id, Position position, int level, IdTexture idTexture,BuildingCost barrackCost):Buildings(id,position,level,idTexture,barrackCost){
+Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost barrackCost,IdTexture idTexture,int life):Buildings(id,position,level,idTexture,barrackCost){
   if (capacity>=0 && capacity<10){
     this->capacity=capacity;
   } else{
@@ -38,6 +38,8 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       BuildingCost barrackCost(50,50);
       setBuildingCost(barrackCost);
       setUnitsNumber(0);
+      setLife(0);
+
       break;}
     case 2 :{
       setCapacity(4);
@@ -48,6 +50,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       BuildingCost barrackCost(100,100);
       setBuildingCost(barrackCost);
       setUnitsNumber(0);
+      setLife(0);
       break;}
     case 3 :{
       setCapacity(6);
@@ -58,6 +61,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       BuildingCost barrackCost(150,150);
       setBuildingCost(barrackCost);
       setUnitsNumber(0);
+      setLife(0);
       break;}
     case 4 :{
       setCapacity(8);
@@ -68,6 +72,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       BuildingCost barrackCost(200,200);
       setBuildingCost(barrackCost);
       setUnitsNumber(0);
+      setLife(0);
       break;}
     default :{
       setCapacity(2);
@@ -78,6 +83,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       BuildingCost barrackCost(50,50);
       setBuildingCost(barrackCost);
       setUnitsNumber(0);
+      setLife(0);
       break;}
   }
 }

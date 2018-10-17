@@ -10,25 +10,20 @@ namespace state {
 }
 
 #include "Position.h"
-#include "IdTexture.h"
 #include "BuildingCost.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
 
   /// class Palace - 
   class Palace : public state::Buildings {
-    // Attributes
-  private:
-    int life;
     // Operations
   public:
     Palace ();
-    Palace (int id, Position position, int level, IdTexture idTexture, BuildingCost palaceCost);
+    Palace (int id, Position position, int level, BuildingCost palaceCost, IdTexture idTexture, int life);
     Palace (int id, Position position, int level);
     ~Palace ();
-    int getLife () const;
-    void setLife (const int life);
     // Setters and Getters
   };
 

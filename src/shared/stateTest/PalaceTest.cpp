@@ -14,7 +14,7 @@ void PalaceTest(){
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
   BuildingCost palaceCost1(50,50);
   Position position1(2,5);
-  Palace palace1(1, position1,1,HDV1, palaceCost1);
+  Palace palace1(1, position1,1, palaceCost1,HDV1,200);
   cout << "Id Building: " << palace1.getIdBuilding() << endl;
   cout << "Position X: " << palace1.getPosition().getX() << endl;
   cout << "Position Y: " << palace1.getPosition().getY() << endl;

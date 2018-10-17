@@ -180,8 +180,8 @@ bool Units::attackAllowed (Units unit2){
   }
 }
 
-void attackBuilding (Buildings& building){
-  if(attackBuildigAllowed(building)){
+void Units::attackBuilding (Buildings& building){
+  if(attackBuildingAllowed(building)){
     const int tempLife = building.getLife()-this->damage;
     if(tempLife>0){
       building.setLife(tempLife);
@@ -191,7 +191,7 @@ void attackBuilding (Buildings& building){
   }
 }
 
-bool attackBuildingAllowed (Buildings building){
+bool Units::attackBuildingAllowed (Buildings building){
   if(building.getLife() > 0){
     if(distance(this->position, building.getPosition()) <= this -> strikeRange){
       return true;

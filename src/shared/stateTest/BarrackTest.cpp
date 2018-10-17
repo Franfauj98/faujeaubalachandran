@@ -3,7 +3,7 @@
 using namespace std;
 using namespace state;
 
-void BarackTest(){
+void BarrackTest(){
 
 
 
@@ -14,7 +14,7 @@ void BarackTest(){
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
   BuildingCost barrackCost1(50,50);
   Position position1(2,5);
-  Barrack barrack1(1, position1,1,BARRACK, barrackCost1);
+  Barrack barrack1(10,1, position1,1, barrackCost1);
   cout << "Id Building: " << barrack1.getIdBuilding() << endl;
   cout << "Position X: " << barrack1.getPosition().getX() << endl;
   cout << "Position Y: " << barrack1.getPosition().getY() << endl;
@@ -37,7 +37,7 @@ void BarackTest(){
   cout << endl;
   BuildingCost barrackCost3(-50,150);
   Position position3(-2,5);
-  Barrack barrack2 (-1, position3,1,BARRACK, barrackCost3);
+  Barrack barrack2 (10,-1, position3,1, barrackCost3);
   cout << "Id Building: " << barrack2.getIdBuilding() << endl;
   cout << "Position X: " << barrack2.getPosition().getX() << endl;
   cout << "Position Y: " << barrack2.getPosition().getY() << endl;
