@@ -14,8 +14,8 @@ namespace state {
 }
 
 #include "Position.h"
-#include "IdTexture.h"
 #include "BuildingCost.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -30,7 +30,7 @@ namespace state {
   public:
     Barrack ();
     Barrack (int id, Position position, int level);
-    Barrack (int capacity, int id, Position position, int level, IdTexture idTexture, BuildingCost barrackCost);
+    Barrack (int capacity, int id, Position position, int level, BuildingCost barrackCost, IdTexture idTexture = BARRACK, int life = 0);
     ~Barrack ();
     int getCapacity () const;
     void setCapacity (const int capacity);

@@ -5,11 +5,10 @@
 #include "state/UnitCost.h"
 #include "state/Position.h"
 #include "state/IdTextureUnits.h"
-#include "state/IdTexture.h"
 #include "state/BuildingCost.h"
+#include "state/IdTexture.h"
 #include "state/Element.h"
 #include "state/Buildings.h"
-#include "state/Palace.h"
 #include "state/Units.h"
 #include "state/Decurion.h"
 #include "state/Arrow.h"
@@ -21,4 +20,5 @@
 #include "state/Ressource.h"
 #include "state/IdDecor.h"
 #include "state/Decor.h"
+#include "state/Palace.h"
 #endif

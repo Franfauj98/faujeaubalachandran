@@ -25,15 +25,18 @@ namespace state {
     int idBuilding;
     int level;
     BuildingCost buildingCost;
+    int life     = 0;
     // Operations
   public:
     Buildings ();
-    Buildings (int id, Position position, int level, IdTexture idTexture, BuildingCost buildingCost);
+    Buildings (int id, Position position, int level, IdTexture idTexture, BuildingCost buildingCost, int life = 0);
     int getLevel () const;
     void setLevel (const int level);
     BuildingCost getBuildingCost () const;
     void setBuildingCost (const BuildingCost buildingCost);
     bool isPassable ();
+    int getLife () const;
+    void setLife (const int life);
     ~Buildings ();
     // Setters and Getters
     IdTexture getIdTexture() const;

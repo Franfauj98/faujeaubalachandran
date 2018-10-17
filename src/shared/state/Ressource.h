@@ -10,8 +10,8 @@ namespace state {
 }
 
 #include "Position.h"
-#include "IdTexture.h"
 #include "BuildingCost.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -25,7 +25,7 @@ namespace state {
   public:
     Ressource ();
     Ressource (int id, Position position, int level);
-    Ressource (int production, int id, Position position, int level, IdTexture idTexture, BuildingCost ressourceCost);
+    Ressource (int production, int id, Position position, int level, BuildingCost ressourceCost, IdTexture idTexture = RESSOURCE, int life = 0);
     int getProduction () const;
     void setProduction (const int production);
     ~Ressource ();
