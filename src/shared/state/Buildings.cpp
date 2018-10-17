@@ -3,13 +3,11 @@
 using namespace state;
 
 Buildings::Buildings() : Element(){
-  Position pos0(0,0);
-  this->position= pos0;
   this->idBuilding=0;
   this->level=0;
   BuildingCost buildingCost(0,0);
   this->buildingCost=buildingCost;
-  
+  this->idTexture=NONE_BUILDING;
 }
 
 Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost, int life) : Element(position){

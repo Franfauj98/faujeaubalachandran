@@ -6,7 +6,20 @@
 using namespace state;
 
 Empire::Empire(){
-
+  this->barrack=new Barrack();
+  this->ressource=new Ressource();
+  this->palace=new Palace();
+  this->idEmpire=0;
+  this->name="none";
+  this->empireLevel=0;
+  this->life=0;
+  this->goldRessource=0;
+  this->woodRessource=0;
+  this->foodRessource=0;
+  std::vector<Position> position(1);
+  Position pos0(0,0);
+  position[0]=pos0;
+  this->position=position;
 }
 
 Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, Barrack* barrack,

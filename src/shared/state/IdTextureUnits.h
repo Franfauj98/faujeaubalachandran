@@ -6,6 +6,7 @@
 namespace state {
 
   enum IdTextureUnits {
+    NONE_UNIT     = 0,
     CAVALIER1     = 1,
     CAVALIER2     = 2,
     CAVALIER3     = 3,

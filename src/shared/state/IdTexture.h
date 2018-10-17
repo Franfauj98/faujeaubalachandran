@@ -6,6 +6,7 @@
 namespace state {
 
   enum IdTexture {
+    NONE_BUILDING     = 0,
     RESSOURCE     = 1,
     BARRACK     = 2,
     HDV1     = 3,

@@ -8,6 +8,8 @@
 using namespace state;
 
 Barrack::Barrack():Buildings(){
+  this->capacity=0;
+  this->unitsNumber=0;
 }
 
 Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost barrackCost,IdTexture idTexture,int life):Buildings(id,position,level,idTexture,barrackCost){

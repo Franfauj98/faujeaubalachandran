@@ -3,7 +3,7 @@
 using namespace state;
 
 Ressource::Ressource():Buildings(){
-
+  this->production=0;
 }
 
 Ressource::Ressource(int production, int id, Position position, int level, BuildingCost ressourceCost,IdTexture idTexture,int life):Buildings(id,position,level,idTexture, ressourceCost){
