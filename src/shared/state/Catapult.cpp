@@ -1,7 +1,19 @@
 #include "Catapult.h"
 using namespace state;
 
-Catapult::Catapult () : Units() {}
+Catapult::Catapult () : Units() {
+  Position p;
+  setPosition(p);
+  setIdUnits(1);
+  setLife(0);
+  setDamage(0);
+  setStrikeRange(1);
+  setMovingRange(1);
+  setLevel(1);
+  setIdTextureUnits(CATAPULT1);
+  UnitCost catapultCost(1,1);
+  setUnitCost(catapultCost);
+}
 
 Catapult::Catapult (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost catapultCost) :
   Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, catapultCost) {}
@@ -11,8 +23,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(3000);
-      setDamage(50);
+      setLife(50);
+      setDamage(5);
       setStrikeRange(4);
       setMovingRange(1);
       setLevel(level);
@@ -23,8 +35,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(4000);
-      setDamage(70);
+      setLife(60);
+      setDamage(10);
       setStrikeRange(4);
       setMovingRange(1);
       setLevel(level);
@@ -35,8 +47,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(5000);
-      setDamage(90);
+      setLife(70);
+      setDamage(15);
       setStrikeRange(5);
       setMovingRange(1);
       setLevel(level);
@@ -47,8 +59,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(6000);
-      setDamage(110);
+      setLife(80);
+      setDamage(20);
       setStrikeRange(5);
       setMovingRange(1);
       setLevel(level);
@@ -59,7 +71,7 @@ Catapult::Catapult (int level, Position p, int id){
     default :{
       setPosition(p);
       setIdUnits(id);
-      setLife(3000);
+      setLife(5);
       setDamage(50);
       setStrikeRange(4);
       setMovingRange(1);

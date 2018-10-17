@@ -6,6 +6,7 @@ using namespace std;
 void elementTest() {
   Position pos2(1,2);
   Position pos1;
+  Position pos3(1000000,2000000);
 
   cout << "-------------------------------------" << endl;
   cout << "TEST ELEMENT" << endl;

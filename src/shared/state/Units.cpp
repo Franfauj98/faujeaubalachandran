@@ -3,6 +3,17 @@
 using namespace state;
 
 Units::Units () : Element(){
+  Position p(1,1);
+  setPosition(p);
+  setIdUnits(1);
+  setLife(1);
+  setDamage(1);
+  setStrikeRange(1);
+  setMovingRange(1);
+  setLevel(1);
+  setIdTextureUnits(CATAPULT1);
+  UnitCost cost(1,1);
+  setUnitCost(cost);
 }
 
 Units::Units (int idUnits, Position position, int life,
@@ -12,38 +23,38 @@ Units::Units (int idUnits, Position position, int life,
     if(idUnits>0) {
       this->idUnits = idUnits;
     } else {
-      throw std::string("idUnits must be positive");
       this->idUnits = 0;
+      throw std::string("idUnits must be positive");
     }
-    if(life>0 && life <1000) {
+    if(life>0 && life <=1000) {
       this->life = life;
     } else {
-      throw std::string("life must be positive or be smaller than 1000");
       this->life = 0;
+      throw std::string("life must be positive or be smaller than 1000");
     }
-    if(damage>0 && damage < 100) {
+    if(damage>0 && damage <= 100) {
       this->damage = damage;
     } else {
-      throw std::string("damage must be positive or be smaller than 100");
       this->damage = 0;
+      throw std::string("damage must be positive or be smaller than 100");
     }
     if(strikeRange>0 && strikeRange < 10) {
       this->strikeRange = strikeRange;
     } else {
-      throw std::string("strikeRange must be positive or be smaller than 10");
       this->strikeRange = 0;
+      throw std::string("strikeRange must be positive or be smaller than 10");
     }
     if(movingRange>0 && movingRange<5) {
       this->movingRange = movingRange;
     } else {
-      throw std::string("movingRange must be positive or be smaller than 5");
       this->movingRange = 0;
+      throw std::string("movingRange must be positive or be smaller than 5");
     }
     if(level>0 && level<5) {
       this->level = level;
     } else {
-      throw std::string("level must be positive and smaller than 5");
       this->level = 0;
+      throw std::string("level must be positive and smaller than 5");
     }
     this->idTextureUnits=idTextureUnits;
     this->unitCost=unitCost;
@@ -54,11 +65,11 @@ Units::Units (int idUnits, Position position, int life,
 
 void Units::setLife (int life){
   try{
-    if(life > 0 && life <1000){
+    if(life > 0 && life <=1000){
       this->life = life;
     } else {
-      throw std::string("life must be positive  or be smaller than 1000");
       this->life = 0;
+      throw std::string("life must be positive  or be smaller than 1000");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -71,7 +82,7 @@ int Units::getLife() const{
 
 void Units::setDamage (const int damage){
   try{
-    if(damage>0 && damage<100){
+    if(damage>0 && damage<=100){
       this->damage = damage;
     } else {
       this->damage = 0;

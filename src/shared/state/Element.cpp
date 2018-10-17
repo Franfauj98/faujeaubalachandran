@@ -18,8 +18,8 @@ void Element::setPosition (const Position& pos){
     if(pos.getX()>0&&pos.getY()>0 && pos.getX()<10000 && pos.getY()<10000){
       this->position = pos;
     } else {
-      throw std::string("Position must be positive  or on the map ");
       Position p;
+      throw std::string("Position must be positive  or on the map ");
       this->position = p;
     }
   } catch (std::string error){

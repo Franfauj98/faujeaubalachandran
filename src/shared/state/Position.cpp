@@ -10,14 +10,14 @@ Position::Position (int x, int y) {
     if(x>=0 && x<10000){
       this->x = x;
     } else {
-      throw std::string("X must be positive or be on the map");
       this->x = 0;
+      throw std::string("X must be positive or be on the map");
     }
     if(y>=0 && y<10000){
       this->y = y;
     } else{
-      throw std::string("Y must be positive or be on the map")  ;
       this->y = 0;
+      throw std::string("Y must be positive or be on the map")  ;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;

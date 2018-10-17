@@ -1,7 +1,19 @@
 #include "Decurion.h"
 using namespace state;
 
-Decurion::Decurion () : Units() {}
+Decurion::Decurion () : Units() {
+  Position p;
+  setPosition(p);
+  setIdUnits(1);
+  setLife(0);
+  setDamage(0);
+  setStrikeRange(1);
+  setMovingRange(1);
+  setLevel(1);
+  setIdTextureUnits(DECURION1);
+  UnitCost decurionCost(1,1);
+  setUnitCost(decurionCost);
+}
 
 Decurion::Decurion (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost decurionCost) :
   Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, decurionCost) {}
@@ -11,8 +23,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(600);
-      setDamage(150);
+      setLife(30);
+      setDamage(30);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -23,8 +35,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(700);
-      setDamage(200);
+      setLife(40);
+      setDamage(40);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -35,8 +47,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(800);
-      setDamage(250);
+      setLife(50);
+      setDamage(50);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -47,8 +59,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(900);
-      setDamage(300);
+      setLife(60);
+      setDamage(55);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -59,8 +71,8 @@ Decurion::Decurion (int level, Position p, int id){
     default :{
       setPosition(p);
       setIdUnits(id);
-      setLife(600);
-      setDamage(150);
+      setLife(20);
+      setDamage(20);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(1);

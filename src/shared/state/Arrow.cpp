@@ -2,7 +2,19 @@
 #include <iostream>
 using namespace state;
 
-Arrow::Arrow () : Units() {}
+Arrow::Arrow () : Units() {
+  Position p;
+  setPosition(p);
+  setIdUnits(1);
+  setLife(0);
+  setDamage(0);
+  setStrikeRange(1);
+  setMovingRange(1);
+  setLevel(1);
+  setIdTextureUnits(ARROW1);
+  UnitCost arrowCost(1,1);
+  setUnitCost(arrowCost);
+}
 
 Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost) :
   Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, arrowCost) {}
@@ -12,8 +24,8 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(400);
-      setDamage(100);
+      setLife(40);
+      setDamage(10);
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(level);
@@ -24,8 +36,8 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(500);
-      setDamage(200);
+      setLife(50);
+      setDamage(20);
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(level);
@@ -36,8 +48,8 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(600);
-      setDamage(300);
+      setLife(60);
+      setDamage(30);
       setStrikeRange(3);
       setMovingRange(1);
       setLevel(level);
@@ -48,8 +60,8 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(700);
-      setDamage(400);
+      setLife(70);
+      setDamage(40);
       setStrikeRange(3);
       setMovingRange(1);
       setLevel(level);
@@ -60,8 +72,8 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
     default :{
       setPosition(p);
       setIdUnits(id);
-      setLife(400);
-      setDamage(100);
+      setLife(40);
+      setDamage(10);
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(1);

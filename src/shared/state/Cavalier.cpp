@@ -1,7 +1,19 @@
 #include "Cavalier.h"
 using namespace state;
 
-Cavalier::Cavalier () : Units() {}
+Cavalier::Cavalier () : Units() {
+  Position p;
+  setPosition(p);
+  setIdUnits(1);
+  setLife(0);
+  setDamage(0);
+  setStrikeRange(1);
+  setMovingRange(1);
+  setLevel(1);
+  setIdTextureUnits(CAVALIER1);
+  UnitCost cavalierCost(1,1);
+  setUnitCost(cavalierCost);
+}
 
 Cavalier::Cavalier (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost cavalierCost) :
   Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, cavalierCost) {}
@@ -11,8 +23,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(1000);
-      setDamage(180);
+      setLife(40);
+      setDamage(25);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -23,8 +35,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(1500);
-      setDamage(230);
+      setLife(50);
+      setDamage(40);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -35,8 +47,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(2000);
-      setDamage(300);
+      setLife(70);
+      setDamage(50);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -47,8 +59,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(2500);
-      setDamage(350);
+      setLife(80);
+      setDamage(55);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -59,8 +71,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     default :{
       setPosition(p);
       setIdUnits(id);
-      setLife(1000);
-      setDamage(180);
+      setLife(40);
+      setDamage(25);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(1);
