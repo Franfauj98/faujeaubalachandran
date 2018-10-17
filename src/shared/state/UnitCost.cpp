@@ -8,42 +8,53 @@ UnitCost::UnitCost(){
 }
 
 UnitCost::UnitCost(int gold, int food){
-
-  if (gold>=0 && gold<1000){
-    this->gold=gold;
-  }
-  else {
-    std::cerr<<"gold must be positive or be smaller than 1000"<<std::endl;
-    this->gold=0;
-  }
-  if (food>=0 && food<1000){
-    this->food=food;
-  }
-  else{
-    std::cerr<<"food must be positive or be smaller than 1000"<<std::endl;
-    this->food=0;
+  try{
+    if (gold>=0 && gold<1000){
+      this->gold=gold;
+    }
+    else {
+      throw std::string("gold must be positive or be smaller than 1000");
+      this->gold=0;
+    }
+    if (food>=0 && food<1000){
+      this->food=food;
+    }
+    else{
+      throw std::string("food must be positive or be smaller than 1000");
+      this->food=0;
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
 void UnitCost::setGold (const int gold){
-  if (gold>=0 && gold<1000){
-    this->gold=gold;
-  }
-  else {
-    std::cerr<<"gold must be positive or be smaller than 1000"<<std::endl;
-    this->gold=0;
+  try{
+    if (gold>=0 && gold<1000){
+      this->gold=gold;
+    }
+    else {
+      throw std::string("gold must be positive or be smaller than 1000");
+      this->gold=0;
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 int UnitCost::getGold () const{
   return this->gold;
 }
 void UnitCost::setFood (const int food){
-  if (food>=0 && food<1000){
-    this->food=food;
-  }
-  else{
-    std::cerr<<"food must be positive  or be smaller than 1000"<<std::endl;
-    this->food=0;
+  try{
+    if (food>=0 && food<1000){
+      this->food=food;
+    }
+    else{
+      throw std::string("food must be positive  or be smaller than 1000");
+      this->food=0;
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 int UnitCost::getFood () const{

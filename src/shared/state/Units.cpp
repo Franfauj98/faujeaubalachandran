@@ -8,52 +8,60 @@ Units::Units () : Element(){
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
   int level, IdTextureUnits idTextureUnits, UnitCost uniCost) : Element(position){
-  if(idUnits>0) {
-    this->idUnits = idUnits;
-  } else {
-    std::cerr << "idUnits must be positive"<< std::endl;
-    this->idUnits = 0;
+  try{
+    if(idUnits>0) {
+      this->idUnits = idUnits;
+    } else {
+      throw std::string("idUnits must be positive");
+      this->idUnits = 0;
+    }
+    if(life>0 && life <1000) {
+      this->life = life;
+    } else {
+      throw std::string("life must be positive or be smaller than 1000");
+      this->life = 0;
+    }
+    if(damage>0 && damage < 100) {
+      this->damage = damage;
+    } else {
+      throw std::string("damage must be positive or be smaller than 100");
+      this->damage = 0;
+    }
+    if(strikeRange>0 && strikeRange < 10) {
+      this->strikeRange = strikeRange;
+    } else {
+      throw std::string("strikeRange must be positive or be smaller than 10");
+      this->strikeRange = 0;
+    }
+    if(movingRange>0 && movingRange<5) {
+      this->movingRange = movingRange;
+    } else {
+      throw std::string("movingRange must be positive or be smaller than 5");
+      this->movingRange = 0;
+    }
+    if(level>0 && level<5) {
+      this->level = level;
+    } else {
+      throw std::string("level must be positive and smaller than 5");
+      this->level = 0;
+    }
+    this->idTextureUnits=idTextureUnits;
+    this->unitCost=unitCost;
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
-  if(life>0 && life <1000) {
-    this->life = life;
-  } else {
-    std::cerr << "life must be positive or be smaller than 1000"<< std::endl;
-    this->life = 0;
-  }
-  if(damage>0 && damage < 100) {
-    this->damage = damage;
-  } else {
-    std::cerr << "damage must be positive or be smaller than 100"<< std::endl;
-    this->damage = 0;
-  }
-  if(strikeRange>0 && strikeRange < 10) {
-    this->strikeRange = strikeRange;
-  } else {
-    std::cerr << "strikeRange must be positive or be smaller than 10"<< std::endl;
-    this->strikeRange = 0;
-  }
-  if(movingRange>0 && movingRange<5) {
-    this->movingRange = movingRange;
-  } else {
-    std::cerr << "movingRange must be positive or be smaller than 5"<< std::endl;
-    this->movingRange = 0;
-  }
-  if(level>0 && level<5) {
-    this->level = level;
-  } else {
-    std::cerr << "level must be positive and smaller than 5"<< std::endl;
-    this->level = 0;
-  }
-  this->idTextureUnits=idTextureUnits;
-  this->unitCost=unitCost;
 }
 
 void Units::setLife (int life){
-  if(life > 0 && life <1000){
-    this->life = life;
-  } else {
-    std::cerr << "life must be positive  or be smaller than 1000"<< std::endl;
-    this->life = 0;
+  try{
+    if(life > 0 && life <1000){
+      this->life = life;
+    } else {
+      throw std::string("life must be positive  or be smaller than 1000");
+      this->life = 0;
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
@@ -62,11 +70,15 @@ int Units::getLife() const{
 }
 
 void Units::setDamage (const int damage){
-  if(damage>0 && damage<100){
-    this->damage = damage;
-  } else {
-    this->damage = 0;
-    std::cerr << "damage must be positive or be smaller than 100"<< std::endl;
+  try{
+    if(damage>0 && damage<100){
+      this->damage = damage;
+    } else {
+      this->damage = 0;
+      throw std::string("damage must be positive or be smaller than 100");
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
@@ -75,11 +87,15 @@ int Units::getDamage() const{
 }
 
 void Units::setStrikeRange (const int strikeRange){
-  if(strikeRange > 0 && strikeRange<10){
-    this->strikeRange = strikeRange;
-  } else {
-    this->strikeRange = 0;
-    std::cerr << "strikeRange must be positive or be smaller than 10"<< std::endl;
+try{
+    if(strikeRange > 0 && strikeRange<10){
+      this->strikeRange = strikeRange;
+    } else {
+      this->strikeRange = 0;
+      throw std::string("strikeRange must be positive or be smaller than 10");
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
@@ -88,11 +104,15 @@ int Units::getStrikeRange() const{
 }
 
 void Units::setMovingRange (const int movingRange){
-  if(movingRange > 0 && movingRange<5){
-    this->movingRange = movingRange;
-  } else {
-    this->movingRange = 0;
-    std::cerr << "movingRange must be positive or be smaller than 5"<< std::endl;
+  try{
+    if(movingRange > 0 && movingRange<5){
+      this->movingRange = movingRange;
+    } else {
+      this->movingRange = 0;
+      throw std::string("movingRange must be positive or be smaller than 5");
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
@@ -101,11 +121,15 @@ int Units::getMovingRange() const{
 }
 
 void Units::setLevel (const int level){
-  if(level>0 && level<5){
-    this->level = level;
-  } else {
-    this->level = 0;
-    std::cerr << "level must be positive or be smaller than 5"<< std::endl;
+  try{
+    if(level>0 && level<5){
+      this->level = level;
+    } else {
+      this->level = 0;
+      throw std::string("level must be positive or be smaller than 5");
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
@@ -126,11 +150,15 @@ int Units::getIdUnits () const{
 }
 
 void Units::setIdUnits (const int idUnits){
-  if(idUnits>0){
-    this->idUnits = idUnits;
-  } else {
-    this->idUnits = 0;
-    std::cerr << "idUnits must be positive"<< std::endl;
+  try{
+    if(idUnits>0){
+      this->idUnits = idUnits;
+    } else {
+      this->idUnits = 0;
+      throw std::string("idUnits must be positive");
+    }
+  } catch (std::string error){
+    std::cerr << error << std::endl;
   }
 }
 
