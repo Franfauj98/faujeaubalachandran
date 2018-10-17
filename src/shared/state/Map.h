@@ -25,8 +25,10 @@ namespace state {
   public:
     Map ();
     ~Map ();
-    void setMap (const std::vector<std::unique_ptr<Element>> playingMap);
+    void addElement (std::unique_ptr<Element> elt);
     std::vector<std::unique_ptr<Element>> getMap ();
+    void deleteElement (int pos);
+    int getPositionElement (std::unique_ptr<Element> elt);
     // Setters and Getters
   };
 
