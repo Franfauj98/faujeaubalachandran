@@ -1,5 +1,8 @@
 #include "BarrackTest.h"
-
+#include "ArrowTest.h"
+#include "CatapultTest.h"
+#include "DecurionTest.h"
+#include "CavalierTest.h"
 using namespace std;
 using namespace state;
 
@@ -22,6 +25,9 @@ void BarrackTest(){
   cout << "Wood Cost: " << barrack1.getBuildingCost().getWood() << endl;
   cout << "Gold Cost: " << barrack1.getBuildingCost().getGold() << endl;
   cout << "Passable ?: " << barrack1.isPassable() << endl;
+  cout << "Capacity: " << barrack1.getCapacity() << endl;
+  cout << "UnitsNumber: " << barrack1.getUnitsNumber() << endl;
+
   BuildingCost barrackCost2(150,250);
   Position position2(5,2);
   barrack1.setIdBuilding(10);
