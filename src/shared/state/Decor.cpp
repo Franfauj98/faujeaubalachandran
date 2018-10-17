@@ -32,12 +32,12 @@ bool Decor::getPassable() const {
   return this->passable;
 }
 
-void Decor::setPassable(bool passable){
+void Decor::setPassable(const bool passable){
   this->passable=passable;
 }
 IdDecor Decor::getIdDecor() const{
   return this->idDecor;
 }
-void Decor::setIdDecor(IdDecor idDecor){
+void Decor::setIdDecor(const IdDecor idDecor){
   this->idDecor=idDecor;
 }

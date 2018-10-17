@@ -18,6 +18,8 @@ namespace state {
     ~Position ();
     int getX () const;
     int getY () const;
+    void setX (const int x);
+    void setY (const int y);
     // Setters and Getters
   };
 

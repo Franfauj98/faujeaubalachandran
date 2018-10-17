@@ -8,6 +8,7 @@ namespace state {
   class Position;
   class Units;
   class Palace;
+  class Buildings;
   class Element;
 }
 
@@ -38,28 +39,29 @@ namespace state {
     Units ();
     Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost);
     ~Units ();
-    void setLife (int life);
+    void setLife (const int life);
     int getLife () const;
-    void setDamage (int damage);
+    void setDamage (const int damage);
     int getDamage () const;
-    void setStrikeRange (int strikeRange);
+    void setStrikeRange (const int strikeRange);
     int getStrikeRange () const;
-    void setMovingRange (int movingRange);
+    void setMovingRange (const int movingRange);
     int getMovingRange () const;
     void move (Position& p2, int moveNumber);
     bool moveAllowed (Position p2, int moveNumber);
     void attack (Units& unit2);
     bool attackAllowed (Units unit2);
     int getLevel () const;
-    void setLevel (int level);
+    void setLevel (const int level);
     IdTextureUnits getIdTextureUnits () const;
-    void setIdTextureUnits (IdTextureUnits idTextureUnits);
+    void setIdTextureUnits (const IdTextureUnits idTextureUnits);
     int getIdUnits () const;
-    void setIdUnits (int idUnits);
+    void setIdUnits (const int idUnits);
     UnitCost getUnitCost () const;
-    void setUnitCost (UnitCost unitCost);
+    void setUnitCost (const UnitCost unitCost);
     bool isPassable ();
     void attackPalace (Palace palace);
+    void attackBuilding (Buildings& building);
     // Setters and Getters
   };
 

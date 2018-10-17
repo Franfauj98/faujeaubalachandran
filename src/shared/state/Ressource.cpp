@@ -7,10 +7,10 @@ Ressource::Ressource():Buildings(){
 }
 
 Ressource::Ressource(int production, int id, Position position, int level, IdTexture idTexture,BuildingCost ressourceCost):Buildings(id,position,level,idTexture, ressourceCost){
-  if(production>=0){
+  if(production>=0 && production<1000){
     this->production=production;
   }else{
-    std::cerr<<"production must be positive"<<std::endl;
+    std::cerr<<"production must be positive or be smaller than 1000"<<std::endl;
     this->production=0;
   }
 }
@@ -70,12 +70,12 @@ int Ressource::getProduction() const {
   return this->production;
 }
 
-void Ressource::setProduction(int production) {
-  if(production>=0){
+void Ressource::setProduction(const int production) {
+  if(production>=0 && production<1000){
     this->production=production;
   }
   else {
-    std::cerr<<"production must be positive"<<std::endl;
+    std::cerr<<"production must be positive or be smaller than 1000"<<std::endl;
     this->production=0;
   }
 }

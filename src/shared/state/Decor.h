@@ -26,7 +26,7 @@ namespace state {
     Decor ();
     Decor (IdDecor id, Position position);
     bool getPassable () const;
-    void setPassable (bool passable);
+    void setPassable (const bool passable);
     ~Decor ();
     // Setters and Getters
     IdDecor getIdDecor() const;

@@ -33,9 +33,9 @@ namespace state {
     Barrack (int capacity, int id, Position position, int level, IdTexture idTexture, BuildingCost barrackCost);
     ~Barrack ();
     int getCapacity () const;
-    void setCapacity (int capacity);
+    void setCapacity (const int capacity);
     int  getUnitsNumber () const;
-    void setUnitsNumber (int unitsNumber);
+    void setUnitsNumber (const int unitsNumber);
     /// switch case for units level. 
     /// @param arrowName		(???) 
     /// @param level		(???) 

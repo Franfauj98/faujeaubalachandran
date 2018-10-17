@@ -16,9 +16,9 @@ namespace state {
     BuildingCost ();
     BuildingCost ( int gold, int wood);
     ~BuildingCost ();
-    void setGold (int gold);
+    void setGold (const int gold);
     int getGold () const;
-    void setWood (int wood);
+    void setWood (const int wood);
     int getWood () const;
     // Setters and Getters
   };

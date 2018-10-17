@@ -12,17 +12,17 @@ Barrack::Barrack():Buildings(){
 }
 
 Barrack::Barrack(int capacity, int id, Position position, int level, IdTexture idTexture,BuildingCost barrackCost):Buildings(id,position,level,idTexture,barrackCost){
-  if (capacity>=0){
+  if (capacity>=0 && capacity<10){
     this->capacity=capacity;
   } else{
-    std::cerr << "capacity must be positive" <<std::endl;
+    std::cerr << "capacity must be positive or smaller than 10" <<std::endl;
     this->capacity=0;
   }
 
-  if (unitsNumber>=0){
+  if (unitsNumber>=0 && unitsNumber<=capacity){
     this->unitsNumber=unitsNumber;
   }else{
-    std::cerr << "unitsNumber must be positive" <<std::endl;
+    std::cerr << "unitsNumber must be positive or smaller than capacity " <<std::endl;
     this->unitsNumber=0;
   }
 }
@@ -86,12 +86,12 @@ int Barrack::getCapacity() const{
   return this->capacity;
 }
 
-void Barrack::setCapacity(int capacity){
-  if (capacity>=0){
+void Barrack::setCapacity(const int capacity){
+  if (capacity>=0 && capacity<10){
     this->capacity=capacity;
   }
   else {
-    std::cerr << "capacity must be positive" <<std::endl;
+    std::cerr << "capacity must be positive or smaller than 10" <<std::endl;
     this->capacity=0;
   }
 }
@@ -100,12 +100,12 @@ int Barrack::getUnitsNumber() const{
   return this->unitsNumber;
 }
 
-void Barrack::setUnitsNumber(int unitsNumber){
-  if (unitsNumber>=0){
+void Barrack::setUnitsNumber(const int unitsNumber){
+  if (unitsNumber>=0 && unitsNumber<=capacity){
     this->unitsNumber=unitsNumber;
   }
   else {
-    std::cerr << "unitsNumber must be positive" <<std::endl;
+    std::cerr << "unitsNumber must be positive or smaller than capacity " <<std::endl;
     this->unitsNumber=0;
   }
 

@@ -28,7 +28,7 @@ namespace state {
     Palace (int id, Position position, int level);
     ~Palace ();
     int getLife () const;
-    void setLife (int life);
+    void setLife (const int life);
     // Setters and Getters
   };
 

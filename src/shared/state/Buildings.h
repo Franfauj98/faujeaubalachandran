@@ -30,9 +30,9 @@ namespace state {
     Buildings ();
     Buildings (int id, Position position, int level, IdTexture idTexture, BuildingCost buildingCost);
     int getLevel () const;
-    void setLevel (int level);
+    void setLevel (const int level);
     BuildingCost getBuildingCost () const;
-    void setBuildingCost (BuildingCost buildingCost);
+    void setBuildingCost (const BuildingCost buildingCost);
     bool isPassable ();
     ~Buildings ();
     // Setters and Getters

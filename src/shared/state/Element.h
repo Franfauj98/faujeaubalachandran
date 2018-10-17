@@ -24,7 +24,7 @@ namespace state {
     ~Element ();
     bool isPassable ();
     Position& getPosition ();
-    void setPosition (Position& position);
+    void setPosition (const Position& position);
     int distance (Position pos1, Position pos2);
     // Setters and Getters
   };
