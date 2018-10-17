@@ -176,12 +176,19 @@ bool Units::attackAllowed (Units unit2){
       return false;
     }
   } else {
-  return false;
+    return false;
   }
 }
 
 void attackBuilding (Buildings& building){
-  
+  if(attackBuildigAllowed(building)){
+    const int tempLife = building.getLife()-this->damage;
+    if(tempLife>0){
+      building.setLife(tempLife);
+    } else{
+      building.setLife(0);
+    }
+  }
 }
 
 bool attackBuildingAllowed (Buildings building){
@@ -192,7 +199,7 @@ bool attackBuildingAllowed (Buildings building){
       return false;
     }
   } else {
-  return false;
+    return false;
   }
 }
 
