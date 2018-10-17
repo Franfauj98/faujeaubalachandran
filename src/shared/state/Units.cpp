@@ -11,7 +11,7 @@ Units::Units (int idUnits, Position position, int life,
   if(idUnits>0) {
     this->idUnits = idUnits;
   } else {
-    std::cerr << "idUnits must be >= 0"<< std::endl;
+    std::cerr << "idUnits must be positive"<< std::endl;
     this->idUnits = 0;
   }
   if(life>0 && life <1000) {
@@ -171,6 +171,22 @@ void Units::attack (Units& unit2){
 bool Units::attackAllowed (Units unit2){
   if(unit2.getLife() > 0){
     if(distance(this->position, unit2.getPosition()) <= this -> strikeRange){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+  return false;
+  }
+}
+
+void attackBuilding (Buildings& building){
+  
+}
+
+bool attackBuildingAllowed (Buildings building){
+  if(building.getLife() > 0){
+    if(distance(this->position, building.getPosition()) <= this -> strikeRange){
       return true;
     } else {
       return false;
