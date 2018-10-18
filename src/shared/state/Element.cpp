@@ -2,14 +2,6 @@
 #include <iostream>
 
 using namespace state;
-// 
-// Element::Element() {
-//   Position pos0(0,0);
-//   this->position=pos0;
-//
-// }
-//
-// Element::Element(Position position) : position(position){}
 
 Position& Element::getPosition(){
   return position;

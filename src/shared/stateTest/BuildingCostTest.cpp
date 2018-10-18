@@ -5,8 +5,6 @@ using namespace state;
 
 void BuildingCostTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST BUILDING_COST" << endl;
   cout << "-------------------------------------" << endl;
@@ -34,7 +32,7 @@ void BuildingCostTest(){
   buildingCost2.setGold(-100);
   buildingCost2.setWood(-200);
   cout << endl;
-  
+
   cout << "CONSTRUCTEUR AVEC AVEC PARAMETRES HORS DOMAINE DE DEF" << endl;
   BuildingCost buildingCost3(-50,10000);
   cout << endl;

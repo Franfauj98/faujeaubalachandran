@@ -5,8 +5,6 @@ using namespace state;
 
 void PalaceTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST PALACE" << endl;
   cout << "-------------------------------------" << endl;
@@ -104,6 +102,4 @@ void PalaceTest(){
   cout << "Level: " << palace3.getLevel() << endl;
   cout << "Life: " << palace3.getLife() << endl;
   cout << endl;
-
-
 }

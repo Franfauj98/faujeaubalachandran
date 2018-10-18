@@ -5,8 +5,6 @@ using namespace state;
 
 void UnitCostTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST UNIT_COST" << endl;
   cout << "-------------------------------------" << endl;

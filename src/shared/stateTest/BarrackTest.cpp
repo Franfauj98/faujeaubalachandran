@@ -8,8 +8,6 @@ using namespace state;
 
 void BarrackTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST BARRACK" << endl;
   cout << "-------------------------------------" << endl;

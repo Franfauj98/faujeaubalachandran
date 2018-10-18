@@ -5,7 +5,6 @@ using namespace state;
 
 void decurionTest(){
 
-
   Position pos1(2,2);
   Position pos2(2,1);
   Position pos3(2,3);
