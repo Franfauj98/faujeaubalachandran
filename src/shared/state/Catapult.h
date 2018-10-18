@@ -23,7 +23,7 @@ namespace state {
     Catapult ();
     Catapult (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost catapultCost);
     Catapult (int level, Position position, int id);
-    ~Catapult ();
+    virtual ~Catapult ();
     // Setters and Getters
   };
 

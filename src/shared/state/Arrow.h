@@ -23,7 +23,7 @@ namespace state {
     Arrow ();
     Arrow (int level, int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost);
     Arrow (int level, Position position, int id);
-    ~Arrow ();
+    virtual ~Arrow ();
     // Setters and Getters
   };
 

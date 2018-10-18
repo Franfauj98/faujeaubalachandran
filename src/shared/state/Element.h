@@ -19,9 +19,7 @@ namespace state {
     Position position;
     // Operations
   public:
-    Element ();
-    Element (Position position);
-    ~Element ();
+    virtual ~Element ();
     bool isPassable ();
     Position& getPosition ();
     void setPosition (const Position& position);

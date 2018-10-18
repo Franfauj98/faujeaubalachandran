@@ -37,7 +37,7 @@ namespace state {
   public:
     Units ();
     Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost);
-    ~Units ();
+    virtual ~Units ();
     void setLife (const int life);
     int getLife () const;
     void setDamage (const int damage);

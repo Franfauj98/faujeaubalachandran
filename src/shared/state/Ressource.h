@@ -28,7 +28,7 @@ namespace state {
     Ressource (int production, int id, Position position, int level, BuildingCost ressourceCost, IdTexture idTexture = RESSOURCE, int life = 0);
     int getProduction () const;
     void setProduction (const int production);
-    ~Ressource ();
+    virtual ~Ressource ();
     // Setters and Getters
   };
 

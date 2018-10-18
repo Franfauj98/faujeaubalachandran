@@ -23,7 +23,7 @@ namespace state {
     Decurion ();
     Decurion (int level, int id, Position position, int life, int dammage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost decurionCost);
     Decurion (int level, Position position, int id);
-    ~Decurion ();
+    virtual ~Decurion ();
     // Setters and Getters
   };
 

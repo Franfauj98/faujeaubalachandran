@@ -2,7 +2,9 @@
 #include<iostream>
 using namespace state;
 
-Buildings::Buildings() : Element(){
+Buildings::Buildings() {
+  Position p(0,0);
+  this->position = p;
   this->idBuilding=0;
   this->level=0;
   BuildingCost buildingCost(0,0);
@@ -10,10 +12,11 @@ Buildings::Buildings() : Element(){
   this->idTexture=NONE_BUILDING;
 }
 
-Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost, int life) : Element(position){
+Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost, int life) {
   try{
     if(id>=0 && position.getX()>=0 && position.getX()<=10000 && position.getY()>=0 && position.getY()<=10000 && level>=0 && level<5
   && buildingCost.getWood()>=0 && buildingCost.getWood()>=10000 && buildingCost.getGold()>=0 && buildingCost.getGold()>=10000 && life >=0 && life <=1000){
+      this->position = position;
       this->idBuilding= id;
       this->level= level;
       this->idTexture=idTexture;
