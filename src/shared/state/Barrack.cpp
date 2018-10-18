@@ -136,39 +136,41 @@ Arrow* Barrack::createArrow(int level,Position position, int id){
     }
 }
 
-Cavalier* Barrack::createCavalier (Cavalier* cavalierName, int level, Position position, int id){
+Cavalier* Barrack::createCavalier (int level, Position position, int id){
   try{
-    cavalierName=0;
+    Cavalier* cavalier=0;
     if (this->unitsNumber < this->capacity){
-      cavalierName=new Cavalier(level,position,id);
+      cavalier=new Cavalier(level,position,id);
+      return cavalier;
     } else {
         throw std::string("UnitsNumber is bigger than capacity");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
     }
-    return cavalierName;
 }
 
-Decurion* Barrack::createDecurion (Decurion* decurionName, int level, Position position, int id){
+Decurion* Barrack::createDecurion (int level, Position position, int id){
   try{
-    decurionName=0;
+    Decurion* decurion=0;
     if (this->unitsNumber<this->capacity){
-      decurionName=new Decurion(level,position,id);
+      decurion=new Decurion(level,position,id);
+      return decurion;
     } else {
       throw std::string("UnitsNumber is bigger than capacity");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
     }
-    return decurionName;
+
 }
 
-Catapult* Barrack::createCatapult (Catapult* catapultName, int level, Position position, int id){
+Catapult* Barrack::createCatapult (int level, Position position, int id){
   try{
-    catapultName=0;
+    Catapult* catapult=0;
     if (this->unitsNumber<this->capacity){
-      catapultName=new Catapult(level,position,id);
+      catapult=new Catapult(level,position,id);
+      return catapult;
     } else {
       throw std::string("UnitsNumber is bigger than capacity");
     }
@@ -176,7 +178,7 @@ Catapult* Barrack::createCatapult (Catapult* catapultName, int level, Position p
   } catch (std::string error){
     std::cerr << error << std::endl;
     }
-    return catapultName;
+
 }
 
 void Barrack::destructArrow (Arrow* arrow) {

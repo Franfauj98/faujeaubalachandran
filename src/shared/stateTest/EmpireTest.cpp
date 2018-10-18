@@ -1,4 +1,7 @@
 #include "EmpireTest.h"
+#include "BarrackTest.h"
+#include "PalaceTest.h"
+#include "RessourceTest.h"
 
 using namespace std;
 using namespace state;
@@ -24,25 +27,61 @@ void EmpireTest(){
     cout << "Position X: " << pos[i].getX() << endl;
     cout << "Position Y: " << pos[i].getY() << endl;
   }
-
+  Barrack* empireBarrack0=empire0.getBarrack();
+  cout<< "Barrack X position:" << empireBarrack0->getPosition().getX() << endl;
+  cout<< "Barrack Y position:" << empireBarrack0->getPosition().getY() << endl;
+  cout<< "Barrack level:" << empireBarrack0->getLevel() << endl;
+  cout<< "Barrack life:" << empireBarrack0->getLife() << endl;
   cout << endl;
 
-//     cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;
-//     Position pos0(50,25);
-//     BuildingCost buildingCost0(200,100);
-//     building0.setIdBuilding(10);
-//     building0.setPosition(pos0);
-//     building0.setIdTexture(HDV1);
-//     building0.setBuildingCost(buildingCost0);
-//     building0.setLife(500);
-//     cout << "New Id Building: " << building0.getIdBuilding() << endl;
-//     cout << "New Position X: " << building0.getPosition().getX() << endl;
-//     cout << "New Position Y: " << building0.getPosition().getY() << endl;
-//     cout << "New IdTexture: " << building0.getIdTexture() << endl;
-//     cout << "New Wood Cost: " << building0.getBuildingCost().getWood() << endl;
-//     cout << "New Gold Cost: " << building0.getBuildingCost().getGold() << endl;
-//     cout << "New Life: " << building0.getLife() << endl;
-//     cout << endl;
+  Palace* empirePalace0=empire0.getPalace();
+  cout<< "Palace X position:" << empirePalace0->getPosition().getX() << endl;
+  cout<< "Palace Y position:" << empirePalace0->getPosition().getY() << endl;
+  cout<< "Palace level:" << empirePalace0->getLevel() << endl;
+  cout<< "Palace life:" << empirePalace0->getLife() << endl;
+  cout << endl;
+
+  Ressource* empireRessource0=empire0.getRessource();
+  cout<< "Ressource X position:" << empireRessource0->getPosition().getX() << endl;
+  cout<< "Ressource Y position:" << empireRessource0->getPosition().getY() << endl;
+  cout<< "Ressource level:" << empireRessource0->getLevel() << endl;
+  cout<< "Ressource life:" << empireRessource0->getLife() << endl;
+  cout << endl;
+
+  cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;
+
+  cout << "idEmpire: " << empire0.getId() << endl;
+  cout << "Name: " << empire0.getName() << endl;
+  cout << "EmpireLevel: " << empire0.getEmpireLevel() << endl;
+  cout << "GoldRessource: " << empire0.getGoldRessource() << endl;
+  cout << "WoodRessource: " << empire0.getWoodRessource() << endl;
+  cout << "FoodRessource: " << empire0.getFoodRessource() << endl;
+  std::vector<Position> pos=empire0.getPosition();
+  for (unsigned int i=0;i<pos.size();i++ ){
+    cout << "Position X: " << pos[i].getX() << endl;
+    cout << "Position Y: " << pos[i].getY() << endl;
+  }
+  Barrack* empireBarrack0=empire0.getBarrack();
+  cout<< "Barrack X position:" << empireBarrack0->getPosition().getX() << endl;
+  cout<< "Barrack Y position:" << empireBarrack0->getPosition().getY() << endl;
+  cout<< "Barrack level:" << empireBarrack0->getLevel() << endl;
+  cout<< "Barrack life:" << empireBarrack0->getLife() << endl;
+  cout << endl;
+
+  Palace* empirePalace0=empire0.getPalace();
+  cout<< "Palace X position:" << empirePalace0->getPosition().getX() << endl;
+  cout<< "Palace Y position:" << empirePalace0->getPosition().getY() << endl;
+  cout<< "Palace level:" << empirePalace0->getLevel() << endl;
+  cout<< "Palace life:" << empirePalace0->getLife() << endl;
+  cout << endl;
+
+  Ressource* empireRessource0=empire0.getRessource();
+  cout<< "Ressource X position:" << empireRessource0->getPosition().getX() << endl;
+  cout<< "Ressource Y position:" << empireRessource0->getPosition().getY() << endl;
+  cout<< "Ressource level:" << empireRessource0->getLevel() << endl;
+  cout<< "Ressource life:" << empireRessource0->getLife() << endl;
+  cout << endl;
+  
 //
 //     cout << "SETTER AVEC PARAMETRES HORS DOMAINE DE DEF" << endl;
 //     Position pos1(-50,25);

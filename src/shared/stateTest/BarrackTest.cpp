@@ -127,12 +127,42 @@ void BarrackTest(){
   cout << endl;
 
   cout << "CREATION ARCHER" << endl;
-  // Position posArrow(10,10);
-  // Arrow* arrow=barrack1.createArrow(1,posArrow,1);
-  //
-  // cout<< "Level:"<< *arrow.getLevel()<<endl;
-  // cout<< "MovingRange:"<< *arrow.getMovingRange()<<endl;
-  // cout<< "Damage:"<< *arrow.getDamage()<<endl;
-  // cout<< "Life:"<< *arrow.getLife()<<endl;
+  Position posArrow(10,10);
+  Arrow* arrow=barrack0.createArrow(1,posArrow,1);
+  cout << "Arrow X position:" << arrow->getPosition().getX() << endl;
+  cout << "Arrow Y position:" << arrow->getPosition().getY() << endl;
+  cout << "Arrow id:" << arrow->getIdUnits() << endl;
+  cout << "Arrow level:" << arrow->getLevel() << endl;
+  cout << "Arrow life:" << arrow->getLife() << endl;
+  cout << endl;
 
+  cout << "CREATION CAVALIER" << endl;
+  Position posCavalier(20,20);
+  Cavalier* cavalier=barrack0.createCavalier(2,posCavalier,2);
+  cout << "Cavalier X position:" << cavalier->getPosition().getX() << endl;
+  cout << "Cavalier Y position:" << cavalier->getPosition().getY() << endl;
+  cout << "Cavalier id:" << cavalier->getIdUnits() << endl;
+  cout << "Cavalier level:" << cavalier->getLevel() << endl;
+  cout << "Cavalier life:" << cavalier->getLife() << endl;
+  cout << endl;
+
+  cout << "CREATION DECURION" << endl;
+  Position posDecurion(30,30);
+  Decurion* decurion=barrack0.createDecurion(3,posArrow,3);
+  cout << "Decurion X position:" << decurion->getPosition().getX() << endl;
+  cout << "Decurion Y position:" << decurion->getPosition().getY() << endl;
+  cout << "Decurion id:" << decurion->getIdUnits() << endl;
+  cout << "Decurion level:" << decurion->getLevel() << endl;
+  cout << "Decurion life:" << decurion->getLife() << endl;
+  cout << endl;
+
+  cout << "CREATION CATAPULT" << endl;
+  Position posCatapult(40,40);
+  Catapult* catapult=barrack0.createCatapult(1,posArrow,1);
+  cout << "Catapult X position:" << catapult->getPosition().getX() << endl;
+  cout << "Catapult Y position:" << catapult->getPosition().getY() << endl;
+  cout << "Catapult id:" << catapult->getIdUnits() << endl;
+  cout << "Catapult level:" << catapult->getLevel() << endl;
+  cout << "Catapult life:" << catapult->getLife() << endl;
+  cout << endl;
 }

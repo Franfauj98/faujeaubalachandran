@@ -54,6 +54,12 @@ namespace state {
     void setFoodRessource (const int food);
     std::vector<Position> getPosition () const;
     void setPosition (const std::vector<Position> postion);
+    Barrack* getBarrack () const;
+    void setBarrack (Barrack* barrack);
+    Palace* getPalace () const;
+    void setPalace (Palace* palace);
+    Ressource* getRessource () const;
+    void setRessource (Ressource* ressource);
     Barrack* createBarrack (Barrack* barrack, int id, Position position, int level);
     Ressource* createRessource (Ressource* ressource, int id, Position position, int level);
     Palace* createPalace (Palace* palace, int id, Position position, int level);

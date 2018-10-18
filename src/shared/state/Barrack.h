@@ -42,18 +42,16 @@ namespace state {
     /// @param id		(???) 
     Arrow* createArrow (int level, Position position, int id);
     /// switch case for units level. 
-    /// @param cavalierName		(???) 
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Cavalier* createCavalier (Cavalier* cavalierName, int level, Position position, int id);
+    Cavalier* createCavalier (int level, Position position, int id);
     /// switch case for units level. 
-    /// @param decurionName		(???) 
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Decurion* createDecurion (Decurion* decurionName, int level, Position position, int id);
-    Catapult* createCatapult (Catapult* catapultName, int level, Position position, int id);
+    Decurion* createDecurion (int level, Position position, int id);
+    Catapult* createCatapult (int level, Position position, int id);
     void destructArrow (Arrow* arrow);
     void destructCavalier (Cavalier* cavalier);
     void destructDecurion (Decurion* decurion);
