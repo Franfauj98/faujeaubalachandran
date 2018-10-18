@@ -129,11 +129,10 @@ void BarrackTest(){
   cout << "CREATION ARCHER" << endl;
   // Position posArrow(10,10);
   // Arrow* arrow=barrack1.createArrow(1,posArrow,1);
-  // Barrack* b=new Barrack();
-  //   cout<< *b.getIdBuilding()<<endl;
-  // cout<< arrow.getLevel()<<endl;
-  // cout<< arrow->movingRange<<endl;
-  // cout<< arrow->damage<<endl;
-  // cout<< arrow->life<<endl;
+  //
+  // cout<< "Level:"<< *arrow.getLevel()<<endl;
+  // cout<< "MovingRange:"<< *arrow.getMovingRange()<<endl;
+  // cout<< "Damage:"<< *arrow.getDamage()<<endl;
+  // cout<< "Life:"<< *arrow.getLife()<<endl;
 
 }

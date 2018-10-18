@@ -13,8 +13,8 @@ BuildingCost::BuildingCost(int gold,int wood){
       this->gold=gold;
       this->wood=wood;
     } else {
-      //this->gold=0;
-      //this->wood=0;
+      this->gold=0;
+      this->wood=0;
       throw std::string("ressources must be positive or smaller than 10000");
     }
   } catch (std::string error){
@@ -27,7 +27,7 @@ void BuildingCost::setGold (const int gold){
     if (gold>=0 && gold<=10000){
       this->gold=gold;
     } else {
-      //this->gold=0;
+      this->gold=0;
       throw std::string("gold must be positive or smaller than 10000");
     }
   } catch (std::string error){
@@ -43,7 +43,7 @@ void BuildingCost::setWood (const int wood){
     if (wood>=0 && wood<=10000){
       this->wood=wood;
     } else {
-      //this->wood=0;
+      this->wood=0;
       throw std::string("wood must be positive or smaller than 10000");
     }
   } catch (std::string error){

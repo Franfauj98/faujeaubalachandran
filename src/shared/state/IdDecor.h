@@ -6,11 +6,7 @@
 namespace state {
 
   enum IdDecor {
-<<<<<<< HEAD
-    NONE     = 0,
-=======
     NONE_DECOR     = 0,
->>>>>>> de7a7205cfb919cb1e85e327142c6750f70a621d
     ARBRE     = 1,
     CHEVAL     = 2,
     RENNE     = 3,

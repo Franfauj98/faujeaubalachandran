@@ -16,11 +16,12 @@ Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost
   try{
     if (capacity>=0 && capacity<=10){
       this->capacity=capacity;
+      this->unitsNumber=0;
     } else {
-      //this->capacity=0;
+      this->capacity=0;
+      this->unitsNumber=0;
       throw std::string("capacity must be positive or smaller than 10");
     }
-    this->unitsNumber=0;
     } catch (std::string error){
     std::cerr << error << std::endl;
     }
@@ -96,7 +97,7 @@ void Barrack::setCapacity(const int capacity){
     if (capacity>=0 && capacity<=10){
       this->capacity=capacity;
     } else {
-      //this->capacity=0;
+      this->capacity=0;
       throw std::string("capacity must be positive or smaller than 10");
     }
   } catch (std::string error){
@@ -113,7 +114,7 @@ void Barrack::setUnitsNumber(const int unitsNumber){
     if (unitsNumber>=0 && unitsNumber<=capacity){
       this->unitsNumber=unitsNumber;
     } else {
-      //this->unitsNumber=0;
+      this->unitsNumber=0;
       throw std::string("unitsNumber must be positive or smaller than capacity ");
     }
   } catch (std::string error){
@@ -128,7 +129,6 @@ Arrow* Barrack::createArrow(int level,Position position, int id){
       arrow=new Arrow(level,position,id);
       return arrow;
     } else {
-      return arrow;
       throw std::string("UnitsNumber is bigger than capacity");
     }
   } catch (std::string error){

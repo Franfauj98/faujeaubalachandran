@@ -24,6 +24,7 @@ void EmpireTest(){
     cout << "Position X: " << pos[i].getX() << endl;
     cout << "Position Y: " << pos[i].getY() << endl;
   }
+
   cout << endl;
 
 //     cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;

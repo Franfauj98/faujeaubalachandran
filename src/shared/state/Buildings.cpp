@@ -20,7 +20,12 @@ Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, 
       this->buildingCost=buildingCost;
       this->life=life;
     } else {
-      //this->idBuilding= 0;
+        this->idBuilding= 0;
+        this->level= 0;
+        this->idTexture=NONE_BUILDING;
+        BuildingCost buildingCostNull(0,0);
+        this->buildingCost=buildingCostNull;
+        this->life=0;
         std::string message="idBuilding must be positive";
         message+='\n';
         message+="Position must be on the map";
@@ -46,7 +51,7 @@ void Buildings::setLevel (const int level) {
     if(level>=0 && level<5){
       this->level=level;
     } else {
-      //this->level=0;
+      this->level=0;
       throw std::string("level must be positive or smaller than 5");
     }
   } catch (std::string error){
@@ -62,8 +67,8 @@ void Buildings::setBuildingCost (BuildingCost buildingCost) {
     if(buildingCost.getGold()>=0 && buildingCost.getWood()>=0 && buildingCost.getGold()<=10000 && buildingCost.getWood()<=10000){
       this->buildingCost=buildingCost;
     } else {
-        //BuildingCost buildingCostnull(0,0);
-        //this->buildingCost=buildingCostnull;
+        BuildingCost buildingCostnull(0,0);
+        this->buildingCost=buildingCostnull;
         throw std::string("buldingCost must be positive or smaller than 10000");
     }
   } catch (std::string error){
@@ -80,8 +85,8 @@ void Buildings::setLife (const int life) {
     if(life>=0 && life<=1000){
       this->life=life;
     } else {
+      this->life=0;
       throw std::string("life must be positive or smaller than 1000");
-      //this->life=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -103,8 +108,8 @@ void Buildings::setIdBuilding(const int idBuilding){
     if (idBuilding>=0){
       this->idBuilding=idBuilding;
     } else {
+      this->idBuilding=0;
       throw std::string("idBuilding must be positive");
-      //this->idBuilding=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
