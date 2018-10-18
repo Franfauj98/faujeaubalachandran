@@ -126,6 +126,8 @@ Arrow* Barrack::createArrow(int level,Position position, int id){
     Arrow* arrow=0;
     if (this->unitsNumber < this->capacity){
       arrow=new Arrow(level,position,id);
+    } else {
+      std::cerr << "UnitsNumber is bigger than capacity" << std::endl;
     }
     return arrow;
 }
@@ -134,6 +136,8 @@ Cavalier* Barrack::createCavalier (int level, Position position, int id){
     Cavalier* cavalier=0;
     if (this->unitsNumber < this->capacity){
       cavalier=new Cavalier(level,position,id);
+    } else {
+      std::cerr << "UnitsNumber is bigger than capacity" << std::endl;
     }
       return cavalier;
 }
@@ -142,6 +146,8 @@ Decurion* Barrack::createDecurion (int level, Position position, int id){
     Decurion* decurion=0;
     if (this->unitsNumber<this->capacity){
       decurion=new Decurion(level,position,id);
+    } else {
+      std::cerr << "UnitsNumber is bigger than capacity" << std::endl;
     }
     return decurion;
 }
@@ -150,6 +156,8 @@ Catapult* Barrack::createCatapult (int level, Position position, int id){
     Catapult* catapult=0;
     if (this->unitsNumber<this->capacity){
       catapult=new Catapult(level,position,id);
+    } else {
+      std::cerr << "UnitsNumber is bigger than capacity" << std::endl;
     }
     return catapult;
 }
