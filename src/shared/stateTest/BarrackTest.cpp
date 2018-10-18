@@ -71,13 +71,13 @@ void BarrackTest(){
   barrack1.setBuildingCost(barrackCost2);
   barrack1.setCapacity(-10);
   barrack1.setUnitsNumber(-8);
-  // cout << "New Id Building: " << barrack1.getIdBuilding() << endl;
-  // cout << "New Position X: " << barrack1.getPosition().getX() << endl;
-  // cout << "New Position Y: " << barrack1.getPosition().getY() << endl;
-  // cout << "New Wood Cost: " << barrack1.getBuildingCost().getWood() << endl;
-  // cout << "New Gold Cost: " << barrack1.getBuildingCost().getGold() << endl;
-  // cout << "New Capacity: " << barrack1.getCapacity() << endl;
-  // cout << "New UnitsNumber: " << barrack1.getUnitsNumber() << endl;
+  cout << "New Id Building: " << barrack1.getIdBuilding() << endl;
+  cout << "New Position X: " << barrack1.getPosition().getX() << endl;
+  cout << "New Position Y: " << barrack1.getPosition().getY() << endl;
+  cout << "New Wood Cost: " << barrack1.getBuildingCost().getWood() << endl;
+  cout << "New Gold Cost: " << barrack1.getBuildingCost().getGold() << endl;
+  cout << "New Capacity: " << barrack1.getCapacity() << endl;
+  cout << "New UnitsNumber: " << barrack1.getUnitsNumber() << endl;
   cout << endl;
 
 
@@ -103,27 +103,18 @@ void BarrackTest(){
   barrack2.setBuildingCost(barrackCost3);
   barrack2.setCapacity(6);
   barrack2.setUnitsNumber(8);
-  // cout << "New Id Building: " << barrack2.getIdBuilding() << endl;
-  // cout << "New Position X: " << barrack2.getPosition().getX() << endl;
-  // cout << "New Position Y: " << barrack2.getPosition().getY() << endl;
-  // cout << "New Wood Cost: " << barrack2.getBuildingCost().getWood() << endl;
-  // cout << "New Gold Cost: " << barrack2.getBuildingCost().getGold() << endl;
-  // cout << "New Capacity: " << barrack2.getCapacity() << endl;
-  // cout << "New UnitsNumber: " << barrack2.getUnitsNumber() << endl;
+  cout << "New Id Building: " << barrack2.getIdBuilding() << endl;
+  cout << "New Position X: " << barrack2.getPosition().getX() << endl;
+  cout << "New Position Y: " << barrack2.getPosition().getY() << endl;
+  cout << "New Wood Cost: " << barrack2.getBuildingCost().getWood() << endl;
+  cout << "New Gold Cost: " << barrack2.getBuildingCost().getGold() << endl;
+  cout << "New Capacity: " << barrack2.getCapacity() << endl;
+  cout << "New UnitsNumber: " << barrack2.getUnitsNumber() << endl;
   cout << endl;
 
   cout << "CONSTRUCTEUR AVEC 7 ARGUMENTS PARAMETRES NÉGATIFS" << endl;
   Position position5(-20,50);
   Barrack barrack3(5,1, position3,-2,barrackCost3);
-  // cout << "Id Building: " << barrack2.getIdBuilding() << endl;
-  // cout << "Position X: " << barrack2.getPosition().getX() << endl;
-  // cout << "Position Y: " << barrack2.getPosition().getY() << endl;
-  // cout << "IdTexture: " << barrack2.getIdTexture() << endl;
-  // cout << "Wood Cost: " << barrack2.getBuildingCost().getWood() << endl;
-  // cout << "Gold Cost: " << barrack2.getBuildingCost().getGold() << endl;
-  // cout << "Passable?: " << barrack2.isPassable() << endl;
-  // cout << "Capacity: " << barrack2.getCapacity() << endl;
-  // cout << "UnitsNumber: " << barrack2.getUnitsNumber() << endl;
   cout << endl;
 
   cout << "CREATION ARCHER" << endl;
@@ -165,4 +156,12 @@ void BarrackTest(){
   cout << "Catapult level:" << catapult->getLevel() << endl;
   cout << "Catapult life:" << catapult->getLife() << endl;
   cout << endl;
+
+  cout << "DESTRUCTIONS" << endl;
+  barrack0.destructArrow(arrow);
+  barrack0.destructCavalier(cavalier);
+  barrack0.destructCatapult(catapult);
+  barrack0.destructDecurion(decurion);
+  cout << endl;
+
 }
