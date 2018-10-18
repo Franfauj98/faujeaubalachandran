@@ -12,8 +12,7 @@ namespace state {
     HDV1     = 3,
     HDV2     = 4,
     HDV3     = 5,
-    HDV4     = 6,
-    NONE     = 0
+    HDV4     = 6
   };
 
 };

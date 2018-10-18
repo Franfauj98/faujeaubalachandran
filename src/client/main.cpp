@@ -36,6 +36,7 @@ int main(int argc,char* argv[])
     PalaceTest();
     BarrackTest();
     EmpireTest();
+    mapTest();
 
     cout << "-------------------------------------" << endl;
     cout << "TEST LIVRABLE 1.1" << endl;
