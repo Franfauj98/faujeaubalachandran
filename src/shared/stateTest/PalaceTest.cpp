@@ -11,7 +11,20 @@ void PalaceTest(){
   cout << "TEST PALACE" << endl;
   cout << "-------------------------------------" << endl;
 
-  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
+  cout << "CONSTRUCTEUR PAR DEFAUT" << endl;
+  Palace palace0;
+  cout << "Id Building: " << palace0.getIdBuilding() << endl;
+  cout << "Position X: " << palace0.getPosition().getX() << endl;
+  cout << "Position Y: " << palace0.getPosition().getY() << endl;
+  cout << "IdTexture: " << palace0.getIdTexture() << endl;
+  cout << "Wood Cost: " << palace0.getBuildingCost().getWood() << endl;
+  cout << "Gold Cost: " << palace0.getBuildingCost().getGold() << endl;
+  cout << "Passable ?: " << palace0.isPassable() << endl;
+  cout << "Level: " << palace0.getLevel() << endl;
+  cout << "Life: " << palace0.getLife() << endl;
+
+
+  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
   BuildingCost palaceCost1(50,50);
   Position position1(2,5);
   Palace palace1(1, position1,1, palaceCost1,HDV1,200);
@@ -22,12 +35,18 @@ void PalaceTest(){
   cout << "Wood Cost: " << palace1.getBuildingCost().getWood() << endl;
   cout << "Gold Cost: " << palace1.getBuildingCost().getGold() << endl;
   cout << "Passable ?: " << palace1.isPassable() << endl;
+  cout << "Level: " << palace1.getLevel() << endl;
+  cout << "Life: " << palace1.getLife() << endl;
+
+  cout << "SETTER AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
   BuildingCost palaceCost2(150,250);
   Position position2(5,2);
   palace1.setIdBuilding(10);
   palace1.setPosition(position2);
   palace1.setIdTexture(HDV2);
   palace1.setBuildingCost(palaceCost2);
+  palace1.setLife(500);
+  palace1.setLevel(4);
   cout << endl;
   cout << "New Id Building: " << palace1.getIdBuilding() << endl;
   cout << "New Position X: " << palace1.getPosition().getX() << endl;
@@ -36,10 +55,14 @@ void PalaceTest(){
   cout << "New Wood Cost: " << palace1.getBuildingCost().getWood() << endl;
   cout << "New Gold Cost: " << palace1.getBuildingCost().getGold() << endl;
   cout << "New Passable ?: " << palace1.isPassable() << endl;
+  cout << "Level: " << palace1.getLevel() << endl;
+  cout << "Life: " << palace1.getLife() << endl;
   cout << endl;
+
+  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
   BuildingCost palaceCost3(-50,150);
   Position position3(-2,5);
-  Buildings palace2 (-1, position3,1,BARRACK, palaceCost3);
+  Buildings palace2 (-1, position3,1,HDV2, palaceCost3);
   cout << "Id Building: " << palace2.getIdBuilding() << endl;
   cout << "Position X: " << palace2.getPosition().getX() << endl;
   cout << "Position Y: " << palace2.getPosition().getY() << endl;
@@ -47,7 +70,11 @@ void PalaceTest(){
   cout << "Wood Cost: " << palace2.getBuildingCost().getWood() << endl;
   cout << "Gold Cost: " << palace2.getBuildingCost().getGold() << endl;
   cout << "Passable ?: " << palace2.isPassable() << endl;
+  cout << "Level: " << palace2.getLevel() << endl;
+  cout << "Life: " << palace2.getLife() << endl;
   cout << endl;
+
+  cout << "SETTERS AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
   BuildingCost palaceCost4(-50,-50);
   Position position4(-5,-2);
   palace2.setIdBuilding(-10);
@@ -74,16 +101,9 @@ void PalaceTest(){
   cout << "Wood Cost: " << palace3.getBuildingCost().getWood() << endl;
   cout << "Gold Cost: " << palace3.getBuildingCost().getGold() << endl;
   cout << "Passable ?: " << palace3.isPassable() << endl;
+  cout << "Level: " << palace3.getLevel() << endl;
+  cout << "Life: " << palace3.getLife() << endl;
   cout << endl;
-  Position position6(-20,50);
-  Palace palace4(-10, position6,-25);
-  cout << "Id Building: " << palace4.getIdBuilding() << endl;
-  cout << "Position X: " << palace4.getPosition().getX() << endl;
-  cout << "Position Y: " << palace4.getPosition().getY() << endl;
-  cout << "IdTexture: " << palace4.getIdTexture() << endl;
-  cout << "Wood Cost: " << palace4.getBuildingCost().getWood() << endl;
-  cout << "Gold Cost: " << palace4.getBuildingCost().getGold() << endl;
-  cout << "Passable ?: " << palace4.isPassable() << endl;
-  cout << endl;
+
 
 }
