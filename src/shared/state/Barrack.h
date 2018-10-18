@@ -31,7 +31,7 @@ namespace state {
     Barrack ();
     Barrack (int id, Position position, int level);
     Barrack (int capacity, int id, Position position, int level, BuildingCost barrackCost, IdTexture idTexture = BARRACK, int life = 0);
-    ~Barrack ();
+    virtual ~Barrack ();
     int getCapacity () const;
     void setCapacity (const int capacity);
     int  getUnitsNumber () const;

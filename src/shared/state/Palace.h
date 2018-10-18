@@ -23,7 +23,7 @@ namespace state {
     Palace ();
     Palace (int id, Position position, int level, BuildingCost palaceCost, IdTexture idTexture, int life);
     Palace (int id, Position position, int level);
-    ~Palace ();
+    virtual ~Palace ();
     // Setters and Getters
   };
 

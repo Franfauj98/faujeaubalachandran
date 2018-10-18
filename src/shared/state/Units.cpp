@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace state;
 
-Units::Units () : Element(){
+Units::Units () {
   Position p(0,0);
   setPosition(p);
   setIdUnits(0);
@@ -18,9 +18,10 @@ Units::Units () : Element(){
 
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
-  int level, IdTextureUnits idTextureUnits, UnitCost uniCost) : Element(position){
+  int level, IdTextureUnits idTextureUnits, UnitCost uniCost) {
   try{
     if(idUnits>=0 && life>=0 && life <=1000 && damage>=0 && damage <= 100 && strikeRange>=0 && strikeRange <= 10 && movingRange>=0 && movingRange<=5 && level>=0 && level<=5) {
+      this->position = position;
       this->idUnits = idUnits;
       this->life = life;
       this->damage = damage;

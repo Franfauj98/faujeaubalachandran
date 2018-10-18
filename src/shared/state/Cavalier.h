@@ -23,7 +23,7 @@ namespace state {
     Cavalier ();
     Cavalier (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost cavalierCost);
     Cavalier (int level, Position position, int id);
-    ~Cavalier ();
+    virtual ~Cavalier ();
     // Setters and Getters
   };
 

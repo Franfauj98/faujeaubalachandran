@@ -37,7 +37,7 @@ namespace state {
     bool isPassable ();
     int getLife () const;
     void setLife (const int life);
-    ~Buildings ();
+    virtual ~Buildings ();
     // Setters and Getters
     IdTexture getIdTexture() const;
     void setIdTexture(IdTexture idTexture);

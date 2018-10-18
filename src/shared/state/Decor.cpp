@@ -1,13 +1,16 @@
 #include "Decor.h"
 using namespace state;
 
-Decor::Decor():Element() {
+Decor::Decor() {
+  Position p(0,0);
+  this->position = p;
   this->idDecor=NONE_DECOR;
   this->passable=true;
 }
 
-Decor::Decor(IdDecor id, Position position):Element(position) {
+Decor::Decor(IdDecor id, Position position) {
   this->idDecor=id;
+  this->position = position;
   switch(id){
     case IdDecor::NONE_DECOR: passable=true;
     break;
