@@ -2,12 +2,15 @@
 using namespace state;
 
 Decor::Decor():Element() {
-
+  this->idDecor=NONE_DECOR;
+  this->passable=true;
 }
 
 Decor::Decor(IdDecor id, Position position):Element(position) {
   this->idDecor=id;
   switch(id){
+    case IdDecor::NONE_DECOR: passable=true;
+    break;
     case IdDecor::ARBRE: passable=true;
     break;
     case IdDecor::CHEVAL: passable=true;
@@ -40,4 +43,7 @@ IdDecor Decor::getIdDecor() const{
 }
 void Decor::setIdDecor(const IdDecor idDecor){
   this->idDecor=idDecor;
+}
+Decor::~Decor(){
+
 }

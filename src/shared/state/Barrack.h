@@ -37,11 +37,10 @@ namespace state {
     int  getUnitsNumber () const;
     void setUnitsNumber (const int unitsNumber);
     /// switch case for units level. 
-    /// @param arrowName		(???) 
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Arrow* createArrow (Arrow* arrowName, int level, Position position, int id);
+    Arrow* createArrow (int level, Position position, int id);
     /// switch case for units level. 
     /// @param cavalierName		(???) 
     /// @param level		(???) 

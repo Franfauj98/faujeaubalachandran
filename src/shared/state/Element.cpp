@@ -4,6 +4,8 @@
 using namespace state;
 
 Element::Element() {
+  Position pos0(0,0);
+  this->position=pos0;
 
 }
 
