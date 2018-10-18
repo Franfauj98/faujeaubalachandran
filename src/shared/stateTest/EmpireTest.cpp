@@ -48,40 +48,46 @@ void EmpireTest(){
   cout<< "Ressource life:" << empireRessource0->getLife() << endl;
   cout << endl;
 
-  cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;
+  // cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;
+  // empire0.setId(10);
+  // empire0.setName("Warriors");
+  // empire0.setLevel(5);
+  // empire0.setGoldRessource(100);
+  // empire0.setWoodRessource(100);
+  // empire0.setFoodRessource(100);
+  // std::vector<Position> pos
+  // cout << "idEmpire: " << empire0.getId() << endl;
+  // cout << "Name: " << empire0.getName() << endl;
+  // cout << "EmpireLevel: " << empire0.getEmpireLevel() << endl;
+  // cout << "GoldRessource: " << empire0.getGoldRessource() << endl;
+  // cout << "WoodRessource: " << empire0.getWoodRessource() << endl;
+  // cout << "FoodRessource: " << empire0.getFoodRessource() << endl;
+  // std::vector<Position> pos=empire0.getPosition();
+  // for (unsigned int i=0;i<pos.size();i++ ){
+  //   cout << "Position X: " << pos[i].getX() << endl;
+  //   cout << "Position Y: " << pos[i].getY() << endl;
+  // }
+  // Barrack* empireBarrack0=empire0.getBarrack();
+  // cout<< "Barrack X position:" << empireBarrack0->getPosition().getX() << endl;
+  // cout<< "Barrack Y position:" << empireBarrack0->getPosition().getY() << endl;
+  // cout<< "Barrack level:" << empireBarrack0->getLevel() << endl;
+  // cout<< "Barrack life:" << empireBarrack0->getLife() << endl;
+  // cout << endl;
+  //
+  // Palace* empirePalace0=empire0.getPalace();
+  // cout<< "Palace X position:" << empirePalace0->getPosition().getX() << endl;
+  // cout<< "Palace Y position:" << empirePalace0->getPosition().getY() << endl;
+  // cout<< "Palace level:" << empirePalace0->getLevel() << endl;
+  // cout<< "Palace life:" << empirePalace0->getLife() << endl;
+  // cout << endl;
+  //
+  // Ressource* empireRessource0=empire0.getRessource();
+  // cout<< "Ressource X position:" << empireRessource0->getPosition().getX() << endl;
+  // cout<< "Ressource Y position:" << empireRessource0->getPosition().getY() << endl;
+  // cout<< "Ressource level:" << empireRessource0->getLevel() << endl;
+  // cout<< "Ressource life:" << empireRessource0->getLife() << endl;
+  // cout << endl;
 
-  cout << "idEmpire: " << empire0.getId() << endl;
-  cout << "Name: " << empire0.getName() << endl;
-  cout << "EmpireLevel: " << empire0.getEmpireLevel() << endl;
-  cout << "GoldRessource: " << empire0.getGoldRessource() << endl;
-  cout << "WoodRessource: " << empire0.getWoodRessource() << endl;
-  cout << "FoodRessource: " << empire0.getFoodRessource() << endl;
-  std::vector<Position> pos=empire0.getPosition();
-  for (unsigned int i=0;i<pos.size();i++ ){
-    cout << "Position X: " << pos[i].getX() << endl;
-    cout << "Position Y: " << pos[i].getY() << endl;
-  }
-  Barrack* empireBarrack0=empire0.getBarrack();
-  cout<< "Barrack X position:" << empireBarrack0->getPosition().getX() << endl;
-  cout<< "Barrack Y position:" << empireBarrack0->getPosition().getY() << endl;
-  cout<< "Barrack level:" << empireBarrack0->getLevel() << endl;
-  cout<< "Barrack life:" << empireBarrack0->getLife() << endl;
-  cout << endl;
-
-  Palace* empirePalace0=empire0.getPalace();
-  cout<< "Palace X position:" << empirePalace0->getPosition().getX() << endl;
-  cout<< "Palace Y position:" << empirePalace0->getPosition().getY() << endl;
-  cout<< "Palace level:" << empirePalace0->getLevel() << endl;
-  cout<< "Palace life:" << empirePalace0->getLife() << endl;
-  cout << endl;
-
-  Ressource* empireRessource0=empire0.getRessource();
-  cout<< "Ressource X position:" << empireRessource0->getPosition().getX() << endl;
-  cout<< "Ressource Y position:" << empireRessource0->getPosition().getY() << endl;
-  cout<< "Ressource level:" << empireRessource0->getLevel() << endl;
-  cout<< "Ressource life:" << empireRessource0->getLife() << endl;
-  cout << endl;
-  
 //
 //     cout << "SETTER AVEC PARAMETRES HORS DOMAINE DE DEF" << endl;
 //     Position pos1(-50,25);
