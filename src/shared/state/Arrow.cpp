@@ -5,14 +5,14 @@ using namespace state;
 Arrow::Arrow () : Units() {
   Position p;
   setPosition(p);
-  setIdUnits(1);
+  setIdUnits(0);
   setLife(0);
   setDamage(0);
-  setStrikeRange(1);
-  setMovingRange(1);
-  setLevel(1);
+  setStrikeRange(0);
+  setMovingRange(0);
+  setLevel(0);
   setIdTextureUnits(ARROW1);
-  UnitCost arrowCost(1,1);
+  UnitCost arrowCost(0,0);
   setUnitCost(arrowCost);
 }
 
