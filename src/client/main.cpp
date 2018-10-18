@@ -11,7 +11,7 @@ void testSFML() {
 
 #include "state.h"
 
-#include "stateTest.h"
+#include "../shared/state/stateTest.h"
 
 using namespace std;
 using namespace state;
