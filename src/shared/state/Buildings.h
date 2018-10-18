@@ -4,13 +4,15 @@
 
 
 namespace state {
+  class BuildingCost;
   class Position;
   class Element;
 }
 
+#include "BuildingCost.h"
 #include "Position.h"
-#include "Element.h"
 #include "IdTexture.h"
+#include "Element.h"
 
 namespace state {
 
@@ -22,15 +24,20 @@ namespace state {
   protected:
     int idBuilding;
     int level;
+    BuildingCost buildingCost;
+    int life     = 0;
     // Operations
   public:
-    Buildings (int id, Position position, int level, int idTexture);
-    int getId ();
-    void setId (int id);
-    Position getPosition ();
-    void setPosition (Position position);
-    int getLevel ();
-    void setLevel (int level);
+    Buildings ();
+    Buildings (int id, Position position, int level, IdTexture idTexture, BuildingCost buildingCost, int life = 0);
+    int getLevel () const;
+    void setLevel (const int level);
+    BuildingCost getBuildingCost () const;
+    void setBuildingCost (const BuildingCost buildingCost);
+    bool isPassable ();
+    int getLife () const;
+    void setLife (const int life);
+    virtual ~Buildings ();
     // Setters and Getters
     IdTexture getIdTexture() const;
     void setIdTexture(IdTexture idTexture);

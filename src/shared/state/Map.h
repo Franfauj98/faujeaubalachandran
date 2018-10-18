@@ -5,11 +5,11 @@
 #include <vector>
 
 namespace state {
-  class Position;
   class Element;
+  class Empire;
 }
 
-#include "Position.h"
+#include "Empire.h"
 #include "Element.h"
 
 namespace state {
@@ -18,10 +18,16 @@ namespace state {
   class Map {
     // Associations
     // Attributes
-  public:
-    std::vector<Position> positionList;
   private:
-    std::vector<Element> elementList;
+    std::vector<Element*> playingMap;
+    // Operations
+  public:
+    Map ();
+    ~Map ();
+    void addElement (Element* elt);
+    std::vector<Element*> getMap () const;
+    void deleteElement (int pos);
+    int getPositionElement (Element* elt);
     // Setters and Getters
   };
 

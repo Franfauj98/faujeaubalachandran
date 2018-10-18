@@ -13,11 +13,13 @@ namespace state {
     int food;
     // Operations
   public:
+    UnitCost ();
     UnitCost (int gold, int food);
+    ~UnitCost ();
     void setGold (int gold);
-    int getGold ();
+    int getGold () const;
     void setFood (int food);
-    int getFood ();
+    int getFood () const;
     // Setters and Getters
   };
 

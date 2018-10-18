@@ -5,12 +5,13 @@
 
 namespace state {
   class Position;
-  class Element;
+  class UnitCost;
   class Units;
 }
 
 #include "Position.h"
-#include "Element.h"
+#include "IdTextureUnits.h"
+#include "UnitCost.h"
 #include "Units.h"
 
 namespace state {
@@ -19,11 +20,10 @@ namespace state {
   class Decurion : public state::Units {
     // Operations
   public:
-    Decurion (int level, int id, Position position, int life, int dammage, int strikeRange, int movingRange, int idTextureUnits);
-    bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
-    void move (Position p1, Position p2);
-    void attack (Element unit1, Element unit2);
-    bool attackAllowed (Element unit1, Element unit2, int strikeRange);
+    Decurion ();
+    Decurion (int level, int id, Position position, int life, int dammage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost decurionCost);
+    Decurion (int level, Position position, int id);
+    virtual ~Decurion ();
     // Setters and Getters
   };
 

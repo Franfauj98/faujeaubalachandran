@@ -2,7 +2,7 @@
 #include "string.h"
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
-
+#include "../shared/state/Position.h"
 void testSFML() {
     sf::Texture texture;
 }
@@ -11,17 +11,37 @@ void testSFML() {
 
 #include "state.h"
 
+#include "stateTest.h"
+
 using namespace std;
 using namespace state;
 
 int main(int argc,char* argv[])
 {
 
-    if (argv[1] &&!strcmp(argv[1],"hello")){
-      cout << "Bonjour le monde!" << endl;
-    } else {
-      cout << "Please type 'hello'!" << endl;
-    }
+  if (argv[1] &&!strcmp(argv[1],"hello")){
+    cout << "Bonjour le monde!" << endl;
+  } else if (argv[1] &&!strcmp(argv[1],"state")) {
+    positionTest();
+    UnitCostTest();
+    unitsTest();
+    arrowTest();
+    catapultTest();
+    cavalierTest();
+    decurionTest();
+    DecorTest();
+    BuildingCostTest();
+    BuildingsTest();
+    PalaceTest();
+    BarrackTest();
+    EmpireTest();
+    RessourceTest();
+    mapTest();
 
-    return 0;
+  } else {
+    cout << "Please type 'hello' or 'state'" << endl;
+  }
+
+
+  return 0;
 }

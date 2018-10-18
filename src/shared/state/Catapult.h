@@ -5,12 +5,13 @@
 
 namespace state {
   class Position;
-  class Element;
+  class UnitCost;
   class Units;
 }
 
 #include "Position.h"
-#include "Element.h"
+#include "IdTextureUnits.h"
+#include "UnitCost.h"
 #include "Units.h"
 
 namespace state {
@@ -19,11 +20,10 @@ namespace state {
   class Catapult : public state::Units {
     // Operations
   public:
-    Catapult (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, int idTextureUnits);
-    bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
-    void move (Position p1, Position p2);
-    void attack (Element unit1, Element unit2);
-    bool attackAllowed (Element unit1, Element unit2, int strikeRange);
+    Catapult ();
+    Catapult (int level, int id, Position position, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost catapultCost);
+    Catapult (int level, Position position, int id);
+    virtual ~Catapult ();
     // Setters and Getters
   };
 

@@ -6,13 +6,14 @@
 namespace state {
 
   enum IdDecor {
+    NONE_DECOR     = 0,
     ARBRE     = 1,
     CHEVAL     = 2,
     RENNE     = 3,
     POISSON     = 4,
-    POULES     = 5,
+    POULE     = 5,
     MONTAGNE     = 6,
-    DUNES     = 7,
+    DUNE     = 7,
     HERBE     = 8,
     EAU     = 9
   };

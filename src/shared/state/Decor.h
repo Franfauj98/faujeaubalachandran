@@ -8,9 +8,9 @@ namespace state {
   class Element;
 }
 
+#include "IdDecor.h"
 #include "Position.h"
 #include "Element.h"
-#include "IdDecor.h"
 
 namespace state {
 
@@ -23,7 +23,11 @@ namespace state {
     bool passable;
     // Operations
   public:
-    Decor (int id, Position position);
+    Decor ();
+    Decor (IdDecor id, Position position);
+    bool getPassable () const;
+    void setPassable (const bool passable);
+    virtual ~Decor ();
     // Setters and Getters
     IdDecor getIdDecor() const;
     void setIdDecor(IdDecor idDecor);

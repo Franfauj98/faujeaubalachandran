@@ -5,10 +5,13 @@
 
 namespace state {
   class Position;
+  class BuildingCost;
   class Buildings;
 }
 
 #include "Position.h"
+#include "BuildingCost.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -20,10 +23,12 @@ namespace state {
     int production;
     // Operations
   public:
-    Ressource (int production, int id, Position position, int level, int idTexture);
-    void ressourceProduction (int gold, int wood, int food);
-    int getProduction ();
-    void setProduction (int production);
+    Ressource ();
+    Ressource (int id, Position position, int level);
+    Ressource (int production, int id, Position position, int level, BuildingCost ressourceCost, IdTexture idTexture = RESSOURCE, int life = 0);
+    int getProduction () const;
+    void setProduction (const int production);
+    virtual ~Ressource ();
     // Setters and Getters
   };
 

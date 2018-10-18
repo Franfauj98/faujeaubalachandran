@@ -4,13 +4,18 @@
 
 
 namespace state {
+  class UnitCost;
   class Position;
+  class Units;
+  class Buildings;
   class Element;
 }
 
+#include "UnitCost.h"
 #include "Position.h"
-#include "Element.h"
 #include "IdTextureUnits.h"
+#include "Buildings.h"
+#include "Element.h"
 
 namespace state {
 
@@ -19,39 +24,44 @@ namespace state {
     // Associations
     state::IdTextureUnits idTextureUnits;
     // Attributes
+  private:
+    UnitCost unitCost;
   protected:
     int idUnits;
     int life;
     int damage;
-    int stikeRange;
+    int strikeRange;
     int movingRange     = 1;
     int level;
     // Operations
   public:
-    Units (int id, Position position, int life, int damage, int strikeRange, int movingRange, int level, int idTextureUnits);
-    void setPosition (Position position);
-    Position getPosition ();
-    void setLife (int life);
-    int getLife ();
-    void setDamage (int damage);
-    int getDamage ();
-    void setStrikeRange (int strikeRange);
-    int getStrikeRange ();
-    void setMovingRange (int movingRange);
-    int getMovingRange ();
-    virtual void move (Position p1, Position p2);
-    virtual bool moveAllowed (Position p1, Position p2, int movingRange, int moveNumber);
-    virtual void attack (Element unit1, Element unit2);
-    virtual bool attackAllowed (Element unit1, Element unit2, int strikeRange);
+    Units ();
+    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost);
+    virtual ~Units ();
+    void setLife (const int life);
+    int getLife () const;
+    void setDamage (const int damage);
+    int getDamage () const;
+    void setStrikeRange (const int strikeRange);
+    int getStrikeRange () const;
+    void setMovingRange (const int movingRange);
+    int getMovingRange () const;
+    void move (Position& p2, int moveNumber);
+    bool moveAllowed (Position p2, int moveNumber);
+    void attack (Units& unit2);
+    bool attackAllowed (Units unit2);
+    int getLevel () const;
+    void setLevel (const int level);
+    IdTextureUnits getIdTextureUnits () const;
+    void setIdTextureUnits (const IdTextureUnits idTextureUnits);
+    int getIdUnits () const;
+    void setIdUnits (const int idUnits);
+    UnitCost getUnitCost () const;
+    void setUnitCost (const UnitCost unitCost);
+    bool isPassable ();
+    void attackBuilding (Buildings& building);
+    bool attackBuildingAllowed (Buildings building);
     // Setters and Getters
-    IdTextureUnits getIdTextureUnits() const;
-    void setIdTextureUnits(IdTextureUnits idTextureUnits);
-    int getIdUnits() const;
-    void setIdUnits(int idUnits);
-    int getStikeRange() const;
-    void setStikeRange(int stikeRange);
-    int getLevel() const;
-    void setLevel(int level);
   };
 
 };

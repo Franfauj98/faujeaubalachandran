@@ -9,15 +9,10 @@ namespace state {
   class Barrack;
   class Ressource;
   class Palace;
-  class BuildingCost;
   class Position;
   class Buildings;
 }
 
-#include "Barrack.h"
-#include "Ressource.h"
-#include "Palace.h"
-#include "BuildingCost.h"
 #include "Position.h"
 #include "Buildings.h"
 
@@ -28,12 +23,9 @@ namespace state {
     // Associations
     // Attributes
   public:
-    Barrack barrack;
-    Ressource ressource;
-    Palace palace;
-    BuildingCost barrackCost;
-    BuildingCost ressourceCost;
-    BuildingCost palaceCost;
+    Barrack* barrack;
+    Ressource* ressource;
+    Palace* palace;
   private:
     int idEmpire;
     std::string name;
@@ -45,22 +37,36 @@ namespace state {
     std::vector<Position> position;
     // Operations
   public:
-    Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position);
-    int getId ();
-    void setName (std::string name);
-    std::string getName ();
-    void setEmpireLevel (int level);
-    int getEmpireLevel ();
-    void setLife (int life);
-    int getLife ();
-    int getGoldRessource ();
-    void setGoldRessource (int gold);
-    int getWoodRessource ();
-    void setWoodRessource (int wood);
-    int getFoodRessource ();
-    void setFoodRessource (int food);
-    std::vector<Position> getPosition ();
-    void setPosition (std::vector<Position> postion);
+    Empire ();
+    Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, Barrack* barrack, Ressource* ressource, Palace* palace);
+    int getId () const;
+    void setName (const std::string name);
+    std::string getName () const;
+    void setEmpireLevel (const int level);
+    int getEmpireLevel () const;
+    void setLife (const int life);
+    int getLife () const;
+    int getGoldRessource () const;
+    void setGoldRessource (const int gold);
+    int getWoodRessource () const;
+    void setWoodRessource (const int wood);
+    int getFoodRessource () const;
+    void setFoodRessource (const int food);
+    std::vector<Position> getPosition () const;
+    void setPosition (const std::vector<Position> postion);
+    Barrack* getBarrack () const;
+    void setBarrack (Barrack* barrack);
+    Palace* getPalace () const;
+    void setPalace (Palace* palace);
+    Ressource* getRessource () const;
+    void setRessource (Ressource* ressource);
+    Barrack* createBarrack (Barrack* barrack, int id, Position position, int level);
+    Ressource* createRessource (Ressource* ressource, int id, Position position, int level);
+    Palace* createPalace (Palace* palace, int id, Position position, int level);
+    void destructBarrack (Barrack* barrack);
+    void destructRessource (Ressource* ressource);
+    void destructPalace (Palace* palace);
+    ~Empire ();
     // Setters and Getters
   };
 

@@ -5,10 +5,13 @@
 
 namespace state {
   class Position;
+  class BuildingCost;
   class Buildings;
 }
 
 #include "Position.h"
+#include "BuildingCost.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -17,7 +20,10 @@ namespace state {
   class Palace : public state::Buildings {
     // Operations
   public:
-    Palace (int id, Position position, int level, int idTexture);
+    Palace ();
+    Palace (int id, Position position, int level, BuildingCost palaceCost, IdTexture idTexture, int life);
+    Palace (int id, Position position, int level);
+    virtual ~Palace ();
     // Setters and Getters
   };
 

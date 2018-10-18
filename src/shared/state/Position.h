@@ -13,8 +13,13 @@ namespace state {
     int y;
     // Operations
   public:
-    int getX ();
-    int getY ();
+    Position ();
+    Position (int x, int y);
+    ~Position ();
+    int getX () const;
+    int getY () const;
+    void setX (const int x);
+    void setY (const int y);
     // Setters and Getters
   };
 

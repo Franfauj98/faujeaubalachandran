@@ -5,10 +5,17 @@
 
 namespace state {
   class Position;
+  class BuildingCost;
+  class Arrow;
+  class Cavalier;
+  class Decurion;
+  class Catapult;
   class Buildings;
 }
 
 #include "Position.h"
+#include "BuildingCost.h"
+#include "IdTexture.h"
 #include "Buildings.h"
 
 namespace state {
@@ -18,18 +25,37 @@ namespace state {
     // Attributes
   private:
     int capacity;
+    int unitsNumber;
     // Operations
   public:
-    Barrack (int capacity, int id, Position position, int level, int idTexture);
-    int getCapacity ();
-    void setCapacity (int capacity);
+    Barrack ();
+    Barrack (int id, Position position, int level);
+    Barrack (int capacity, int id, Position position, int level, BuildingCost barrackCost, IdTexture idTexture = BARRACK, int life = 0);
+    virtual ~Barrack ();
+    int getCapacity () const;
+    void setCapacity (const int capacity);
+    int  getUnitsNumber () const;
+    void setUnitsNumber (const int unitsNumber);
     /// switch case for units level. 
-    void createArrow ();
+    /// @param level		(???) 
+    /// @param position		(???) 
+    /// @param id		(???) 
+    Arrow* createArrow (int level, Position position, int id);
     /// switch case for units level. 
-    void createCavalier ();
+    /// @param level		(???) 
+    /// @param position		(???) 
+    /// @param id		(???) 
+    Cavalier* createCavalier (int level, Position position, int id);
     /// switch case for units level. 
-    void createDecurion ();
-    void createCatapult ();
+    /// @param level		(???) 
+    /// @param position		(???) 
+    /// @param id		(???) 
+    Decurion* createDecurion (int level, Position position, int id);
+    Catapult* createCatapult (int level, Position position, int id);
+    void destructArrow (Arrow* arrow);
+    void destructCavalier (Cavalier* cavalier);
+    void destructDecurion (Decurion* decurion);
+    void destructCatapult (Catapult* catapult);
     // Setters and Getters
   };
 

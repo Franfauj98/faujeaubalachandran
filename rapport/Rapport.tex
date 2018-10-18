@@ -13,6 +13,7 @@
 \usepackage{eurosym}
 \usepackage{multirow}
 \usepackage{float}
+\usepackage[normalem]{ulem}
 
 \usepackage{hyperref}
 
@@ -129,5 +130,101 @@ Voici les différentes ressources (images, textures, sprites) utilisées pour le
      \caption{images des unités de combats}
 \end{figure}
 
+\newpage
+
+\section{Description et conception des états}
+
+\subsection{Description des états}
+
+Un état de jeu est constitué d'une carte sur lequel se situent différents empires avec leurs différents bâtiments (éléments fixes), les éléments de décor (éléments fixes) et des unités de combats (éléments mobiles).
+
+\subsubsection{Description de la carte}
+
+La carte est représentée avec une grille composée de cases contenant des éléments sur chacunes d'elles avec une certaine position. Elle est composée d'empires, qui sont eux-mêmes constitués de bâtiments, et d'éléments comme les bâtiments, les unités de combats et les éléments de décor. Certains éléments sont franchissables par les unités et d'autres non. La taille de la carte est fixée.
+
+\subsubsection{Description des états éléments fixes}
+
+Les éléments fixes sont les décors et les bâtiments et les empires qui sont abstraits. Tous les éléments fixes possèdent une position (x,y).\\
+
+\uline{Décors}\\
+
+Les décors sont de différents types: eau, herbe, dunes, montagnes, arbre, animaux... Ils ont chaucun un identifiant. Les décors possèdent un attribut passable qui permet de savoir si l'élément est franchissable ou non par les unités de soldats.\\
+
+\uline{Empire}\\
+
+Un empire a plusieurs attributs:
+\begin{itemize}
+\item un identifiant pour le différencier des autres empires (chiffre)
+\item un nom
+\item un niveau compris entre 1 et 4
+\item des points de vie qui sont égaux à ceux du palais
+\item des ressources (or, bois, nourriture) pour se développer et former des troupes
+\item une liste de position permettant d'indiquer où se positionne l'empire sur la carte
+\end{itemize}
+
+Enfin, elle est composée d'une caserne, d'un bâtiment ressource et enfin d'un palais. \\
+
+\uline{Bâtiments}\\
+
+Les bâtiments ont tous ces attributs 
+\begin{itemize}
+\item un identifiantpour le différencier des autres (chiffre)
+\item un niveau qui va de 0 à 4
+\item un coût en bois et en or pour les construire
+\item un identifiant pour leur texture graphique
+\end{itemize}
+
+Il y a trois types de bâtiments: la caserne, les ressources et le palais.
+
+La caserne a une capacité maximale de formation de troupes et possède comme attribut le nombre de troupes formées. Elle permet de former les différentes troupes.
+
+Les ressources ont un niveau de production identique pour l'or, le bois ainsi que la nourriture. Ils vont permettre d'augmenter la richesse d'un joueur à chaque tour.
+
+Le palais quant à lui possède des points de vie. C'est lui qui sera attaqué par un joueur et sa destruction mènera à la fin d'une partie.\\
+
+\subsubsection{Description des états éléments mobiles}\\
+
+Tous les éléments mobiles possèdent une position (x,y). 
+Ils possèdent tous:
+\begin{itemize}
+\item un identifiant pour les différencier
+\item un niveau de vie
+\item un niveau de dommages en attaque
+\item une portée pour attaquer
+\itemun nombre de déplacements de cases limité
+\item un coût en or et en nourriture pour la former
+\item un identifiant de texture graphique.
+\end{itemize}
+Les unités de soldats dans le jeu sont les unités de combats: décurion, cavalier, catapulte et archer.\\
+
+\subsection{Conception des états}
+Dans cette partie nous allons décrire le diagramme UML d'état du jeu. (Voir figure 6)\\
+
+Class "Element" : Cette classe est la classe mère de tous nos éléments, mobiles ou statiques. Nous avons choisi pour cette classe qu'elle contienne une position, la position de notre élément sur la map, et une méthode isPassable(), qui nous permet de savoir si l'élément peut être traversé par un autre.\\
+
+Class "Units" : Cette classe est la classe mère de toutes nos unités mobiles sur la carte. Elle hérite d'"Element". Elle contient tous les paramètres nécessaires à la création d'une unité (vie, attaque, niveau, ...). \\
+
+Class "Arrow" : Cette classe est la classe fille de Units. Elle hérite d'"Element". Elle permet de construire des unitées de type archer avec leurs attributs initialisés en fontion de leur niveau. Ce sera la façon la plus utilisée de créer un archer. Il existe de même des classes pour Decurion, Cavalier et Catapult.\\
+
+Class "Buildings" : Cette classe est la classe mère de toutes nos unités statiques sur la carte. Elle hérite d'"Element". Elle contient tous les paramètres nécessaires à la création d'un bâtiment (niveau, coût, ...).\\
+
+Class "Barrack" : Une caserne est un bâtiment et hérite donc de "Buildings", elle ajoute en plus quelques fonctionnalitées telles que la création d'unités. De même pour les bâtiments de type ressource et palais.\\
+
+Concernant les coûts, nous avons créé deux classes qui permettent de créer le coût des unités et des bâtiments, et de pouvoir les modifier.\\
+
+Nous avons aussi choisi d'attribuer à chaque élément un id qui permet de savoir instantanément lequel il est.\\
+
+Class "Decor" : Cette classe hérite d'élément, elle permet de créer les différents décors qui seront présents sur la carte de jeu.\\ 
+
+Class "Empire" : Dans notre jeu nous avons besoin à tout instant d'avoir une classe qui stocke les éléments importants d'un empire. Par exemple un empire à un nom, une vie, de l'or, du bois, de la nourriture, ... . Ainsi, cette classe va agir comme un conteneur de tous les élements clés de notre empire.\\
+
+Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle permet d'ajouter des élément, de les récupérer ou d'en supprimer.\\
+
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=1\textwidth]{ressources/dia.png}
+     \caption{Diagramme de classes d'état}
+\end{figure}
 
 \end{document}
