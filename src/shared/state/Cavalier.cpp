@@ -2,16 +2,16 @@
 using namespace state;
 
 Cavalier::Cavalier () : Units() {
-  Position p;
+  Position p(0,0);
   setPosition(p);
-  setIdUnits(1);
+  setIdUnits(0);
   setLife(0);
   setDamage(0);
-  setStrikeRange(1);
-  setMovingRange(1);
-  setLevel(1);
+  setStrikeRange(0);
+  setMovingRange(0);
+  setLevel(0);
   setIdTextureUnits(CAVALIER1);
-  UnitCost cavalierCost(1,1);
+  UnitCost cavalierCost(0,0);
   setUnitCost(cavalierCost);
 }
 
