@@ -238,37 +238,3 @@ bool Units::isPassable(){
 }
 
 Units::~Units () {}
-
-//   this->idUnits = 0;
-//   throw std::string("idUnits must be positive");
-// }
-// if(life>0 && life <=1000) {
-//   this->life = life;
-// } else {
-//   this->life = 0;
-//   throw std::string("life must be positive or be smaller than 1000");
-// }
-// if(damage>0 && damage <= 100) {
-//   this->damage = damage;
-// } else {
-//   this->damage = 0;
-//   throw std::string("damage must be positive or be smaller than 100");
-// }
-// if(strikeRange>0 && strikeRange < 10) {
-//   this->strikeRange = strikeRange;
-// } else {
-//   this->strikeRange = 0;
-//   throw std::string("strikeRange must be positive or be smaller than 10");
-// }
-// if(movingRange>0 && movingRange<5) {
-//   this->movingRange = movingRange;
-// } else {
-//   this->movingRange = 0;
-//   throw std::string("movingRange must be positive or be smaller than 5");
-// }
-// if(level>0 && level<5) {
-//   this->level = level;
-// } else {
-//   this->level = 0;
-//   throw std::string("level must be positive and smaller than 5");
-// }

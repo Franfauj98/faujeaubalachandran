@@ -31,8 +31,8 @@ void Position::setX(const int x) {
     if(x>=0 && x<10000){
       this->x = x;
     } else {
+      this->x = 0;
       throw std::string("X must be positive or be on the map");
-      //this->x = 0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -44,8 +44,8 @@ void Position::setY(const int y) {
     if(y>=0 && y<10000){
       this->y = y;
     } else{
+      this->y = 0;
       throw std::string("Y must be positive or be on the map");
-      //this->y = 0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;

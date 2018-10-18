@@ -5,8 +5,6 @@ using namespace state;
 
 void RessourceTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST RESSOURCE" << endl;
   cout << "-------------------------------------" << endl;
@@ -110,6 +108,4 @@ void RessourceTest(){
   cout << "Life: " << ressource3.getLife() << endl;
   cout << "Production: " << ressource3.getProduction() << endl;
   cout << endl;
-
-
 }

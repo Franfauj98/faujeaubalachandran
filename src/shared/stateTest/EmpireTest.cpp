@@ -8,8 +8,6 @@ using namespace state;
 
 void EmpireTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST EMPIRE" << endl;
   cout << "-------------------------------------" << endl;

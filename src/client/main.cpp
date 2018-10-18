@@ -23,7 +23,6 @@ int main(int argc,char* argv[])
     cout << "Bonjour le monde!" << endl;
   } else if (argv[1] &&!strcmp(argv[1],"state")) {
     positionTest();
-    elementTest();
     UnitCostTest();
     unitsTest();
     arrowTest();
@@ -38,11 +37,6 @@ int main(int argc,char* argv[])
     EmpireTest();
     RessourceTest();
     mapTest();
-
-
-    cout << "-------------------------------------" << endl;
-    cout << "TEST LIVRABLE 1.1" << endl;
-    cout << "-------------------------------------" << endl;
 
   } else {
     cout << "Please type 'hello' or 'state'" << endl;

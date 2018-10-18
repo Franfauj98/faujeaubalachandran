@@ -5,8 +5,6 @@ using namespace state;
 
 void BuildingsTest(){
 
-
-
   cout << "-------------------------------------" << endl;
   cout << "TEST BUILDING" << endl;
   cout << "-------------------------------------" << endl;
@@ -69,6 +67,5 @@ void BuildingsTest(){
     Position pos3(-2,5);
     Buildings building2(1, pos3,1,BARRACK, buildingCost3);
     cout << endl;
-
 
 }
