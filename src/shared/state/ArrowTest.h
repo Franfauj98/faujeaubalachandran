@@ -1,5 +1,5 @@
-#include "../state/Arrow.h"
+#include "./Arrow.h"
 #include <iostream>
-#include "../state/Palace.h"
+#include "./Palace.h"
 
 void arrowTest();

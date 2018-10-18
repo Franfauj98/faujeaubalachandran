@@ -1,5 +1,5 @@
-#include "../state/Decurion.h"
-#include "../state/Palace.h"
+#include "./Decurion.h"
+#include "./Palace.h"
 #include <iostream>
 
 void decurionTest();

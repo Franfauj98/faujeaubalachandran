@@ -1,5 +1,5 @@
-#include "../state/Catapult.h"
-#include "../state/Palace.h"
+#include "./Catapult.h"
+#include "./Palace.h"
 #include <iostream>
 
 void catapultTest();

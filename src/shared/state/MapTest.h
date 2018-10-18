@@ -1,5 +1,5 @@
-#include "../state/Map.h"
-#include "../state/Arrow.h"
+#include "./Map.h"
+#include "./Arrow.h"
 #include <iostream>
 
 void mapTest();

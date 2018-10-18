@@ -1,5 +1,5 @@
-#include "../state/Cavalier.h"
-#include "../state/Palace.h"
+#include "./Cavalier.h"
+#include "./Palace.h"
 #include <iostream>
 
 void cavalierTest();

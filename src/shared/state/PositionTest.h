@@ -1,4 +1,4 @@
-#include "../state/Position.h"
+#include "./Position.h"
 #include <iostream>
 
 void positionTest();

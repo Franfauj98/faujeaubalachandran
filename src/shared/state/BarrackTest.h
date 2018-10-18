@@ -1,4 +1,4 @@
-#include "../state/Barrack.h"
+#include "./Barrack.h"
 #include <iostream>
 
 void BarrackTest();

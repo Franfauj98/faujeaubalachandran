@@ -1,4 +1,4 @@
-#include "../state/Palace.h"
+#include "./Palace.h"
 #include <iostream>
 
 void PalaceTest();

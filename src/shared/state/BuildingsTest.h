@@ -1,4 +1,4 @@
-#include "../state/Buildings.h"
+#include "./Buildings.h"
 #include <iostream>
 
 void BuildingsTest();
