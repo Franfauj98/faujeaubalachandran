@@ -1,4 +1,4 @@
-#include "./Empire.h"
+#include "../state/Empire.h"
 #include <iostream>
 
 void EmpireTest();
