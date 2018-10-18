@@ -30,10 +30,12 @@ int main(int argc,char* argv[])
     catapultTest();
     cavalierTest();
     decurionTest();
+    DecorTest();
     BuildingCostTest();
     BuildingsTest();
     PalaceTest();
     BarrackTest();
+    EmpireTest();
 
     cout << "-------------------------------------" << endl;
     cout << "TEST LIVRABLE 1.1" << endl;

@@ -44,3 +44,6 @@ IdDecor Decor::getIdDecor() const{
 void Decor::setIdDecor(const IdDecor idDecor){
   this->idDecor=idDecor;
 }
+Decor::~Decor(){
+
+}

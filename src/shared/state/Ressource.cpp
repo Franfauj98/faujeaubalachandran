@@ -12,7 +12,7 @@ Ressource::Ressource(int production, int id, Position position, int level, Build
       this->production=production;
     } else {
       throw std::string("production must be positive or be smaller than 1000");
-      this->production=0;
+      //this->production=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -85,7 +85,7 @@ void Ressource::setProduction(const int production) {
       this->production=production;
     } else {
       throw std::string("production must be positive or be smaller than 1000");
-      this->production=0;
+      //this->production=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;

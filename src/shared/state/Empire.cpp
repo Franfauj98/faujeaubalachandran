@@ -25,43 +25,7 @@ Empire::Empire(){
 Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, Barrack* barrack,
   Ressource* ressource, Palace* palace){
   try{
-    if (idEmpire>=0){
-      this->idEmpire=id;
-    } else {
-      throw std::string("idEmpire must be positive");
-      this->idEmpire=0;
-    }
-    this->name=name;
-    if (empireLevel>=0 && empireLevel<5){
-      this->empireLevel=empireLevel;
-    } else {
-      throw std::string("empireLevel must be positive or smaller than 5");
-      this->empireLevel=0;
-    }
-    if (life>=0 && life<=1000){
-      this->life=life;
-    } else {
-      throw std::string("life must be positive or smaller than 1000");
-      this->life=0;
-    }
-    if (goldRessource>=0){
-      this->goldRessource=goldRessource;
-    } else {
-      throw std::string("goldRessource must be positive");
-      this->goldRessource=0;
-    }
-    if (woodRessource>=0){
-      this->woodRessource=woodRessource;
-    } else {
-      throw std::string("woodRessource must be positive");
-      this->woodRessource=0;
-    }
-    if (foodRessource>=0){
-      this->foodRessource=foodRessource;
-    } else {
-      throw std::string("foodRessource must be positive");
-      this->foodRessource=0;
-    }
+    bool a;
     unsigned int count =0;
     for (unsigned int i=0;i<position.size();i++){
       if (position[i].getX()>=0 && position[i].getY()>=0 && position[i].getX()<=10000 &&position[i].getY()<=10000){
@@ -69,23 +33,43 @@ Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRes
       }
     }
     if(count==position.size()) {
+      a=true;
+    }
+    if (idEmpire>=0 && empireLevel>=0 && empireLevel<5 && life>=0 && life<=1000 &&goldRessource>=0 &&
+    woodRessource>=0 && foodRessource>=0 && a==true){
+      this->idEmpire=id;
+      this->name=name;
+      this->empireLevel=empireLevel;
+      this->life=life;
+      this->goldRessource=goldRessource;
+      this->woodRessource=woodRessource;
+      this->foodRessource=foodRessource;
       this->position=position;
+      this->barrack=barrack;
+      this->palace=palace;
+      this->ressource=ressource;
     } else {
-        throw std::string("position vector must be positive or be on the map ");
-        Position pos0(0,0);
-        std::vector<Position> pos;
-        for (unsigned int i=0;i<pos.size();i++){
-          pos[i]=pos0;
-        }
-        this->position=pos;
-      }
+      std::string message="idEmpire must be positive";
+      message+='\n';
+      message+="empireLevel must be positive or smaller than 5";
+      message+='\n';
+      message+="life must be positive and smaller than 1000";
+      message+='\n';
+      message+="goldRessource must be positive";
+      message+='\n';
+      message+="woodRessource must be positive";
+      message+='\n';
+      message+="foodRessource must be positive";
+      message+='\n';
+      message+="position vector must be positive or be on the map ";
+      message+='\n';
+      throw std::string(message);
 
-    this->barrack=barrack;
-    this->palace=palace;
-    this->ressource=ressource;
+      //this->idEmpire=0;
+    }
   } catch (std::string error){
     std::cerr << error << std::endl;
-    }
+  }
 }
 int Empire::getId () const{
   return this->idEmpire;
@@ -104,7 +88,7 @@ void Empire::setEmpireLevel (const int level){
       this->empireLevel=level;
     } else {
       throw std::string("empireLevel must be positive or smaller than 5");
-      this->empireLevel=0;
+      //this->empireLevel=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -121,7 +105,7 @@ void Empire::setLife (const int life){
       this->life=life;
     } else {
       throw std::string("life must be positive or smaller than 1000");
-      this->life=0;
+      //this->life=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -139,7 +123,7 @@ void Empire::setGoldRessource (const int gold){
       this->goldRessource=gold;
     } else {
       throw std::string("goldRessource must be positive");
-      this->goldRessource=0;
+      //this->goldRessource=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -154,7 +138,7 @@ void Empire::setWoodRessource (const int wood){
       this->woodRessource=wood;
     } else {
       throw std::string("woodRessource must be positive");
-      this->woodRessource=0;
+      //this->woodRessource=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -169,7 +153,7 @@ void Empire::setFoodRessource (const int food){
       this->foodRessource=food;
     } else {
       throw std::string("foodRessource must be positive");
-      this->foodRessource=0;
+      //this->foodRessource=0;
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -190,12 +174,12 @@ void Empire::setPosition (const std::vector<Position> postion){
     this->position=position;
     } else {
         throw std::string("position vector must be positive or be on the map");
-        Position pos0(0,0);
-        std::vector<Position> pos;
-        for (unsigned int i=0;i<pos.size();i++){
-          pos[i]=pos0;
-        }
-        this->position=pos;
+        // Position pos0(0,0);
+        // std::vector<Position> pos;
+        // for (unsigned int i=0;i<pos.size();i++){
+        //   pos[i]=pos0;
+        // }
+        // this->position=pos;
       }
     } catch (std::string error){
       std::cerr << error << std::endl;
