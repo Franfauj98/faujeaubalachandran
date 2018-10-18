@@ -13,3 +13,4 @@
 #include "./stateTest/BarrackTest.h"
 #include "./stateTest/EmpireTest.h"
 #include "./stateTest/DecorTest.h"
+#include "./stateTest/MapTest.h"

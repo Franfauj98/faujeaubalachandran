@@ -1,5 +1,5 @@
+#include "../state/Map.h"
 #include "../state/Arrow.h"
 #include <iostream>
-#include "../state/Palace.h"
 
-void arrowTest();
+void mapTest();

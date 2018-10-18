@@ -61,6 +61,7 @@ void arrowTest(){
   cout << "MOVE & ATTACK" << endl;
   Arrow arrow3(3, pos1, 5);
   Arrow arrow4(2, pos1, 5);
+  Palace palace(1,pos2, 2);
 
   cout << "TEST MOVEALLOWED & MOVE : " << endl;
   cout << "moveAllowed de (2,2) à (2,1): " << arrow4.moveAllowed(pos2, 1) << endl;
@@ -86,4 +87,26 @@ void arrowTest(){
   arrow3.attack(arrow4);
   cout << "Life Arrow 3: " << arrow3.getLife() << endl;
   cout << "Life Arrow 4: " << arrow4.getLife() << endl;
+
+  cout << "Attack Buildings" << endl;
+  arrow3.attackBuilding(palace);
+  cout << "Life Arrow 3: " << arrow3.getLife() << endl;
+  cout << "Life Palace: " << palace.getLife() << endl;
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  arrow3.attackBuilding(palace);
+  cout << "After some attacks: " << endl;
+  cout << "Life Arrow 3: " << arrow3.getLife() << endl;
+  cout << "Life Palace: " << palace.getLife() << endl;
 }
