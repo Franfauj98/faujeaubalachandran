@@ -83,6 +83,7 @@ Decurion::Decurion (int level, Position p, int id){
   }
 }
 
+
 Decurion::~Decurion(){
 
 }
