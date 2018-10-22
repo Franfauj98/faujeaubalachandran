@@ -13,6 +13,7 @@ Decurion::Decurion () : Units() {
   setIdTextureUnits(DECURION1);
   UnitCost decurionCost(0,0);
   setUnitCost(decurionCost);
+  this->type = 2;
 }
 
 Decurion::Decurion (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost decurionCost) :
@@ -31,6 +32,7 @@ Decurion::Decurion (int level, Position p, int id){
       setIdTextureUnits(DECURION1);
       UnitCost decurionCost(50,50);
       setUnitCost(decurionCost);
+      this->type = 2;
       break;}
     case 2 :{
       setPosition(p);
@@ -43,6 +45,7 @@ Decurion::Decurion (int level, Position p, int id){
       setIdTextureUnits(DECURION2);
       UnitCost decurionCost(100,100);
       setUnitCost(decurionCost);
+      this->type = 2;
       break;}
     case 3 :{
       setPosition(p);
@@ -55,6 +58,7 @@ Decurion::Decurion (int level, Position p, int id){
       setIdTextureUnits(DECURION3);
       UnitCost decurionCost(150,150);
       setUnitCost(decurionCost);
+      this->type = 2;
       break;}
     case 4 :{
       setPosition(p);
@@ -67,6 +71,7 @@ Decurion::Decurion (int level, Position p, int id){
       setIdTextureUnits(DECURION4);
       UnitCost decurionCost(200,200);
       setUnitCost(decurionCost);
+      this->type = 2;
       break;}
     default :{
       setPosition(p);
@@ -79,6 +84,7 @@ Decurion::Decurion (int level, Position p, int id){
       setIdTextureUnits(DECURION1);
       UnitCost decurionCost(50,50);
       setUnitCost(decurionCost);
+      this->type = 2;
       break;}
   }
 }

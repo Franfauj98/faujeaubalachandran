@@ -3,6 +3,7 @@
 #define STATE__MAP__H
 
 #include <vector>
+#include <memory>
 
 namespace state {
   class Element;
@@ -19,13 +20,13 @@ namespace state {
     // Associations
     // Attributes
   private:
-    std::vector<Element*> playingMap;
+    std::vector<std::unique_ptr<Element>> playingMap;
     // Operations
   public:
     Map ();
     ~Map ();
     void addElement (Element* elt);
-    std::vector<Element*> getMap () const;
+    std::vector<std::unique_ptr<Element>> const& getMap ();
     void deleteElement (int pos);
     int getPositionElement (Element* elt);
     // Setters and Getters

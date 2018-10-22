@@ -5,16 +5,16 @@ using namespace std;
 
 Map::Map(){}
 Map::~Map(){
-  for(size_t i = 0; i<this->playingMap.size();i++){
-    delete this->playingMap[i];
-  }
+  // for(size_t i = 0; i<this->playingMap.size();i++){
+  //   delete this->playingMap[i];
+  // }
 }
 
 void Map::addElement (Element* elt){
-   this->playingMap.push_back(elt);
+   this->playingMap.push_back(unique_ptr<Element>(elt));
 }
 
-std::vector<Element*> Map::getMap() const{
+std::vector<unique_ptr<state::Element>> const& Map::getMap(){
   return this->playingMap;
 }
 
@@ -25,7 +25,7 @@ void Map::deleteElement (int pos){
 int Map::getPositionElement (Element* elt){
   int pos = -1;
   for(size_t i = 0; i<this->playingMap.size(); i++){
-    if(elt==this->playingMap[i]){
+    if(elt==this->playingMap[i].get()){
       pos = i;
       break;
     }

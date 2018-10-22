@@ -28,6 +28,11 @@ int Element::distance(Position pos1, Position pos2){
   return(absdiff+orddiff);
 }
 
+int Element::getType () const{
+  return this->type;
+}
+
+
 Element::~Element(){
   // delete &position;
 }
