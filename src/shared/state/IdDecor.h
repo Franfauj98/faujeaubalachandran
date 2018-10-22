@@ -15,7 +15,8 @@ namespace state {
     MONTAGNE     = 6,
     DUNE     = 7,
     HERBE     = 8,
-    EAU     = 9
+    EAU     = 9,
+    LIFE     = 10
   };
 
 };

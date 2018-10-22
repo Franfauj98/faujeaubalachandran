@@ -12,6 +12,7 @@ Catapult::Catapult () : Units() {
   setLevel(0);
   setIdTextureUnits(CATAPULT1);
   UnitCost catapultCost(0,0);
+  this->type = 4;
   setUnitCost(catapultCost);
 }
 
@@ -31,6 +32,7 @@ Catapult::Catapult (int level, Position p, int id){
       setIdTextureUnits(CATAPULT1);
       UnitCost catapultCost(50,50);
       setUnitCost(catapultCost);
+      this->type = 4;
       break;}
     case 2 :{
       setPosition(p);
@@ -43,6 +45,7 @@ Catapult::Catapult (int level, Position p, int id){
       setIdTextureUnits(CATAPULT2);
       UnitCost catapultCost(100,100);
       setUnitCost(catapultCost);
+      this->type = 4;
       break;}
     case 3 :{
       setPosition(p);
@@ -55,6 +58,7 @@ Catapult::Catapult (int level, Position p, int id){
       setIdTextureUnits(CATAPULT3);
       UnitCost catapultCost(150,150);
       setUnitCost(catapultCost);
+      this->type = 4;
       break;}
     case 4 :{
       setPosition(p);
@@ -67,6 +71,7 @@ Catapult::Catapult (int level, Position p, int id){
       setIdTextureUnits(CATAPULT4);
       UnitCost catapultCost(200,200);
       setUnitCost(catapultCost);
+      this->type = 4;
       break;}
     default :{
       setPosition(p);
@@ -79,6 +84,7 @@ Catapult::Catapult (int level, Position p, int id){
       setIdTextureUnits(CATAPULT1);
       UnitCost catapultCost(50,50);
       setUnitCost(catapultCost);
+      this->type = 4;
       break;}
   }
 }

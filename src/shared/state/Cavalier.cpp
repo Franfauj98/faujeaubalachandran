@@ -13,6 +13,7 @@ Cavalier::Cavalier () : Units() {
   setIdTextureUnits(CAVALIER1);
   UnitCost cavalierCost(0,0);
   setUnitCost(cavalierCost);
+  this->type = 3;
 }
 
 Cavalier::Cavalier (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost cavalierCost) :
@@ -31,6 +32,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setIdTextureUnits(CAVALIER1);
       UnitCost cavalierCost(50,50);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     case 2 :{
       setPosition(p);
@@ -43,6 +45,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(100,100);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     case 3 :{
       setPosition(p);
@@ -55,6 +58,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setIdTextureUnits(CAVALIER3);
       UnitCost cavalierCost(150,150);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     case 4 :{
       setPosition(p);
@@ -67,6 +71,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setIdTextureUnits(CAVALIER4);
       UnitCost cavalierCost(200,200);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     default :{
       setPosition(p);
@@ -79,6 +84,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setIdTextureUnits(CAVALIER1);
       UnitCost cavalierCost(50,50);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
   }
 }

@@ -6,11 +6,13 @@ Decor::Decor() {
   this->position = p;
   this->idDecor=NONE_DECOR;
   this->passable=true;
+  this->type = 0;
 }
 
 Decor::Decor(IdDecor id, Position position) {
   this->idDecor=id;
   this->position = position;
+  this->type = 0;
   switch(id){
     case IdDecor::NONE_DECOR: passable=true;
     break;
@@ -31,6 +33,8 @@ Decor::Decor(IdDecor id, Position position) {
     case IdDecor::HERBE: passable=true;
     break;
     case IdDecor::EAU: passable=false;
+    break;
+    case IdDecor::LIFE: passable=true;
     break;
   }
 }
