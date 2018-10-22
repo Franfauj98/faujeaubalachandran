@@ -34,6 +34,8 @@ Decor::Decor(IdDecor id, Position position) {
     break;
     case IdDecor::EAU: passable=false;
     break;
+    case IdDecor::LIFE: passable=true;
+    break;
   }
 }
 bool Decor::getPassable() const {

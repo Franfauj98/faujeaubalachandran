@@ -3,7 +3,7 @@
 using namespace state;
 
 Arrow::Arrow () : Units() {
-  Position p;
+  Position p(0,0);
   setPosition(p);
   setIdUnits(0);
   setLife(0);
