@@ -2,12 +2,12 @@
 #ifndef __RENDER__H
 #define __RENDER__H
 
-#include "render/Surface.h"
+#include "render/MapCreator.h"
 #include "render/Tile.h"
 #include "render/TileSet.h"
 #include "render/Layer.h"
-#include "render/GridLayer.h"
-#include "render/StateTileSet.h"
-#include "render/GridTileSet.h"
+#include "render/MapLayer.h"
+#include "render/DecorTileSet.h"
 #include "render/UnitsTileSet.h"
+#include "render/BuildingTileSet.h"
 #endif

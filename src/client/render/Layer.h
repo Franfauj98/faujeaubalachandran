@@ -7,11 +7,11 @@
 #include <stdlib.h>
 
 namespace render {
-  class Surface;
+  class MapCreator;
   class TileSet;
 }
 
-#include "Surface.h"
+#include "MapCreator.h"
 #include "TileSet.h"
 
 namespace render {
@@ -21,15 +21,15 @@ namespace render {
     // Associations
     // Attributes
   protected:
-    std::unique_ptr<Surface> surface;
+    std::unique_ptr<MapCreator> mapCreator;
     std::shared_ptr<Tileset> tileset;
     // Operations
   public:
     Layer ();
     ~Layer ();
-    const Surface* const getSurface ();
-    void setSurface (Surface* surface);
-    void initSurface ();
+    const MapCreator* const getMapCreator ();
+    void setMapCreator (MapCreator* mapCreator);
+    virtual void initMapCreator ();
     void printText (int x, int y, const std::string& msg, size_t tileMinIdx, size_t tileMaxIdx);
     // Setters and Getters
     const std::shared_ptr<Tileset>& getTileset() const;

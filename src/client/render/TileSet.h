@@ -21,8 +21,7 @@ namespace render {
     virtual int getCellWidth () const = 0;
     virtual int getCellHeight () const = 0;
     virtual const std::string& getImageFile () const = 0;
-    virtual const Tile& getTile (const state::Element& e) const;
-    virtual const Tile& getCharTile (char c) const;
+    virtual const Tile& getTile (const state::Element& e) const = 0;
     // Setters and Getters
   };
 
