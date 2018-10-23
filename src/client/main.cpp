@@ -34,6 +34,21 @@ int main(int argc,char* argv[])
     mapTest();
 
   } else if (argv[1] &&!strcmp(argv[1],"render")) {
+
+    Tile tile;
+    cout<<tile.getX()<<endl;
+    cout<<tile.getY()<<endl;
+    cout<<tile.getWidth()<<endl;
+    cout<<tile.getHeight()<<endl;
+    tile.setX(10);
+    tile.setY(20);
+    tile.setWidth(30);
+    tile.setHeight(40);
+    cout<<tile.getX()<<endl;
+    cout<<tile.getY()<<endl;
+    cout<<tile.getWidth()<<endl;
+    cout<<tile.getHeight()<<endl;
+
     sf::RenderWindow window(sf::VideoMode(450, 450), "Tilemap");
     MapCreator map;
     const int tiles[] ={2,2,2,2,2,2,2,2,2,2,
