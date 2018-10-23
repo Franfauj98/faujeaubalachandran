@@ -116,38 +116,43 @@ int main(int argc,char* argv[])
     mapTest();
 
   } else if (argv[1] &&!strcmp(argv[1],"render")) {
-      sf::RenderWindow window(sf::VideoMode(500,500 ), "Tilemap");
+    sf::RenderWindow window(sf::VideoMode(450, 450), "Tilemap");
 
-      MapCreator map;
-      map.loadTexture("res/terrain.png");
-      map.initQuads(10);
-      const int tiles[]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                         2, 0, 0, 2, 2, 2, 2, 2, 2, 2,
-                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                         2, 2, 2, 2, 2, 1, 1, 2, 2, 2,
-                         2, 2, 2, 2, 2, 1, 1, 2, 2, 2,
-                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
-            // on remplit le tableau de vertex, avec un quad par tuile
-      for (unsigned int x = 0; x < 10; ++x) {
-          for (unsigned int y = 0; y < 10; ++y)
-          {
-            map.setSpriteLocation (10, x, y,0);
-            map.setSpriteTexture (10, tiles, 0, x, y);
-            }
-          }
-
-
-
-
-   // on définit le niveau à l'aide de numéro de tuiles
+  //  const int level[] =
+  //  {
+  //     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  //     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  //     2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+  //     2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+  //     2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+  //     2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 7, 8,
+  //     2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 12, 11, 10, 9,
+  //     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  // };
+   // on crée la tilemap avec le niveau précédemment défini
    // TileMap map;
-   // map.load("res/terrain.png", sf::Vector2u(64, 32), tiles, 16, 8);
+   // if (!map.load("res/terrain.png", sf::Vector2u(64, 32), level, 16, 8))
+   //     return -1;
 
-
+   MapCreator map;
+   const int tiles[] ={2,2,2,2,2,2,2,2,2,2,
+                      2,2,2,2,2,2,2,2,2,2,
+                      2,2,2,2,2,2,2,2,2,2,
+                      2,2,2,2,0,0,2,2,2,2,
+                      2,2,2,2,0,0,2,2,2,2,
+                      2,2,2,2,2,2,2,2,2,2,
+                      2,2,2,2,1,1,2,2,2,2,
+                      2,2,2,2,1,1,2,2,2,2,
+                      2,2,2,2,2,2,2,2,2,2,
+                      2,2,2,2,2,2,2,2,2,2};
+   map.loadTexture("res/terrain.png");
+   map.initQuads(10);
+   for (int x=0;x<10;x++){
+     for(int y=0;y<10;y++){
+       map.setSpriteLocation (10,x,y,0);
+       map.setSpriteTexture(10,tiles,0,x,y);
+     }
+   }
    // on fait tourner la boucle principale
    while (window.isOpen())
    {
