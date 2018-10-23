@@ -22,7 +22,7 @@ namespace render {
     // Attributes
   protected:
     std::unique_ptr<MapCreator> mapCreator;
-    std::shared_ptr<Tileset> tileset;
+    std::shared_ptr<TileSet> tileset;
     // Operations
   public:
     Layer ();
@@ -31,9 +31,11 @@ namespace render {
     void setMapCreator (MapCreator* mapCreator);
     virtual void initMapCreator ();
     void printText (int x, int y, const std::string& msg, size_t tileMinIdx, size_t tileMaxIdx);
+    void setTileSet (std::shared_ptr<TileSet> tileSet);
+    const std::shared_ptr<TileSet> getTileSet () const;
     // Setters and Getters
-    const std::shared_ptr<Tileset>& getTileset() const;
-    void setTileset(const std::shared_ptr<Tileset>& tileset);
+    const std::shared_ptr<TileSet>& getTileset() const;
+    void setTileset(const std::shared_ptr<TileSet>& tileset);
   };
 
 };
