@@ -10,8 +10,8 @@ namespace state {
   class Empire;
 }
 
-#include "Empire.h"
 #include "Element.h"
+#include "Empire.h"
 
 namespace state {
 
@@ -20,15 +20,18 @@ namespace state {
     // Associations
     // Attributes
   private:
-    std::vector<std::unique_ptr<Element>> playingMap;
+    std::vector<std::unique_ptr<Element>> basicMap;
+    std::vector<std::unique_ptr<Element>> decorMap;
+    std::vector<std::unique_ptr<Element>> unitsMap;
+    std::vector<std::unique_ptr<Element>> buildingsMap;
     // Operations
   public:
     Map ();
     ~Map ();
-    void addElement (Element* elt);
+    void addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt);
     std::vector<std::unique_ptr<Element>> const& getMap ();
     void deleteElement (int pos);
-    int getPositionElement (Element* elt);
+    int getPositionElement (std::unique_ptr<Element> elt);
     // Setters and Getters
   };
 
