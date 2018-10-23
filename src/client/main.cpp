@@ -27,32 +27,40 @@ public:
 
         // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
         m_vertices.setPrimitiveType(sf::Quads);
-        m_vertices.resize(width * height * 4);
+        m_vertices.resize((width) * height * 4);
 
         // on remplit le tableau de vertex, avec un quad par tuile
         for (unsigned int i = 0; i < width; ++i)
             for (unsigned int j = 0; j < height; ++j)
             {
                 // on récupère le numéro de tuile courant
-                int tileNumber = tiles[i + j * width];
+                int tileNumber = tiles[i + j * (width)];
 
                 // on en déduit sa position dans la texture du tileset
                 int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
                 int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
 
                 // on récupère un pointeur vers le quad à définir dans le tableau de vertex
-                sf::Vertex* quad = &m_vertices[(i + j * width) * 4];
+                sf::Vertex* quad = &m_vertices[(i + j * (width)) * 4];
                 // on définit ses quatre coins
-                quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
-                quad[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
-                quad[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
-                quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+                if(i%2==0) {
+                  quad[0].position = sf::Vector2f(i/2 * tileSize.x+tileSize.x/2, j * tileSize.y);
+                  quad[1].position = sf::Vector2f((i/2 +1 ) * tileSize.x, j * tileSize.y+tileSize.y/2);
+                  quad[2].position = sf::Vector2f((i/2 + 1) * tileSize.x-tileSize.x/2, (j+1) * tileSize.y);
+                  quad[3].position = sf::Vector2f((i/2) * tileSize.x, (j + 1) * tileSize.y-tileSize.y/2);
 
-                // on définit ses quatre coordonnées de texture
-                quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
-                quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
-                quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
-                quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
+                }
+                else if(j<height-1) {
+                  quad[0].position = sf::Vector2f((i+1)/2 * tileSize.x, j * tileSize.y+tileSize.y/2);
+                  quad[1].position = sf::Vector2f(((i+1)/2 +1 ) * tileSize.x-tileSize.x/2, (j+1) * tileSize.y);
+                  quad[2].position = sf::Vector2f((i+1)/2 * tileSize.x, (j+1) * tileSize.y+tileSize.y/2);
+                  quad[3].position = sf::Vector2f((i+1)/2 * tileSize.x-tileSize.x/2, (j + 1) * tileSize.y);
+                }
+
+                quad[0].texCoords = sf::Vector2f(tu * tileSize.x+tileSize.x/2, tv * tileSize.y);
+                quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y+tileSize.y/2);
+                quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x-tileSize.x/2, (tv + 1) * tileSize.y);
+                quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y-tileSize.y/2);
               }
 
     return true;
@@ -101,21 +109,19 @@ int main(int argc,char* argv[])
     mapTest();
 
   } else if (argv[1] &&!strcmp(argv[1],"render")) {
-    sf::RenderWindow window(sf::VideoMode(512, 256), "Tilemap");
+    sf::RenderWindow window(sf::VideoMode(1024, 256), "Tilemap");
 
-   // on définit le niveau à l'aide de numéro de tuiles
-
-    const int level[] =
-    {
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-   };
+   const int level[] =
+   {
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 7, 8,
+      2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 12, 11, 10, 9,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  };
    // on crée la tilemap avec le niveau précédemment défini
    TileMap map;
    if (!map.load("res/terrain.png", sf::Vector2u(64, 32), level, 16, 8))
