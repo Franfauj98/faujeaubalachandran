@@ -3,20 +3,6 @@
 using namespace render;
 using namespace std;
 
-
-// quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
-// quad[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
-// quad[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
-// quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
-
-// on définit ses quatre coordonnées de texture
-// quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
-// quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
-// quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
-// quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
-
-
-
 void MapCreator::loadTexture (const std::string& imageFile) {
   // on charge la texture du tileset
   texture.loadFromFile(imageFile);
@@ -45,6 +31,12 @@ void MapCreator::setSpriteLocation (int size, int x, int y,int form){
       quad[2].position = sf::Vector2f((x+1)/2 * 64, (y+1) * 32+32/2);
       quad[3].position = sf::Vector2f((x+1)/2 * 64-64/2, (y + 1) * 32);
     }
+  else if (form==1) {
+    quad[0].position = sf::Vector2f(x * 64, y * 32);
+    quad[1].position = sf::Vector2f((x + 1) * 64, y * 32);
+    quad[2].position = sf::Vector2f((x + 1) * 64, (y + 1) * 32);
+    quad[3].position = sf::Vector2f(x * 64, (y + 1) * 32);
+    }
   }
 }
 
@@ -63,6 +55,12 @@ void MapCreator::setSpriteTexture (int size, const int* tiles, int form,int x, i
     quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 32+32/2);
     quad[2].texCoords = sf::Vector2f((tu + 1) * 64-64/2, (tv + 1) * 32);
     quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32-32/2);
+  }
+  else if (form==1){
+     quad[0].texCoords = sf::Vector2f(tu * 64, tv * 32);
+     quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 32);
+     quad[2].texCoords = sf::Vector2f((tu + 1) * 64, (tv + 1) * 32);
+     quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32);
   }
 
 }
