@@ -1,5 +1,5 @@
 #include "MapTest.h"
-
+#include <time.h>
 using namespace std;
 using namespace state;
 
@@ -7,6 +7,8 @@ void mapTest(){
   cout << "-------------------------------------" << endl;
   cout << "TEST MAP" << endl;
   cout << "-------------------------------------" << endl;
+
+  srand(time(NULL));
 
   Map map;
 
@@ -37,22 +39,31 @@ void mapTest(){
   // cout << "Pos X : " << arr3->getPosition().getX() << endl;
   // cout << "Pos Y : " << arr3->getPosition().getY() << endl;
 
-  Decor* arr = (Decor *)map.getMap()[0].get();
-  cout << "decor" << endl;
-  // cout << arr->getLife() << endl;
-  cout << arr->getType() << endl;
-  cout << arr->getIdDecor() << endl;
-  cout << "Pos X : " << arr->getPosition().getX() << endl;
-  cout << "Pos Y : " << arr->getPosition().getY() << endl;
+  // Decor* arr = (Decor *)map.getMap()[0].get();
+  // cout << "decor" << endl;
+  // // cout << arr->getLife() << endl;
+  // cout << arr->getType() << endl;
+  // cout << arr->getIdDecor() << endl;
+  // cout << "Pos X : " << arr->getPosition().getX() << endl;
+  // cout << "Pos Y : " << arr->getPosition().getY() << endl;
+  //
+  // Arrow* arr3 = (Arrow *)map.getMap()[2].get();
+  // cout << "Decor" << endl;
+  // // cout << arr3->getLife() << endl;
+  // cout << arr3->getType() << endl;
+  // cout << arr->getIdDecor() << endl;
+  // cout << "Pos X : " << arr3->getPosition().getX() << endl;
+  // cout << "Pos Y : " << arr3->getPosition().getY() << endl;
 
-  Arrow* arr3 = (Arrow *)map.getMap()[2].get();
-  cout << "Decor" << endl;
-  // cout << arr3->getLife() << endl;
-  cout << arr3->getType() << endl;
-  cout << arr->getIdDecor() << endl;
-  cout << "Pos X : " << arr3->getPosition().getX() << endl;
-  cout << "Pos Y : " << arr3->getPosition().getY() << endl;
+  std::vector<std::unique_ptr<Element>> const &ma = map.getMap();
 
+  for(size_t i=0; i<ma.size(); i++){
+    if(i%40==0) cout<<"\n";
+    Decor* d = (Decor *) ma[i].get();
+    cout<< d->getIdDecor();
+  }
+  cout<<"\n";
+  cout<<rand()%40<<endl;
 
   // Catapult* ca = (Catapult *)map.getMap()[3].get();
   // cout << "Catapult" << endl;
