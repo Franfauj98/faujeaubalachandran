@@ -29,9 +29,12 @@ namespace state {
     Map ();
     ~Map ();
     void addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt);
-    std::vector<std::unique_ptr<Element>> const& getMap ();
+    std::vector<std::unique_ptr<Element>> const& getBasicMap ();
     void deleteElement (int pos);
     int getPositionElement (std::unique_ptr<Element> elt);
+    std::vector<std::unique_ptr<Element>> const& getDecorMap ();
+    std::vector<std::unique_ptr<Element>> const& getUnitsMap ();
+    std::vector<std::unique_ptr<Element>> const& getBuildingsMap ();
     // Setters and Getters
   };
 

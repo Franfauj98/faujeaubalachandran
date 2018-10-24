@@ -32,7 +32,6 @@ namespace state {
     int damage;
     int strikeRange;
     int movingRange     = 1;
-    int level;
     // Operations
   public:
     Units ();

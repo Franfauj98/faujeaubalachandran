@@ -32,6 +32,9 @@ int Element::getType () const{
   return this->type;
 }
 
+int Element::getLevel () const{
+  return this->level;
+}
 
 Element::~Element(){
   // delete &position;

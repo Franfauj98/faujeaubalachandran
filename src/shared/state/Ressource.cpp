@@ -28,7 +28,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
       setLife(0);
@@ -40,7 +40,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(2);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(100,100);
       setBuildingCost(ressourceCost);
       setLife(0);
@@ -51,7 +51,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(3);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(150,150);
       setBuildingCost(ressourceCost);
       setLife(0);
@@ -62,7 +62,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(4);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(200,200);
       setBuildingCost(ressourceCost);
       setLife(0);
@@ -73,7 +73,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
       setLife(0);

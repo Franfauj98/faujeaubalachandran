@@ -28,8 +28,6 @@ Decor::Decor(IdDecor id, Position position) {
     break;
     case IdDecor::MONTAGNE: passable=false;
     break;
-    case IdDecor::DUNE: passable=true;
-    break;
     case IdDecor::HERBE: passable=true;
     break;
     case IdDecor::EAU: passable=false;

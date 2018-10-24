@@ -55,15 +55,24 @@ void mapTest(){
   // cout << "Pos X : " << arr3->getPosition().getX() << endl;
   // cout << "Pos Y : " << arr3->getPosition().getY() << endl;
 
-  std::vector<std::unique_ptr<Element>> const &ma = map.getMap();
+  std::vector<std::unique_ptr<Element>> const &basic = map.getBasicMap();
+  std::vector<std::unique_ptr<Element>> const &decor = map.getDecorMap();
 
-  for(size_t i=0; i<ma.size(); i++){
+  for(size_t i=0; i<basic.size(); i++){
     if(i%40==0) cout<<"\n";
-    Decor* d = (Decor *) ma[i].get();
+    Decor* d = (Decor *) basic[i].get();
     cout<< d->getIdDecor();
   }
   cout<<"\n";
-  cout<<rand()%40<<endl;
+  cout<<"\n";
+  for(size_t i=0; i<decor.size(); i++){
+    if(i%40==0) cout<<"\n";
+    Decor* d = (Decor *) decor[i].get();
+    cout<< d->getIdDecor();
+  }
+  cout<<"\n";
+
+  // cout<<rand()%40<<endl;
 
   // Catapult* ca = (Catapult *)map.getMap()[3].get();
   // cout << "Catapult" << endl;

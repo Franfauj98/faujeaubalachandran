@@ -18,6 +18,7 @@ namespace state {
   protected:
     Position position;
     int type;
+    int level;
     // Operations
   public:
     virtual ~Element ();
@@ -26,8 +27,10 @@ namespace state {
     void setPosition (const Position& position);
     int distance (Position pos1, Position pos2);
     int getType () const;
+    virtual int getLevel () const;
     // Setters and Getters
     void setType(int type);
+    void setLevel(int level);
   };
 
 };

@@ -23,7 +23,6 @@ namespace state {
     // Attributes
   protected:
     int idBuilding;
-    int level;
     BuildingCost buildingCost;
     int life     = 0;
     // Operations

@@ -25,7 +25,7 @@ namespace state {
   public:
     Ressource ();
     Ressource (int id, Position position, int level);
-    Ressource (int production, int id, Position position, int level, BuildingCost ressourceCost, IdTexture idTexture = RESSOURCE, int life = 0);
+    Ressource (int production, int id, Position position, int level, BuildingCost ressourceCost, IdTexture idTexture = RESSOURCE1, int life = 0);
     int getProduction () const;
     void setProduction (const int production);
     virtual ~Ressource ();
