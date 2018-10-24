@@ -9,10 +9,14 @@
 namespace render {
   class MapCreator;
   class TileSet;
+};
+namespace state {
+  class Map;
 }
 
 #include "MapCreator.h"
 #include "TileSet.h"
+#include "state/Map.h"
 
 namespace render {
 
@@ -20,7 +24,7 @@ namespace render {
   class Layer {
     // Associations
     // Attributes
-  protected:
+  private:
     std::unique_ptr<MapCreator> mapCreator;
     std::shared_ptr<TileSet> tileset;
     // Operations
@@ -29,13 +33,8 @@ namespace render {
     ~Layer ();
     const MapCreator* const getMapCreator ();
     void setMapCreator (MapCreator* mapCreator);
-    virtual void initMapCreator ();
     void printText (int x, int y, const std::string& msg, size_t tileMinIdx, size_t tileMaxIdx);
-    void setTileSet (std::shared_ptr<TileSet> tileSet);
-    const std::shared_ptr<TileSet> getTileSet () const;
     // Setters and Getters
-    const std::shared_ptr<TileSet>& getTileset() const;
-    void setTileset(const std::shared_ptr<TileSet>& tileset);
   };
 
 };
