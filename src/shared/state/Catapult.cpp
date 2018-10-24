@@ -10,7 +10,7 @@ Catapult::Catapult () : Units() {
   setStrikeRange(0);
   setMovingRange(0);
   setLevel(0);
-  setIdTextureUnits(CATAPULT1);
+  setIdTextureUnits(CATAPULT2);
   UnitCost catapultCost(0,0);
   this->type = 4;
   setUnitCost(catapultCost);
@@ -29,7 +29,7 @@ Catapult::Catapult (int level, Position p, int id){
       setStrikeRange(4);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CATAPULT1);
+      setIdTextureUnits(CATAPULT2);
       UnitCost catapultCost(50,50);
       setUnitCost(catapultCost);
       this->type = 4;
@@ -55,7 +55,7 @@ Catapult::Catapult (int level, Position p, int id){
       setStrikeRange(5);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CATAPULT3);
+      setIdTextureUnits(CATAPULT2);
       UnitCost catapultCost(150,150);
       setUnitCost(catapultCost);
       this->type = 4;
@@ -68,7 +68,7 @@ Catapult::Catapult (int level, Position p, int id){
       setStrikeRange(5);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CATAPULT4);
+      setIdTextureUnits(CATAPULT2);
       UnitCost catapultCost(200,200);
       setUnitCost(catapultCost);
       this->type = 4;
@@ -81,7 +81,7 @@ Catapult::Catapult (int level, Position p, int id){
       setStrikeRange(4);
       setMovingRange(1);
       setLevel(1);
-      setIdTextureUnits(CATAPULT1);
+      setIdTextureUnits(CATAPULT2);
       UnitCost catapultCost(50,50);
       setUnitCost(catapultCost);
       this->type = 4;
