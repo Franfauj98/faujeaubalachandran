@@ -7,6 +7,11 @@
 
 namespace render {
   class Tile;
+};
+namespace state {
+  class Element;
+};
+namespace render {
   class TileSet;
 }
 
@@ -26,10 +31,11 @@ namespace render {
     // Operations
   public:
     UnitsTileSet ();
+    ~UnitsTileSet ();
     int getCellWidth () const;
     int getCellHeight () const;
-    const std::string& getImageFile () const;
-    const Tile& getTile (const state::Element& e) const;
+    const std::string getImageFile () const;
+    const Tile getTile (const state::Element& e) const;
     // Setters and Getters
   };
 
