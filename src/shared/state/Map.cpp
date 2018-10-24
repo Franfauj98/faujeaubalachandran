@@ -75,9 +75,9 @@ Map::Map(){
       int buildingRand = rand() % size;
       while(test){
         for(int k = 0; k < 3; k++){
-          if( ((buildingRand>(*listSeaPosition[k]-sizeSea-1)) && (buildingRand<(*listSeaPosition[k]+sizeSea+1))) ||
-          ((buildingRand>(*listWoodPosition[k]-sizeWood-1)) && (buildingRand<(*listWoodPosition[k]+sizeWood+1))) ||
-          ((buildingRand>(*listMountainPosition[k]-sizeMountain-1)) && (buildingRand<(*listMountainPosition[k]+sizeMountain+1))) ){
+          if( ((buildingRand+1>(*listSeaPosition[k]-sizeSea-1)) && (buildingRand-1<(*listSeaPosition[k]+sizeSea+1))) ||
+          ((buildingRand+1>(*listWoodPosition[k]-sizeWood-1)) && (buildingRand-1<(*listWoodPosition[k]+sizeWood+1))) ||
+          ((buildingRand+1>(*listMountainPosition[k]-sizeMountain-1)) && (buildingRand-1<(*listMountainPosition[k]+sizeMountain+1))) ){
             buildingRand = rand() % size;
             break;
           } else if (k==2){

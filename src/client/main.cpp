@@ -41,7 +41,7 @@ int main(int argc,char* argv[])
     //ileSetTest();
     //mapCreatorTest();
     Layer layer;
-    sf::RenderWindow window(sf::VideoMode(1000, 1500), "Tilemap");
+    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
     while (window.isOpen())
     {
   // on gère les évènements
