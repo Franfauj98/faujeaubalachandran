@@ -5,13 +5,6 @@
 using namespace state;
 using namespace std;
 
-// int woodRand = rand() % sizeMap;
-// int mountainRand = rand() % sizeMap;
-// while( ((woodRand>(seaRand-sizeSea-1)) && (woodRand<(seaRand+sizeSea+1))) || ((woodRand>(mountainRand-sizeMountain-1)) && (woodRand<(mountainRand+sizeMountain+1)))) woodRand = rand() % sizeMap;
-// listWoodPosition[i][j] = woodRand;
-// while( ((mountainRand>(seaRand-sizeSea-1)) && (mountainRand<(seaRand+sizeSea+1))) || ((mountainRand>(woodRand-sizeWood-1)) && (mountainRand<(woodRand+sizeWood+1))) ) mountainRand = rand() % sizeMap;
-// listMountainPosition[i][j] = mountainRand;
-
 Map::Map(){
 
 // Create sea
@@ -36,10 +29,11 @@ Map::Map(){
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
       bool test = true;
-      int woodRand = rand() % size;
+      int woodRandi = rand() % size;
+      int woodRandj = rand() % size;
       while(test){
         for(int k = 0; k < 3; k++){
-          if( ((woodRand>(*listSeaPosition[k]-sizeSea-1)) && (woodRand<(*listSeaPosition[k]+sizeSea+1))) ){
+          if( ((woodRand>(listSeaPosition[k]-sizeSea-1)) && (woodRand<(listSeaPosition[k]+sizeSea+1))) ){
             woodRand = rand() % size;
             break;
           } else if (k==2){
@@ -116,7 +110,7 @@ Map::Map(){
       ((i>(listSeaPosition[2][0]-sizeSea) && i<(listSeaPosition[2][0]+sizeSea))&&(j>(listSeaPosition[2][1]-sizeSea) && j<(listSeaPosition[2][1]+sizeSea))) ){
         Position p(i,j);
         // this->basicMap[toChange] = move(unique_ptr<Element> (new Decor(EAU,p)));
-        this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(EAU,p)));
+        this->basicMap[toChange] = move(unique_ptr<Element> (new Decor(EAU,p)));
         if((i==listSeaPosition[0][0]&&j==listSeaPosition[0][1]) || (i==listSeaPosition[1][0]&&j==listSeaPosition[1][1]) || (i==listSeaPosition[2][0]&&j==listSeaPosition[2][1])){
           this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(POISSON,p)));
         }
