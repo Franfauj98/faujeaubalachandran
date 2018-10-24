@@ -10,7 +10,7 @@ Cavalier::Cavalier () : Units() {
   setStrikeRange(0);
   setMovingRange(0);
   setLevel(0);
-  setIdTextureUnits(CAVALIER1);
+  setIdTextureUnits(CAVALIER2);
   UnitCost cavalierCost(0,0);
   setUnitCost(cavalierCost);
   this->type = 3;
@@ -29,7 +29,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CAVALIER1);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(50,50);
       setUnitCost(cavalierCost);
       this->type = 3;
@@ -55,7 +55,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CAVALIER3);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(150,150);
       setUnitCost(cavalierCost);
       this->type = 3;
@@ -68,7 +68,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CAVALIER4);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(200,200);
       setUnitCost(cavalierCost);
       this->type = 3;
@@ -81,7 +81,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(1);
-      setIdTextureUnits(CAVALIER1);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(50,50);
       setUnitCost(cavalierCost);
       this->type = 3;
