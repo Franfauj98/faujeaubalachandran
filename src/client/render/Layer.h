@@ -2,6 +2,8 @@
 #ifndef RENDER__LAYER__H
 #define RENDER__LAYER__H
 
+#include <vector>
+#include <memory>
 
 namespace render {
   class TileSet;
@@ -20,6 +22,9 @@ namespace render {
   /// class Layer - 
   class Layer {
     // Associations
+    // Attributes
+  private:
+    std::vector<std::unique_ptr<MapCreator>> layers;
     // Operations
   public:
     Layer ();

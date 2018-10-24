@@ -12,7 +12,7 @@ void mapCreatorTest(){
 
   sf::RenderWindow window(sf::VideoMode(450, 450), "Tilemap");
   MapCreator map;
-  const int tiles[] ={2,2,2,2,2,2,2,2,2,2,
+  vector <int> tiles={2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,1,1,1,2,2,2,
@@ -32,7 +32,7 @@ void mapCreatorTest(){
   }
 
   MapCreator building;
-  const int bu[] ={0,0,0,0,0,0,0,0,0,0,
+  vector <int> bu ={0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
                   0,6,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
@@ -52,7 +52,7 @@ void mapCreatorTest(){
   }
 
   MapCreator units;
-  const int un[] ={14,0,0,0,0,0,0,0,0,4,
+  vector <int> un ={14,0,0,0,0,0,0,0,0,4,
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
