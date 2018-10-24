@@ -19,6 +19,8 @@ namespace state {
   class Map {
     // Associations
     // Attributes
+  public:
+    int size     = 50;
   private:
     std::vector<std::unique_ptr<Element>> basicMap;
     std::vector<std::unique_ptr<Element>> decorMap;
@@ -35,6 +37,11 @@ namespace state {
     std::vector<std::unique_ptr<Element>> const& getDecorMap ();
     std::vector<std::unique_ptr<Element>> const& getUnitsMap ();
     std::vector<std::unique_ptr<Element>> const& getBuildingsMap ();
+    std::vector<int> getBasicMapId ();
+    std::vector<int> getDecorMapId ();
+    std::vector<int> getUnitsMapId ();
+    std::vector<int> getBuildingsMapId ();
+    int getSize () const;
     // Setters and Getters
   };
 

@@ -55,20 +55,41 @@ void mapTest(){
   // cout << "Pos X : " << arr3->getPosition().getX() << endl;
   // cout << "Pos Y : " << arr3->getPosition().getY() << endl;
 
-  std::vector<std::unique_ptr<Element>> const &basic = map.getBasicMap();
-  std::vector<std::unique_ptr<Element>> const &decor = map.getDecorMap();
+  // std::vector<std::unique_ptr<Element>> const &basic = map.getBasicMap();
+  // std::vector<std::unique_ptr<Element>> const &decor = map.getDecorMap();
+  //
+  // for(size_t i=0; i<basic.size(); i++){
+  //   if(i%40==0) cout<<"\n";
+  //   Decor* d = (Decor *) basic[i].get();
+  //   cout<< d->getIdDecor();
+  // }
+  // cout<<"\n";
+  // cout<<"\n";
+  // for(size_t i=0; i<decor.size(); i++){
+  //   if(i%40==0) cout<<"\n";
+  //   Decor* d = (Decor *) decor[i].get();
+  //   cout<< d->getIdDecor();
+  // }
+  // cout<<"\n";
+  std::vector<int> const &basic = map.getBasicMapId();
+  std::vector<int> const &decor = map.getDecorMapId();
+  std::vector<int> const &buildings = map.getBuildingsMapId();
 
   for(size_t i=0; i<basic.size(); i++){
-    if(i%40==0) cout<<"\n";
-    Decor* d = (Decor *) basic[i].get();
-    cout<< d->getIdDecor();
+    if(i%map.getSize()==0) cout<<"\n";
+    cout<< basic[i];
   }
   cout<<"\n";
   cout<<"\n";
   for(size_t i=0; i<decor.size(); i++){
-    if(i%40==0) cout<<"\n";
-    Decor* d = (Decor *) decor[i].get();
-    cout<< d->getIdDecor();
+    if(i%50==0) cout<<"\n";
+    cout<< decor[i];
+  }
+  cout<<"\n";
+  cout<<"\n";
+  for(size_t i=0; i<buildings.size(); i++){
+    if(i%50==0) cout<<"\n";
+    cout<< buildings[i];
   }
   cout<<"\n";
 

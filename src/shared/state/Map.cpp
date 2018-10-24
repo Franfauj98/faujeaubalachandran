@@ -15,7 +15,6 @@ Map::Map(){
 
 // Create sea
 
-  int sizeMap = 40;
   int sizeSea = 2;
   int sizeMountain = 2;
   int sizeWood = 2;
@@ -27,7 +26,7 @@ Map::Map(){
 
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
-      int seaRand = rand() % sizeMap;
+      int seaRand = rand() % size;
       listSeaPosition[i][j] = seaRand;
     }
   }
@@ -35,11 +34,11 @@ Map::Map(){
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
       bool test = true;
-      int woodRand = rand() % sizeMap;
+      int woodRand = rand() % size;
       while(test){
         for(int k = 0; k < 3; k++){
           if( ((woodRand>(*listSeaPosition[k]-sizeSea-1)) && (woodRand<(*listSeaPosition[k]+sizeSea+1))) ){
-            woodRand = rand() % sizeMap;
+            woodRand = rand() % size;
             break;
           } else if (k==2){
             test = false;
@@ -53,11 +52,11 @@ Map::Map(){
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
       bool test = true;
-      int mountainRand = rand() % sizeMap;
+      int mountainRand = rand() % size;
       while(test){
         for(int k = 0; k < 3; k++){
           if( ((mountainRand>(*listSeaPosition[k]-sizeSea-1)) && (mountainRand<(*listSeaPosition[k]+sizeSea+1))) || ((mountainRand>(*listWoodPosition[k]-sizeWood-1)) && (mountainRand<(*listWoodPosition[k]+sizeWood+1))) ){
-            mountainRand = rand() % sizeMap;
+            mountainRand = rand() % size;
             break;
           } else if (k==2){
             test = false;
@@ -71,13 +70,13 @@ Map::Map(){
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
       bool test = true;
-      int buildingRand = rand() % sizeMap;
+      int buildingRand = rand() % size;
       while(test){
         for(int k = 0; k < 3; k++){
           if( ((buildingRand>(*listSeaPosition[k]-sizeSea-1)) && (buildingRand<(*listSeaPosition[k]+sizeSea+1))) ||
           ((buildingRand>(*listWoodPosition[k]-sizeWood-1)) && (buildingRand<(*listWoodPosition[k]+sizeWood+1))) ||
           ((buildingRand>(*listMountainPosition[k]-sizeMountain-1)) && (buildingRand<(*listMountainPosition[k]+sizeMountain+1))) ){
-            buildingRand = rand() % sizeMap;
+            buildingRand = rand() % size;
             break;
           } else if (k==2){
             test = false;
@@ -95,8 +94,8 @@ Map::Map(){
   }
 
 //Map Init
-  for(int i = 0; i<sizeMap; i++){
-    for(int j = 0; j<sizeMap; j++){
+  for(int i = 0; i<size; i++){
+    for(int j = 0; j<size; j++){
       Position p(i,j);
       this->basicMap.push_back(unique_ptr<Element> (new Decor(HERBE,p)));
       this->decorMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
@@ -108,8 +107,8 @@ Map::Map(){
 // Add decor to maps
   int toChange=0;
 
-  for(int i = 0; i<sizeMap; i++){
-    for(int j = 0; j<sizeMap; j++){
+  for(int i = 0; i<size; i++){
+    for(int j = 0; j<size; j++){
       if( ((i>(listSeaPosition[0][0]-sizeSea) && i<(listSeaPosition[0][0]+sizeSea))&&(j>(listSeaPosition[0][1]-sizeSea) && j<(listSeaPosition[0][1]+sizeSea))) ||
       ((i>(listSeaPosition[1][0]-sizeSea) && i<(listSeaPosition[1][0]+sizeSea))&&(j>(listSeaPosition[1][1]-sizeSea) && j<(listSeaPosition[1][1]+sizeSea))) ||
       ((i>(listSeaPosition[2][0]-sizeSea) && i<(listSeaPosition[2][0]+sizeSea))&&(j>(listSeaPosition[2][1]-sizeSea) && j<(listSeaPosition[2][1]+sizeSea))) ){
@@ -132,10 +131,12 @@ Map::Map(){
       } else if( (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) || (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) || (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) ||
         (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) || (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) || (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) ||
         (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) || (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) || (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) ){
-        Position p(i,j);
-        this->buildingsMap[toChange-1] = move(unique_ptr<Element> (new Ressource(1,p,2)));
-        this->buildingsMap[toChange] = move(unique_ptr<Element> (new Palace(1,p,2)));
-        this->buildingsMap[toChange+1] = move(unique_ptr<Element> (new Barrack(1,p,2)));
+        Position p1(i,j-1);
+        Position p2(i,j);
+        Position p3(i,j+2);
+        this->buildingsMap[toChange-1] = move(unique_ptr<Element> (new Ressource(1,p1,2)));
+        this->buildingsMap[toChange] = move(unique_ptr<Element> (new Palace(1,p2,2)));
+        this->buildingsMap[toChange+1] = move(unique_ptr<Element> (new Barrack(1,p3,2)));
       }
       toChange++;
     }
@@ -167,6 +168,50 @@ std::vector<unique_ptr<state::Element>> const& Map::getUnitsMap(){
 
 std::vector<unique_ptr<state::Element>> const& Map::getBuildingsMap(){
   return this->buildingsMap;
+}
+
+std::vector<int> Map::getBasicMapId () {
+  // std::vector<std::unique_ptr<Element>> const &basic = this->basicMap;
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->basicMap.size(); i++){
+    Decor* d = (Decor *) this->basicMap[i].get();
+    toReturn.push_back(d->getIdDecor());
+  }
+  return toReturn;
+}
+
+std::vector<int> Map::getDecorMapId () {
+  // std::vector<std::unique_ptr<Element>> const &basic = this->decorMap.getDecorMap();
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->decorMap.size(); i++){
+    Decor* d = (Decor *) this->decorMap[i].get();
+    toReturn.push_back(d->getIdDecor());
+  }
+  return toReturn;
+}
+
+std::vector<int> Map::getUnitsMapId () {
+  // std::vector<std::unique_ptr<Element>> const &basic = this->unitsMap.getDecorMap();
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->unitsMap.size(); i++){
+    Units* d = (Units *) this->unitsMap[i].get();
+    toReturn.push_back(d->getIdTextureUnits());
+  }
+  return toReturn;
+}
+
+std::vector<int> Map::getBuildingsMapId () {
+  // std::vector<std::unique_ptr<Element>> const &basic = this->buildingsMap.getDecorMap();
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->buildingsMap.size(); i++){
+    Buildings* d = (Buildings *) this->buildingsMap[i].get();
+    toReturn.push_back(d->getIdTexture());
+  }
+  return toReturn;
+}
+
+int Map::getSize () const{
+  return this->size;
 }
 
 void Map::deleteElement (int pos){
