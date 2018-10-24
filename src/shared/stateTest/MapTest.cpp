@@ -82,16 +82,16 @@ void mapTest(){
   cout<<"\n";
   cout<<"\n";
   for(size_t i=0; i<decor.size(); i++){
-    if(i%50==0) cout<<"\n";
+    if(i%25==0) cout<<"\n";
     cout<< decor[i];
   }
-  cout<<"\n";
-  cout<<"\n";
-  for(size_t i=0; i<buildings.size(); i++){
-    if(i%50==0) cout<<"\n";
-    cout<< buildings[i];
-  }
-  cout<<"\n";
+  // cout<<"\n";
+  // cout<<"\n";
+  // for(size_t i=0; i<buildings.size(); i++){
+  //   if(i%40==0) cout<<"\n";
+  //   cout<< buildings[i];
+  // }
+  // cout<<"\n";
 
   // cout<<rand()%40<<endl;
 

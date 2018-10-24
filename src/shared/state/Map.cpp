@@ -5,6 +5,12 @@
 using namespace state;
 using namespace std;
 
+int distance(int x1, int y1, int x2, int y2){
+  int absDiff = abs(x1-x2);
+  int ordDiff = abs(y1-y2);
+  return absDiff+ordDiff;
+}
+
 Map::Map(){
 
 // Create sea
@@ -26,61 +32,41 @@ Map::Map(){
     }
   }
 
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 2; j++){
-      bool test = true;
-      int woodRandi = rand() % size;
-      int woodRandj = rand() % size;
-      while(test){
-        for(int k = 0; k < 3; k++){
-          if( ((woodRand>(listSeaPosition[k]-sizeSea-1)) && (woodRand<(listSeaPosition[k]+sizeSea+1))) ){
-            woodRand = rand() % size;
-            break;
-          } else if (k==2){
-            test = false;
-          }
-        }
-      }
-      listWoodPosition[i][j] = woodRand;
+  for(int i = 0; i<3; i++){
+    int woodRandx = rand() % size;
+    int woodRandy = rand() % size;
+    while( !((woodRandx != listSeaPosition[i][0] || woodRandy != listSeaPosition[i][1]) && distance(woodRandx, woodRandy, listSeaPosition[i][0], listSeaPosition[i][1]) > 6) ){
+      woodRandx = rand() % size;
+      woodRandy = rand() % size;
     }
+    listWoodPosition[i][0] = woodRandx;
+    listWoodPosition[i][1] = woodRandy;
   }
 
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 2; j++){
-      bool test = true;
-      int mountainRand = rand() % size;
-      while(test){
-        for(int k = 0; k < 3; k++){
-          if( ((mountainRand>(*listSeaPosition[k]-sizeSea-1)) && (mountainRand<(*listSeaPosition[k]+sizeSea+1))) || ((mountainRand>(*listWoodPosition[k]-sizeWood-1)) && (mountainRand<(*listWoodPosition[k]+sizeWood+1))) ){
-            mountainRand = rand() % size;
-            break;
-          } else if (k==2){
-            test = false;
-          }
-        }
-      }
-      listMountainPosition[i][j] = mountainRand;
+  for(int i = 0; i<3; i++){
+    int mountainRandx = rand() % size;
+    int mountainRandy = rand() % size;
+    while( !( ((mountainRandx != listSeaPosition[i][0] || mountainRandy != listSeaPosition[i][1]) && distance(mountainRandx, mountainRandy, listSeaPosition[i][0], listSeaPosition[i][1]) > 6) &&
+    ((mountainRandx != listWoodPosition[i][0] || mountainRandy != listWoodPosition[i][1]) && distance(mountainRandx, mountainRandy, listWoodPosition[i][0], listWoodPosition[i][1]) > 6) )){
+      mountainRandx = rand() % size;
+      mountainRandy = rand() % size;
     }
+    listMountainPosition[i][0] = mountainRandx;
+    listMountainPosition[i][1] = mountainRandy;
   }
 
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 2; j++){
-      bool test = true;
-      int buildingRand = rand() % size;
-      while(test){
-        for(int k = 0; k < 3; k++){
-          if( ((buildingRand+1>(*listSeaPosition[k]-sizeSea-1)) && (buildingRand-1<(*listSeaPosition[k]+sizeSea+1))) ||
-          ((buildingRand+1>(*listWoodPosition[k]-sizeWood-1)) && (buildingRand-1<(*listWoodPosition[k]+sizeWood+1))) ||
-          ((buildingRand+1>(*listMountainPosition[k]-sizeMountain-1)) && (buildingRand-1<(*listMountainPosition[k]+sizeMountain+1))) ){
-            buildingRand = rand() % size;
-            break;
-          } else if (k==2){
-            test = false;
-          }
-        }
-      }
-      listBuildingsPosition[i][j] = buildingRand;
+  for(int i = 0; i<3; i++){
+    int buildingRandx = rand() % size;
+    int buildingRandy = rand() % size;
+    while( !( ((buildingRandx != listSeaPosition[i][0] || buildingRandy != listSeaPosition[i][1]) && distance(buildingRandx, buildingRandy, listSeaPosition[i][0], listSeaPosition[i][1]) > 6) &&
+    ((buildingRandx != listWoodPosition[i][0] || buildingRandy != listWoodPosition[i][1]) && distance(buildingRandx, buildingRandy, listWoodPosition[i][0], listWoodPosition[i][1]) > 6) &&
+    ((buildingRandx != listMountainPosition[i][0] || buildingRandy != listMountainPosition[i][1]) && distance(buildingRandx, buildingRandy, listMountainPosition[i][0], listMountainPosition[i][1]) > 6)
+      && (buildingRandx%this->size > 3) && (buildingRandy%this->size > 3) && (buildingRandx%this->size < (this->size-3)) && (buildingRandy%this->size < (this->size-3)) )){
+      buildingRandx = rand() % size;
+      buildingRandy = rand() % size;
     }
+    listBuildingsPosition[i][0] = buildingRandx;
+    listBuildingsPosition[i][1] = buildingRandy;
   }
 
   for(int i = 0; i < 3; i++){
