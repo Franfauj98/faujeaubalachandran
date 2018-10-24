@@ -7,26 +7,32 @@
 
 namespace render {
   class Tile;
+};
+namespace state {
+  class Decor;
+};
+namespace render {
   class TileSet;
 }
 
 #include "Tile.h"
 #include "TileSet.h"
+#include "state/Decor.h"
 
 namespace render {
 
   /// class DecorTileSet - 
   class DecorTileSet : public render::TileSet {
+    // Associations
     // Attributes
   private:
     std::vector<Tile> decor;
     // Operations
   public:
     DecorTileSet ();
-    int getCellWidth () const;
-    int getCellHeight () const;
-    const std::string& getImageFile () const;
-    const Tile& getTile (const state::Element& e) const;
+    ~DecorTileSet ();
+    const std::string getImageFile () const;
+    const Tile getTile (const state::Decor& e) const;
     // Setters and Getters
   };
 

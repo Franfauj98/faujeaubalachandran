@@ -5,13 +5,11 @@ using namespace std;
 
 Tile::Tile (){
   this->x= 0;
-  this->y= 0;
   this->width= 64;
   this->height= 32;
 }
-Tile::Tile (int x, int y, int width, int height){
+Tile::Tile (int x, int width, int height){
   this->x= x;
-  this->y= y;
   this->width= width;
   this->height= height;
 }
@@ -22,14 +20,6 @@ int Tile::getX() const{
 
 void Tile::setX(int x){
   this->x=x;
-}
-
-int Tile::getY() const{
-  return this->y;
-}
-
-void Tile::setY(int y){
-  this->y=y;
 }
 
 int Tile::getWidth() const{

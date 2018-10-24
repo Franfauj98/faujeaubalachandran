@@ -17,11 +17,10 @@ namespace render {
     // Associations
     // Operations
   public:
-    ~TileSet ();
-    virtual int getCellWidth () const = 0;
-    virtual int getCellHeight () const = 0;
-    virtual const std::string& getImageFile () const = 0;
-    virtual const Tile& getTile (const state::Element& e) const = 0;
+    virtual ~TileSet ();
+    int getCellWidth () const;
+    int getCellHeight () const;
+    virtual const std::string getImageFile () const = 0;
     // Setters and Getters
   };
 

@@ -10,18 +10,15 @@ namespace render {
     // Attributes
   protected:
     int x     = 0;
-    int y     = 0;
     int width     = 64;
     int height     = 32;
     // Operations
   public:
     Tile ();
-    Tile (int x, int y, int width, int height);
+    Tile (int x, int width, int height);
     // Setters and Getters
     int getX() const;
     void setX(int x);
-    int getY() const;
-    void setY(int y);
     int getWidth() const;
     void setWidth(int width);
     int getHeight() const;

@@ -9,7 +9,7 @@ Position& Element::getPosition(){
 
 void Element::setPosition (const Position& pos){
   try{
-    if(pos.getX()>0&&pos.getY()>0 && pos.getX()<10000 && pos.getY()<10000){
+    if(pos.getX()>=0&&pos.getY()>=0 && pos.getX()<=10000 && pos.getY()<=10000){
       this->position = pos;
     } else {
       Position p;
