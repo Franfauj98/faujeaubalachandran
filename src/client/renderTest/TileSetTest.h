@@ -7,6 +7,11 @@
 #include "state/Palace.h"
 #include "state/Barrack.h"
 #include "state/Ressource.h"
+#include "state/Units.h"
+#include "state/Arrow.h"
+#include "state/Cavalier.h"
+#include "state/Decurion.h"
+#include "state/Catapult.h"
 #include <iostream>
 
 

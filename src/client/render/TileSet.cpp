@@ -7,5 +7,14 @@ using namespace std;
 
 
 TileSet::~TileSet(){
-  
+
+}
+
+int TileSet::getCellWidth () const{
+  return 64;
+
+}
+
+int TileSet::getCellHeight () const{
+  return 32;
 }

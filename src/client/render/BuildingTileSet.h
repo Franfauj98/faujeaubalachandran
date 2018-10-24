@@ -9,7 +9,7 @@ namespace render {
   class Tile;
 };
 namespace state {
-  class Element;
+  class Buildings;
 };
 namespace render {
   class TileSet;
@@ -17,11 +17,13 @@ namespace render {
 
 #include "Tile.h"
 #include "TileSet.h"
+#include "state/Buildings.h"
 
 namespace render {
 
   /// class BuildingTileSet - 
   class BuildingTileSet : public render::TileSet {
+    // Associations
     // Attributes
   private:
     std::vector<Tile> palace;
@@ -31,10 +33,8 @@ namespace render {
   public:
     BuildingTileSet ();
     ~BuildingTileSet ();
-    int getCellWidth () const;
-    int getCellHeight () const;
     const std::string getImageFile () const;
-    const Tile getTile (const state::Element& e) const;
+    const Tile getTile (const state::Buildings& e) const;
     // Setters and Getters
   };
 

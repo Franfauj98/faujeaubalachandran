@@ -38,14 +38,6 @@ BuildingTileSet::BuildingTileSet (){
   this->ressource=r;
 }
 
-int BuildingTileSet::getCellWidth () const{
-  return 64;
-
-}
-
-int BuildingTileSet::getCellHeight () const{
-  return 32;
-}
 
 const std::string BuildingTileSet::getImageFile () const{
    const std::string file="res/Buildings.png";
@@ -53,7 +45,7 @@ const std::string BuildingTileSet::getImageFile () const{
 
 }
 
-const Tile BuildingTileSet::getTile (const state::Element& e) const{
+const Tile BuildingTileSet::getTile (const state::Buildings& e) const{
   Tile tile;
   switch(e.getType()){
       case 5: tile=this->barrack[0];
@@ -62,13 +54,14 @@ const Tile BuildingTileSet::getTile (const state::Element& e) const{
             switch (e.getLevel()){
               case 1: tile=this->palace[0];
               break;
-              case 2:tile=this->palace[1];/
+              case 2:tile=this->palace[1];
               break;
               case 3:tile=this->palace[2];
               break;
               case 4:tile=this->palace[3];
              break;
           }
+      break;
       case 7: tile=this->ressource[0];
       break;
     }
