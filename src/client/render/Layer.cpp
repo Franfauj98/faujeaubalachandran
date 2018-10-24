@@ -49,10 +49,24 @@ using namespace std;
           buildingMap.setSpriteTexture(principalMap.getSize(),buildingsId,0,x,y);
         }
       }
-      unique_ptr<MapCreator> myBasicMap;
-      myBasicMap.reset(basicMap);
-      this->layers.push_back(myBasicMap);
+      this->basicMap=basicMap;
+      this->decorMap=decorMap;
+      this->buildingMap=buildingMap;
 }
+
+MapCreator Layer::getBasicMap() const{
+  return this->basicMap;
+}
+
+MapCreator Layer::getDecorMap() const {
+  return this->decorMap;
+}
+
+
+MapCreator Layer::getBuildingMap() const {
+  return this->buildingMap;
+}
+
 
   Layer::~Layer (){
 
