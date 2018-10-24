@@ -15,10 +15,10 @@ Map::Map(){
 
 // Create sea
 
-  int sizeMap = 60;
-  int sizeSea = 3;
-  int sizeMountain = 3;
-  int sizeWood = 3;
+  int sizeMap = 40;
+  int sizeSea = 2;
+  int sizeMountain = 2;
+  int sizeWood = 2;
 
   int listSeaPosition[3][2];
   int listWoodPosition[3][2];
@@ -38,7 +38,7 @@ Map::Map(){
       int woodRand = rand() % sizeMap;
       while(test){
         for(int k = 0; k < 3; k++){
-          if( ((woodRand>(*listSeaPosition[k]-sizeSea)) && (woodRand<(*listSeaPosition[k]+sizeSea))) ){
+          if( ((woodRand>(*listSeaPosition[k]-sizeSea-1)) && (woodRand<(*listSeaPosition[k]+sizeSea+1))) ){
             woodRand = rand() % sizeMap;
             break;
           } else if (k==2){
@@ -56,7 +56,7 @@ Map::Map(){
       int mountainRand = rand() % sizeMap;
       while(test){
         for(int k = 0; k < 3; k++){
-          if( ((mountainRand>(*listSeaPosition[k]-sizeSea)) && (mountainRand<(*listSeaPosition[k]+sizeSea))) || ((mountainRand>(*listWoodPosition[k]-sizeWood)) && (mountainRand<(*listWoodPosition[k]+sizeWood))) ){
+          if( ((mountainRand>(*listSeaPosition[k]-sizeSea-1)) && (mountainRand<(*listSeaPosition[k]+sizeSea+1))) || ((mountainRand>(*listWoodPosition[k]-sizeWood-1)) && (mountainRand<(*listWoodPosition[k]+sizeWood+1))) ){
             mountainRand = rand() % sizeMap;
             break;
           } else if (k==2){
@@ -67,9 +67,26 @@ Map::Map(){
       listMountainPosition[i][j] = mountainRand;
     }
   }
-      // listWoodPosition[i][j] = woodRand;
 
-
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 2; j++){
+      bool test = true;
+      int buildingRand = rand() % sizeMap;
+      while(test){
+        for(int k = 0; k < 3; k++){
+          if( ((buildingRand>(*listSeaPosition[k]-sizeSea-1)) && (buildingRand<(*listSeaPosition[k]+sizeSea+1))) ||
+          ((buildingRand>(*listWoodPosition[k]-sizeWood-1)) && (buildingRand<(*listWoodPosition[k]+sizeWood+1))) ||
+          ((buildingRand>(*listMountainPosition[k]-sizeMountain-1)) && (buildingRand<(*listMountainPosition[k]+sizeMountain+1))) ){
+            buildingRand = rand() % sizeMap;
+            break;
+          } else if (k==2){
+            test = false;
+          }
+        }
+      }
+      listBuildingsPosition[i][j] = buildingRand;
+    }
+  }
 
   for(int i = 0; i < 3; i++){
     cout << "x  : " << listSeaPosition[i][0] << " y  : " << listSeaPosition[i][1] << endl;
@@ -83,6 +100,8 @@ Map::Map(){
       Position p(i,j);
       this->basicMap.push_back(unique_ptr<Element> (new Decor(HERBE,p)));
       this->decorMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
+      this->buildingsMap.push_back(unique_ptr<Element> (new Buildings()));
+      this->unitsMap.push_back(unique_ptr<Element> (new Units()));
     }
   }
 
@@ -110,6 +129,13 @@ Map::Map(){
       ((i>(listMountainPosition[2][0]-sizeMountain) && i<(listMountainPosition[2][0]+sizeMountain))&&(j>(listMountainPosition[2][1]-sizeMountain) && j<(listMountainPosition[2][1]+sizeMountain))) ){
         Position p(i,j);
         this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(MONTAGNE,p)));
+      } else if( (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) || (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) || (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) ||
+        (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) || (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) || (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) ||
+        (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) || (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) || (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) ){
+        Position p(i,j);
+        this->buildingsMap[toChange-1] = move(unique_ptr<Element> (new Ressource(1,p,2)));
+        this->buildingsMap[toChange] = move(unique_ptr<Element> (new Palace(1,p,2)));
+        this->buildingsMap[toChange+1] = move(unique_ptr<Element> (new Barrack(1,p,2)));
       }
       toChange++;
     }

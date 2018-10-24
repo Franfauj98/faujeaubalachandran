@@ -59,14 +59,14 @@ void mapTest(){
   std::vector<std::unique_ptr<Element>> const &decor = map.getDecorMap();
 
   for(size_t i=0; i<basic.size(); i++){
-    if(i%60==0) cout<<"\n";
+    if(i%40==0) cout<<"\n";
     Decor* d = (Decor *) basic[i].get();
     cout<< d->getIdDecor();
   }
   cout<<"\n";
   cout<<"\n";
   for(size_t i=0; i<decor.size(); i++){
-    if(i%60==0) cout<<"\n";
+    if(i%40==0) cout<<"\n";
     Decor* d = (Decor *) decor[i].get();
     cout<< d->getIdDecor();
   }

@@ -11,7 +11,7 @@ Units::Units () {
   setStrikeRange(0);
   setMovingRange(0);
   setLevel(0);
-  setIdTextureUnits(CATAPULT1);
+  setIdTextureUnits(NONE_UNIT);
   UnitCost cost(0,0);
   setUnitCost(cost);
 }
