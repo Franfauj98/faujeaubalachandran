@@ -1,6 +1,7 @@
 #include "Map.h"
 #include <iostream>
 #include "../state.h"
+#include <time.h>
 using namespace state;
 using namespace std;
 
@@ -14,6 +15,7 @@ using namespace std;
 Map::Map(){
 
 // Create sea
+  srand(time(NULL));
 
   int sizeSea = 2;
   int sizeMountain = 2;

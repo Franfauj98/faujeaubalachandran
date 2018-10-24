@@ -20,7 +20,7 @@ namespace state {
     // Associations
     // Attributes
   public:
-    int size     = 20;
+    int size     = 30;
   private:
     std::vector<std::unique_ptr<Element>> basicMap;
     std::vector<std::unique_ptr<Element>> decorMap;
