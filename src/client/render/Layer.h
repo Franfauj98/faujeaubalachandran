@@ -2,19 +2,17 @@
 #ifndef RENDER__LAYER__H
 #define RENDER__LAYER__H
 
-#include <vector>
-#include <memory>
 
 namespace render {
-  class TileSet;
   class MapCreator;
+  class TileSet;
 };
 namespace state {
   class Map;
 }
 
-#include "TileSet.h"
 #include "MapCreator.h"
+#include "TileSet.h"
 #include "state/Map.h"
 
 namespace render {
@@ -24,11 +22,16 @@ namespace render {
     // Associations
     // Attributes
   private:
-    std::vector<std::unique_ptr<MapCreator>> layers;
+    MapCreator basicMap;
+    MapCreator decorMap;
+    MapCreator buildingMap;
     // Operations
   public:
     Layer ();
     ~Layer ();
+    MapCreator getBuildingMap () const;
+    MapCreator getBasicMap () const;
+    MapCreator getDecorMap () const;
     // Setters and Getters
   };
 

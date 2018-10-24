@@ -8,6 +8,7 @@
 #include "renderTest.h"
 #include "stateTest.h"
 
+
 using namespace std;
 using namespace state;
 using namespace render;
@@ -36,9 +37,28 @@ int main(int argc,char* argv[])
 
   } else if (argv[1] &&!strcmp(argv[1],"render")) {
 
-    tileTest();
-    tileSetTest();
-    mapCreatorTest();
+    //tileTest();
+    //ileSetTest();
+    //mapCreatorTest();
+    Layer layer;
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Tilemap");
+    while (window.isOpen())
+    {
+  // on gère les évènements
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+      if(event.type == sf::Event::Closed)
+      window.close();
+    }
+
+  // on dessine le niveau
+    window.clear();
+    window.draw(layer.getBasicMap());
+    window.draw(layer.getDecorMap());
+    window.draw(layer.getBuildingMap());
+    window.display();
+    }
 
 
   }
