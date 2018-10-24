@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
 
 namespace sf {
   class Texture;
@@ -26,7 +27,7 @@ namespace render {
     void loadTexture (const std::string& imageFile);
     void initQuads (int size);
     void setSpriteLocation (int size, int x, int y, int form);
-    void setSpriteTexture (int size, const int* tiles, int form, int x, int y);
+    void setSpriteTexture (int size, std::vector<int> tiles, int form, int x, int y);
     void draw (sf::RenderTarget& target, sf::RenderStates states) const;
     // Setters and Getters
   };

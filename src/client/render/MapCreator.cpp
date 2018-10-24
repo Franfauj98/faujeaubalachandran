@@ -40,7 +40,7 @@ void MapCreator::setSpriteLocation (int size, int x, int y,int form){
   }
 }
 
-void MapCreator::setSpriteTexture (int size, const int* tiles, int form,int x, int y){
+void MapCreator::setSpriteTexture (int size, vector<int> tiles, int form,int x, int y){
   // on récupère le numéro de tuile courant
   int tileNumber = tiles[x + y * size];
 
