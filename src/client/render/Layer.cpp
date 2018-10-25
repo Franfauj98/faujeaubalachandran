@@ -1,4 +1,5 @@
 #include "Layer.h"
+#include "MenuLayer.h"
 #include "BuildingTileSet.h"
 #include "DecorTileSet.h"
 #include "UnitsTileSet.h"
@@ -11,7 +12,7 @@ using namespace std;
 
 
   Layer::Layer (){
-      Map principalMap;
+      Map principalMap; // à mettre dans le moteur
 
       MapCreator basicMap;
       vector<int> basicId = principalMap.getBasicMapId();
@@ -49,6 +50,16 @@ using namespace std;
           buildingMap.setSpriteTexture(principalMap.getSize(),buildingsId,0,x,y);
         }
       }
+      vector<MenuLayer> text;
+      // MenuLayer menu1("res/helvetica.ttf", "Stats", 14, sf::Color::White, 900, 100);
+      // text.push_back(menu1);
+      // MenuLayer menu2("res/helvetica.ttf", "Level", 14, sf::Color::White, 900, 130);
+      // text.push_back(menu2);
+      // MenuLayer menu3("res/helvetica.ttf", "Life", 14, sf::Color::White, 900, 160);
+      // text.push_back(menu3);
+      // MenuLayer menu4("res/helvetica.ttf", "Damage", 14, sf::Color::White, 900, 190);
+      // text.push_back(menu4);
+      this->text=text;
       this->basicMap=basicMap;
       this->decorMap=decorMap;
       this->buildingMap=buildingMap;
@@ -67,6 +78,13 @@ MapCreator Layer::getBuildingMap() const {
   return this->buildingMap;
 }
 
+MapCreator Layer::getUnitMap() const {
+  return this->unitMap;
+}
+
+vector<MenuLayer> Layer::getText() const {
+  return this->text;
+}
 
   Layer::~Layer (){
 
