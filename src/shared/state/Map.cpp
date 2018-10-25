@@ -11,20 +11,30 @@ int distance(int x1, int y1, int x2, int y2){
   return absDiff+ordDiff;
 }
 
-Map::Map(){
+bool comparePosition(int elementRandX1, int elementRandY1, int elementRandX2, int elementRandY2){
+  if (((elementRandX1 != elementRandX2 || elementRandX1 != elementRandY2) && distance(elementRandX1, elementRandY1, elementRandX2, elementRandY2) > 6)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
+Map::Map(){
 // Create sea
   srand(time(NULL));
 
+// decor wide
   int sizeSea = 2;
   int sizeMountain = 2;
   int sizeWood = 2;
 
+// array which contain radom locations for decors
   int listSeaPosition[3][2];
   int listWoodPosition[3][2];
   int listMountainPosition[3][2];
   int listBuildingsPosition[3][2];
 
+// feeding of sea decor random array positions
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
       int seaRand = rand() % size;
@@ -32,10 +42,12 @@ Map::Map(){
     }
   }
 
+// feeding of wood decor random array positions
   for(int i = 0; i<3; i++){
     int woodRandx = rand() % size;
     int woodRandy = rand() % size;
-    while( !((woodRandx != listSeaPosition[i][0] || woodRandy != listSeaPosition[i][1]) && distance(woodRandx, woodRandy, listSeaPosition[i][0], listSeaPosition[i][1]) > 6) ){
+    while( !( comparePosition(woodRandx, woodRandy, listSeaPosition[0][0], listSeaPosition[0][1]) && comparePosition(woodRandx, woodRandy, listSeaPosition[1][0], listSeaPosition[1][1])
+    && comparePosition(woodRandx, woodRandy, listSeaPosition[2][0], listSeaPosition[2][1]))){
       woodRandx = rand() % size;
       woodRandy = rand() % size;
     }
@@ -43,11 +55,13 @@ Map::Map(){
     listWoodPosition[i][1] = woodRandy;
   }
 
+// feeding of mountain decor random array positions
   for(int i = 0; i<3; i++){
     int mountainRandx = rand() % size;
     int mountainRandy = rand() % size;
-    while( !( ((mountainRandx != listSeaPosition[i][0] || mountainRandy != listSeaPosition[i][1]) && distance(mountainRandx, mountainRandy, listSeaPosition[i][0], listSeaPosition[i][1]) > 6) &&
-    ((mountainRandx != listWoodPosition[i][0] || mountainRandy != listWoodPosition[i][1]) && distance(mountainRandx, mountainRandy, listWoodPosition[i][0], listWoodPosition[i][1]) > 6) )){
+    while( !( comparePosition(mountainRandx, mountainRandy, listSeaPosition[0][0], listSeaPosition[0][1]) && comparePosition(mountainRandx, mountainRandy, listSeaPosition[1][0], listSeaPosition[1][1]) &&
+    comparePosition(mountainRandx, mountainRandy, listSeaPosition[2][0], listSeaPosition[2][1]) && comparePosition(mountainRandx, mountainRandy, listWoodPosition[0][0], listWoodPosition[0][1]) &&
+    comparePosition(mountainRandx, mountainRandy, listWoodPosition[1][0], listWoodPosition[1][1]) && comparePosition(mountainRandx, mountainRandy, listWoodPosition[2][0], listWoodPosition[2][1]) )) {
       mountainRandx = rand() % size;
       mountainRandy = rand() % size;
     }
@@ -55,25 +69,49 @@ Map::Map(){
     listMountainPosition[i][1] = mountainRandy;
   }
 
-  for(int i = 0; i<3; i++){
-    int buildingRandx = rand() % size;
-    int buildingRandy = rand() % size;
-    while( !( ((buildingRandx != listSeaPosition[i][0] || buildingRandy != listSeaPosition[i][1]) && distance(buildingRandx, buildingRandy, listSeaPosition[i][0], listSeaPosition[i][1]) > 6) &&
-    ((buildingRandx != listWoodPosition[i][0] || buildingRandy != listWoodPosition[i][1]) && distance(buildingRandx, buildingRandy, listWoodPosition[i][0], listWoodPosition[i][1]) > 6) &&
-    ((buildingRandx != listMountainPosition[i][0] || buildingRandy != listMountainPosition[i][1]) && distance(buildingRandx, buildingRandy, listMountainPosition[i][0], listMountainPosition[i][1]) > 6)
-      && (buildingRandx%this->size > 3) && (buildingRandy%this->size > 3) && (buildingRandx%this->size < (this->size-3)) && (buildingRandy%this->size < (this->size-3)) )){
-      buildingRandx = rand() % size;
-      buildingRandy = rand() % size;
-    }
-    listBuildingsPosition[i][0] = buildingRandx;
-    listBuildingsPosition[i][1] = buildingRandy;
+// feeding of building decor random array positions in few steps. A building cannot be on an other one
+  int buildingRandx = rand() % size;
+  int buildingRandy = rand() % size;
+  while( !( comparePosition(buildingRandx, buildingRandy, listSeaPosition[0][0], listSeaPosition[0][1]) && comparePosition(buildingRandx, buildingRandy, listSeaPosition[1][0], listSeaPosition[1][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listSeaPosition[2][0], listSeaPosition[2][1]) && comparePosition(buildingRandx, buildingRandy, listWoodPosition[0][0], listWoodPosition[0][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listWoodPosition[1][0], listWoodPosition[1][1]) && comparePosition(buildingRandx, buildingRandy, listWoodPosition[2][0], listWoodPosition[2][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listMountainPosition[0][0], listMountainPosition[0][1]) && comparePosition(buildingRandx, buildingRandy, listMountainPosition[1][0], listMountainPosition[1][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listMountainPosition[2][0], listMountainPosition[2][1]) && (buildingRandx%this->size > 3) && (buildingRandy%this->size > 3) &&
+  (buildingRandx%this->size < (this->size-3)) && (buildingRandy%this->size < (this->size-3) )) ){
+    buildingRandx = rand() % size;
+    buildingRandy = rand() % size;
   }
+  listBuildingsPosition[0][0] = buildingRandx;
+  listBuildingsPosition[0][1] = buildingRandy;
 
-  for(int i = 0; i < 3; i++){
-    cout << "x  : " << listSeaPosition[i][0] << " y  : " << listSeaPosition[i][1] << endl;
-    cout << "x  : " << listWoodPosition[i][0] << " y  : " << listWoodPosition[i][1] << endl;
-    cout << "x  : " << listMountainPosition[i][0] << " y  : " << listMountainPosition[i][1] << endl;
+  buildingRandx = rand() % size;
+  buildingRandy = rand() % size;
+  while( !( comparePosition(buildingRandx, buildingRandy, listSeaPosition[0][0], listSeaPosition[0][1]) && comparePosition(buildingRandx, buildingRandy, listSeaPosition[1][0], listSeaPosition[1][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listSeaPosition[2][0], listSeaPosition[2][1]) && comparePosition(buildingRandx, buildingRandy, listWoodPosition[0][0], listWoodPosition[0][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listWoodPosition[1][0], listWoodPosition[1][1]) && comparePosition(buildingRandx, buildingRandy, listWoodPosition[2][0], listWoodPosition[2][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listMountainPosition[0][0], listMountainPosition[0][1]) && comparePosition(buildingRandx, buildingRandy, listMountainPosition[1][0], listMountainPosition[1][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listMountainPosition[2][0], listMountainPosition[2][1]) && comparePosition(buildingRandx, buildingRandy, listBuildingsPosition[0][0], listBuildingsPosition[0][1]) &&
+  (buildingRandx%this->size > 3) && (buildingRandy%this->size > 3) && (buildingRandx%this->size < (this->size-3)) && (buildingRandy%this->size < (this->size-3)) ) ){
+    buildingRandx = rand() % size;
+    buildingRandy = rand() % size;
   }
+  listBuildingsPosition[1][0] = buildingRandx;
+  listBuildingsPosition[1][1] = buildingRandy;
+
+  buildingRandx = rand() % size;
+  buildingRandy = rand() % size;
+  while( !( comparePosition(buildingRandx, buildingRandy, listSeaPosition[0][0], listSeaPosition[0][1]) && comparePosition(buildingRandx, buildingRandy, listSeaPosition[1][0], listSeaPosition[1][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listSeaPosition[2][0], listSeaPosition[2][1]) && comparePosition(buildingRandx, buildingRandy, listWoodPosition[0][0], listWoodPosition[0][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listWoodPosition[1][0], listWoodPosition[1][1]) && comparePosition(buildingRandx, buildingRandy, listWoodPosition[2][0], listWoodPosition[2][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listMountainPosition[0][0], listMountainPosition[0][1]) && comparePosition(buildingRandx, buildingRandy, listMountainPosition[1][0], listMountainPosition[1][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listMountainPosition[2][0], listMountainPosition[2][1]) && comparePosition(buildingRandx, buildingRandy, listBuildingsPosition[0][0], listBuildingsPosition[0][1]) &&
+  comparePosition(buildingRandx, buildingRandy, listBuildingsPosition[1][0], listBuildingsPosition[1][1]) && (buildingRandx%this->size > 3) && (buildingRandy%this->size > 3) &&
+  (buildingRandx%this->size < (this->size-3)) && (buildingRandy%this->size < (this->size-3)) ) ){
+    buildingRandx = rand() % size;
+    buildingRandy = rand() % size;
+  }
+  listBuildingsPosition[2][0] = buildingRandx;
+  listBuildingsPosition[2][1] = buildingRandy;
 
 //Map Init
   for(int i = 0; i<size; i++){
@@ -95,7 +133,6 @@ Map::Map(){
       ((i>(listSeaPosition[1][0]-sizeSea) && i<(listSeaPosition[1][0]+sizeSea))&&(j>(listSeaPosition[1][1]-sizeSea) && j<(listSeaPosition[1][1]+sizeSea))) ||
       ((i>(listSeaPosition[2][0]-sizeSea) && i<(listSeaPosition[2][0]+sizeSea))&&(j>(listSeaPosition[2][1]-sizeSea) && j<(listSeaPosition[2][1]+sizeSea))) ){
         Position p(i,j);
-        // this->basicMap[toChange] = move(unique_ptr<Element> (new Decor(EAU,p)));
         this->basicMap[toChange] = move(unique_ptr<Element> (new Decor(EAU,p)));
         if((i==listSeaPosition[0][0]&&j==listSeaPosition[0][1]) || (i==listSeaPosition[1][0]&&j==listSeaPosition[1][1]) || (i==listSeaPosition[2][0]&&j==listSeaPosition[2][1])){
           this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(POISSON,p)));
@@ -127,9 +164,6 @@ Map::Map(){
 }
 
 Map::~Map(){
-  // for(size_t i = 0; i<this->playingMap.size();i++){
-  //   delete this->playingMap[i];
-  // }
 }
 
 void Map::addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt){
@@ -153,7 +187,6 @@ std::vector<unique_ptr<state::Element>> const& Map::getBuildingsMap(){
 }
 
 std::vector<int> Map::getBasicMapId () {
-  // std::vector<std::unique_ptr<Element>> const &basic = this->basicMap;
   std::vector<int> toReturn;
   for(size_t i=0; i<this->basicMap.size(); i++){
     Decor* d = (Decor *) this->basicMap[i].get();
@@ -163,7 +196,6 @@ std::vector<int> Map::getBasicMapId () {
 }
 
 std::vector<int> Map::getDecorMapId () {
-  // std::vector<std::unique_ptr<Element>> const &basic = this->decorMap.getDecorMap();
   std::vector<int> toReturn;
   for(size_t i=0; i<this->decorMap.size(); i++){
     Decor* d = (Decor *) this->decorMap[i].get();
@@ -173,7 +205,6 @@ std::vector<int> Map::getDecorMapId () {
 }
 
 std::vector<int> Map::getUnitsMapId () {
-  // std::vector<std::unique_ptr<Element>> const &basic = this->unitsMap.getDecorMap();
   std::vector<int> toReturn;
   for(size_t i=0; i<this->unitsMap.size(); i++){
     Units* d = (Units *) this->unitsMap[i].get();
@@ -183,7 +214,6 @@ std::vector<int> Map::getUnitsMapId () {
 }
 
 std::vector<int> Map::getBuildingsMapId () {
-  // std::vector<std::unique_ptr<Element>> const &basic = this->buildingsMap.getDecorMap();
   std::vector<int> toReturn;
   for(size_t i=0; i<this->buildingsMap.size(); i++){
     Buildings* d = (Buildings *) this->buildingsMap[i].get();

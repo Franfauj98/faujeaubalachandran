@@ -17,27 +17,10 @@ void MapCreator::initQuads (int size){
 void MapCreator::setSpriteLocation (int size, int x, int y,int form){
   sf::Vertex* quad = &quads[(x + y * size) * 4];
   // on définit ses quatre coins
-  if (form==0){
-    if(x%2==0) {
-      quad[0].position = sf::Vector2f(x/2 * 64+64/2, y * 32);
-      quad[1].position = sf::Vector2f((x/2 +1 ) * 64, y * 32+32/2);
-      quad[2].position = sf::Vector2f((x/2 + 1) * 64-64/2, (y+1) * 32);
-      quad[3].position = sf::Vector2f((x/2) * 64, (y + 1) * 32-32/2);
-
-    }
-    else if(y<size-1) {
-      quad[0].position = sf::Vector2f((x+1)/2 * 64, y * 32+32/2);
-      quad[1].position = sf::Vector2f(((x+1)/2 +1 ) * 64-64/2, (y+1) * 32);
-      quad[2].position = sf::Vector2f((x+1)/2 * 64, (y+1) * 32+32/2);
-      quad[3].position = sf::Vector2f((x+1)/2 * 64-64/2, (y + 1) * 32);
-    }
-  else if (form==1) {
-    quad[0].position = sf::Vector2f(x * 64, y * 32);
-    quad[1].position = sf::Vector2f((x + 1) * 64, y * 32);
-    quad[2].position = sf::Vector2f((x + 1) * 64, (y + 1) * 32);
-    quad[3].position = sf::Vector2f(x * 64, (y + 1) * 32);
-    }
-  }
+  quad[0].position = sf::Vector2f(x*32 - y*32 + 32 + 14*64, y*16 + x*16 + 1*64);
+  quad[1].position = sf::Vector2f(x*32 - y*32 + 64 + 14*64, y*16 + x*16 + 16 + 1*64);
+  quad[2].position = sf::Vector2f(x*32 - y*32 + 14*64 + 32 , y*16 + x*16 + 32 + 1*64);
+  quad[3].position = sf::Vector2f(x*32 - y*32 + 14*64, y*16 + x*16 + 16 + 1*64);
 }
 
 void MapCreator::setSpriteTexture (int size, vector<int> tiles, int form,int x, int y){
