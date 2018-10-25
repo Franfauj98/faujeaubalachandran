@@ -44,8 +44,8 @@ namespace state {
     std::vector<int> getUnitsMapId ();
     std::vector<int> getBuildingsMapId ();
     int getSize () const;
-    void addUnitsToMap (std::unique_ptr<Units> unitsToMap);
-    void deleteUnitsOnMap (std::unique_ptr<Units> unit);
+    void addUnitsToMap (std::unique_ptr<Units> unitsToMap, int position);
+    void deleteUnitsOnMap (std::unique_ptr<Element> unit);
     // Setters and Getters
   };
 

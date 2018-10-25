@@ -232,11 +232,20 @@ void Map::deleteElement (int pos){
 
 int Map::getPositionElement (std::unique_ptr<Element> elt){
   int pos = -1;
-  for(size_t i = 0; i<this->basicMap.size(); i++){
-    if(elt.get()==this->basicMap[i].get()){
+  for(size_t i = 0; i<this->unitsMap.size(); i++){
+    if(elt.get()==this->unitsMap[i].get()){
       pos = i;
       break;
     }
   }
   return pos;
+}
+
+void Map::addUnitsToMap (std::unique_ptr<Units> unitsToMap, int position){
+  this->unitsMap[position] = move(unitsToMap);  
+}
+
+void Map::deleteUnitsOnMap (unique_ptr<Element> unit){
+  int pos = this->getPositionElement(move(unit));
+  this->unitsMap[pos] = nullptr;
 }
