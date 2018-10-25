@@ -10,7 +10,7 @@ MenuLayer::MenuLayer(const std::string& fontFile, std::string text, int size, sf
   this->text.setFont(this->font);
   this->text.setString(text);
   this->text.setCharacterSize(size);
-  this->text.setFillColor(color);
+  this->text.setColor(color);
   this->text.setPosition(x,y);
 }
 
@@ -32,7 +32,7 @@ void MenuLayer::setCharacterSize (int size){
 }
 
 void MenuLayer::setColor (sf::Color color){
-    this->text.setFillColor(color);
+    this->text.setColor(color);
 }
 
 void MenuLayer::setPosition (int x, int y){
