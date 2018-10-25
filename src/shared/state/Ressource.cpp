@@ -10,8 +10,10 @@ Ressource::Ressource(int production, int id, Position position, int level, Build
   try{
     if(production>=0 && production<=1000){
       this->production=production;
+      this->type = 7;
     } else {
       this->production=0;
+      this->type = 7;
       throw std::string("production must be positive or be smaller than 1000");
     }
   } catch (std::string error){
@@ -26,10 +28,11 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
       setLife(0);
+      this->type = 7;
 
       break;}
     case 2 :{
@@ -37,40 +40,44 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setIdBuilding(id);
       setPosition(position);
       setLevel(2);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(100,100);
       setBuildingCost(ressourceCost);
       setLife(0);
+      this->type = 7;
       break;}
     case 3 :{
       setProduction(6);
       setIdBuilding(id);
       setPosition(position);
       setLevel(3);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(150,150);
       setBuildingCost(ressourceCost);
       setLife(0);
+      this->type = 7;
       break;}
     case 4 :{
       setProduction(8);
       setIdBuilding(id);
       setPosition(position);
       setLevel(4);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(200,200);
       setBuildingCost(ressourceCost);
       setLife(0);
+      this->type = 7;
       break;}
     default :{
       setProduction(2);
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
-      setIdTexture(RESSOURCE);
+      setIdTexture(RESSOURCE1);
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
       setLife(0);
+      this->type = 7;
       break;}
   }
 }

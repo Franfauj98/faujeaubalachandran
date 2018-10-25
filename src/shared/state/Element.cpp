@@ -9,7 +9,7 @@ Position& Element::getPosition(){
 
 void Element::setPosition (const Position& pos){
   try{
-    if(pos.getX()>0&&pos.getY()>0 && pos.getX()<10000 && pos.getY()<10000){
+    if(pos.getX()>=0&&pos.getY()>=0 && pos.getX()<=10000 && pos.getY()<=10000){
       this->position = pos;
     } else {
       Position p;
@@ -26,6 +26,14 @@ int Element::distance(Position pos1, Position pos2){
   absdiff = std::abs(pos1.getX() - pos2.getX());
   orddiff = std::abs(pos1.getY() - pos2.getY());
   return(absdiff+orddiff);
+}
+
+int Element::getType () const{
+  return this->type;
+}
+
+int Element::getLevel () const{
+  return this->level;
 }
 
 Element::~Element(){

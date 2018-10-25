@@ -10,9 +10,10 @@ Cavalier::Cavalier () : Units() {
   setStrikeRange(0);
   setMovingRange(0);
   setLevel(0);
-  setIdTextureUnits(CAVALIER1);
+  setIdTextureUnits(CAVALIER2);
   UnitCost cavalierCost(0,0);
   setUnitCost(cavalierCost);
+  this->type = 3;
 }
 
 Cavalier::Cavalier (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost cavalierCost) :
@@ -28,9 +29,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CAVALIER1);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(50,50);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     case 2 :{
       setPosition(p);
@@ -43,6 +45,7 @@ Cavalier::Cavalier (int level, Position p, int id){
       setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(100,100);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     case 3 :{
       setPosition(p);
@@ -52,9 +55,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CAVALIER3);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(150,150);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     case 4 :{
       setPosition(p);
@@ -64,9 +68,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(CAVALIER4);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(200,200);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
     default :{
       setPosition(p);
@@ -76,9 +81,10 @@ Cavalier::Cavalier (int level, Position p, int id){
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(1);
-      setIdTextureUnits(CAVALIER1);
+      setIdTextureUnits(CAVALIER2);
       UnitCost cavalierCost(50,50);
       setUnitCost(cavalierCost);
+      this->type = 3;
       break;}
   }
 }

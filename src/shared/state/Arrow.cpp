@@ -3,7 +3,7 @@
 using namespace state;
 
 Arrow::Arrow () : Units() {
-  Position p;
+  Position p(0,0);
   setPosition(p);
   setIdUnits(0);
   setLife(0);
@@ -11,9 +11,10 @@ Arrow::Arrow () : Units() {
   setStrikeRange(0);
   setMovingRange(0);
   setLevel(0);
-  setIdTextureUnits(ARROW1);
+  setIdTextureUnits(ARROW2);
   UnitCost arrowCost(0,0);
   setUnitCost(arrowCost);
+  this->type = 1;
 }
 
 Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost) :
@@ -29,9 +30,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(ARROW1);
+      setIdTextureUnits(ARROW2);
       UnitCost arrowCost(50,50);
       setUnitCost(arrowCost);
+      this->type = 1;
       break;}
     case 2 :{
       setPosition(p);
@@ -44,6 +46,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setIdTextureUnits(ARROW2);
       UnitCost arrowCost(100,100);
       setUnitCost(arrowCost);
+      this->type = 1;
       break;}
     case 3 :{
       setPosition(p);
@@ -53,9 +56,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setStrikeRange(3);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(ARROW3);
+      setIdTextureUnits(ARROW2);
       UnitCost arrowCost(150,150);
       setUnitCost(arrowCost);
+      this->type = 1;
       break;}
     case 4 :{
       setPosition(p);
@@ -65,9 +69,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setStrikeRange(3);
       setMovingRange(1);
       setLevel(level);
-      setIdTextureUnits(ARROW4);
+      setIdTextureUnits(ARROW2);
       UnitCost arrowCost(200,200);
       setUnitCost(arrowCost);
+      this->type = 1;
       break;}
     default :{
       setPosition(p);
@@ -77,9 +82,10 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(1);
-      setIdTextureUnits(ARROW1);
+      setIdTextureUnits(ARROW2);
       UnitCost arrowCost(50,50);
       setUnitCost(arrowCost);
+      this->type = 1;
       break;}
   }
 }

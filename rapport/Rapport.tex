@@ -223,8 +223,75 @@ Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle per
 
 \begin{figure}[!ht]
 \centering
-    \includegraphics[width=1\textwidth]{ressources/dia.png}
+    \includegraphics[width=1\textwidth]{ressources/state.png}
      \caption{Diagramme de classes d'état}
+\end{figure}
+
+\newpage
+
+\section{Rendu: Stratégie et conception des états}
+\subsection{Stratégie de rendu d'un état}
+
+Pour le rendu des états, nous avons décidé de faire une carte en 2D avec des tuiles et en isométrie. Cette carte sera à chaque fois générée aléatoirement et donc à chaque lancement du programme elle sera différente. Nous utilisons la librairie SFML. Nous avons trois tilesets qui vont nous servir à créer les textures de la carte: 
+\begin{itemize}
+\item un pour les textures du terrain (eau, herbe, animaux ...)
+\item un pour les bâtiments (caserne, ressource, palais)
+\item un pour les unités (archer, cavalier, decurion, catapulte)
+\end{itemize}\\
+
+Sur le côté gauche, un petit menu permet de donner le niveau, la vie et les dommages s'il y en a des éléments.
+
+Nous aurons une carte divisée en quatre plans: 
+\begin{itemize}
+\item un pour l'herbe et l'eau qui sont nos éléments visuels de base
+\item un pour les éléments de décor comme les montagnes, les arbres ou encore les animaux
+\item un pour les bâtiments
+\item un pour les unités mobiles
+\end{itemize}\\
+
+Les trois premiers plans seront initialisés au départ du jeu grâce aux textures et à des tableaux constitués des numéros de texture d'éléments, selon une position, générés aléatoirement, selon certaines règles de création de map:
+\begin{itemize}
+\item Toute la carte est préalablement constitué d'herbe seulement
+\item Ensuite, trois zones d'eau sont tirées au sort aléatoirement
+\item Puis, trois zones d'arbres et de montagnes sont tirées  aléatoirement et quelques animaux sont placés
+\item Enfin, trois positions pour les empires sont tirées au sort et les trois bâtiments sont placés côte à côte
+\end{itemize}\\
+
+Tous les plans seront ensuite superposés pour former la carte. Les troix premiers plans seront fixes et seul le plan des unités changera. Ce dernier sera en effet modifié à chaque tour lorsque l'utilisateur fera déplacer ses unités mobiles. La mise à jour de l'affichage et du changement d'états se fera à une fréquence de quelques hertz.
+
+\newpage
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=1\textwidth]{ressources/MapAlea.png}
+     \caption{Exemple d'un état généré aléatoirement}
+\end{figure}
+
+\subsection{Conception de rendu d'un état}
+Dans cette partie nous allons décrire le diagramme UML de rendu d'un état du jeu.
+
+Class "Tiles" : C'est un élément de base des tilesets. Ils ont une longueur et une largeur comme attributs ainsi qu'une position dans le tileset.
+
+Class "TileSet" : Cette classe est la classe mère de tous les tilesets (tableaux de tuiles associés aux éléments). Elle est composée de tuiles. Nous avons choisi pour cette classe qu'elle contienne une méthode pour connaître la largeur d'une tuile et une autre qui permet de renvoyer la hauteur d'une tuile.\\
+
+Class "BuildingTileSet" :  Elle hérite de "TileSet". Elle contient trois tableaux de tuiles comme attributs (un pour les casernes, un pour les palais et un pour les ressources) permettant de donner la texture associée à chaque élément. Elle possède une méthode permettant de renvoyer le chemin du fichier png contenant le tileset et une autre pour obtenir la tuile d'un bâtiment donné. \\
+
+Class "DecorTileSet" :  Elle hérite de "TileSet". Elle contient un tableau de tuiles pour les décors comme attributs permettant de leur donner la texture associée. Elle possède une méthode permettant de renvoyer le chemin du fichier png contenant le tileset et une autre pour obtenir la tuile d'un décor donné. \\
+
+Class "UnitsTileSet" :  Elle hérite de "TileSet". Elle contient quatre tableaux de tuiles comme attributs (un pour les archers, un pour les cavaliers, un pour les décurions et un pour les catapultes) permettant de donner la texture associée à chaque unité. Elle possède une méthode permettant de renvoyer le chemin du fichier png contenant le tileset et une autre pour obtenir la tuile d'une unité donnée. \\
+
+Class "MapCreator" : Cette classe permet de créer une carte avec des textures d'un tileset. Elle constitue les plans d'une carte. Elle contient des textures et un tableau en attributs. Elle a des méthodes pour charger un fichier de texture, d'initialiser lee tableau, pour positionner un sprite sur une carte et lui donner sa texture et enfin d'afficher cette carte.\\
+
+Class "MenuLayer" : Cette classe permet le menu permettant d'indiquer le niveau, la vie et les dommages.
+
+Class "Layer" : Cette classe permet de créer des plans de carte. Elle est composée de MapCreator. Elle a comme attributs les tableaux de textures, selon leurs position, des éléments de base (herbe, eau), des décors et des bâtiments. Elle fait le lien entre la map du jeu contenue dans le diagramme d'état et le rendu.\\
+
+
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=1\textwidth]{ressources/render.png}
+     \caption{Diagramme de classes du rendu}
 \end{figure}
 
 \end{document}

@@ -3,14 +3,17 @@
 #define STATE__MAP__H
 
 #include <vector>
+#include <memory>
 
 namespace state {
   class Element;
+  class Units;
   class Empire;
 }
 
-#include "Empire.h"
 #include "Element.h"
+#include "Units.h"
+#include "Empire.h"
 
 namespace state {
 
@@ -18,16 +21,31 @@ namespace state {
   class Map {
     // Associations
     // Attributes
+  public:
+    int size     = 25;
   private:
-    std::vector<Element*> playingMap;
+    std::vector<std::unique_ptr<Element>> basicMap;
+    std::vector<std::unique_ptr<Element>> decorMap;
+    std::vector<std::unique_ptr<Element>> unitsMap;
+    std::vector<std::unique_ptr<Element>> buildingsMap;
     // Operations
   public:
     Map ();
     ~Map ();
-    void addElement (Element* elt);
-    std::vector<Element*> getMap () const;
+    void addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt);
+    std::vector<std::unique_ptr<Element>> const& getBasicMap ();
     void deleteElement (int pos);
-    int getPositionElement (Element* elt);
+    int getPositionElement (std::unique_ptr<Element> elt);
+    std::vector<std::unique_ptr<Element>> const& getDecorMap ();
+    std::vector<std::unique_ptr<Element>> const& getUnitsMap ();
+    std::vector<std::unique_ptr<Element>> const& getBuildingsMap ();
+    std::vector<int> getBasicMapId ();
+    std::vector<int> getDecorMapId ();
+    std::vector<int> getUnitsMapId ();
+    std::vector<int> getBuildingsMapId ();
+    int getSize () const;
+    void addUnitsToMap (std::unique_ptr<Units> unitsToMap, int position);
+    void deleteUnitsOnMap (std::unique_ptr<Element> unit);
     // Setters and Getters
   };
 

@@ -26,7 +26,7 @@ void RessourceTest(){
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
   BuildingCost ressourceCost1(50,50);
   Position position1(2,5);
-  Ressource ressource1(5,1, position1,1, ressourceCost1,RESSOURCE);
+  Ressource ressource1(5,1, position1,1, ressourceCost1,RESSOURCE1);
   cout << "Id Building: " << ressource1.getIdBuilding() << endl;
   cout << "Position X: " << ressource1.getPosition().getX() << endl;
   cout << "Position Y: " << ressource1.getPosition().getY() << endl;
@@ -43,7 +43,7 @@ void RessourceTest(){
   Position position2(5,2);
   ressource1.setIdBuilding(10);
   ressource1.setPosition(position2);
-  ressource1.setIdTexture(RESSOURCE);
+  ressource1.setIdTexture(RESSOURCE1);
   ressource1.setBuildingCost(ressourceCost2);
   ressource1.setLife(500);
   ressource1.setLevel(4);
@@ -64,7 +64,7 @@ void RessourceTest(){
   cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
   BuildingCost ressourceCost3(-50,150);
   Position position3(-2,5);
-  Ressource ressource2(5000,-1, position3,1,ressourceCost3,RESSOURCE);
+  Ressource ressource2(5000,-1, position3,1,ressourceCost3,RESSOURCE1);
   cout << "Id Building: " << ressource2.getIdBuilding() << endl;
   cout << "Position X: " << ressource2.getPosition().getX() << endl;
   cout << "Position Y: " << ressource2.getPosition().getY() << endl;
@@ -82,7 +82,7 @@ void RessourceTest(){
   Position position4(-5,-2);
   ressource2.setIdBuilding(-10);
   ressource2.setPosition(position4);
-  ressource2.setIdTexture(RESSOURCE);
+  ressource2.setIdTexture(RESSOURCE1);
   cout << endl;
   cout << "New Id Building: " << ressource2.getIdBuilding() << endl;
   cout << "New Position X: " << ressource2.getPosition().getX() << endl;
