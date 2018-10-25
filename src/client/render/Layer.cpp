@@ -21,8 +21,8 @@ using namespace std;
       basicMap.initQuads(principalMap.getSize());
       for (int x=0;x<principalMap.getSize();x++){
         for(int y=0;y<principalMap.getSize();y++){
-          basicMap.setSpriteLocation (principalMap.getSize(),x,y,0);
-          basicMap.setSpriteTexture(principalMap.getSize(),basicId,0,x,y);
+          basicMap.setSpriteLocation (principalMap.getSize(),x,y);
+          basicMap.setSpriteTexture(principalMap.getSize(),basicId,x,y);
         }
       }
 
@@ -34,8 +34,8 @@ using namespace std;
       decorMap.initQuads(principalMap.getSize());
       for (int x=0;x<principalMap.getSize();x++){
         for(int y=0;y<principalMap.getSize();y++){
-          decorMap.setSpriteLocation (principalMap.getSize(),x,y,0);
-          decorMap.setSpriteTexture(principalMap.getSize(),decorId,0,x,y);
+          decorMap.setSpriteLocation (principalMap.getSize(),x,y);
+          decorMap.setSpriteTexture(principalMap.getSize(),decorId,x,y);
         }
       }
 
@@ -46,8 +46,8 @@ using namespace std;
       buildingMap.initQuads(principalMap.getSize());
       for (int x=0;x<principalMap.getSize();x++){
         for(int y=0;y<principalMap.getSize();y++){
-          buildingMap.setSpriteLocation (principalMap.getSize(),x,y,0);
-          buildingMap.setSpriteTexture(principalMap.getSize(),buildingsId,0,x,y);
+          buildingMap.setSpriteLocation (principalMap.getSize(),x,y);
+          buildingMap.setSpriteTexture(principalMap.getSize(),buildingsId,x,y);
         }
       }
 

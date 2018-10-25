@@ -26,8 +26,8 @@ void mapCreatorTest(){
   map.initQuads(10);
   for (int x=0;x<10;x++){
     for(int y=0;y<10;y++){
-      map.setSpriteLocation (10,x,y,0);
-      map.setSpriteTexture(10,tiles,0,x,y);
+      map.setSpriteLocation (10,x,y);
+      map.setSpriteTexture(10,tiles,x,y);
     }
   }
 
@@ -46,8 +46,8 @@ void mapCreatorTest(){
   building.initQuads(10);
   for (int x=0;x<10;x++){
     for(int y=0;y<10;y++){
-      building.setSpriteLocation (10,x,y,0);
-      building.setSpriteTexture(10,bu,0,x,y);
+      building.setSpriteLocation (10,x,y);
+      building.setSpriteTexture(10,bu,x,y);
     }
   }
 
@@ -66,8 +66,8 @@ void mapCreatorTest(){
   units.initQuads(10);
   for (int x=0;x<10;x++){
     for(int y=0;y<10;y++){
-      units.setSpriteLocation (10,x,y,0);
-      units.setSpriteTexture(10,un,0,x,y);
+      units.setSpriteLocation (10,x,y);
+      units.setSpriteTexture(10,un,x,y);
     }
   }
 // on fait tourner la boucle principale

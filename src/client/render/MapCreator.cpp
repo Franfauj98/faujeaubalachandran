@@ -14,7 +14,7 @@ void MapCreator::initQuads (int size){
   quads.resize(size * size * 4);
 }
 
-void MapCreator::setSpriteLocation (int size, int x, int y,int form){
+void MapCreator::setSpriteLocation (int size, int x, int y){
   sf::Vertex* quad = &quads[(x + y * size) * 4];
   // on définit ses quatre coins
   quad[0].position = sf::Vector2f(x*32 - y*32 + 32 + 12*64, y*16 + x*16 + 0*64);
@@ -23,7 +23,7 @@ void MapCreator::setSpriteLocation (int size, int x, int y,int form){
   quad[3].position = sf::Vector2f(x*32 - y*32 + 12*64, y*16 + x*16 + 16 + 0*64);
 }
 
-void MapCreator::setSpriteTexture (int size, vector<int> tiles, int form,int x, int y){
+void MapCreator::setSpriteTexture (int size, vector<int> tiles,int x, int y){
   // on récupère le numéro de tuile courant
   int tileNumber = tiles[x + y * size];
 
@@ -32,19 +32,10 @@ void MapCreator::setSpriteTexture (int size, vector<int> tiles, int form,int x, 
   int tv = tileNumber / (texture.getSize().x / 64);
   sf::Vertex* quad = &quads[(x + y * size) * 4];
   // on définit ses quatre coins
-  if (form==0){
-
-    quad[0].texCoords = sf::Vector2f(tu * 64+64/2, tv * 32);
-    quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 32+32/2);
-    quad[2].texCoords = sf::Vector2f((tu + 1) * 64-64/2, (tv + 1) * 32);
-    quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32-32/2);
-  }
-  else if (form==1){
-     quad[0].texCoords = sf::Vector2f(tu * 64, tv * 32);
-     quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 32);
-     quad[2].texCoords = sf::Vector2f((tu + 1) * 64, (tv + 1) * 32);
-     quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32);
-  }
+  quad[0].texCoords = sf::Vector2f(tu * 64+64/2, tv * 32);
+  quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 32+32/2);
+  quad[2].texCoords = sf::Vector2f((tu + 1) * 64-64/2, (tv + 1) * 32);
+  quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32-32/2);
 
 }
 
