@@ -7,10 +7,12 @@
 
 namespace state {
   class Element;
+  class Units;
   class Empire;
 }
 
 #include "Element.h"
+#include "Units.h"
 #include "Empire.h"
 
 namespace state {
@@ -42,6 +44,8 @@ namespace state {
     std::vector<int> getUnitsMapId ();
     std::vector<int> getBuildingsMapId ();
     int getSize () const;
+    void addUnitsToMap (std::unique_ptr<Units> unitsToMap);
+    void deleteUnitsOnMap (std::unique_ptr<Units> unit);
     // Setters and Getters
   };
 

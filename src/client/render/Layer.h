@@ -2,8 +2,10 @@
 #ifndef RENDER__LAYER__H
 #define RENDER__LAYER__H
 
+#include <vector>
 
 namespace render {
+  class MenuLayer;
   class MapCreator;
   class TileSet;
 };
@@ -11,6 +13,7 @@ namespace state {
   class Map;
 }
 
+#include "MenuLayer.h"
 #include "MapCreator.h"
 #include "TileSet.h"
 #include "state/Map.h"
@@ -21,10 +24,13 @@ namespace render {
   class Layer {
     // Associations
     // Attributes
+  public:
+    std::vector<MenuLayer> text;
   private:
     MapCreator basicMap;
     MapCreator decorMap;
     MapCreator buildingMap;
+    MapCreator unitMap;
     // Operations
   public:
     Layer ();
@@ -32,6 +38,8 @@ namespace render {
     MapCreator getBuildingMap () const;
     MapCreator getBasicMap () const;
     MapCreator getDecorMap () const;
+    MapCreator getUnitMap () const;
+    std::vector<MenuLayer> getText () const;
     // Setters and Getters
   };
 
