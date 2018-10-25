@@ -30,6 +30,7 @@ namespace render {
     void setCharacterSize (int size);
     void setColor (sf::Color color);
     void setPosition (int x, int y);
+    sf::Text getText () const;
     // Setters and Getters
   };
 

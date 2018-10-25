@@ -38,3 +38,7 @@ void MenuLayer::setColor (sf::Color color){
 void MenuLayer::setPosition (int x, int y){
     this->text.setPosition(x,y);
 }
+
+sf::Text MenuLayer::getText ()const{
+    return this->text;
+}

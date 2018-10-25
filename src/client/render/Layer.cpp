@@ -50,16 +50,16 @@ using namespace std;
           buildingMap.setSpriteTexture(principalMap.getSize(),buildingsId,0,x,y);
         }
       }
-      vector<MenuLayer> text;
-      // MenuLayer menu1("res/helvetica.ttf", "Stats", 14, sf::Color::White, 900, 100);
-      // text.push_back(menu1);
-      // MenuLayer menu2("res/helvetica.ttf", "Level", 14, sf::Color::White, 900, 130);
-      // text.push_back(menu2);
-      // MenuLayer menu3("res/helvetica.ttf", "Life", 14, sf::Color::White, 900, 160);
-      // text.push_back(menu3);
-      // MenuLayer menu4("res/helvetica.ttf", "Damage", 14, sf::Color::White, 900, 190);
-      // text.push_back(menu4);
-      this->text=text;
+
+
+      // MenuLayer menu1("res/helvetica.ttf", "Stats", 14, sf::Color::White, 100, 100);
+      // this->text.push_back(menu1.getText());
+      // MenuLayer menu2("res/helvetica.ttf", "Level", 14, sf::Color::White, 100, 130);
+      // this->text.push_back(menu2.getText());
+      // MenuLayer menu3("res/helvetica.ttf", "Life", 14, sf::Color::White, 100, 160);
+      // this->text.push_back(menu3.getText());
+      // MenuLayer menu4("res/helvetica.ttf", "Damage", 14, sf::Color::White, 100, 190);
+      // this->text.push_back(menu4.getText());
       this->basicMap=basicMap;
       this->decorMap=decorMap;
       this->buildingMap=buildingMap;
@@ -82,7 +82,7 @@ MapCreator Layer::getUnitMap() const {
   return this->unitMap;
 }
 
-vector<MenuLayer> Layer::getText() const {
+vector<sf::Text> Layer::getText() const {
   return this->text;
 }
 

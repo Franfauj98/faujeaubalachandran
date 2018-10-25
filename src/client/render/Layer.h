@@ -4,8 +4,10 @@
 
 #include <vector>
 
+namespace sf {
+  class Text;
+};
 namespace render {
-  class MenuLayer;
   class MapCreator;
   class TileSet;
 };
@@ -13,7 +15,6 @@ namespace state {
   class Map;
 }
 
-#include "MenuLayer.h"
 #include "MapCreator.h"
 #include "TileSet.h"
 #include "state/Map.h"
@@ -25,7 +26,7 @@ namespace render {
     // Associations
     // Attributes
   public:
-    std::vector<MenuLayer> text;
+    std::vector<sf::Text> text;
   private:
     MapCreator basicMap;
     MapCreator decorMap;
@@ -39,7 +40,7 @@ namespace render {
     MapCreator getBasicMap () const;
     MapCreator getDecorMap () const;
     MapCreator getUnitMap () const;
-    std::vector<MenuLayer> getText () const;
+    std::vector<sf::Text> getText () const;
     // Setters and Getters
   };
 

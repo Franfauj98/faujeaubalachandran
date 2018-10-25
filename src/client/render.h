@@ -3,11 +3,11 @@
 #define __RENDER__H
 
 #include "render/MapCreator.h"
-#include "render/MenuLayer.h"
 #include "render/Tile.h"
 #include "render/TileSet.h"
 #include "render/Layer.h"
 #include "render/DecorTileSet.h"
 #include "render/UnitsTileSet.h"
 #include "render/BuildingTileSet.h"
+#include "render/MenuLayer.h"
 #endif
