@@ -9,7 +9,7 @@ void RessourceTest(){
   cout << "TEST RESSOURCE" << endl;
   cout << "-------------------------------------" << endl;
 
-  cout << "CONSTRUCTEUR PAR DEFAUT" << endl;
+  cout << "DEFAULT CONSTRUCTOR" << endl;
   Ressource ressource0;
   cout << "Id Building: " << ressource0.getIdBuilding() << endl;
   cout << "Position X: " << ressource0.getPosition().getX() << endl;
@@ -23,7 +23,7 @@ void RessourceTest(){
   cout << "Production: " << ressource0.getProduction() << endl;
 
 
-  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
+  cout << "CONSTRUCTOR WITH ALL ARGUMENTS IN DEFINITION DOMAIN" << endl;
   BuildingCost ressourceCost1(50,50);
   Position position1(2,5);
   Ressource ressource1(5,1, position1,1, ressourceCost1,RESSOURCE1);
@@ -38,7 +38,7 @@ void RessourceTest(){
   cout << "Life: " << ressource1.getLife() << endl;
   cout << "Production: " << ressource1.getProduction() << endl;
 
-  cout << "SETTER AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
+  cout << "SETTER WITH ALL ARGUMENTS IN THE DEFINITION DOMAIN" << endl;
   BuildingCost ressourceCost2(150,250);
   Position position2(5,2);
   ressource1.setIdBuilding(10);
@@ -61,7 +61,7 @@ void RessourceTest(){
   cout << "Production: " << ressource1.getProduction() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
+  cout << "CONSTRUCTOR WITH ALL ARGUMENTS OUTSIDE OF THE DEFINITION DOMAIN" << endl;
   BuildingCost ressourceCost3(-50,150);
   Position position3(-2,5);
   Ressource ressource2(5000,-1, position3,1,ressourceCost3,RESSOURCE1);
@@ -77,7 +77,7 @@ void RessourceTest(){
   cout << "Production: " << ressource2.getProduction() << endl;
   cout << endl;
 
-  cout << "SETTERS AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
+  cout << "SETTERS WITH ALL OF ITS ARGUMENTS OUTSIDE OF DEFINITION DOMAIN" << endl;
   BuildingCost ressourceCost4(-50,-50);
   Position position4(-5,-2);
   ressource2.setIdBuilding(-10);
@@ -94,7 +94,7 @@ void RessourceTest(){
   cout << "Production: " << ressource2.getProduction() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC TROIS ARGUMENTS" << endl;
+  cout << "CONSTRUCTOR WITH THREE ARGUMENTS" << endl;
   Position position5(20,50);
   Ressource ressource3(1, position5,2);
   cout << "Id Building: " << ressource3.getIdBuilding() << endl;

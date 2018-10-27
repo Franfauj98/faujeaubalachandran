@@ -9,7 +9,7 @@ void BuildingsTest(){
   cout << "TEST BUILDING" << endl;
   cout << "-------------------------------------" << endl;
 
-    cout << "CONSTRUCTEUR PAR DEFAUT" << endl;
+    cout << "DEFAULT CONSTRUCTOR" << endl;
     Buildings building0;
     cout << "Id Building: " << building0.getIdBuilding() << endl;
     cout << "Position X: " << building0.getPosition().getX() << endl;
@@ -21,7 +21,7 @@ void BuildingsTest(){
     cout << "Life: " << building0.getLife() << endl;
     cout << endl;
 
-    cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;
+    cout << "SETTER WITH ALL PARAMETERS INSIDE OF DEF" << endl;
     Position pos0(50,25);
     BuildingCost buildingCost0(200,100);
     building0.setIdBuilding(10);
@@ -38,7 +38,7 @@ void BuildingsTest(){
     cout << "New Life: " << building0.getLife() << endl;
     cout << endl;
 
-    cout << "SETTER AVEC PARAMETRES HORS DOMAINE DE DEF" << endl;
+    cout << "SETTER WITH PARAMETERS OUTSIDE OF DEF" << endl;
     Position pos1(-50,25);
     BuildingCost buildingCost1(200000,-100);
     building0.setIdBuilding(-10);
@@ -48,7 +48,7 @@ void BuildingsTest(){
     building0.setLife(50000);
     cout << endl;
 
-    cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
+    cout << "CONSTRUCTOR WITH ALL ARGUMENTS" << endl;
     BuildingCost buildingCost2(50,50);
     Position pos2(2,5);
     Buildings building1(1, pos2,1,BARRACK, buildingCost2);
@@ -62,7 +62,7 @@ void BuildingsTest(){
     cout << "Life: " << building1.getLife() << endl;
     cout << endl;
 
-    cout << "CONSTRUCTEUR AVEC ARGUMENTS HORS DOMAINE DE DEF" << endl;
+    cout << "CONSTRUCTOR WITH ARGUMENTS OUTSIDE OF DEF" << endl;
     BuildingCost buildingCost3(50,50000);
     Position pos3(-2,5);
     Buildings building2(1, pos3,1,BARRACK, buildingCost3);

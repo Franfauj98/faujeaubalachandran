@@ -9,13 +9,13 @@ void UnitCostTest(){
   cout << "TEST UNIT_COST" << endl;
   cout << "-------------------------------------" << endl;
 
-  cout << "CONSTRUCTEUR SANS ARGUMENTS" << endl;
+  cout << "DEFAULT CONSTRUCTOR" << endl;
   UnitCost unitCost;
   cout << "Gold Cost: " << unitCost.getGold() << endl;
   cout << "Food Cost: " << unitCost.getFood() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS" << endl;
+  cout << "CONSTRUCTOR WITH ALL ARGUMENTS" << endl;
   UnitCost unitCost2(50,50);
   cout << "Gold Cost: " << unitCost2.getGold() << endl;
   cout << "Food Cost: " << unitCost2.getFood() << endl;

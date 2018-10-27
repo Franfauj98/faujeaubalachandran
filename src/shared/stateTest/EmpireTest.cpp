@@ -12,7 +12,7 @@ void EmpireTest(){
   cout << "TEST EMPIRE" << endl;
   cout << "-------------------------------------" << endl;
 
-  cout << "CONSTRUCTEUR PAR DEFAUT" << endl;
+  cout << "DEFAULT CONSTRUCTOR" << endl;
   Empire empire0;
   cout << "idEmpire: " << empire0.getId() << endl;
   cout << "Name: " << empire0.getName() << endl;
@@ -46,7 +46,7 @@ void EmpireTest(){
   cout<< "Ressource life:" << empireRessource0->getLife() << endl;
   cout << endl;
 
-  cout << "SETTER AVEC PARAMETRES DANS LE DOMAINE DE DEF" << endl;
+  cout << "SETTER WITH PARAMETERS INSIDE OF DEF DOMAIN" << endl;
   //empire0.setId(10);
   empire0.setName("Warriors");
   empire0.setEmpireLevel(5);
@@ -98,7 +98,7 @@ void EmpireTest(){
   cout<< "Ressource life:" << empireRessource1->getLife() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC ARGUMENTS DANS DOMAINE DEF" << endl;
+  cout << "CONSTRUCTEUR WITH PARAMETERS INSIDE OF THE DEF DOMAIN" << endl;
   Empire empire1(5,"ENSEA",2,500,100,100,100,pos1,empireBarrack1,empireRessource1,empirePalace1);
   cout << "idEmpire: " << empire1.getId() << endl;
   cout << "Name: " << empire1.getName() << endl;
@@ -132,7 +132,7 @@ void EmpireTest(){
   cout<< "Ressource life:" << empireRessource2->getLife() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC ARGUMENTS HORS DOMAINE DEF" << endl;
+  cout << "CONSTRUCTEUR WITH ARGUMENTS OUTSIDE DEF DOMAINE" << endl;
   Empire empire2(-5,"ENSEA",1000,50000,100,100,100,pos1,empireBarrack1,empireRessource1,empirePalace1);
   cout << endl;
 }

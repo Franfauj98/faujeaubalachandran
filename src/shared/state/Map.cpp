@@ -117,7 +117,7 @@ Map::Map(){
   for(int i = 0; i<size; i++){
     for(int j = 0; j<size; j++){
       Position p(i,j);
-      this->basicMap.push_back(unique_ptr<Element> (new Decor(HERBE,p)));
+      this->basicMap.push_back(unique_ptr<Element> (new Decor(GRASS,p)));
       this->decorMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
       this->buildingsMap.push_back(unique_ptr<Element> (new Buildings()));
       this->unitsMap.push_back(unique_ptr<Element> (new Units()));
@@ -133,20 +133,20 @@ Map::Map(){
       ((i>(listSeaPosition[1][0]-sizeSea) && i<(listSeaPosition[1][0]+sizeSea))&&(j>(listSeaPosition[1][1]-sizeSea) && j<(listSeaPosition[1][1]+sizeSea))) ||
       ((i>(listSeaPosition[2][0]-sizeSea) && i<(listSeaPosition[2][0]+sizeSea))&&(j>(listSeaPosition[2][1]-sizeSea) && j<(listSeaPosition[2][1]+sizeSea))) ){
         Position p(i,j);
-        this->basicMap[toChange] = move(unique_ptr<Element> (new Decor(EAU,p)));
+        this->basicMap[toChange] = move(unique_ptr<Element> (new Decor(SEA,p)));
         if((i==listSeaPosition[0][0]&&j==listSeaPosition[0][1]) || (i==listSeaPosition[1][0]&&j==listSeaPosition[1][1]) || (i==listSeaPosition[2][0]&&j==listSeaPosition[2][1])){
-          this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(POISSON,p)));
+          this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(FISH,p)));
         }
       } else if( ((i>(listWoodPosition[0][0]-sizeWood) && i<(listWoodPosition[0][0]+sizeWood))&&(j>(listWoodPosition[0][1]-sizeWood) && j<(listWoodPosition[0][1]+sizeWood))) ||
       ((i>(listWoodPosition[1][0]-sizeWood) && i<(listWoodPosition[1][0]+sizeWood))&&(j>(listWoodPosition[1][1]-sizeWood) && j<(listWoodPosition[1][1]+sizeWood))) ||
       ((i>(listWoodPosition[2][0]-sizeWood) && i<(listWoodPosition[2][0]+sizeWood))&&(j>(listWoodPosition[2][1]-sizeWood) && j<(listWoodPosition[2][1]+sizeWood))) ){
         Position p(i,j);
-        this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(ARBRE,p)));
+        this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(TREE,p)));
       } else if( ((i>(listMountainPosition[0][0]-sizeMountain) && i<(listMountainPosition[0][0]+sizeMountain))&&(j>(listMountainPosition[0][1]-sizeMountain) && j<(listMountainPosition[0][1]+sizeMountain))) ||
       ((i>(listMountainPosition[1][0]-sizeMountain) && i<(listMountainPosition[1][0]+sizeMountain))&&(j>(listMountainPosition[1][1]-sizeMountain) && j<(listMountainPosition[1][1]+sizeMountain))) ||
       ((i>(listMountainPosition[2][0]-sizeMountain) && i<(listMountainPosition[2][0]+sizeMountain))&&(j>(listMountainPosition[2][1]-sizeMountain) && j<(listMountainPosition[2][1]+sizeMountain))) ){
         Position p(i,j);
-        this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(MONTAGNE,p)));
+        this->decorMap[toChange] = move(unique_ptr<Element> (new Decor(MOUNTAGNE,p)));
       } else if( (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) || (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) || (i==listBuildingsPosition[0][0] && j==listBuildingsPosition[0][1]) ||
         (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) || (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) || (i==listBuildingsPosition[1][0] && j==listBuildingsPosition[1][1]) ||
         (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) || (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) || (i==listBuildingsPosition[2][0] && j==listBuildingsPosition[2][1]) ){
@@ -242,7 +242,7 @@ int Map::getPositionElement (std::unique_ptr<Element> elt){
 }
 
 void Map::addUnitsToMap (std::unique_ptr<Units> unitsToMap, int position){
-  this->unitsMap[position] = move(unitsToMap);  
+  this->unitsMap[position] = move(unitsToMap);
 }
 
 void Map::deleteUnitsOnMap (unique_ptr<Element> unit){

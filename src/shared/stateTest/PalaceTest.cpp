@@ -9,7 +9,7 @@ void PalaceTest(){
   cout << "TEST PALACE" << endl;
   cout << "-------------------------------------" << endl;
 
-  cout << "CONSTRUCTEUR PAR DEFAUT" << endl;
+  cout << "DEFAULT CONSTRUCTOR" << endl;
   Palace palace0;
   cout << "Id Building: " << palace0.getIdBuilding() << endl;
   cout << "Position X: " << palace0.getPosition().getX() << endl;
@@ -22,7 +22,7 @@ void PalaceTest(){
   cout << "Life: " << palace0.getLife() << endl;
 
 
-  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
+  cout << "CONSTRUCTOR WITH ALL ARGUMENTS INSIDE DEF DOMAIN" << endl;
   BuildingCost palaceCost1(50,50);
   Position position1(2,5);
   Palace palace1(1, position1,1, palaceCost1,HDV1,200);
@@ -36,7 +36,7 @@ void PalaceTest(){
   cout << "Level: " << palace1.getLevel() << endl;
   cout << "Life: " << palace1.getLife() << endl;
 
-  cout << "SETTER AVEC TOUS LES ARGUMENTS DANS DOMAINE DEF" << endl;
+  cout << "SETTER WITH ALL ARGUMENTS INSIDE DEF DOMAIN" << endl;
   BuildingCost palaceCost2(150,250);
   Position position2(5,2);
   palace1.setIdBuilding(10);
@@ -57,7 +57,7 @@ void PalaceTest(){
   cout << "Life: " << palace1.getLife() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
+  cout << "CONSTRUCTOR WITH ALL ARGUMENTS OUTSIDE OF DEF DOMAIN" << endl;
   BuildingCost palaceCost3(-50,150);
   Position position3(-2,5);
   Buildings palace2 (-1, position3,1,HDV2, palaceCost3);
@@ -72,7 +72,7 @@ void PalaceTest(){
   cout << "Life: " << palace2.getLife() << endl;
   cout << endl;
 
-  cout << "SETTERS AVEC TOUS LES ARGUMENTS HORS DOMAINE DEF" << endl;
+  cout << "SETTERS WITH ALL ARGUMENTS OUTSIDE OF DEF DOMAIN" << endl;
   BuildingCost palaceCost4(-50,-50);
   Position position4(-5,-2);
   palace2.setIdBuilding(-10);
@@ -89,7 +89,7 @@ void PalaceTest(){
   cout << "New Passable ?: " << palace2.isPassable() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC TROIS ARGUMENTS" << endl;
+  cout << "CONSTRUCTEUR WITH THREE ARGUMENTS" << endl;
   Position position5(20,50);
   Palace palace3(1, position5,2);
   cout << "Id Building: " << palace3.getIdBuilding() << endl;

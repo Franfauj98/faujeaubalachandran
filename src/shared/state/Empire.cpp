@@ -28,7 +28,7 @@ Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRes
     bool a;
     unsigned int count =0;
     for (unsigned int i=0;i<position.size();i++){
-      if (position[i].getX()>=0 && position[i].getY()>=0 && position[i].getX()<=10000 &&position[i].getY()<=10000){
+      if (position[i].getX()>=0 && position[i].getY()>=0 && position[i].getX()<=25 &&position[i].getY()<=25){
         count +=1;
       }
     }

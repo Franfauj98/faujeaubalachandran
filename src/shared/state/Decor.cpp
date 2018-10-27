@@ -16,21 +16,21 @@ Decor::Decor(IdDecor id, Position position) {
   switch(id){
     case IdDecor::NONE_DECOR: passable=true;
     break;
-    case IdDecor::ARBRE: passable=true;
+    case IdDecor::TREE: passable=true;
     break;
-    case IdDecor::CHEVAL: passable=true;
+    case IdDecor::HORSE: passable=true;
     break;
     case IdDecor::RENNE: passable=true;
     break;
-    case IdDecor::POISSON: passable=true;
+    case IdDecor::FISH: passable=true;
     break;
-    case IdDecor::POULE: passable=true;
+    case IdDecor::CHICKEN: passable=true;
     break;
-    case IdDecor::MONTAGNE: passable=false;
+    case IdDecor::MOUNTAGNE: passable=false;
     break;
-    case IdDecor::HERBE: passable=true;
+    case IdDecor::GRASS: passable=true;
     break;
-    case IdDecor::EAU: passable=false;
+    case IdDecor::SEA: passable=false;
     break;
     case IdDecor::LIFE: passable=true;
     break;

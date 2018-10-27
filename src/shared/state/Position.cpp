@@ -7,7 +7,7 @@ Position::Position () : x(0), y(0) {}
 
 Position::Position (int x, int y) {
   try{
-    if(x>=0 && x<=10000 && y>=0 && y<=10000){
+    if(x>=0 && x<=25 && y>=0 && y<=25){
       this->x = x;
       this->y = y;
     } else {
@@ -28,7 +28,7 @@ int Position::getY() const{
 
 void Position::setX(const int x) {
   try{
-    if(x>=0 && x<10000){
+    if(x>=0 && x<=25){
       this->x = x;
     } else {
       this->x = 0;
@@ -41,7 +41,7 @@ void Position::setX(const int x) {
 
 void Position::setY(const int y) {
   try{
-    if(y>=0 && y<10000){
+    if(y>=0 && y<=25){
       this->y = y;
     } else{
       this->y = 0;

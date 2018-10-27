@@ -12,7 +12,7 @@ void BarrackTest(){
   cout << "TEST BARRACK" << endl;
   cout << "-------------------------------------" << endl;
 
-  cout << "CONSTRUCTEUR PAR DEFAUT" << endl;
+  cout << "Default Constructor" << endl;
   Barrack barrack0;
   cout << "Id Building: " << barrack0.getIdBuilding() << endl;
   cout << "Position X: " << barrack0.getPosition().getX() << endl;
@@ -25,7 +25,7 @@ void BarrackTest(){
   cout << "UnitsNumber: " << barrack0.getUnitsNumber() << endl;
   cout << endl;
 
-  cout << "SETTER PARAMETRES DANS DOMAINE DE DEF" << endl;
+  cout << "SETTER PARAMETERS IN DEF DOMAIN" << endl;
   BuildingCost buildingCost0(200,150);
   Position pos0(5,10);
   barrack0.setIdBuilding(1);
@@ -46,7 +46,7 @@ void BarrackTest(){
   cout << "New UnitsNumber: " << barrack0.getUnitsNumber() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC 7 ARGUMENTS" << endl;
+  cout << "CONSTRUCTOR WITH 7 ARGUMENTS" << endl;
   BuildingCost barrackCost1(50,50);
   Position position1(2,5);
   Barrack barrack1(10,1, position1,1, barrackCost1);
@@ -61,7 +61,7 @@ void BarrackTest(){
   cout << "UnitsNumber: " << barrack1.getUnitsNumber() << endl;
   cout << endl;
 
-  cout << "SETTER PARAMETRES HORS DOMAINE DE DEF" << endl;
+  cout << "SETTER PARAMETERS OUTSIDE OF DEF" << endl;
   BuildingCost barrackCost2(-150,250);
   Position position2(5,-2);
   barrack1.setIdBuilding(-10);
@@ -79,7 +79,7 @@ void BarrackTest(){
   cout << endl;
 
 
-  cout << "CONSTRUCTEUR AVEC TROIS ARGUMENTS" << endl;
+  cout << "CONSTRUCTOR WITH THREE ARGUMENTS" << endl;
   Position position3(20,50);
   Barrack barrack2(1, position3,2);
   cout << "Id Building: " << barrack2.getIdBuilding() << endl;
@@ -93,7 +93,7 @@ void BarrackTest(){
   cout << "UnitsNumber: " << barrack2.getUnitsNumber() << endl;
   cout << endl;
 
-  cout << "SETTER PARAMETRES HORS DU DOMAINE DE DEFINITION" << endl;
+  cout << "SETTER PARAMETERS OUTSIDE OF DEF" << endl;
   BuildingCost barrackCost3(15000,100000);
   Position position4(20000,40000);
   barrack2.setIdBuilding(1);
@@ -110,12 +110,12 @@ void BarrackTest(){
   cout << "New UnitsNumber: " << barrack2.getUnitsNumber() << endl;
   cout << endl;
 
-  cout << "CONSTRUCTEUR AVEC 7 ARGUMENTS PARAMETRES NÉGATIFS" << endl;
+  cout << "CONSTRUCTOR WITH 7 NEGATIVE PARAMETERS" << endl;
   Position position5(-20,50);
   Barrack barrack3(5,1, position3,-2,barrackCost3);
   cout << endl;
 
-  cout << "CREATION ARCHER" << endl;
+  cout << "ARROW CREATION" << endl;
   Position posArrow(10,10);
   Arrow* arrow=barrack0.createArrow(1,posArrow,1);
   cout << "Arrow X position:" << arrow->getPosition().getX() << endl;
@@ -125,7 +125,7 @@ void BarrackTest(){
   cout << "Arrow life:" << arrow->getLife() << endl;
   cout << endl;
 
-  cout << "CREATION CAVALIER" << endl;
+  cout << "CAVALIER CREATION" << endl;
   Position posCavalier(20,20);
   Cavalier* cavalier=barrack0.createCavalier(2,posCavalier,2);
   cout << "Cavalier X position:" << cavalier->getPosition().getX() << endl;
@@ -135,7 +135,7 @@ void BarrackTest(){
   cout << "Cavalier life:" << cavalier->getLife() << endl;
   cout << endl;
 
-  cout << "CREATION DECURION" << endl;
+  cout << "DECURION CREATION" << endl;
   Position posDecurion(30,30);
   Decurion* decurion=barrack0.createDecurion(3,posArrow,3);
   cout << "Decurion X position:" << decurion->getPosition().getX() << endl;
@@ -145,7 +145,7 @@ void BarrackTest(){
   cout << "Decurion life:" << decurion->getLife() << endl;
   cout << endl;
 
-  cout << "CREATION CATAPULT" << endl;
+  cout << "CATAPULT CREATION" << endl;
   Position posCatapult(40,40);
   Catapult* catapult=barrack0.createCatapult(1,posArrow,1);
   cout << "Catapult X position:" << catapult->getPosition().getX() << endl;

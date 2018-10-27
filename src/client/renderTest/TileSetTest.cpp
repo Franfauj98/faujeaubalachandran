@@ -30,9 +30,9 @@ void tileSetTest(){
   cout<<"width:"<<dts.getCellWidth()<<endl;
   cout<<"height:"<<dts.getCellHeight()<<endl;
   cout<<"ImageFile:"<<dts.getImageFile()<<endl;
-  Decor water(IdDecor::EAU,pos1);
+  Decor water(IdDecor::SEA,pos1);
   cout<<"Water tile position:"<<dts.getTile(water).getX()<<endl;
-  Decor grass(IdDecor::HERBE,pos2);
+  Decor grass(IdDecor::GRASS,pos2);
   cout<<"Grass tile position:"<<dts.getTile(grass).getX()<<endl;
   cout<<endl;
 
