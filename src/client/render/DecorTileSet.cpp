@@ -35,7 +35,7 @@ DecorTileSet::DecorTileSet (){
 
 
 const std::string DecorTileSet::getImageFile () const{
-   const std::string file="res/terrain.png";
+   const std::string file="res/map.png";
    return file;
 
 }

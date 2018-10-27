@@ -8,13 +8,13 @@ Ressource::Ressource():Buildings(){
 
 Ressource::Ressource(int production, int id, Position position, int level, BuildingCost ressourceCost,IdTexture idTexture,int life):Buildings(id,position,level,idTexture, ressourceCost){
   try{
-    if(production>=0 && production<=1000){
+    if(production>=0 && production<=100){
       this->production=production;
       this->type = 7;
     } else {
       this->production=0;
       this->type = 7;
-      throw std::string("production must be positive or be smaller than 1000");
+      throw std::string("production must be positive or be smaller than 100");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;
@@ -88,11 +88,11 @@ int Ressource::getProduction() const {
 
 void Ressource::setProduction(const int production) {
   try{
-    if(production>=0 && production<=1000){
+    if(production>=0 && production<=100){
       this->production=production;
     } else {
       this->production=0;
-      throw std::string("production must be positive or be smaller than 1000");
+      throw std::string("production must be positive or be smaller than 100");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;

@@ -35,7 +35,7 @@ Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, 
         message+='\n';
         message+="level must be positive and smaller than 5";
         message+='\n';
-        message+="buildingCost must be positive and smaller than 10000";
+        message+="buildingCost must be positive and smaller than 1000";
         message+='\n';
         message+="life must be positive and smaller than 1000";
         message+='\n';
@@ -67,12 +67,12 @@ BuildingCost Buildings::getBuildingCost () const {
 }
 void Buildings::setBuildingCost (BuildingCost buildingCost) {
   try{
-    if(buildingCost.getGold()>=0 && buildingCost.getWood()>=0 && buildingCost.getGold()<=10000 && buildingCost.getWood()<=10000){
+    if(buildingCost.getGold()>=0 && buildingCost.getWood()>=0 && buildingCost.getGold()<=1000 && buildingCost.getWood()<=1000){
       this->buildingCost=buildingCost;
     } else {
         BuildingCost buildingCostnull(0,0);
         this->buildingCost=buildingCostnull;
-        throw std::string("buldingCost must be positive or smaller than 10000");
+        throw std::string("buldingCost must be positive or smaller than 1000");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;

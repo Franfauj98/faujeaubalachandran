@@ -13,12 +13,12 @@ void positionTest() {
   Position pos3(-2,-2);
 
   cout << "DEFAULT CONSTRUCTOR: " << endl;
-  cout << "abscisse : " << pos1.getX() << endl;
-  cout << "ordonnee : " << pos1.getY() << endl;
+  cout << "x : " << pos1.getX() << endl;
+  cout << "y : " << pos1.getY() << endl;
 
   cout << "CONSTRUCTOR WITH NEGATIVE ARGUMENTS: " << endl;
-  cout << "abscisse : " << pos3.getX() << endl;
-  cout << "ordonnee : " << pos3.getY() << endl;
+  cout << "x : " << pos3.getX() << endl;
+  cout << "y : " << pos3.getY() << endl;
 
   cout << "setX AND setY WITH NEGATIVE ARGUMENTS: " << endl;
   pos3.setX(-10);

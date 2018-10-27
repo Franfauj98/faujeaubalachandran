@@ -12,7 +12,7 @@ using namespace std;
 
 
   Layer::Layer (){
-      Map principalMap; // à mettre dans le moteur
+      Map principalMap; // to put in engine
 
       MapCreator basicMap;
       vector<int> basicId = principalMap.getBasicMapId();

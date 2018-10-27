@@ -14,7 +14,7 @@ Barrack::Barrack():Buildings(){
 
 Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost barrackCost,IdTexture idTexture,int life):Buildings(id,position,level,idTexture,barrackCost){
   try{
-    if (capacity>=0 && capacity<=10){
+    if (capacity>=0 && capacity<=6){
       this->capacity=capacity;
       this->unitsNumber=0;
       this->type = 5;
@@ -22,7 +22,7 @@ Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost
       this->capacity=0;
       this->unitsNumber=0;
       this->type = 5;
-      throw std::string("capacity must be positive or smaller than 10");
+      throw std::string("capacity must be positive or smaller than 6");
     }
     } catch (std::string error){
     std::cerr << error << std::endl;
@@ -32,7 +32,7 @@ Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost
 Barrack::Barrack (int id, Position position, int level) : Buildings() {
   switch(level){
     case 1 : {
-      setCapacity(2);
+      setCapacity(1);
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
@@ -45,7 +45,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
 
       break;}
     case 2 :{
-      setCapacity(4);
+      setCapacity(2);
       setIdBuilding(id);
       setPosition(position);
       setLevel(2);
@@ -57,7 +57,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       this->type = 5;
       break;}
     case 3 :{
-      setCapacity(6);
+      setCapacity(4);
       setIdBuilding(id);
       setPosition(position);
       setLevel(3);
@@ -69,7 +69,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       this->type = 5;
       break;}
     case 4 :{
-      setCapacity(8);
+      setCapacity(6);
       setIdBuilding(id);
       setPosition(position);
       setLevel(4);
@@ -101,11 +101,11 @@ int Barrack::getCapacity() const{
 
 void Barrack::setCapacity(const int capacity){
   try{
-    if (capacity>=0 && capacity<=10){
+    if (capacity>=0 && capacity<=6){
       this->capacity=capacity;
     } else {
       this->capacity=0;
-      throw std::string("capacity must be positive or smaller than 10");
+      throw std::string("capacity must be positive or smaller than 6");
     }
   } catch (std::string error){
     std::cerr << error << std::endl;

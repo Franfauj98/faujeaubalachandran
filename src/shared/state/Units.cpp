@@ -177,7 +177,7 @@ void Units::move (Position& p2, int moveNumber){
 }
 
 bool Units::moveAllowed (Position p2, int moveNumber){
-  if(moveNumber>0 && p2.getX()>=0 && p2.getY()>=0 && (p2.getX()+moveNumber)<10000 && (p2.getY()+moveNumber)<10000){
+  if(moveNumber>0 && p2.getX()>=0 && p2.getY()>=0 && (p2.getX()+moveNumber)<25 && (p2.getY()+moveNumber)<25){
     if(distance(this->position, p2) <= this -> movingRange){
       return true;
     }
