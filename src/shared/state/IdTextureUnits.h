@@ -7,22 +7,22 @@ namespace state {
 
   enum IdTextureUnits {
     NONE_UNIT     = 0,
-    DECURION1     = 1,
-    DECURION2     = 2,
-    DECURION3     = 3,
-    DECURION4     = 4,
-    ARROW1     = 5,
-    ARROW2     = 6,
-    ARROW3     = 7,
-    ARROW4     = 8,
-    CAVALIER1     = 9,
-    CAVALIER2     = 10,
-    CAVALIER3     = 11,
-    CAVALIER4     = 12,
-    CATAPULT1     = 13,
-    CATAPULT2     = 14,
-    CATAPULT3     = 15,
-    CATAPULT4     = 16
+    DECURION1     = 10,
+    DECURION2     = 11,
+    DECURION3     = 12,
+    DECURION4     = 13,
+    ARROW1     = 14,
+    ARROW2     = 15,
+    ARROW3     = 16,
+    ARROW4     = 17,
+    CAVALIER1     = 18,
+    CAVALIER2     = 19,
+    CAVALIER3     = 20,
+    CAVALIER4     = 21,
+    CATAPULT1     = 22,
+    CATAPULT2     = 23,
+    CATAPULT3     = 24,
+    CATAPULT4     = 25
   };
 
 };

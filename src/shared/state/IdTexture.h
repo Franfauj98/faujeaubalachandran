@@ -7,14 +7,14 @@ namespace state {
 
   enum IdTexture {
     NONE_BUILDING     = 0,
-    HDV1     = 1,
-    HDV2     = 2,
-    HDV3     = 3,
-    HDV4     = 4,
-    BARRACK     = 5,
-    RESSOURCE1     = 6,
-    RESSOURCE2     = 7,
-    RESSOURCE3     = 8
+    HDV1     = 26,
+    HDV2     = 27,
+    HDV3     = 28,
+    HDV4     = 29,
+    BARRACK     = 30,
+    RESSOURCE1     = 31,
+    RESSOURCE2     = 32,
+    RESSOURCE3     = 33
   };
 
 };
