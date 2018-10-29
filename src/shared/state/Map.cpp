@@ -100,13 +100,13 @@ for(int i = 0; i<3; i++){
 for (int i=0;i<15;i++){
   int elementRandx = rand () % size;
   int elementRandy = rand () % size;
-  int decor = rand () % 7+1;
-  while (map[elementRandx][elementRandy]!=2 && (decor==2 || decor==6)){
-    decor = rand () % 7+1;
+  int decorArray[] = {1,3,4,5,7,8};
+  int decor = rand () % 6;
+  while (map[elementRandx][elementRandy]!=2){
     elementRandx = rand () % size;
     elementRandy = rand () % size;
   }
-  map[elementRandx][elementRandy]= decor;
+  map[elementRandx][elementRandy]= decorArray[decor];
 }
 
   for (int i=0;i<size;i++){
@@ -136,6 +136,9 @@ for (int i=0;i<15;i++){
   int decorChange=0;
   int buildingChange=0;
 
+ int idPalace=1;
+ int idBarrack=1;
+ int idRessource=1;
 
   for(int i = 0; i<size; i++){
     for(int j = 0; j<size; j++){
@@ -171,15 +174,18 @@ for (int i=0;i<15;i++){
         break;
 
         case 26:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(1,p,2)));
+        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,2)));
+        idPalace++;
         break;
 
         case 30:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Barrack(1,p,2)));
+        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Barrack(idBarrack,p,2)));
+        idBarrack++;
         break;
 
         case 31:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Ressource(1,p,2)));
+        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Ressource(idRessource,p,2)));
+        idRessource++;
         break;
         default:
         break;
