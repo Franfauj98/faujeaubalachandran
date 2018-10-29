@@ -9,7 +9,7 @@ namespace state {
     NONE_DECOR     = 0,
     SEA     = 1,
     GRASS     = 2,
-    MOUNTAGNE     = 3,
+    MOUNTAIN     = 3,
     HORSE     = 4,
     CHICKEN     = 5,
     FISH     = 6,

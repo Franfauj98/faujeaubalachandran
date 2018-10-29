@@ -17,7 +17,7 @@ void DecorTest(){
 
   cout << "SETTER" << endl;
   decor0.setPassable(false);
-  decor0.setIdDecor(MOUNTAGNE);
+  decor0.setIdDecor(MOUNTAIN);
   cout << "idDecor: " << decor0.getIdDecor() << endl;
   cout << "passable?: " << decor0.getPassable() << endl;
   cout << endl;
