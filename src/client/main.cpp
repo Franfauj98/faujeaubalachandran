@@ -60,52 +60,22 @@ int main(int argc,char* argv[])
     window.draw(layer.getDecorMap());
     window.draw(layer.getBuildingMap());
     // MenuLayer menu1("res/helvetica.ttf", "Stats:", 14, sf::Color::White, 80, 50);
-    MenuLayer menu2("res/helvetica.ttf", "Level:", 14, sf::Color::White, 80, 70);
-    MenuLayer menu3("res/helvetica.ttf", "Life:", 14, sf::Color::White, 80, 90);
-    MenuLayer menu4("res/helvetica.ttf", "Damage:", 14, sf::Color::White, 80, 110);
+    //MenuLayer menu2("res/helvetica.ttf", "Level:", 14, sf::Color::White, 80, 70);
+    //MenuLayer menu3("res/helvetica.ttf", "Life:", 14, sf::Color::White, 80, 90);
+    //MenuLayer menu4("res/helvetica.ttf", "Damage:", 14, sf::Color::White, 80, 110);
     // window.draw(menu1.getText());
-    window.draw(menu2.getText());
-    window.draw(menu3.getText());
-    window.draw(menu4.getText());
+    //window.draw(menu2.getText());
+    //window.draw(menu3.getText());
+    //window.draw(menu4.getText());
     window.display();
     }
     cout<<"relaunch the render to get a new map"<<endl;
 
   }
   else {
-    //cout << "Please type 'hello' or 'state' or 'render'" << endl;
-    Layer layer;
-    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
-    window.setVerticalSyncEnabled(false);
-
-    while (window.isOpen())
-    {
-  // on gère les évènements
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      if(event.type == sf::Event::Closed)
-      window.close();
-    }
-
-  // on dessine le niveau
-    window.clear();
-    window.draw(layer.getBasicMap());
-    window.draw(layer.getDecorMap());
-    window.draw(layer.getBuildingMap());
-    // MenuLayer menu1("res/helvetica.ttf", "Stats:", 14, sf::Color::White, 80, 50);
-    MenuLayer menu2("res/helvetica.ttf", "Level:", 14, sf::Color::White, 80, 70);
-    MenuLayer menu3("res/helvetica.ttf", "Life:", 14, sf::Color::White, 80, 90);
-    MenuLayer menu4("res/helvetica.ttf", "Damage:", 14, sf::Color::White, 80, 110);
-    // window.draw(menu1.getText());
-    window.draw(menu2.getText());
-    window.draw(menu3.getText());
-    window.draw(menu4.getText());
-    window.display();
-    }
+    cout << "Please type 'hello' or 'state' or 'render'" << endl;
 
   }
-
 
   return 0;
 }

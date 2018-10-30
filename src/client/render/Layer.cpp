@@ -1,5 +1,4 @@
 #include "Layer.h"
-#include "MenuLayer.h"
 #include "BuildingTileSet.h"
 #include "DecorTileSet.h"
 #include "UnitsTileSet.h"
@@ -11,76 +10,41 @@ using namespace std;
   Layer::Layer (){
       Map principalMap; // to put in engine
 
-      MapCreator basicMap;
       vector<int> basicId = principalMap.getBasicMapId();
       DecorTileSet decor;
-      basicMap.loadTexture(decor.getImageFile());
-      basicMap.initQuads(principalMap.getSize());
-      for (int x=0;x<principalMap.getSize();x++){
-        for(int y=0;y<principalMap.getSize();y++){
-          basicMap.setSpriteLocation (principalMap.getSize(),x,y);
-          basicMap.setSpriteTexture(principalMap.getSize(),basicId,x,y);
-        }
-      }
+      LayerCreator basicMap(decor.getImageFile(),principalMap.getSize(),basicId);
 
-
-      MapCreator decorMap;
       vector<int> decorId = principalMap.getDecorMapId();
+      LayerCreator decorMap(decor.getImageFile(),principalMap.getSize(),decorId);
 
-      decorMap.loadTexture(decor.getImageFile());
-      decorMap.initQuads(principalMap.getSize());
-      for (int x=0;x<principalMap.getSize();x++){
-        for(int y=0;y<principalMap.getSize();y++){
-          decorMap.setSpriteLocation (principalMap.getSize(),x,y);
-          decorMap.setSpriteTexture(principalMap.getSize(),decorId,x,y);
-        }
-      }
-
-      MapCreator buildingMap;
       vector <int> buildingsId = principalMap.getBuildingsMapId();
       BuildingTileSet building;
-      buildingMap.loadTexture(building.getImageFile());
-      buildingMap.initQuads(principalMap.getSize());
-      for (int x=0;x<principalMap.getSize();x++){
-        for(int y=0;y<principalMap.getSize();y++){
-          buildingMap.setSpriteLocation (principalMap.getSize(),x,y);
-          buildingMap.setSpriteTexture(principalMap.getSize(),buildingsId,x,y);
-        }
-      }
+      LayerCreator buildingMap(building.getImageFile(),principalMap.getSize(),buildingsId);
 
-
-      // MenuLayer menu1("res/helvetica.ttf", "Stats", 14, sf::Color::White, 100, 100);
-      // this->text.push_back(menu1.getText());
-      // MenuLayer menu2("res/helvetica.ttf", "Level", 14, sf::Color::White, 100, 130);
-      // this->text.push_back(menu2.getText());
-      // MenuLayer menu3("res/helvetica.ttf", "Life", 14, sf::Color::White, 100, 160);
-      // this->text.push_back(menu3.getText());
-      // MenuLayer menu4("res/helvetica.ttf", "Damage", 14, sf::Color::White, 100, 190);
-      // this->text.push_back(menu4.getText());
       this->basicMap=basicMap;
       this->decorMap=decorMap;
       this->buildingMap=buildingMap;
 }
 
-MapCreator Layer::getBasicMap() const{
+LayerCreator Layer::getBasicMap() const{
   return this->basicMap;
 }
 
-MapCreator Layer::getDecorMap() const {
+LayerCreator Layer::getDecorMap() const {
   return this->decorMap;
 }
 
 
-MapCreator Layer::getBuildingMap() const {
+LayerCreator Layer::getBuildingMap() const {
   return this->buildingMap;
 }
 
-MapCreator Layer::getUnitMap() const {
+LayerCreator Layer::getUnitMap() const {
   return this->unitMap;
 }
 
-vector<sf::Text> Layer::getText() const {
-  return this->text;
+LayerCreator Layer::getStatsMap() const {
+  return this->statsMap;
 }
 
   Layer::~Layer (){

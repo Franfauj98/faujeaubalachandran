@@ -1,17 +1,17 @@
-#include "MapCreatorTest.h"
+#include "LayerCreatorTest.h"
 
 using namespace std;
 using namespace render;
 
 
-void mapCreatorTest(){
+void LayerCreatorTest(){
 
   cout << "-------------------------------------" << endl;
-  cout << "TEST MAPCREATOR" << endl;
+  cout << "TEST LAYERCREATOR" << endl;
   cout << "-------------------------------------" << endl;
 
   sf::RenderWindow window(sf::VideoMode(450, 450), "Tilemap");
-  MapCreator map;
+  LayerCreator map;
   vector <int> tiles={2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2,
@@ -31,7 +31,7 @@ void mapCreatorTest(){
     }
   }
 
-  MapCreator building;
+  LayerCreator building;
   vector <int> bu ={0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
                   0,6,0,0,0,0,0,0,0,0,
@@ -51,7 +51,7 @@ void mapCreatorTest(){
     }
   }
 
-  MapCreator units;
+  LayerCreator units;
   vector <int> un ={14,0,0,0,0,0,0,0,0,4,
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,

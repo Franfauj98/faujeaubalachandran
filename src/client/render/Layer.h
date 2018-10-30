@@ -2,20 +2,16 @@
 #ifndef RENDER__LAYER__H
 #define RENDER__LAYER__H
 
-#include <vector>
 
-namespace sf {
-  class Text;
-};
 namespace render {
-  class MapCreator;
+  class LayerCreator;
   class TileSet;
 };
 namespace state {
   class Map;
 }
 
-#include "MapCreator.h"
+#include "LayerCreator.h"
 #include "TileSet.h"
 #include "state/Map.h"
 
@@ -25,22 +21,21 @@ namespace render {
   class Layer {
     // Associations
     // Attributes
-  public:
-    std::vector<sf::Text> text;
   private:
-    MapCreator basicMap;
-    MapCreator decorMap;
-    MapCreator buildingMap;
-    MapCreator unitMap;
+    LayerCreator basicMap;
+    LayerCreator decorMap;
+    LayerCreator buildingMap;
+    LayerCreator unitMap;
+    LayerCreator statsMap;
     // Operations
   public:
     Layer ();
     ~Layer ();
-    MapCreator getBuildingMap () const;
-    MapCreator getBasicMap () const;
-    MapCreator getDecorMap () const;
-    MapCreator getUnitMap () const;
-    std::vector<sf::Text> getText () const;
+    LayerCreator getBuildingMap () const;
+    LayerCreator getBasicMap () const;
+    LayerCreator getDecorMap () const;
+    LayerCreator getUnitMap () const;
+    LayerCreator getStatsMap () const;
     // Setters and Getters
   };
 
