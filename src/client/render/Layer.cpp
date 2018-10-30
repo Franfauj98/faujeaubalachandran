@@ -8,9 +8,6 @@ using namespace render;
 using namespace state;
 using namespace std;
 
-
-
-
   Layer::Layer (){
       Map principalMap; // to put in engine
 

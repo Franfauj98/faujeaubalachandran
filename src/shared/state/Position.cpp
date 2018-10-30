@@ -7,7 +7,7 @@ Position::Position () : x(0), y(0) {}
 
 Position::Position (int x, int y) {
   try{
-    if(x>=0 && x<=25 && y>=0 && y<=25){
+    if(x>=0 && x<=30 && y>=0 && y<=30){
       this->x = x;
       this->y = y;
     } else {

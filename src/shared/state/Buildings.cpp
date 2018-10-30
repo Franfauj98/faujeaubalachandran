@@ -14,7 +14,7 @@ Buildings::Buildings() {
 
 Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost, int life) {
   try{
-    if(id>=0 && position.getX()>=0 && position.getX()<=10000 && position.getY()>=0 && position.getY()<=10000 && level>=0 && level<5
+    if(id>=0 && position.getX()>=0 && position.getX()<=30 && position.getY()>=0 && position.getY()<=30 && level>=0 && level<5
   && buildingCost.getWood()>=0 && buildingCost.getWood()>=10000 && buildingCost.getGold()>=0 && buildingCost.getGold()>=10000 && life >=0 && life <=1000){
       this->position = position;
       this->idBuilding= id;

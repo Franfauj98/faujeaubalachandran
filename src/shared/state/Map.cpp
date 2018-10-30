@@ -9,11 +9,8 @@ bool compare(int map[25][25],int positionX,int positionY,int rangeX,int rangeY, 
   bool boolean= true;
   for (int i=0;i<2*rangeX+1;i++){
     for (int j=0;j<2*rangeY+1;j++){
-      if(map[positionX+i-rangeX][positionY+j-rangeY] != elementTexture){
-        boolean &=true;
-      }
-      else{
-        boolean &=false;
+      if(map[positionX+i-rangeX][positionY+j-rangeY] == elementTexture){
+        boolean =false;
       }
     }
   }
@@ -24,24 +21,50 @@ Map::Map(){
 // Create sea
   srand(time(NULL));
 
-// decor wide
+// decor wide in one direction
   int sizeSea = 1;
   int sizeMountain = 1;
   int sizeWood = 1;
   int sizeBuilding = 1;
 
-  int map[25][25]; //replace by size
+ //vector< vector<int> > map(this->size,vector<int> (this->size,2)); //replace by size
+ int map[25][25];
   for (int i=0;i<size;i++){
     for (int j=0;j<size;j++){
       map[i][j]=2;
     }
   }
+  // for (int i=0;i<size;i++){
+  //   for (int j=0;j<size;j++){
+  //     cout<< map[i][j] << " ";
+  //   }
+  //   cout<<endl;
+  // }
+  // cout<<endl;
+  // cout<<endl;
 
+  for(int i = 0; i<3; i++){
+    int buildingRandx = rand() % (size-6)+3; // avoid borders
+    int buildingRandy = rand() % (size-6)+3;
+    while( !(compare(map,buildingRandx,buildingRandy,sizeBuilding*3,sizeBuilding*3,26)))
+     {
+        buildingRandx = rand() % (size-6)+3;
+        buildingRandy = rand() % (size-6)+3;
+    }
+        map[buildingRandx][buildingRandy-1] = 31;
+        map[buildingRandx][buildingRandy] = 26;
+        map[buildingRandx][buildingRandy+1] = 30;
+    }
 
 // feeding of sea decor random array positions
   for(int i = 0; i < 3; i++){
       int seaRandx = rand() % size;
       int seaRandy = rand() % size;
+      while(!(compare(map,seaRandx,seaRandy,sizeSea,sizeSea,26) && compare(map,seaRandx,seaRandy,sizeSea,sizeSea,30)
+      && compare(map,seaRandx,seaRandy,sizeSea,sizeSea,31) )){
+        seaRandx = rand() % size;
+        seaRandy = rand() % size;
+      }
       for (int i=0;i<2*sizeSea+1;i++){
         for (int j=0;j<2*sizeSea+1;j++){
           map[seaRandx+i-sizeSea][seaRandy+j-sizeSea] = 1;
@@ -54,7 +77,8 @@ Map::Map(){
   for(int i = 0; i<3; i++){
     int woodRandx = rand() % size;
     int woodRandy = rand() % size;
-    while(!(compare(map,woodRandx,woodRandy,sizeWood,sizeWood,1))){
+    while(!(compare(map,woodRandx,woodRandy,sizeWood,sizeWood,1) && compare(map,woodRandx,woodRandy,sizeWood,sizeWood,26)
+         && compare(map,woodRandx,woodRandy,sizeWood,sizeWood,30)&& compare(map,woodRandx,woodRandy,sizeWood,sizeWood,31))){
       woodRandx = rand() % size;
       woodRandy = rand() % size;
     }
@@ -70,7 +94,9 @@ Map::Map(){
   for(int i = 0; i<3; i++){
     int mountainRandx = rand() % size;
     int mountainRandy = rand() % size;
-    while( !(compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,1) && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,8))) {
+    while( !(compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,1) && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,8)
+           && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,26)&& compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,30)
+           && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,31))) {
       mountainRandx = rand() % size;
       mountainRandy = rand() % size;
     }
@@ -83,19 +109,6 @@ Map::Map(){
 
 // feeding of building decor random array positions in few steps. A building cannot be on an other one
 
-for(int i = 0; i<3; i++){
-  int buildingRandx = rand() % (size-6)+3; // éviter bord
-  int buildingRandy = rand() % (size-6)+3;
-  while( !(compare(map,buildingRandx,buildingRandy,sizeBuilding,0,1) && compare(map,buildingRandx,buildingRandy,sizeBuilding,0,8)
-    && compare(map,buildingRandx,buildingRandy,sizeBuilding,0,3) && compare(map,buildingRandx,buildingRandy,sizeBuilding,0,26)
-    && compare(map,buildingRandx,buildingRandy,sizeBuilding,0,30) && compare(map,buildingRandx,buildingRandy,sizeBuilding,0,31))) {
-      buildingRandx = rand() % (size-6)+3;
-      buildingRandy = rand() % (size-6)+3;
-  }
-      map[buildingRandx][buildingRandy-1] = 31;
-      map[buildingRandx][buildingRandy] = 26;
-      map[buildingRandx][buildingRandy+1] = 30;
-  }
 
 for (int i=0;i<15;i++){
   int elementRandx = rand () % size;
@@ -109,17 +122,24 @@ for (int i=0;i<15;i++){
   map[elementRandx][elementRandy]= decorArray[decor];
 }
 
+  // for (int i=0;i<size;i++){
+  //   for (int j=0;j<size;j++){
+  //     cout<< map[i][j] << " ";
+  //   }
+  //   cout<<endl;
+  // }
+  // cout<<endl;
+  // cout<<endl;
+
+  vector <vector <int> > matrix(25,vector<int> (25,0));
   for (int i=0;i<size;i++){
     for (int j=0;j<size;j++){
-      cout<< map[i][j] << " ";
+      matrix[i][j]=map[i][j];
     }
-    cout<<endl;
   }
-  cout<<endl;
-  cout<<endl;
 
-
-
+  this->mapMatrix = matrix;
+cout << "coucou1"<<endl;
 //Map Init
   for(int i = 0; i<size; i++){
     for(int j = 0; j<size; j++){
@@ -130,7 +150,7 @@ for (int i=0;i<15;i++){
       this->unitsMap.push_back(unique_ptr<Element> (new Units()));
     }
   }
-
+ cout << "coucou2"<<endl;
 // Add decor to maps
   int basicChange=0;
   int decorChange=0;
@@ -195,6 +215,7 @@ for (int i=0;i<15;i++){
       buildingChange++;
     }
   }
+   cout << "coucou3"<<endl;
 }
 
 Map::~Map(){
@@ -226,19 +247,19 @@ std::vector<int> Map::getBasicMapId () {
     Decor* d = (Decor *) this->basicMap[i].get();
     toReturn.push_back(d->getIdDecor());
   }
-  size_t i=0;
-  while (i<toReturn.size()){
-    int count =0;
-    while (count<25){
-      cout<< toReturn[i] << " ";
-      count++;
-      i++;
-    }
-    cout<<endl;
-  }
-  cout<<endl;
-  cout<<endl;
-  return toReturn;
+//   size_t i=0;
+//   while (i<toReturn.size()){
+//     int count =0;
+//     while (count<25){
+//       cout<< toReturn[i] << " ";
+//       count++;
+//       i++;
+//     }
+//     cout<<endl;
+//   }
+//   cout<<endl;
+//   cout<<endl;
+   return toReturn;
 }
 
 std::vector<int> Map::getDecorMapId () {
@@ -270,6 +291,10 @@ std::vector<int> Map::getBuildingsMapId () {
 
 int Map::getSize () const{
   return this->size;
+}
+
+vector<vector<int> > Map::getMapMatrix () const{
+  return this->mapMatrix;
 }
 
 void Map::deleteElement (int pos){

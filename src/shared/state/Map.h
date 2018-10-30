@@ -22,6 +22,7 @@ namespace state {
     // Associations
     // Attributes
   public:
+    std::vector< std::vector<int> >   mapMatrix;
     int size     = 25;
   private:
     std::vector<std::unique_ptr<Element>> basicMap;
@@ -44,6 +45,7 @@ namespace state {
     std::vector<int> getUnitsMapId ();
     std::vector<int> getBuildingsMapId ();
     int getSize () const;
+    std::vector<std::vector<int> > getMapMatrix () const;
     void addUnitsToMap (std::unique_ptr<Units> unitsToMap, int position);
     void deleteUnitsOnMap (std::unique_ptr<Element> unit);
     // Setters and Getters
