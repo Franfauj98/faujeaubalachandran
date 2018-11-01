@@ -1,17 +1,17 @@
-#include "LayerCreatorTest.h"
+#include "LayerTest.h"
 
 using namespace std;
 using namespace render;
 
 
-void LayerCreatorTest(){
+void layerTest(){
 
   cout << "-------------------------------------" << endl;
-  cout << "TEST LAYERCREATOR" << endl;
+  cout << "TEST LAYER" << endl;
   cout << "-------------------------------------" << endl;
 
-  sf::RenderWindow window(sf::VideoMode(450, 450), "Tilemap");
-  LayerCreator map;
+  sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+
   vector <int> tiles={2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2,
@@ -22,16 +22,8 @@ void LayerCreatorTest(){
                       2,2,1,1,2,2,2,2,2,2,
                       2,2,1,1,2,2,2,2,2,2,
                       2,2,2,2,2,2,2,2,2,2};
-  map.loadTexture("res/terrain.png");
-  map.initQuads(10);
-  for (int x=0;x<10;x++){
-    for(int y=0;y<10;y++){
-      map.setSpriteLocation (10,x,y);
-      map.setSpriteTexture(10,tiles,x,y);
-    }
-  }
+  Layer map("res/map.png", 10, tiles,1);
 
-  LayerCreator building;
   vector <int> bu ={0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
                   0,6,0,0,0,0,0,0,0,0,
@@ -42,16 +34,8 @@ void LayerCreatorTest(){
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,2,0,0,0,0,0,3,0,
                   0,0,0,0,0,0,0,0,0,0};
-  building.loadTexture("res/Buildings.png");
-  building.initQuads(10);
-  for (int x=0;x<10;x++){
-    for(int y=0;y<10;y++){
-      building.setSpriteLocation (10,x,y);
-      building.setSpriteTexture(10,bu,x,y);
-    }
-  }
+  Layer building("res/Buildings.png", 10, bu,1);
 
-  LayerCreator units;
   vector <int> un ={14,0,0,0,0,0,0,0,0,4,
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
@@ -62,18 +46,11 @@ void LayerCreatorTest(){
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,};
-  units.loadTexture("res/Units.png");
-  units.initQuads(10);
-  for (int x=0;x<10;x++){
-    for(int y=0;y<10;y++){
-      units.setSpriteLocation (10,x,y);
-      units.setSpriteTexture(10,un,x,y);
-    }
-  }
-// on fait tourner la boucle principale
+  Layer units("res/Units.png", 10, un,1);
+
   while (window.isOpen())
   {
-// on gère les évènements
+
   sf::Event event;
   while (window.pollEvent(event))
   {
@@ -81,7 +58,7 @@ void LayerCreatorTest(){
     window.close();
   }
 
-// on dessine le niveau
+
   window.clear();
   window.draw(map);
   window.draw(building);

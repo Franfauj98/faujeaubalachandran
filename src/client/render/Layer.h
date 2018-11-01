@@ -2,40 +2,56 @@
 #ifndef RENDER__LAYER__H
 #define RENDER__LAYER__H
 
+#include <SFML/Graphics.hpp>
+#include <string>
+#include <vector>
 
-namespace render {
-  class LayerCreator;
-  class TileSet;
-};
-namespace state {
-  class Map;
+namespace sf {
+  class Text;
+  class Font;
+  class Texture;
+  class VertexArray;
+  class Sprite;
+  class Color;
+  class RenderWindow;
+  class Transformable;
+  class Drawable;
 }
 
-#include "LayerCreator.h"
-#include "TileSet.h"
-#include "state/Map.h"
 
 namespace render {
 
   /// class Layer - 
-  class Layer {
-    // Associations
+  class Layer : public sf::Transformable, public sf::Drawable {
     // Attributes
+  public:
+    sf::Text text;
+    sf::Font font;
   private:
-    LayerCreator basicMap;
-    LayerCreator decorMap;
-    LayerCreator buildingMap;
-    LayerCreator unitMap;
-    LayerCreator statsMap;
+    sf::Texture texture;
+    sf::VertexArray quads;
+    sf::Sprite background;
     // Operations
   public:
     Layer ();
+    Layer (const std::string& imageFile, int size, std::vector<int> tiles, int iso);
+    Layer (const std::string& fontFile, std::string text, int size, sf::Color color, int x, int y);
+    Layer (const std::string& imageFile);
     ~Layer ();
-    LayerCreator getBuildingMap () const;
-    LayerCreator getBasicMap () const;
-    LayerCreator getDecorMap () const;
-    LayerCreator getUnitMap () const;
-    LayerCreator getStatsMap () const;
+    void loadTexture (const std::string& imageFile);
+    void initQuads (int size);
+    void setSpriteLocation (int size, int x, int y, int iso);
+    void setSpriteTexture (int size, std::vector<int> tiles, int x, int y, int iso);
+    void draw (sf::RenderTarget& target, sf::RenderStates states) const;
+    void loadFont (const std::string& fontFile);
+    void setFont ();
+    void setText (std::string& text);
+    void setCharacterSize (int size);
+    void setColor (sf::Color& color);
+    void setPosition (int x, int y);
+    sf::Text getText () const;
+    void drawText (sf::RenderWindow& window) const;
+    void drawSprite (sf::RenderWindow& window) const;
     // Setters and Getters
   };
 

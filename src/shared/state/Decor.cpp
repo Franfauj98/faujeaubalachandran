@@ -20,7 +20,7 @@ Decor::Decor(IdDecor id, Position position) {
     break;
     case IdDecor::HORSE: passable=true;
     break;
-    case IdDecor::RENNE: passable=true;
+    case IdDecor::REINDEER: passable=true;
     break;
     case IdDecor::FISH: passable=true;
     break;
@@ -32,7 +32,7 @@ Decor::Decor(IdDecor id, Position position) {
     break;
     case IdDecor::SEA: passable=false;
     break;
-    case IdDecor::LIFE: passable=true;
+    case IdDecor::SELECTED: passable=true;
     break;
   }
 }

@@ -38,15 +38,15 @@ int main(int argc,char* argv[])
   } else if (argv[1] &&!strcmp(argv[1],"render")) {
 
     //tileTest();
-    //ileSetTest();
-    //mapCreatorTest();
-    Layer layer;
+    //tileSetTest();
+    //layerTest();
+    renderMap map;
     sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
     window.setVerticalSyncEnabled(false);
 
     while (window.isOpen())
     {
-  // on gère les évènements
+  // omanage the events
     sf::Event event;
     while (window.pollEvent(event))
     {
@@ -54,19 +54,24 @@ int main(int argc,char* argv[])
       window.close();
     }
 
-  // on dessine le niveau
+  // draw the layers
     window.clear();
-    window.draw(layer.getBasicMap());
-    window.draw(layer.getDecorMap());
-    window.draw(layer.getBuildingMap());
+
+    map.getBackground()->drawSprite(window);
+    window.draw(map.getBasicMap());
+    window.draw(map.getDecorMap());
+    window.draw(map.getBuildingMap());
+    window.draw(map.getStatsMap());
+    //Layer menu1("res/helvetica.ttf", "Stats:", 14, sf::Color::White, 80, 20);
     // MenuLayer menu1("res/helvetica.ttf", "Stats:", 14, sf::Color::White, 80, 50);
     //MenuLayer menu2("res/helvetica.ttf", "Level:", 14, sf::Color::White, 80, 70);
     //MenuLayer menu3("res/helvetica.ttf", "Life:", 14, sf::Color::White, 80, 90);
     //MenuLayer menu4("res/helvetica.ttf", "Damage:", 14, sf::Color::White, 80, 110);
-    // window.draw(menu1.getText());
-    //window.draw(menu2.getText());
-    //window.draw(menu3.getText());
-    //window.draw(menu4.getText());
+    //menu1.drawText(window);
+
+
+
+
     window.display();
     }
     cout<<"relaunch the render to get a new map"<<endl;

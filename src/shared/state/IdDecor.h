@@ -13,9 +13,9 @@ namespace state {
     HORSE     = 4,
     CHICKEN     = 5,
     FISH     = 6,
-    RENNE     = 7,
+    REINDEER     = 7,
     TREE     = 8,
-    LIFE     = 9
+    SELECTED     = 9
   };
 
 };

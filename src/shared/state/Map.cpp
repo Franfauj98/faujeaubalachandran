@@ -186,7 +186,7 @@ cout << "coucou1"<<endl;
         break;
 
         case 7:
-        this->decorMap[decorChange] = move(unique_ptr<Element> (new Decor(RENNE,p)));
+        this->decorMap[decorChange] = move(unique_ptr<Element> (new Decor(REINDEER,p)));
         break;
 
         case 8:
