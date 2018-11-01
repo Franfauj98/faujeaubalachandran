@@ -80,30 +80,30 @@ int main(int argc,char* argv[])
   else {
     cout << "Please type 'hello' or 'state' or 'render'" << endl;
     renderMap map;
-    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
-    window.setVerticalSyncEnabled(false);
+  //   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+  //   window.setVerticalSyncEnabled(false);
+  //
+  //   while (window.isOpen())
+  //   {
+  // // omanage the events
+  //   sf::Event event;
+  //   while (window.pollEvent(event))
+  //   {
+  //     if(event.type == sf::Event::Closed)
+  //     window.close();
+  //   }
+  //
+  // // draw the layers
+  //   window.clear();
+  //
+  //   map.getBackground()->drawSprite(window);
+  //   window.draw(map.getBasicMap());
+  //   window.draw(map.getDecorMap());
+  //   window.draw(map.getBuildingMap());
+  //   window.draw(map.getStatsMap());
+  //   window.display();
 
-    while (window.isOpen())
-    {
-  // omanage the events
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      if(event.type == sf::Event::Closed)
-      window.close();
-    }
-
-  // draw the layers
-    window.clear();
-
-    map.getBackground()->drawSprite(window);
-    window.draw(map.getBasicMap());
-    window.draw(map.getDecorMap());
-    window.draw(map.getBuildingMap());
-    window.draw(map.getStatsMap());
-    window.display();
-
-  }
+  //}
 }
 
   return 0;
