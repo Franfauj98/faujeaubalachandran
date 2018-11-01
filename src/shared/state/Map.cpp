@@ -22,14 +22,29 @@ bool compare(int map[25][25],int positionX,int positionY,int rangeX,int rangeY, 
   return boolean;
 }
 
+bool comp(int rangeX,int rangeY){
+  if (rangeX==0){
+    if (rangeY==0){
+      return false;
+    }
+  }
+  else if (rangeX==2){
+    if (rangeY==2){
+      return false;
+    }
+  }
+  else {
+    return true;
+  }
+}
+
 Map::Map(){
     // Create sea
       srand(time(NULL));
       this->size=25;
     // decor wide in one direction
-      // int rangeXY[2]={1,2};
-      // int rangeX=0;
-      // int rangeY=0;
+      int rangeX=0;
+      int rangeY=0;
      //vector< vector<int> > map(this->size,vector<int> (this->size,2)); //replace by size
      int map[25][25];
       for (int i=0;i<this->size;i++){
@@ -61,16 +76,18 @@ Map::Map(){
       for(int i = 0; i < 3; i++){
          seaRandx = rand() % this->size;
          seaRandy = rand() % this->size;
-         //rangeX= rand() % 2;
-         //rangeY= rand() % 2;
-          while(!(compare(map,seaRandx,seaRandy,sizeSea,sizeSea,26) && compare(map,seaRandx,seaRandy,sizeSea,sizeSea,30)
-          && compare(map,seaRandx,seaRandy,sizeSea,sizeSea,31))){
+         rangeX= rand() % 3;
+         rangeY= rand() % 3;
+          while(!(compare(map,seaRandx,seaRandy,rangeX,rangeY,26) && compare(map,seaRandx,seaRandy,rangeX,rangeY,30)
+          && compare(map,seaRandx,seaRandy,rangeX,rangeY,31) && comp(rangeX,rangeY))){
+            rangeX= rand() % 3;
+            rangeY= rand() % 3;
             seaRandx = rand() % this->size;
             seaRandy = rand() % this->size;
           }
-          for (int i=0;i<2*sizeSea+1;i++){
-            for (int j=0;j<2*sizeSea+1;j++){
-              map[seaRandx+i-sizeSea][seaRandy+j-sizeSea] = 1;
+          for (int i=0;i<2*rangeX+1;i++){
+            for (int j=0;j<2*rangeY+1;j++){
+              map[seaRandx+i-rangeX][seaRandy+j-rangeY] = 1;
             }
           }
           map[seaRandx][seaRandy] = 6;
@@ -82,14 +99,19 @@ Map::Map(){
       for(int i = 0; i<3; i++){
        woodRandx = rand() % this->size;
        woodRandy = rand() % this->size;
-        while(!(compare(map,woodRandx,woodRandy,sizeWood,sizeWood,1) && compare(map,woodRandx,woodRandy,sizeWood,sizeWood,26)
-             && compare(map,woodRandx,woodRandy,sizeWood,sizeWood,30)&& compare(map,woodRandx,woodRandy,sizeWood,sizeWood,31))){
+       rangeX= rand() % 3;
+       rangeY= rand() % 3;
+        while(!(compare(map,woodRandx,woodRandy,rangeX,rangeY,1) && compare(map,woodRandx,woodRandy,rangeX,rangeY,26)
+             && compare(map,woodRandx,woodRandy,rangeX,rangeY,30)&& compare(map,woodRandx,woodRandy,rangeX,rangeY,31)
+           && comp(rangeX,rangeY))){
           woodRandx = rand() % this->size;
           woodRandy = rand() % this->size;
+          rangeX= rand() % 3;
+          rangeY= rand() % 3;
         }
-        for (int i=0;i<2*sizeWood+1;i++){
-          for (int j=0;j<2*sizeWood+1;j++){
-            map[woodRandx+i-sizeWood][woodRandy+j-sizeWood] = 8;
+        for (int i=0;i<2*rangeX+1;i++){
+          for (int j=0;j<2*rangeY+1;j++){
+            map[woodRandx+i-rangeX][woodRandy+j-rangeY] = 8;
         }
       }
     }
@@ -100,15 +122,19 @@ Map::Map(){
       for(int i = 0; i<3; i++){
         mountainRandx = rand() % this->size;
         mountainRandy = rand() % this->size;
-        while( !(compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,1) && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,8)
-               && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,26)&& compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,30)
-               && compare(map,mountainRandx,mountainRandy,sizeMountain,sizeMountain,31))) {
+        rangeX= rand() % 3;
+        rangeY= rand() % 3;
+        while( !(compare(map,mountainRandx,mountainRandy,rangeX,rangeY,1) && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,8)
+               && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,26)&& compare(map,mountainRandx,mountainRandy,rangeX,rangeY,30)
+               && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,31)&& comp(rangeX,rangeY))) {
           mountainRandx = rand() % this->size;
           mountainRandy = rand() % this->size;
+          rangeX= rand() % 3;
+          rangeY= rand() % 3;
         }
-        for (int i=0;i<2*sizeMountain+1;i++){
-          for (int j=0;j<2*sizeMountain+1;j++){
-            map[mountainRandx+i-sizeMountain][mountainRandy+j-sizeMountain] = 3;
+        for (int i=0;i<2*rangeX+1;i++){
+          for (int j=0;j<2*rangeY+1;j++){
+            map[mountainRandx+i-rangeX][mountainRandy+j-rangeY] = 3;
         }
       }
     }
