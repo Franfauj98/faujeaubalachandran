@@ -25,13 +25,11 @@ bool compare(int map[25][25],int positionX,int positionY,int rangeX,int rangeY, 
 Map::Map(){
     // Create sea
       srand(time(NULL));
-
+      this->size=25;
     // decor wide in one direction
-      int sizeSea = 1;
-      int sizeMountain = 1;
-      int sizeWood = 1;
-      int sizeBuilding = 1;
-
+      // int rangeXY[2]={1,2};
+      // int rangeX=0;
+      // int rangeY=0;
      //vector< vector<int> > map(this->size,vector<int> (this->size,2)); //replace by size
      int map[25][25];
       for (int i=0;i<this->size;i++){
@@ -40,12 +38,13 @@ Map::Map(){
         }
       }
 
+      int sizeBuilding = 1;
       int buildingRandx = 0; // avoid borders
       int buildingRandy = 0;
       for(int i = 0; i<3; i++){
         buildingRandx = rand() % (this->size-6)+3; // avoid borders
         buildingRandy = rand() % (this->size-6)+3;
-        while( !(compare(map,buildingRandx,buildingRandy,sizeBuilding*3,sizeBuilding*3,26)))
+        while( !(compare(map,buildingRandx,buildingRandy,sizeBuilding*5,sizeBuilding*5,26)))
          {
             buildingRandx = rand() % (this->size-6)+3;
             buildingRandy = rand() % (this->size-6)+3;
@@ -56,11 +55,14 @@ Map::Map(){
         }
 
     // feeding of sea decor random array positions
+      int sizeSea=1;
       int seaRandx = 0;
       int seaRandy = 0;
       for(int i = 0; i < 3; i++){
          seaRandx = rand() % this->size;
          seaRandy = rand() % this->size;
+         //rangeX= rand() % 2;
+         //rangeY= rand() % 2;
           while(!(compare(map,seaRandx,seaRandy,sizeSea,sizeSea,26) && compare(map,seaRandx,seaRandy,sizeSea,sizeSea,30)
           && compare(map,seaRandx,seaRandy,sizeSea,sizeSea,31))){
             seaRandx = rand() % this->size;
@@ -73,7 +75,7 @@ Map::Map(){
           }
           map[seaRandx][seaRandy] = 6;
       }
-
+      int sizeWood=1;
       int woodRandx = 0;
       int woodRandy = 0;
     // feeding of wood decor random array positions
@@ -91,7 +93,7 @@ Map::Map(){
         }
       }
     }
-
+    int sizeMountain=1;
     int mountainRandx = 0;
     int mountainRandy = 0;
     // feeding of mountain decor random array positions

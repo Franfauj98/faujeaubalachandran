@@ -25,8 +25,8 @@ renderMap::renderMap (){
   vector <int> statsId = {1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0};
   StatsTileSet stats;
   Layer statsMap(stats.getImageFile(),4,statsId,0);
-
-  this->background=new Layer("res/background.png");
+  this->background=unique_ptr<Layer> (new Layer("res/background.png"));
+  //this->background=new Layer("res/background.png");
   this->basicMap=basicMap;
   this->decorMap=decorMap;
   this->buildingMap=buildingMap;
@@ -54,7 +54,7 @@ Layer renderMap::getStatsMap() const {
   return this->statsMap;
 }
 
-Layer* renderMap::getBackground() const {
+std::unique_ptr<Layer> const& renderMap::getBackground() const {
   return this->background;
 }
 

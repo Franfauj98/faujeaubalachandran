@@ -2,6 +2,7 @@
 #ifndef RENDER__RENDERMAP__H
 #define RENDER__RENDERMAP__H
 
+#include <memory>
 
 namespace render {
   class Layer;
@@ -27,7 +28,7 @@ namespace render {
     Layer buildingMap;
     Layer unitMap;
     Layer statsMap;
-    Layer* background;
+    std::unique_ptr<Layer> background;
     // Operations
   public:
     renderMap ();
@@ -37,7 +38,7 @@ namespace render {
     Layer getDecorMap () const;
     Layer getUnitMap () const;
     Layer getStatsMap () const;
-    Layer* getBackground () const;
+    std::unique_ptr<Layer> const& getBackground () const;
     // Setters and Getters
   };
 
