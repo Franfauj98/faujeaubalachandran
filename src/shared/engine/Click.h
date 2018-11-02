@@ -3,13 +3,19 @@
 #define ENGINE__CLICK__H
 
 
+namespace state {
+  class Position;
+}
+
+#include "state/Position.h"
+
 namespace engine {
 
   /// class Click - 
   class Click {
-    // Operations
-  public:
-    Click ();
+    // Attributes
+  private:
+    state::Position positionTile;
     // Setters and Getters
   };
 

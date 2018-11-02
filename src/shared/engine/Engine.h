@@ -10,14 +10,14 @@ namespace engine {
   class Click;
 };
 namespace render {
-  class RenderMap;
+  class renderMap;
 };
 namespace state {
   class Observable;
 }
 
 #include "Click.h"
-#include "render/RenderMap.h"
+#include "render/renderMap.h"
 #include "state/Observable.h"
 #include "Command.h"
 
