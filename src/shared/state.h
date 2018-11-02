@@ -14,9 +14,6 @@
 #include "state/Arrow.h"
 #include "state/Cavalier.h"
 #include "state/Catapult.h"
-#include "state/UnitsObserver.h"
-#include "state/BuildingObserver.h"
-#include "state/Observable.h"
 #include "state/Empire.h"
 #include "state/Map.h"
 #include "state/Barrack.h"
@@ -24,4 +21,7 @@
 #include "state/IdDecor.h"
 #include "state/Decor.h"
 #include "state/Palace.h"
+#include "state/UnitsObserver.h"
+#include "state/BuildingsObserver.h"
+#include "state/Observable.h"
 #endif

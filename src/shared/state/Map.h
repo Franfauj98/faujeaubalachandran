@@ -8,19 +8,17 @@
 namespace state {
   class Element;
   class Units;
-  class Observable;
   class Empire;
 }
 
 #include "Element.h"
 #include "Units.h"
-#include "Observable.h"
 #include "Empire.h"
 
 namespace state {
 
   /// class Map - 
-  class Map : public state::Observable {
+  class Map {
     // Associations
     // Attributes
   public:

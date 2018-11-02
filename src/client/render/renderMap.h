@@ -9,12 +9,12 @@ namespace render {
   class TileSet;
 };
 namespace state {
-  class Map;
+  class Observable;
 }
 
 #include "Layer.h"
 #include "TileSet.h"
-#include "state/Map.h"
+#include "state/Observable.h"
 
 namespace render {
 

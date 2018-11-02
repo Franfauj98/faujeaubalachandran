@@ -9,18 +9,20 @@ using namespace state;
 using namespace std;
 
 renderMap::renderMap (){
-  Map principalMap; // to put in engine
+  Observable principalMap; // to put in engine
 
-  vector<int> basicId = principalMap.getBasicMapId();
+  principalMap.notifyObserver();
+
+  vector<int> basicId = principalMap.getAllMaps()->getBasicMapId();
   DecorTileSet decor;
-  Layer basicMap(decor.getImageFile(),principalMap.getSize(),basicId,1);
+  Layer basicMap(decor.getImageFile(),principalMap.getAllMaps()->getSize(),basicId,1);
 
-  vector<int> decorId = principalMap.getDecorMapId();
-  Layer decorMap(decor.getImageFile(),principalMap.getSize(),decorId,1);
+  vector<int> decorId = principalMap.getAllMaps()->getDecorMapId();
+  Layer decorMap(decor.getImageFile(),principalMap.getAllMaps()->getSize(),decorId,1);
 
-  vector <int> buildingsId = principalMap.getBuildingsMapId();
+  vector <int> buildingsId = principalMap.getAllMaps()->getBuildingsMapId();
   BuildingTileSet building;
-  Layer buildingMap(building.getImageFile(),principalMap.getSize(),buildingsId,1);
+  Layer buildingMap(building.getImageFile(),principalMap.getAllMaps()->getSize(),buildingsId,1);
 
   vector <int> statsId = {1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0};
   StatsTileSet stats;

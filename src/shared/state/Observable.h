@@ -4,22 +4,29 @@
 
 
 namespace state {
+  class Map;
   class UnitsObserver;
-  class BuildingObserver;
+  class BuildingsObserver;
 }
 
+#include "Map.h"
 #include "UnitsObserver.h"
-#include "BuildingObserver.h"
+#include "BuildingsObserver.h"
 
 namespace state {
 
   /// class Observable - 
   class Observable {
     // Associations
+    // Attributes
+  private:
+    Map* allMaps;
     // Operations
   public:
     ~Observable ();
     void notifyObserver () const;
+    Observable ();
+    state::Map* getAllMaps ();
     // Setters and Getters
   };
 
