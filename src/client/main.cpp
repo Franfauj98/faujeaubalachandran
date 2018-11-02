@@ -46,13 +46,32 @@ int main(int argc,char* argv[])
 
     while (window.isOpen())
     {
-  // omanage the events
+  // manage the events
     sf::Event event;
     while (window.pollEvent(event))
     {
-      if(event.type == sf::Event::Closed)
+      if(event.type == sf::Event::Closed){
       window.close();
-    }
+      }
+      // if (event.type == sf::Event::MouseButtonPressed)
+      // {
+      //     if (event.mouseButton.button == sf::Mouse::Right)
+      //     {
+      //       std::cout << "the right button was pressed" << std::endl;
+      //       std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+      //       std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+      //     }
+      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+{
+    // le bouton gauche est enfoncé : on tire
+    std::cout << "the right button was pressed" << std::endl;
+    sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+    std::cout << "mouse x: " << localPosition.x << std::endl;
+    std::cout << "mouse y: " << localPosition.y << std::endl;
+}
+      }
+
+    //}
 
   // draw the layers
     window.clear();
