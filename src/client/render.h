@@ -10,4 +10,5 @@
 #include "render/UnitsTileSet.h"
 #include "render/BuildingTileSet.h"
 #include "render/StatsTileSet.h"
+#include "render/UpdateRender.h"
 #endif

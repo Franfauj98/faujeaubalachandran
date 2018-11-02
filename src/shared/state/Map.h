@@ -8,17 +8,19 @@
 namespace state {
   class Element;
   class Units;
+  class Observable;
   class Empire;
 }
 
 #include "Element.h"
 #include "Units.h"
+#include "Observable.h"
 #include "Empire.h"
 
 namespace state {
 
   /// class Map - 
-  class Map {
+  class Map : public state::Observable {
     // Associations
     // Attributes
   public:
@@ -32,7 +34,7 @@ namespace state {
     // Operations
   public:
     Map ();
-    ~Map ();
+    virtual ~Map ();
     void addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt);
     std::vector<std::unique_ptr<Element>> const& getBasicMap ();
     void deleteElement (int pos);
