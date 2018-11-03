@@ -27,9 +27,10 @@ renderMap::renderMap (){
     10);
 
   principalMap.notifyObserver(principalMap,
-    std::unique_ptr<Element> (new Arrow()),
+    std::unique_ptr<Element> (new Palace(2,pos2,2)),
     1,
-    30);
+    26);
+
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;
