@@ -42,6 +42,14 @@ renderMap::renderMap (){
   BuildingTileSet building;
   Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
 
+  vector <int> unitsId = principalMap.getAllMaps().getUnitsMapId();
+  for(size_t i=0; i<unitsId.size(); i++){
+    if(i%25==0) std::cout<<"\n";
+    std::cout << unitsId[i];
+  }
+  std::cout<<"\n";
+
+
   vector <int> statsId = {1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0};
   StatsTileSet stats;
   Layer statsMap(stats.getImageFile(),4,statsId,0);

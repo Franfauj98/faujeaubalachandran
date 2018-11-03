@@ -288,7 +288,7 @@ int Map::getPositionElement (std::unique_ptr<Element> elt){
   return pos;
 }
 
-void Map::addUnitsToMap (std::unique_ptr<Units> unitsToMap, int position){
+void Map::addUnitsToMap (std::unique_ptr<Element>& unitsToMap, int& position){
   this->unitsMap[position] = move(unitsToMap);
 }
 
