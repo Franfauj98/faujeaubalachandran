@@ -3,6 +3,8 @@
 #include "DecorTileSet.h"
 #include "UnitsTileSet.h"
 #include "StatsTileSet.h"
+#include "../../shared/state.h"
+
 #include <iostream>
 using namespace render;
 using namespace state;
@@ -11,18 +13,34 @@ using namespace std;
 renderMap::renderMap (){
   Observable principalMap; // to put in engine
 
-  principalMap.notifyObserver();
+  Position pos1(1,1);
+  Position pos2(1,2);
 
-  vector<int> basicId = principalMap.getAllMaps()->getBasicMapId();
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Arrow(2, pos1, 1)),
+    1,
+    14);
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Decurion(2, pos2, 2)),
+    2,
+    10);
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Arrow()),
+    1,
+    30);
+
+  vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;
-  Layer basicMap(decor.getImageFile(),principalMap.getAllMaps()->getSize(),basicId,1);
+  Layer basicMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),basicId,1);
 
-  vector<int> decorId = principalMap.getAllMaps()->getDecorMapId();
-  Layer decorMap(decor.getImageFile(),principalMap.getAllMaps()->getSize(),decorId,1);
+  vector<int> decorId = principalMap.getAllMaps().getDecorMapId();
+  Layer decorMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),decorId,1);
 
-  vector <int> buildingsId = principalMap.getAllMaps()->getBuildingsMapId();
+  vector <int> buildingsId = principalMap.getAllMaps().getBuildingsMapId();
   BuildingTileSet building;
-  Layer buildingMap(building.getImageFile(),principalMap.getAllMaps()->getSize(),buildingsId,1);
+  Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
 
   vector <int> statsId = {1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0};
   StatsTileSet stats;

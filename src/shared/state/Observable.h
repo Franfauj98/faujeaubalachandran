@@ -2,14 +2,18 @@
 #ifndef STATE__OBSERVABLE__H
 #define STATE__OBSERVABLE__H
 
+#include <memory>
 
 namespace state {
   class Map;
+  class Observable;
+  class Element;
   class UnitsObserver;
   class BuildingsObserver;
 }
 
 #include "Map.h"
+#include "Element.h"
 #include "UnitsObserver.h"
 #include "BuildingsObserver.h"
 
@@ -20,13 +24,13 @@ namespace state {
     // Associations
     // Attributes
   private:
-    Map* allMaps;
+    Map allMaps;
     // Operations
   public:
     ~Observable ();
-    void notifyObserver () const;
+    void notifyObserver (state::Observable& observable, std::unique_ptr<Element> toChange, int position, int idToChange) const;
     Observable ();
-    state::Map* getAllMaps ();
+    Map& getAllMaps ();
     // Setters and Getters
   };
 
