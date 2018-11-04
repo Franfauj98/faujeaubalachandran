@@ -93,6 +93,10 @@ void Layer::setSpriteTexture (int size, vector<int> tiles,int x, int y, int iso)
   }
 }
 
+sf::VertexArray Layer::getQuads() const {
+  return this->quads;
+}
+
 void Layer::draw (sf::RenderTarget& target, sf::RenderStates states) const{
   // apply the transformation
   states.transform *= getTransform();

@@ -4,9 +4,21 @@
 
 
 namespace engine {
+  class Command;
+}
+
+#include "CommandTypeId.h"
+#include "Command.h"
+
+namespace engine {
 
   /// class Move - 
-  class Move {
+  class Move : public engine::Command {
+    // Operations
+  public:
+    ~Move ();
+    CommandTypeId getTypeId () const;
+    void execute ();
     // Setters and Getters
   };
 

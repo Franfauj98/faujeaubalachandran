@@ -4,9 +4,21 @@
 
 
 namespace engine {
+  class Command;
+}
+
+#include "CommandTypeId.h"
+#include "Command.h"
+
+namespace engine {
 
   /// class LevelUp - 
-  class LevelUp {
+  class LevelUp : public engine::Command {
+    // Operations
+  public:
+    ~LevelUp ();
+    CommandTypeId getTypeId () const;
+    void execute ();
     // Setters and Getters
   };
 

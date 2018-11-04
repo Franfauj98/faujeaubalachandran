@@ -7,7 +7,6 @@
 
 namespace engine {
   class Command;
-  class Click;
 };
 namespace render {
   class renderMap;
@@ -16,7 +15,6 @@ namespace state {
   class Observable;
 }
 
-#include "Click.h"
 #include "render/renderMap.h"
 #include "state/Observable.h"
 #include "Command.h"

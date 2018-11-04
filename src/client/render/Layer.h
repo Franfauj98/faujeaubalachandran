@@ -52,6 +52,7 @@ namespace render {
     sf::Text getText () const;
     void drawText (sf::RenderWindow& window) const;
     void drawSprite (sf::RenderWindow& window) const;
+    sf::VertexArray getQuads () const;
     // Setters and Getters
   };
 
