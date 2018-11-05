@@ -28,11 +28,11 @@ int position, int action){
       Map& map = mapToChange.getAllMaps();
       Units* uniteToUprgrade = (Units *)map.getUnitsMap()[position].get();
 
-      int level = uni->getLevel();
+      int level = uniteToUprgrade->getLevel();
       std::cout << level << std::endl;
       std::cout << "levelUp" << std::endl;
-      uni->setLevel(++level);
-      level = uni->getLevel();
+      uniteToUprgrade->setLevel(++level);
+      level = uniteToUprgrade->getLevel();
       std::cout << level << std::endl;
       break;
     }
