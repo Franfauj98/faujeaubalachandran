@@ -13,7 +13,7 @@ Observable::Observable(){
 
 void Observable::notifyObserver(Observable& observable,
 std::unique_ptr<Element> toChange,
-int position, int id, int action) const{
+int position, int id, int action, int unitToCreate) const{
 
   UnitsObserver units;
   BuildingsObserver buildings;
@@ -24,17 +24,17 @@ int position, int id, int action) const{
 
     case 26:
     cout<<"Do stg on Palace"<<endl;
-    buildings.changeBuildings(move(toChange), observable, position, action);
+    buildings.changeBuildings(move(toChange), observable, position, action, unitToCreate);
     break;
 
     case 30:
     cout<<"Do stg on Barrack"<<endl;
-    buildings.changeBuildings(move(toChange), observable, position, action);
+    buildings.changeBuildings(move(toChange), observable, position, action, unitToCreate);
     break;
 
     case 31:
     cout<<"Do stg on Ressource"<<endl;
-    buildings.changeBuildings(move(toChange), observable, position, action);
+    buildings.changeBuildings(move(toChange), observable, position, action, unitToCreate);
     break;
 
     case 14:

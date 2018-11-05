@@ -18,19 +18,23 @@ renderMap::renderMap (){
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Arrow(2, pos1, 1)),
-    1,
-    14, 1);
-
-  principalMap.notifyObserver(principalMap,
-    std::unique_ptr<Element> (new Decurion(2, pos2, 2)),
-    2,
-    10, 2);
+    1, 14, 1, 0);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,2)),
-    1,
-    26, 1);
+    24, 26, 2, 1);
 
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Palace(2,pos2,2)),
+    25, 26, 2, 2);
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Palace(2,pos2,3)),
+    49, 26, 2, 3);
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Palace(2,pos2,3)),
+    50, 26, 2, 4);
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;
@@ -49,6 +53,10 @@ renderMap::renderMap (){
     std::cout << unitsId[i];
   }
   std::cout<<"\n";
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Decurion(2, pos2, 2)),
+    2, 10, 1, 0);
 
 
   vector <int> statsId = {1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0};
