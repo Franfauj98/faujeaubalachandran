@@ -19,17 +19,17 @@ renderMap::renderMap (){
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Arrow(2, pos1, 1)),
     1,
-    14);
+    14, 1);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Decurion(2, pos2, 2)),
     2,
-    10);
+    10, 2);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,2)),
     1,
-    26);
+    26, 1);
 
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
@@ -69,7 +69,6 @@ Layer renderMap::getBasicMap() const{
 Layer renderMap::getDecorMap() const {
   return this->decorMap;
 }
-
 
 Layer renderMap::getBuildingMap() const {
   return this->buildingMap;
