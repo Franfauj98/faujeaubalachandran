@@ -17,7 +17,7 @@ namespace state {
   class UnitsObserver {
     // Operations
   public:
-    void changeUnits (std::unique_ptr<Element> mapUnits, Observable& mapToChange, int position);
+    void changeUnits (std::unique_ptr<Element> mapUnits, Observable& mapToChange, int position, int action);
     // Setters and Getters
   };
 

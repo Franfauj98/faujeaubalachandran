@@ -28,7 +28,7 @@ namespace state {
     // Operations
   public:
     ~Observable ();
-    void notifyObserver (state::Observable& observable, std::unique_ptr<Element> toChange, int position, int idToChange) const;
+    void notifyObserver (state::Observable& observable, std::unique_ptr<Element> toChange, int position, int idToChange, int action) const;
     Observable ();
     Map& getAllMaps ();
     // Setters and Getters
