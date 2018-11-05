@@ -21,7 +21,7 @@ namespace engine {
   public:
     ~CaseIdentifier ();
     CommandTypeId getTypeId () const;
-    void execute (state::Observable& map, int x, int y);
+    int execute (state::Observable& map, int x, int y);
     // Setters and Getters
   };
 

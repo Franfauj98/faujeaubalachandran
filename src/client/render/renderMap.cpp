@@ -39,6 +39,9 @@ renderMap::renderMap (){
   vector<int> decorId = principalMap.getAllMaps().getDecorMapId();
   Layer decorMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),decorId,1);
 
+  vector<int> selectedId(principalMap.getAllMaps().getSize()*principalMap.getAllMaps().getSize(),0);
+  Layer selectedMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),selectedId,1);
+
   vector <int> buildingsId = principalMap.getAllMaps().getBuildingsMapId();
   BuildingTileSet building;
   Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
@@ -60,6 +63,7 @@ renderMap::renderMap (){
   this->decorMap=decorMap;
   this->buildingMap=buildingMap;
   this->statsMap=statsMap;
+  this->selectedMap=selectedMap;
 }
 
 Layer renderMap::getBasicMap() const{
@@ -82,8 +86,28 @@ Layer renderMap::getStatsMap() const {
   return this->statsMap;
 }
 
+Layer renderMap::getSelectedMap() const {
+  return this->selectedMap;
+}
+
 std::unique_ptr<Layer> const& renderMap::getBackground() const {
   return this->background;
+}
+
+void renderMap::setStatsMap(Layer* statsLayer) {
+
+}
+
+void renderMap::setSelectedMap(Layer* selectedLayer) {
+
+}
+
+void renderMap::setBuildingMap(Layer* buildingLayer) {
+
+}
+
+void renderMap::setUnitMap(Layer* unitLayer) {
+
 }
 
   renderMap::~renderMap (){
