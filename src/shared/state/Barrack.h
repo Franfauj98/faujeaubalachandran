@@ -2,14 +2,15 @@
 #ifndef STATE__BARRACK__H
 #define STATE__BARRACK__H
 
+#include <memory>
 
 namespace state {
   class Position;
   class BuildingCost;
-  class Arrow;
   class Cavalier;
   class Decurion;
   class Catapult;
+  class Arrow;
   class Buildings;
 }
 
@@ -40,7 +41,7 @@ namespace state {
     /// @param level		(???) 
     /// @param position		(???) 
     /// @param id		(???) 
-    Arrow* createArrow (int level, Position position, int id);
+    std::unique_ptr<Element> createArrow (int level, Position position, int id);
     /// switch case for units level. 
     /// @param level		(???) 
     /// @param position		(???) 

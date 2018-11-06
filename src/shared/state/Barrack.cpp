@@ -129,10 +129,10 @@ void Barrack::setUnitsNumber(const int unitsNumber){
     }
 }
 
-Arrow* Barrack::createArrow(int level,Position position, int id){
-    Arrow* arrow=0;
+std::unique_ptr<Element> Barrack::createArrow(int level,Position position, int id){
+    std::unique_ptr<Element> arrow;
     if (this->unitsNumber < this->capacity){
-      arrow=new Arrow(level,position,id);
+      std::unique_ptr<Element> arrow(new Arrow(level,position,id));
     } else {
       std::cerr << "UnitsNumber is bigger than capacity" << std::endl;
     }

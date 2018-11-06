@@ -117,7 +117,8 @@ void BarrackTest(){
 
   cout << "ARROW CREATION" << endl;
   Position posArrow(10,10);
-  Arrow* arrow=barrack0.createArrow(1,posArrow,1);
+  std::unique_ptr<Element> arrow_unique=barrack0.createArrow(1,posArrow,1);
+  Arrow* arrow = ((Arrow *) arrow_unique.get());
   cout << "Arrow X position:" << arrow->getPosition().getX() << endl;
   cout << "Arrow Y position:" << arrow->getPosition().getY() << endl;
   cout << "Arrow id:" << arrow->getIdUnits() << endl;
@@ -156,7 +157,7 @@ void BarrackTest(){
   cout << endl;
 
   cout << "DESTRUCTIONS" << endl;
-  barrack0.destructArrow(arrow);
+  // barrack0.destructArrow(arrow);
   barrack0.destructCavalier(cavalier);
   barrack0.destructCatapult(catapult);
   barrack0.destructDecurion(decurion);
