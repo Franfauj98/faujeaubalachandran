@@ -3,12 +3,18 @@
 #define ENGINE__COMMAND__H
 
 
+namespace state {
+  class Observable;
+}
+
 #include "CommandTypeId.h"
+#include "state/Observable.h"
 
 namespace engine {
 
   /// class Command - 
   class Command {
+    // Associations
     // Operations
   public:
     virtual ~Command ();

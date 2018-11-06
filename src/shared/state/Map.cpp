@@ -142,8 +142,17 @@ Map::Map(){
       this->decorMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
       this->buildingsMap.push_back(unique_ptr<Element> (new Buildings()));
       this->unitsMap.push_back(unique_ptr<Element> (new Units()));
+      this->selectedMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
     }
   }
+
+  for(int i = 0; i<4; i++){
+    for(int j = 0; j<4; j++){
+      Position p(i,j);
+      this->statsMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
+    }
+  }
+
  // Add decor to maps
   int basicChange=0;
   int decorChange=0;
@@ -217,19 +226,19 @@ void Map::addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_pt
    vect.push_back(move(elt));
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getBasicMap(){
+std::vector<unique_ptr<state::Element>>& Map::getBasicMap(){
   return this->basicMap;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getDecorMap(){
+std::vector<unique_ptr<state::Element>>& Map::getDecorMap(){
   return this->decorMap;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getUnitsMap(){
+std::vector<unique_ptr<state::Element>>& Map::getUnitsMap(){
   return this->unitsMap;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getBuildingsMap(){
+std::vector<unique_ptr<state::Element>>& Map::getBuildingsMap(){
   return this->buildingsMap;
 }
 
@@ -295,4 +304,36 @@ void Map::addUnitsToMap (std::unique_ptr<Element>& unitsToMap, int& position){
 void Map::deleteUnitsOnMap (unique_ptr<Element> unit){
   int pos = this->getPositionElement(move(unit));
   this->unitsMap[pos] = nullptr;
+}
+
+std::vector<unique_ptr<state::Element>>& Map::getStatsMap(){
+  return this->statsMap;
+}
+std::vector<unique_ptr<state::Element>>& Map::getSelectedMap(){
+  return this->selectedMap;
+}
+
+std::vector<int> Map::getStatsMapId () {
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->statsMap.size(); i++){
+    toReturn.push_back(((Decor *) this->statsMap[i].get())->getIdDecor());
+  }
+  return toReturn;
+}
+
+
+std::vector<int> Map::getSelectedMapId () {
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->selectedMap.size(); i++){
+    toReturn.push_back(((Decor *) this->selectedMap[i].get())->getIdDecor());
+  }
+  return toReturn;
+}
+
+void Map::setStatsMap(std::vector<unique_ptr<state::Element>>& statsMap){
+  this->statsMap=move(statsMap);
+}
+
+void Map::setSelectedMap(std::vector<unique_ptr<state::Element>>& selectedMap){
+  this->selectedMap=move(selectedMap);
 }

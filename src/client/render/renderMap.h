@@ -29,6 +29,7 @@ namespace render {
     Layer unitMap;
     Layer statsMap;
     std::unique_ptr<Layer> background;
+    Layer selectedMap;
     // Operations
   public:
     renderMap ();
@@ -39,11 +40,11 @@ namespace render {
     Layer getUnitMap () const;
     Layer getStatsMap () const;
     std::unique_ptr<Layer> const& getBackground () const;
-    Layer getSelectedTile () const;
+    Layer getSelectedMap () const;
     void setBuildingMap (Layer* buildingLayer);
-    void setUnitMap (Layer* unitLayer) const;
-    void setStatsMap (Layer* statsLayer) const;
-    void setSelectedMap (Layer* selectedLayer) const;
+    void setUnitMap (Layer* unitLayer);
+    void setStatsMap (Layer* statsLayer);
+    void setSelectedMap (Layer* selectedLayer);
     // Setters and Getters
   };
 

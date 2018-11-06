@@ -54,39 +54,6 @@ int main(int argc,char* argv[])
       if(event.type == sf::Event::Closed){
       window.close();
       }
-     if (event.type == sf::Event::MouseButtonPressed)
-      {
-          if (event.mouseButton.button == sf::Mouse::Left)
-          {
-            std::cout << "the right button was pressed" << std::endl;
-            // std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-            // std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-            int y=(int) floor((event.mouseButton.x-800-2*event.mouseButton.y)/(-64));
-            int x=(int) floor(event.mouseButton.y/16-(event.mouseButton.x-800-2*event.mouseButton.y)/(-64));
-            // std::cout << "x: " << x<< std::endl;
-            // std::cout << "y: " << y << std::endl;
-            int X=0;
-            int Y=0;
-            for (int rangeX=0;rangeX<3;rangeX++){
-              for (int rangeY=0;rangeY<3;rangeY++){
-                sf::Vertex* quad = &map.getDecorMap().getQuads()[(x+rangeX-1 + (y+rangeY-1) * 25) * 4];
-                // std::cout << "q1 x: " << quad[1].position.x<< std::endl;
-                // std::cout << "q3 x: " << quad[3].position.x<< std::endl;
-                // std::cout << "q2 y: " << quad[2].position.y<< std::endl;
-                // std::cout << "q0 y: " << quad[0].position.y<< std::endl;
-
-                if(quad[1].position.x-event.mouseButton.x<45 && event.mouseButton.x-quad[3].position.x<45 &&
-                quad[2].position.y-event.mouseButton.y<20 && event.mouseButton.y-quad[0].position.y<20){
-                  X=x+rangeX-1;
-                  Y=y+rangeY-1;
-                }
-              }
-            }
-            std::cout << "X: " << X << std::endl;
-            std::cout << "Y: " << Y << std::endl;
-          }
-      }
-
     }
 
   // draw the layers
@@ -97,48 +64,77 @@ int main(int argc,char* argv[])
     window.draw(map.getDecorMap());
     window.draw(map.getBuildingMap());
     window.draw(map.getStatsMap());
-    //Layer menu1("res/helvetica.ttf", "Stats:", 14, sf::Color::White, 80, 20);
-    // MenuLayer menu1("res/helvetica.ttf", "Stats:", 14, sf::Color::White, 80, 50);
-    //MenuLayer menu2("res/helvetica.ttf", "Level:", 14, sf::Color::White, 80, 70);
-    //MenuLayer menu3("res/helvetica.ttf", "Life:", 14, sf::Color::White, 80, 90);
-    //MenuLayer menu4("res/helvetica.ttf", "Damage:", 14, sf::Color::White, 80, 110);
-    //menu1.drawText(window);
-
-
-
 
     window.display();
     }
     cout<<"relaunch the render to get a new map"<<endl;
 
   }
+  else if (argv[1] &&!strcmp(argv[1],"engine")) {
+   renderMap map;
+   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+   window.setVerticalSyncEnabled(false);
+
+   while (window.isOpen())
+   {
+ // manage the events
+   sf::Event event;
+   while (window.pollEvent(event))
+   {
+     if(event.type == sf::Event::Closed){
+     window.close();
+     }
+    if (event.type == sf::Event::MouseButtonPressed)
+     {
+         if (event.mouseButton.button == sf::Mouse::Left)
+         {
+           std::cout << "the right button was pressed" << std::endl;
+           // std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+           // std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+           int y=(int) floor((event.mouseButton.x-800-2*event.mouseButton.y)/(-64));
+           int x=(int) floor(event.mouseButton.y/16-(event.mouseButton.x-800-2*event.mouseButton.y)/(-64));
+           // std::cout << "x: " << x<< std::endl;
+           // std::cout << "y: " << y << std::endl;
+           int X=0;
+           int Y=0;
+           for (int rangeX=0;rangeX<3;rangeX++){
+             for (int rangeY=0;rangeY<3;rangeY++){
+               sf::Vertex* quad = &map.getDecorMap().getQuads()[(x+rangeX-1 + (y+rangeY-1) * 25) * 4];
+               // std::cout << "q1 x: " << quad[1].position.x<< std::endl;
+               // std::cout << "q3 x: " << quad[3].position.x<< std::endl;
+               // std::cout << "q2 y: " << quad[2].position.y<< std::endl;
+               // std::cout << "q0 y: " << quad[0].position.y<< std::endl;
+
+               if(quad[1].position.x-event.mouseButton.x<45 && event.mouseButton.x-quad[3].position.x<45 &&
+               quad[2].position.y-event.mouseButton.y<20 && event.mouseButton.y-quad[0].position.y<20){
+                 X=x+rangeX-1;
+                 Y=y+rangeY-1;
+               }
+             }
+           }
+           std::cout << "X: " << X << std::endl;
+           std::cout << "Y: " << Y << std::endl;
+         }
+     }
+
+   }
+
+ // draw the layers
+   window.clear();
+
+   map.getBackground()->drawSprite(window);
+   window.draw(map.getBasicMap());
+   window.draw(map.getDecorMap());
+   window.draw(map.getBuildingMap());
+   window.draw(map.getStatsMap());
+
+   window.display();
+   }
+   cout<<"relaunch the render to get a new map"<<endl;
+
+ }
   else {
     cout << "Please type 'hello' or 'state' or 'render'" << endl;
-    renderMap map;
-  //   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
-  //   window.setVerticalSyncEnabled(false);
-  //
-  //   while (window.isOpen())
-  //   {
-  // // omanage the events
-  //   sf::Event event;
-  //   while (window.pollEvent(event))
-  //   {
-  //     if(event.type == sf::Event::Closed)
-  //     window.close();
-  //   }
-  //
-  // // draw the layers
-  //   window.clear();
-  //
-  //   map.getBackground()->drawSprite(window);
-  //   window.draw(map.getBasicMap());
-  //   window.draw(map.getDecorMap());
-  //   window.draw(map.getBuildingMap());
-  //   window.draw(map.getStatsMap());
-  //   window.display();
-
-  //}
 }
 
   return 0;

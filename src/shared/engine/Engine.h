@@ -5,18 +5,18 @@
 #include <map>
 #include <memory>
 
+namespace state {
+  class Observable;
+};
 namespace engine {
   class Command;
 };
 namespace render {
   class renderMap;
-};
-namespace state {
-  class Observable;
 }
 
-#include "render/renderMap.h"
 #include "state/Observable.h"
+#include "render/renderMap.h"
 #include "Command.h"
 
 namespace engine {
@@ -25,10 +25,8 @@ namespace engine {
   class Engine {
     // Associations
     // Attributes
-  public:
-    state::Element currentElement;
   private:
-    state::Map curentMap;
+    state::Observable curentMap;
     std::map<int, std::unique_ptr<Command>> currentCommand;
     // Operations
   public:

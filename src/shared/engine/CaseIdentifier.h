@@ -3,6 +3,9 @@
 #define ENGINE__CASEIDENTIFIER__H
 
 
+namespace state {
+  class Observable;
+};
 namespace engine {
   class Command;
 }
@@ -18,7 +21,7 @@ namespace engine {
   public:
     ~CaseIdentifier ();
     CommandTypeId getTypeId () const;
-    void execute (int x, int y);
+    int execute (state::Observable& map, int x, int y);
     // Setters and Getters
   };
 
