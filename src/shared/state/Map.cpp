@@ -226,19 +226,19 @@ void Map::addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_pt
    vect.push_back(move(elt));
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getBasicMap(){
+std::vector<unique_ptr<state::Element>>& Map::getBasicMap(){
   return this->basicMap;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getDecorMap(){
+std::vector<unique_ptr<state::Element>>& Map::getDecorMap(){
   return this->decorMap;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getUnitsMap(){
+std::vector<unique_ptr<state::Element>>& Map::getUnitsMap(){
   return this->unitsMap;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getBuildingsMap(){
+std::vector<unique_ptr<state::Element>>& Map::getBuildingsMap(){
   return this->buildingsMap;
 }
 
@@ -306,10 +306,10 @@ void Map::deleteUnitsOnMap (unique_ptr<Element> unit){
   this->unitsMap[pos] = nullptr;
 }
 
-std::vector<unique_ptr<state::Element>> const& Map::getStatsMap(){
+std::vector<unique_ptr<state::Element>>& Map::getStatsMap(){
   return this->statsMap;
 }
-std::vector<unique_ptr<state::Element>> const& Map::getSelectedMap(){
+std::vector<unique_ptr<state::Element>>& Map::getSelectedMap(){
   return this->selectedMap;
 }
 

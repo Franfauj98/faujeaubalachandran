@@ -103,19 +103,19 @@ std::unique_ptr<Layer> const& renderMap::getBackground() const {
 }
 
 void renderMap::setStatsMap(Layer* statsLayer) {
-
+  this->statsMap=*statsLayer;
 }
 
 void renderMap::setSelectedMap(Layer* selectedLayer) {
-
+  this->selectedMap=*selectedLayer;
 }
 
 void renderMap::setBuildingMap(Layer* buildingLayer) {
-
+  this->buildingMap=*buildingLayer;
 }
 
 void renderMap::setUnitMap(Layer* unitLayer) {
-
+  this->unitMap=*unitLayer;
 }
 
   renderMap::~renderMap (){

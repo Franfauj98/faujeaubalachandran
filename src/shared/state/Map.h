@@ -33,12 +33,12 @@ namespace state {
     Map ();
     virtual ~Map ();
     void addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt);
-    std::vector<std::unique_ptr<Element>> const& getBasicMap ();
+    std::vector<std::unique_ptr<Element>>& getBasicMap ();
     void deleteElement (int pos);
     int getPositionElement (std::unique_ptr<Element> elt);
-    std::vector<std::unique_ptr<Element>> const& getDecorMap ();
-    std::vector<std::unique_ptr<Element>> const& getUnitsMap ();
-    std::vector<std::unique_ptr<Element>> const& getBuildingsMap ();
+    std::vector<std::unique_ptr<Element>> & getDecorMap ();
+    std::vector<std::unique_ptr<Element>> & getUnitsMap ();
+    std::vector<std::unique_ptr<Element>> & getBuildingsMap ();
     std::vector<int> getBasicMapId ();
     std::vector<int> getDecorMapId ();
     std::vector<int> getUnitsMapId ();
@@ -49,8 +49,8 @@ namespace state {
     void deleteUnitsOnMap (std::unique_ptr<Element> unit);
     void setStatsMap (std::vector<std::unique_ptr<Element>>& statsMap);
     void setSelectedMap (std::vector<std::unique_ptr<Element>>& selectedMap);
-    std::vector<std::unique_ptr<Element>> const& getStatsMap ();
-    std::vector<std::unique_ptr<Element>> const& getSelectedMap ();
+    std::vector<std::unique_ptr<Element>> & getStatsMap ();
+    std::vector<std::unique_ptr<Element>> & getSelectedMap ();
     std::vector<int> getStatsMapId ();
     std::vector<int> getSelectedMapId ();
     // Setters and Getters
