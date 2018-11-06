@@ -47,8 +47,8 @@ namespace state {
     std::vector<std::vector<int> > getMapMatrix () const;
     void addUnitsToMap (std::unique_ptr<Element>& unitsToMap, int& position);
     void deleteUnitsOnMap (std::unique_ptr<Element> unit);
-    void setStatsMap (std::vector<std::unique_ptr<Element>> statsMap);
-    void setSelectedMap (std::vector<std::unique_ptr<Element>> selectedMap);
+    void setStatsMap (std::vector<std::unique_ptr<Element>>& statsMap);
+    void setSelectedMap (std::vector<std::unique_ptr<Element>>& selectedMap);
     std::vector<std::unique_ptr<Element>> const& getStatsMap ();
     std::vector<std::unique_ptr<Element>> const& getSelectedMap ();
     std::vector<int> getStatsMapId ();

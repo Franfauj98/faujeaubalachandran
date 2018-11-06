@@ -330,10 +330,10 @@ std::vector<int> Map::getSelectedMapId () {
   return toReturn;
 }
 
-// void Map::setStatsMap(std::vector<unique_ptr<state::Element>> statsMap){
-//   this->statsMap=statsMap;
-// }
-//
-// void Map::setSelectedMap(std::vector<unique_ptr<state::Element>> selectedMap){
-//   this->selectedMap=selectedMap;
-// }
+void Map::setStatsMap(std::vector<unique_ptr<state::Element>>& statsMap){
+  this->statsMap=move(statsMap);
+}
+
+void Map::setSelectedMap(std::vector<unique_ptr<state::Element>>& selectedMap){
+  this->selectedMap=move(selectedMap);
+}
