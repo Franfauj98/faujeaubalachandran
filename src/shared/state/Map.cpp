@@ -305,3 +305,35 @@ void Map::deleteUnitsOnMap (unique_ptr<Element> unit){
   int pos = this->getPositionElement(move(unit));
   this->unitsMap[pos] = nullptr;
 }
+
+std::vector<unique_ptr<state::Element>> const& Map::getStatsMap(){
+  return this->statsMap;
+}
+std::vector<unique_ptr<state::Element>> const& Map::getSelectedMap(){
+  return this->selectedMap;
+}
+
+std::vector<int> Map::getStatsMapId () {
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->statsMap.size(); i++){
+    toReturn.push_back(((Decor *) this->statsMap[i].get())->getIdDecor());
+  }
+  return toReturn;
+}
+
+
+std::vector<int> Map::getSelectedMapId () {
+  std::vector<int> toReturn;
+  for(size_t i=0; i<this->selectedMap.size(); i++){
+    toReturn.push_back(((Decor *) this->selectedMap[i].get())->getIdDecor());
+  }
+  return toReturn;
+}
+
+// void Map::setStatsMap(std::vector<unique_ptr<state::Element>> statsMap){
+//   this->statsMap=statsMap;
+// }
+//
+// void Map::setSelectedMap(std::vector<unique_ptr<state::Element>> selectedMap){
+//   this->selectedMap=selectedMap;
+// }

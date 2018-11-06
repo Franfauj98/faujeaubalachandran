@@ -19,14 +19,15 @@ namespace state {
   class Map {
     // Associations
     // Attributes
-  public:
-    std::vector< std::vector<int> >   mapMatrix;
-    int size     = 25;
   private:
     std::vector<std::unique_ptr<Element>> basicMap;
     std::vector<std::unique_ptr<Element>> decorMap;
     std::vector<std::unique_ptr<Element>> unitsMap;
     std::vector<std::unique_ptr<Element>> buildingsMap;
+    std::vector<std::unique_ptr<Element>> selectedMap;
+    std::vector<std::unique_ptr<Element>> statsMap;
+    std::vector< std::vector<int> >   mapMatrix;
+    int size     = 25;
     // Operations
   public:
     Map ();
@@ -46,6 +47,12 @@ namespace state {
     std::vector<std::vector<int> > getMapMatrix () const;
     void addUnitsToMap (std::unique_ptr<Element>& unitsToMap, int& position);
     void deleteUnitsOnMap (std::unique_ptr<Element> unit);
+    void setStatsMap (std::vector<std::unique_ptr<Element>> statsMap);
+    void setSelectedMap (std::vector<std::unique_ptr<Element>> selectedMap);
+    std::vector<std::unique_ptr<Element>> const& getStatsMap ();
+    std::vector<std::unique_ptr<Element>> const& getSelectedMap ();
+    std::vector<int> getStatsMapId ();
+    std::vector<int> getSelectedMapId ();
     // Setters and Getters
   };
 
