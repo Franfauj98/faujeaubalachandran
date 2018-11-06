@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "state.h"
+#include "engine.h"
 #include "render.h"
 #include <cmath>
 #include <iostream>
@@ -11,8 +12,10 @@ using namespace render;
 
 
 Engine::Engine (){
-  //Observable principalMap; // to put in engine
-  renderMap map;
+  Observable principalMap; // to put in engine
+  renderMap map(principalMap);
+  int X=0;
+  int Y=0;
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
   window.setVerticalSyncEnabled(false);
 
@@ -36,8 +39,8 @@ Engine::Engine (){
           int x=(int) floor(event.mouseButton.y/16-(event.mouseButton.x-800-2*event.mouseButton.y)/(-64));
           // std::cout << "x: " << x<< std::endl;
           // std::cout << "y: " << y << std::endl;
-          int X=0;
-          int Y=0;
+          X=0;
+          Y=0;
           for (int rangeX=0;rangeX<3;rangeX++){
             for (int rangeY=0;rangeY<3;rangeY++){
               sf::Vertex* quad = &map.getDecorMap().getQuads()[(x+rangeX-1 + (y+rangeY-1) * 25) * 4];
@@ -55,19 +58,24 @@ Engine::Engine (){
           }
           std::cout << "X: " << X << std::endl;
           std::cout << "Y: " << Y << std::endl;
+
         }
     }
 
   }
+  CaseIdentifier cs;
+  Possibilities ps;
+  ps.execute(principalMap,X,Y,cs.execute(principalMap,X,Y));
+  renderMap map1(principalMap);
 
 // draw the layers
   window.clear();
 
-//  principalMap.getAllMap().getBackground()->drawSprite(window);
-  window.draw(map.getBasicMap());
-  window.draw(map.getDecorMap());
-  window.draw(map.getBuildingMap());
-  window.draw(map.getStatsMap());
+  map1.getBackground()->drawSprite(window);
+  window.draw(map1.getBasicMap());
+  window.draw(map1.getDecorMap());
+  window.draw(map1.getBuildingMap());
+  window.draw(map1.getStatsMap());
 
   window.display();
   }

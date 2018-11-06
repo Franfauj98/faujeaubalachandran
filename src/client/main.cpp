@@ -43,33 +43,33 @@ int main(int argc,char* argv[])
     //tileTest();
     //tileSetTest();
     //layerTest();
-    renderMap map;
-    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
-    window.setVerticalSyncEnabled(false);
-
-    while (window.isOpen())
-    {
-  // manage the events
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      if(event.type == sf::Event::Closed){
-      window.close();
-      }
-    }
-
-  // draw the layers
-    window.clear();
-
-    map.getBackground()->drawSprite(window);
-    window.draw(map.getBasicMap());
-    window.draw(map.getDecorMap());
-    window.draw(map.getBuildingMap());
-    window.draw(map.getStatsMap());
-
-    window.display();
-    }
-    cout<<"relaunch the render to get a new map"<<endl;
+  //   renderMap map;
+  //   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+  //   window.setVerticalSyncEnabled(false);
+  //
+  //   while (window.isOpen())
+  //   {
+  // // manage the events
+  //   sf::Event event;
+  //   while (window.pollEvent(event))
+  //   {
+  //     if(event.type == sf::Event::Closed){
+  //     window.close();
+  //     }
+  //   }
+  //
+  // // draw the layers
+  //   window.clear();
+  //
+  //   map.getBackground()->drawSprite(window);
+  //   window.draw(map.getBasicMap());
+  //   window.draw(map.getDecorMap());
+  //   window.draw(map.getBuildingMap());
+  //   window.draw(map.getStatsMap());
+  //
+  //   window.display();
+  //   }
+  //   cout<<"relaunch the render to get a new map"<<endl;
 
   }
   else if (argv[1] &&!strcmp(argv[1],"engine")) {
@@ -77,6 +77,7 @@ int main(int argc,char* argv[])
  }
   else {
     cout << "Please type 'hello' or 'state' or 'render'" << endl;
+    Engine engine;
 }
 
   return 0;

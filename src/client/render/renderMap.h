@@ -6,10 +6,12 @@
 
 namespace render {
   class Layer;
-  class TileSet;
 };
 namespace state {
   class Observable;
+};
+namespace render {
+  class TileSet;
 }
 
 #include "Layer.h"
@@ -32,7 +34,7 @@ namespace render {
     Layer selectedMap;
     // Operations
   public:
-    renderMap ();
+    renderMap (state::Observable& principalMap);
     ~renderMap ();
     Layer getBuildingMap () const;
     Layer getBasicMap () const;
