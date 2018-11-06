@@ -15,8 +15,8 @@ int position, int action, int unitToCreate, int level, int position2){
     if(i%25 == 0) x+=1;
     if(i==position) break;
   }
-  std::cout << "posx : " << x << std::endl;
-  std::cout << "posy : " << y << std::endl;
+  // std::cout << "posx : " << x << std::endl;
+  // std::cout << "posy : " << y << std::endl;
   Position* pos1 = new Position(x,y);
 
   switch(action){

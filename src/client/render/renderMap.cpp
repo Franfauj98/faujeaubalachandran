@@ -18,7 +18,7 @@ renderMap::renderMap (){
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Arrow(2, pos1, 1)),
-    1, 14, 1, 0, 0, 0);
+    1, 26, 2, 1, 1, 0);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,2)),
@@ -39,24 +39,6 @@ renderMap::renderMap (){
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,3)),
     2, 26, 2, 2, 2, 0);
-
-  vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
-  DecorTileSet decor;
-  Layer basicMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),basicId,1);
-
-  vector<int> decorId = principalMap.getAllMaps().getDecorMapId();
-  Layer decorMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),decorId,1);
-
-  vector<int> selectedId=principalMap.getAllMaps().getSelectedMapId();
-  Layer selectedMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),selectedId,1);
-
-  vector <int> buildingsId = principalMap.getAllMaps().getBuildingsMapId();
-  BuildingTileSet building;
-  Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
-
-  vector <int> statsId = principalMap.getAllMaps().getStatsMapId();;
-  StatsTileSet stats;
-  Layer statsMap(stats.getImageFile(),4,statsId,0);
 
   // print to Test
   vector <int> unitsId = principalMap.getAllMaps().getUnitsMapId();
@@ -79,6 +61,13 @@ renderMap::renderMap (){
     2, 10, 1, 2, 2, 0);
 
   std::cout<<"\n";
+  std::cout<<"\n";
+
+  std::cout << ((Units*)unitsMap[1].get())->getPosition().getX()<<endl;
+  std::cout << ((Units*)unitsMap[1].get())->getPosition().getY()<<endl;
+
+  std::cout<<"\n";
+  std::cout<<"\n";
 
   std::vector<unique_ptr<state::Element>> const& unitsMap2 = principalMap.getAllMaps().getUnitsMap();
   for(size_t i=0; i<unitsMap2.size(); i++){
@@ -98,7 +87,53 @@ renderMap::renderMap (){
     if(i%25==0) std::cout<<"\n";
     std::cout << unitsId2[i];
   }
+
   std::cout<<"\n";
+  std::cout<<"\n";
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Arrow(2,pos2,3)),
+    3, 10, 2, -1, 2, 2);
+
+  vector <int> unitsId3 = principalMap.getAllMaps().getUnitsMapId();
+  for(size_t i=0; i<unitsId3.size(); i++){
+    if(i%25==0) std::cout<<"\n";
+    std::cout << unitsId3[i];
+  }
+  std::cout<<"\n";
+  std::vector<unique_ptr<state::Element>> const& unitsMap3 = principalMap.getAllMaps().getUnitsMap();
+  std::cout<<"\n";
+  std::cout<<"\n";
+
+  std::cout << ((Units*)unitsMap3[1].get())->getLife()<<endl;
+  std::cout << ((Units*)unitsMap3[2].get())->getLife()<<endl;
+
+  std::cout<<"\n";
+  std::cout<<"\n";
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Arrow(2,pos2,3)),
+    1, 10, 3, -1, -1, 2);
+
+  std::vector<unique_ptr<state::Element>> const& unitsMap4 = principalMap.getAllMaps().getUnitsMap();
+  std::cout << ((Units*)unitsMap4[1].get())->getLife()<<endl;
+  std::cout << ((Units*)unitsMap4[2].get())->getLife()<<endl;
+
+  vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
+  DecorTileSet decor;
+  Layer basicMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),basicId,1);
+
+  vector<int> decorId = principalMap.getAllMaps().getDecorMapId();
+  Layer decorMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),decorId,1);
+
+  vector<int> selectedId=principalMap.getAllMaps().getSelectedMapId();
+  Layer selectedMap(decor.getImageFile(),principalMap.getAllMaps().getSize(),selectedId,1);
+
+  vector <int> buildingsId = principalMap.getAllMaps().getBuildingsMapId();
+  BuildingTileSet building;
+  Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
+
+  vector <int> statsId = principalMap.getAllMaps().getStatsMapId();;
+  StatsTileSet stats;
+  Layer statsMap(stats.getImageFile(),4,statsId,0);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
   //this->background=new Layer("res/background.png");
