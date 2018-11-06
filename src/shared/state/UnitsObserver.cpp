@@ -40,10 +40,9 @@ int position, int action, int level, int position2){
       unitToChange->move(*pos1, 1);
       // map.getUnitsMap()[position2].reset(std::move(map.getUnitsMap()[position]));
       // map.getUnitsMap()[position].reset(std::move());
-      Element* tmp = (Element* )map.getUnitsMap()[position].get();
-      // make_unique(tmp);
+      std::unique_ptr<Element> tmp = std::move(map.getUnitsMap()[position]);
       std::unique_ptr<Element> wideUnit(new Units());
-      // map.addUnitsToMap(tmp, position2);
+      map.addUnitsToMap(tmp, position2);
       map.addUnitsToMap(wideUnit, position);
       break;
     }
