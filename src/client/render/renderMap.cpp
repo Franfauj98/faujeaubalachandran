@@ -22,19 +22,23 @@ renderMap::renderMap (){
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,2)),
-    24, 26, 2, 1, 0, 0);
+    24, 26, 2, 1, 1, 0);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,2)),
-    25, 26, 2, 2, 0, 0);
+    25, 26, 2, 2, 2, 0);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,3)),
-    49, 26, 2, 3, 0, 0);
+    49, 26, 2, 3, 1, 0);
 
   principalMap.notifyObserver(principalMap,
     std::unique_ptr<Element> (new Palace(2,pos2,3)),
-    50, 26, 2, 4, 0, 0);
+    50, 26, 2, 4, 2, 0);
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Palace(2,pos2,3)),
+    2, 26, 2, 2, 2, 0);
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;
@@ -47,6 +51,7 @@ renderMap::renderMap (){
   BuildingTileSet building;
   Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
 
+  // print to Test
   vector <int> unitsId = principalMap.getAllMaps().getUnitsMapId();
   for(size_t i=0; i<unitsId.size(); i++){
     if(i%25==0) std::cout<<"\n";
@@ -54,9 +59,39 @@ renderMap::renderMap (){
   }
   std::cout<<"\n";
 
+  std::vector<unique_ptr<state::Element>> const& unitsMap = principalMap.getAllMaps().getUnitsMap();
+  for(size_t i=0; i<unitsMap.size(); i++){
+    if(i%25==0) std::cout<<"\n";
+    std::cout << unitsMap[i].get()->getLevel();
+  }
+  std::cout<<"\n";
+  // print to Test
+
   principalMap.notifyObserver(principalMap,
-    std::unique_ptr<Element> (new Decurion(2, pos2, 2)),
-    2, 10, 1, 0, 0, 0);
+    std::unique_ptr<Element> (new Arrow(2,pos2,3)),
+    2, 10, 1, 2, 2, 0);
+
+  std::cout<<"\n";
+
+  std::vector<unique_ptr<state::Element>> const& unitsMap2 = principalMap.getAllMaps().getUnitsMap();
+  for(size_t i=0; i<unitsMap2.size(); i++){
+    if(i%25==0) std::cout<<"\n";
+    std::cout << unitsMap2[i].get()->getLevel();
+  }
+  std::cout<<"\n";
+
+  principalMap.notifyObserver(principalMap,
+    std::unique_ptr<Element> (new Arrow(2,pos2,3)),
+    2, 10, 2, -1, 2, 3);
+
+  std::cout<<"\n";
+
+  vector <int> unitsId2 = principalMap.getAllMaps().getUnitsMapId();
+  for(size_t i=0; i<unitsId2.size(); i++){
+    if(i%25==0) std::cout<<"\n";
+    std::cout << unitsId2[i];
+  }
+  std::cout<<"\n";
 
 
   vector <int> statsId = {1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0};

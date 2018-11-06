@@ -21,24 +21,31 @@ int position, int action, int level, int position2){
   std::cout << "posx : " << x << std::endl;
   std::cout << "posy : " << y << std::endl;
   Position* pos1 = new Position(x,y);
+  Map& map = mapToChange.getAllMaps();
+  Units* unitToChange = (Units *)map.getUnitsMap()[position].get();
 
   switch(action){
     case 1: //levelup
     {
-      Map& map = mapToChange.getAllMaps();
-      Units* uniteToUprgrade = (Units *)map.getUnitsMap()[position].get();
-
-      int level = uniteToUprgrade->getLevel();
-      std::cout << level << std::endl;
+      int level2 = unitToChange->getLevel();
+      std::cout << level2 << std::endl;
       std::cout << "levelUp" << std::endl;
-      uniteToUprgrade->setLevel(++level);
-      level = uniteToUprgrade->getLevel();
-      std::cout << level << std::endl;
+      unitToChange->setLevel(++level2);
+      level2 = unitToChange->getLevel();
+      std::cout << level2 << std::endl;
       break;
     }
     case 2: //move
     {
-      // uni->move(pos1, 1);
+      unitToChange->move(*pos1, 1);
+      // map.getUnitsMap()[position2].reset(std::move(map.getUnitsMap()[position]));
+      // map.getUnitsMap()[position].reset(std::move());
+      Element* tmp = (Element* )map.getUnitsMap()[position].get();
+      // make_unique(tmp);
+      std::unique_ptr<Element> wideUnit(new Units());
+      // map.addUnitsToMap(tmp, position2);
+      map.addUnitsToMap(wideUnit, position);
+      break;
     }
     default: break;
   }
