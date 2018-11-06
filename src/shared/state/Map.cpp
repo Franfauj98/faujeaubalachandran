@@ -142,8 +142,17 @@ Map::Map(){
       this->decorMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
       this->buildingsMap.push_back(unique_ptr<Element> (new Buildings()));
       this->unitsMap.push_back(unique_ptr<Element> (new Units()));
+      this->selectedMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
     }
   }
+
+  for(int i = 0; i<4; i++){
+    for(int j = 0; j<4; j++){
+      Position p(i,j);
+      this->statsMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
+    }
+  }
+
  // Add decor to maps
   int basicChange=0;
   int decorChange=0;
