@@ -50,7 +50,7 @@ renderMap::renderMap (){
   BuildingTileSet building;
   Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
 
-  vector <int> statsId = principalMap.getAllMaps().getStatsMapId();;
+  vector <int> statsId = principalMap.getAllMaps().getStatsMap();;
   StatsTileSet stats;
   Layer statsMap(stats.getImageFile(),4,statsId,0);
 
