@@ -17,9 +17,6 @@ int position, int id, int action, int unitToCreate, int level, int position2) co
 
   UnitsObserver units;
   BuildingsObserver buildings;
-  //
-  // Map map = observable.getAllMaps();
-  //
   switch(id){
 
     case 26:
@@ -60,8 +57,6 @@ int position, int id, int action, int unitToCreate, int level, int position2) co
     default:
     break;
   }
-
-  // units.changeUnits(std::unique_ptr<Element> (new Arrow()));
 }
 
 state::Map& Observable::getAllMaps(){

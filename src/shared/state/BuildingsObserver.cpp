@@ -15,8 +15,8 @@ int position, int action, int unitToCreate, int level, int position2){
     if(i%25 == 0) x+=1;
     if(i==position) break;
   }
-  std::cout << "posx : " << x << std::endl;
-  std::cout << "posy : " << y << std::endl;
+  // std::cout << "posx : " << x << std::endl;
+  // std::cout << "posy : " << y << std::endl;
   Position* pos1 = new Position(x,y);
 
   switch(action){
@@ -39,27 +39,27 @@ int position, int action, int unitToCreate, int level, int position2){
       switch (unitToCreate){
         case 1:
         {
-          // Arrow* arrow = barrack->createArrow(2, *pos1, 1);
-          std::unique_ptr<Element> arrow_ptr(new Arrow(2,*pos1,1));
+          // std::unique_ptr<Element> arrow_ptr = barrack->createArrow(2, *pos1, 1);
+          std::unique_ptr<Element> arrow_ptr(new Arrow(level,*pos1,1));
           // barrack->destructArrow(arrow);
           map.addUnitsToMap(arrow_ptr, position);
           break;
         }
         case 2:
         {
-          std::unique_ptr<Element> decurion_ptr(new Decurion(2,*pos1,1));
+          std::unique_ptr<Element> decurion_ptr(new Decurion(level,*pos1,1));
           map.addUnitsToMap(decurion_ptr, position);
           break;
         }
         case 3:
         {
-          std::unique_ptr<Element> catapult_ptr(new Catapult(2,*pos1,1));
+          std::unique_ptr<Element> catapult_ptr(new Catapult(level,*pos1,1));
           map.addUnitsToMap(catapult_ptr, position);
           break;
         }
         case 4:
         {
-          std::unique_ptr<Element> cavalier_ptr(new Cavalier(2,*pos1,1));
+          std::unique_ptr<Element> cavalier_ptr(new Cavalier(level,*pos1,1));
           map.addUnitsToMap(cavalier_ptr, position);
           break;
         }
