@@ -10,12 +10,12 @@ using namespace render;
 using namespace state;
 using namespace std;
 
-renderMap::renderMap (state::Observable& principalMap){
+renderMap::renderMap (){
   // Observable principalMap; // to put in engine
   //
   // Position pos1(1,1);
   // Position pos2(1,2);
-  //
+
   // principalMap.notifyObserver(principalMap,
   //   std::unique_ptr<Element> (new Arrow(2, pos1, 1)),
   //   1, 26, 2, 1, 1, 0);
@@ -116,6 +116,9 @@ renderMap::renderMap (state::Observable& principalMap){
   // std::vector<unique_ptr<state::Element>> const& unitsMap4 = principalMap.getAllMaps().getUnitsMap();
   // std::cout << ((Units*)unitsMap4[1].get())->getLife()<<endl;
   // std::cout << ((Units*)unitsMap4[2].get())->getLife()<<endl;
+}
+
+void renderMap::update(state::Observable& principalMap) {
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;

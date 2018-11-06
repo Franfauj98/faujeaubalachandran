@@ -23,14 +23,27 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
     Position pos(x,y);
     selectedMap[x+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
     if (element==10 || element==14 || element==18 || element==22){
-      Position pos2(x+1,y);
-      selectedMap[x+1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos2)));
-      Position pos3(x-1,y);
-      selectedMap[x-1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos3)));
-      Position pos4(x,y+1);
-      selectedMap[x+25*(y+1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos4)));
-      Position pos5(x,y-1);
-      selectedMap[x+25*(y-1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos5)));
+      if(map.getAllMaps().getMapMatrix()[x+1][y]!=1 || map.getAllMaps().getMapMatrix()[x+1][y]!=3 ||
+      map.getAllMaps().getMapMatrix()[x+1][y]!=30 || map.getAllMaps().getMapMatrix()[x+1][y]!=31){
+        Position pos2(x+1,y);
+        selectedMap[x+1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos2)));
+      }
+      if(map.getAllMaps().getMapMatrix()[x-1][y]!=1 || map.getAllMaps().getMapMatrix()[x-1][y]!=3 ||
+      map.getAllMaps().getMapMatrix()[x-1][y]!=30 || map.getAllMaps().getMapMatrix()[x-1][y]!=31){
+        Position pos3(x-1,y);
+        selectedMap[x-1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos3)));
+      }
+      if(map.getAllMaps().getMapMatrix()[x][y+1]!=1 || map.getAllMaps().getMapMatrix()[x][y+1]!=3 ||
+      map.getAllMaps().getMapMatrix()[x][y+1]!=30 || map.getAllMaps().getMapMatrix()[x][y+1]!=31){
+        Position pos4(x,y+1);
+        selectedMap[x+25*(y+1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos4)));
+      }
+      if(map.getAllMaps().getMapMatrix()[x][y-1]!=1 || map.getAllMaps().getMapMatrix()[x][y-1]!=3 ||
+      map.getAllMaps().getMapMatrix()[x][y-1]!=30 || map.getAllMaps().getMapMatrix()[x][y-1]!=31){
+        Position pos5(x,y-1);
+        selectedMap[x+25*(y-1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos5)));
+      }
     }
     map.getAllMaps().setSelectedMap(selectedMap);
+
 }

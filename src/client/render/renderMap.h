@@ -34,7 +34,7 @@ namespace render {
     Layer selectedMap;
     // Operations
   public:
-    renderMap (state::Observable& principalMap);
+    renderMap ();
     ~renderMap ();
     Layer getBuildingMap () const;
     Layer getBasicMap () const;
@@ -47,6 +47,7 @@ namespace render {
     void setUnitMap (Layer* unitLayer);
     void setStatsMap (Layer* statsLayer);
     void setSelectedMap (Layer* selectedLayer);
+    void update (state::Observable& principalMap);
     // Setters and Getters
   };
 

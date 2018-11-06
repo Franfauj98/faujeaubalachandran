@@ -13,7 +13,8 @@ using namespace render;
 
 Engine::Engine (){
   Observable principalMap; // to put in engine
-  renderMap map(principalMap);
+  renderMap map;
+  map.update(principalMap);
   int X=0;
   int Y=0;
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
@@ -66,16 +67,17 @@ Engine::Engine (){
   CaseIdentifier cs;
   Possibilities ps;
   ps.execute(principalMap,X,Y,cs.execute(principalMap,X,Y));
-  renderMap map1(principalMap);
+  map.update(principalMap);
 
 // draw the layers
   window.clear();
 
-  map1.getBackground()->drawSprite(window);
-  window.draw(map1.getBasicMap());
-  window.draw(map1.getDecorMap());
-  window.draw(map1.getBuildingMap());
-  window.draw(map1.getStatsMap());
+  map.getBackground()->drawSprite(window);
+  window.draw(map.getBasicMap());
+  window.draw(map.getSelectedMap());
+  window.draw(map.getDecorMap());
+  window.draw(map.getBuildingMap());
+  window.draw(map.getStatsMap());
 
   window.display();
   }
