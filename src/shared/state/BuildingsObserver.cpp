@@ -5,7 +5,7 @@ using namespace state;
 
 void BuildingsObserver::changeBuildings(std::unique_ptr<Element> buildings,
 Observable& mapToChange,
-int position, int action, int unitToCreate){
+int position, int action, int unitToCreate, int level, int position2){
   // std::vector<std::unique_ptr<Element>> const& map = mapToChange.getAllMaps().getBuildingsMap();
   Buildings* build = ((Buildings *) buildings.get());
   std::cout << "BuildingsObserver" << std::endl;

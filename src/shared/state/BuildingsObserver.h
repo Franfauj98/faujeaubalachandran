@@ -17,7 +17,7 @@ namespace state {
   class BuildingsObserver {
     // Operations
   public:
-    void changeBuildings (std::unique_ptr<Element> buildingsMap, Observable& mapToChange, int position, int action, int unitToCreate);
+    void changeBuildings (std::unique_ptr<Element> buildingsMap, Observable& mapToChange, int position, int action, int unitToCreate, int level, int position2);
     // Setters and Getters
   };
 

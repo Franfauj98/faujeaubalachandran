@@ -5,7 +5,7 @@ using namespace state;
 
 void UnitsObserver::changeUnits(std::unique_ptr<Element> unit,
 Observable& mapToChange,
-int position, int action){
+int position, int action, int level, int position2){
   // Map& map = mapToChange.getAllMaps();
   // map.addUnitsToMap(unit, position);
 
