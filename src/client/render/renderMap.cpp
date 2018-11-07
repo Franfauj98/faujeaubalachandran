@@ -35,58 +35,83 @@ renderMap::renderMap (){
   // principalMap.notifyObserver(principalMap,
   //   2, 26, 2, 2, 0);
   //
-  // // print to Test
+  // std::vector<vector<int>>& mapMatrix1 = principalMap.getAllMaps().getMapMatrix();
+  // for(size_t i=0; i<25; i++){
+  //   for(size_t j=0; j<25; j++){
+  //   std::cout << mapMatrix1[i][j];
+  //   }
+  //   std::cout<<"\n";
+  // }
+  // std::cout<<"\n";
+
+
+  // print to Test
   // vector <int> unitsId = principalMap.getAllMaps().getUnitsMapId();
   // for(size_t i=0; i<unitsId.size(); i++){
   //   if(i%25==0) std::cout<<"\n";
   //   std::cout << unitsId[i];
   // }
   // std::cout<<"\n";
-  //
+
   // std::vector<unique_ptr<state::Element>> const& unitsMap = principalMap.getAllMaps().getUnitsMap();
   // for(size_t i=0; i<unitsMap.size(); i++){
   //   if(i%25==0) std::cout<<"\n";
   //   std::cout << unitsMap[i].get()->getLevel();
   // }
   // std::cout<<"\n";
-  // // print to Test
-  //
+  // print to Test
+
   // principalMap.notifyObserver(principalMap,
   //   2, 10, 1, -1, 3);
   //
   // std::cout<<"\n";
   // std::cout<<"\n";
-  //
+
   // std::cout << ((Units*)unitsMap[1].get())->getPosition().getX()<<endl;
   // std::cout << ((Units*)unitsMap[1].get())->getPosition().getY()<<endl;
+
+  // std::vector<vector<int>>& mapMatrix2 = principalMap.getAllMaps().getMapMatrix();
+  // for(size_t i=0; i<25; i++){
+  //   for(size_t j=0; j<25; j++){
+  //   std::cout << mapMatrix2[i][j];
+  //   }
+  //   std::cout<<"\n";
+  // }
   //
   // std::cout<<"\n";
   // std::cout<<"\n";
-  //
+
   // std::vector<unique_ptr<state::Element>> const& unitsMap2 = principalMap.getAllMaps().getUnitsMap();
   // for(size_t i=0; i<unitsMap2.size(); i++){
   //   if(i%25==0) std::cout<<"\n";
   //   std::cout << unitsMap2[i].get()->getLevel();
   // }
   // std::cout<<"\n";
-  //
-  //
+
+
   // principalMap.notifyObserver(principalMap,
   //   3, 10, 1, -1, 2);
   //
   // std::cout<<"\n";
-  //
+
   // vector <int> unitsId2 = principalMap.getAllMaps().getUnitsMapId();
   // for(size_t i=0; i<unitsId2.size(); i++){
   //   if(i%25==0) std::cout<<"\n";
   //   std::cout << unitsId2[i];
+  // }
+  // std::vector<vector<int>>& mapMatrix3 = principalMap.getAllMaps().getMapMatrix();
+  // for(size_t i=0; i<25; i++){
+  //   for(size_t j=0; j<25; j++){
+  //   std::cout << mapMatrix3[i][j];
+  //   }
+  //   std::cout<<"\n";
   // }
   //
   // std::cout<<"\n";
   // std::cout<<"\n";
   // principalMap.notifyObserver(principalMap,
   //   2, 10, 2, -1, 1);
-  //
+
   // vector <int> unitsId3 = principalMap.getAllMaps().getUnitsMapId();
   // for(size_t i=0; i<unitsId3.size(); i++){
   //   if(i%25==0) std::cout<<"\n";
