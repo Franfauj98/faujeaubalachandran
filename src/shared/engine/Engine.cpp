@@ -67,6 +67,7 @@ Engine::Engine (){
   renderMap map;
   CreateUnit cu1;
   cu1.execute(principalMap,10,10,1);
+  cu1.execute(principalMap,12,12,3);
   map.update(principalMap);
 
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
@@ -93,12 +94,16 @@ Engine::Engine (){
 
   if (element==10||element==14||element==18||element==22) {
     Move mv;
+    Attack at;
     sf::Vector2i click2 = getClick(window, map);
 
     CaseIdentifier cs2;
     element2 = cs2.execute(principalMap,click2.x,click2.y);
     if(element2==2){
       mv.execute(principalMap, click.x, click.y, click2.x, click2.y);
+    }
+    if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
+      at.execute(principalMap, click.x, click.y, click2.x, click2.y);
     }
     map.update(principalMap);
     drawMap(window,map);

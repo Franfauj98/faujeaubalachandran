@@ -19,25 +19,25 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
   if (element==10 || element==14 || element==18 || element==22){
     Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
-    if (units->getLife()<=50*units->getLevel() && units->getLife()>3/4*50*units->getLevel()){
+    if (units->getLife()>=40){
       statsMap[0]=1;
       statsMap[1]=1;
       statsMap[2]=1;
       statsMap[3]=1;
     }
-    else if (units->getLife()<=3/4*50*units->getLevel() && units->getLife()>1/2*50*units->getLevel()){
+    else if (units->getLife()>=30&&units->getLife()<40){
       statsMap[0]=1;
       statsMap[1]=1;
       statsMap[2]=1;
       statsMap[3]=0;
     }
-    else if (units->getLife()<=1/2*50*units->getLevel() && units->getLife()>1/4*50*units->getLevel()){
+    else if (units->getLife()>=20&&units->getLife()<30){
       statsMap[0]=1;
       statsMap[1]=1;
       statsMap[2]=0;
       statsMap[3]=0;
     }
-    else if (units->getLife()<=1/4*50*units->getLevel() && units->getLife()>0){
+    else if (units->getLife()>=10&&units->getLife()<20){
       statsMap[0]=1;
       statsMap[1]=0;
       statsMap[2]=0;
