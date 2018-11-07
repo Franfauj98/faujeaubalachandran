@@ -43,19 +43,19 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(units->getLevel()){
       case 1:
-      statsMap[4]=2;
-      break;
-
-      case 2:
       statsMap[4]=3;
       break;
 
-      case 3:
+      case 2:
       statsMap[4]=4;
       break;
 
-      case 4:
+      case 3:
       statsMap[4]=5;
+      break;
+
+      case 4:
+      statsMap[4]=6;
       break;
     }
 
@@ -93,19 +93,19 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(palace->getLevel()){
       case 1:
-      statsMap[4]=2;
-      break;
-
-      case 2:
       statsMap[4]=3;
       break;
 
-      case 3:
+      case 2:
       statsMap[4]=4;
       break;
 
-      case 4:
+      case 3:
       statsMap[4]=5;
+      break;
+
+      case 4:
+      statsMap[4]=6;
       break;
     }
 
@@ -142,62 +142,62 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(barrack->getLevel()){
       case 1:
-      statsMap[4]=2;
-      break;
-
-      case 2:
       statsMap[4]=3;
       break;
 
-      case 3:
+      case 2:
       statsMap[4]=4;
       break;
 
-      case 4:
+      case 3:
       statsMap[4]=5;
+      break;
+
+      case 4:
+      statsMap[4]=6;
       break;
     }
     switch(barrack->getUnitsNumber()){
       case 1:
-      statsMap[8]=2;
-      break;
-
-      case 2:
       statsMap[8]=3;
       break;
 
-      case 3:
+      case 2:
       statsMap[8]=4;
       break;
 
-      case 4:
+      case 3:
       statsMap[8]=5;
       break;
 
-      case 5:
+      case 4:
       statsMap[8]=6;
       break;
 
-      case 6:
+      case 5:
       statsMap[8]=7;
+      break;
+
+      case 6:
+      statsMap[8]=8;
       break;
     }
 
     switch(barrack->getCapacity()){
       case 1:
-      statsMap[12]=2;
-      break;
-
-      case 2:
       statsMap[12]=3;
       break;
 
-      case 3:
-      statsMap[12]=5;
+      case 2:
+      statsMap[12]=4;
       break;
 
       case 4:
-      statsMap[12]=7;
+      statsMap[12]=6;
+      break;
+
+      case 6:
+      statsMap[12]=8;
       break;
     }
     map.getAllMaps().setStatsMap(statsMap);
@@ -237,37 +237,37 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(ressource->getLevel()){
       case 1:
-      statsMap[4]=2;
-      break;
-
-      case 2:
       statsMap[4]=3;
       break;
 
-      case 3:
+      case 2:
       statsMap[4]=4;
       break;
 
-      case 4:
+      case 3:
       statsMap[4]=5;
+      break;
+
+      case 4:
+      statsMap[4]=6;
       break;
     }
 
     switch(ressource->getProduction()){
-      case 1:
-      statsMap[8]=3;
-      break;
-
       case 2:
-      statsMap[8]=5;
-      break;
-
-      case 3:
-      statsMap[8]=7;
+      statsMap[8]=4;
       break;
 
       case 4:
+      statsMap[8]=6;
+      break;
+
+      case 6:
       statsMap[8]=8;
+      break;
+
+      case 8:
+      statsMap[8]=10;
       break;
     }
 
