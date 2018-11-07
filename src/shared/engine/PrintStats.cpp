@@ -13,7 +13,7 @@ CommandTypeId PrintStats::getTypeId () const{
   return CommandTypeId::PRINTSTATS;
 }
 void PrintStats::execute (state::Observable& map, int x, int y, int element){
-  std::vector<int> statsMap(16,0);
+  std::vector<int> statsMap(36,0);
   if (element==10 || element==14 || element==18 || element==22){
     Units* units = (Units*) map.getAllMaps().getUnitsMap()[x+25*y].get();
     if (units->getLife()<=50*units->getLevel() && units->getLife()>3/4*50*units->getLevel()){
@@ -43,19 +43,19 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(units->getLevel()){
       case 1:
-      statsMap[4]=3;
+      statsMap[6]=3;
       break;
 
       case 2:
-      statsMap[4]=4;
+      statsMap[6]=4;
       break;
 
       case 3:
-      statsMap[4]=5;
+      statsMap[6]=5;
       break;
 
       case 4:
-      statsMap[4]=6;
+      statsMap[6]=6;
       break;
     }
 
@@ -283,10 +283,14 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     if (ressource->getLevel()<4){
       statsMap[18]=16;
     }
-    map.getAllMaps().setStatsMap(statsMap);
+
 
     //cout<<ressource->getLife()<<endl;
     //cout<<ressource->getLevel()<<endl;
     //cout<<ressource->getProduction()<<endl;
+  }
+
+  else {
+    map.getAllMaps().setStatsMap(statsMap);
   }
 }

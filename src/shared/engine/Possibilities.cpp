@@ -23,26 +23,47 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
     Position pos(x,y);
     selectedMap[x+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
     if (element==10 || element==14 || element==18 || element==22){
-      if(map.getAllMaps().getMapMatrix()[x+1][y]!=1 || map.getAllMaps().getMapMatrix()[x+1][y]!=3 ||
-      map.getAllMaps().getMapMatrix()[x+1][y]!=30 || map.getAllMaps().getMapMatrix()[x+1][y]!=31){
-        Position pos2(x+1,y);
-        selectedMap[x+1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos2)));
+      if (x+1>=0 && x+1<25){
+        if(map.getAllMaps().getMapMatrix()[x+1][y]==2 || map.getAllMaps().getMapMatrix()[x+1][y]==9 ||
+        map.getAllMaps().getMapMatrix()[x+1][y]==26 || map.getAllMaps().getMapMatrix()[x+1][y]==27 ||
+        map.getAllMaps().getMapMatrix()[x+1][y]==28 || map.getAllMaps().getMapMatrix()[x+1][y]==29 ||
+        map.getAllMaps().getMapMatrix()[x+1][y]==10 || map.getAllMaps().getMapMatrix()[x+1][y]==14 ||
+        map.getAllMaps().getMapMatrix()[x+1][y]==16 || map.getAllMaps().getMapMatrix()[x+1][y]==22){
+          Position pos2(x+1,y);
+          selectedMap[x+1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos2)));
+        }
       }
-      if(map.getAllMaps().getMapMatrix()[x-1][y]!=1 || map.getAllMaps().getMapMatrix()[x-1][y]!=3 ||
-      map.getAllMaps().getMapMatrix()[x-1][y]!=30 || map.getAllMaps().getMapMatrix()[x-1][y]!=31){
-        Position pos3(x-1,y);
-        selectedMap[x-1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos3)));
+      if (x-1>=0 && x-1<25){
+        if(map.getAllMaps().getMapMatrix()[x-1][y]==2 || map.getAllMaps().getMapMatrix()[x-1][y]==9 ||
+        map.getAllMaps().getMapMatrix()[x-1][y]==26 || map.getAllMaps().getMapMatrix()[x-1][y]==27 ||
+        map.getAllMaps().getMapMatrix()[x-1][y]==28 || map.getAllMaps().getMapMatrix()[x-1][y]==29 ||
+        map.getAllMaps().getMapMatrix()[x-1][y]==10 || map.getAllMaps().getMapMatrix()[x-1][y]==14 ||
+        map.getAllMaps().getMapMatrix()[x-1][y]==16 || map.getAllMaps().getMapMatrix()[x-1][y]==22){
+          Position pos3(x-1,y);
+          selectedMap[x-1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos3)));
+        }
       }
-      if(map.getAllMaps().getMapMatrix()[x][y+1]!=1 || map.getAllMaps().getMapMatrix()[x][y+1]!=3 ||
-      map.getAllMaps().getMapMatrix()[x][y+1]!=30 || map.getAllMaps().getMapMatrix()[x][y+1]!=31){
-        Position pos4(x,y+1);
-        selectedMap[x+25*(y+1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos4)));
+      if (y+1>=0 && y+1<25){
+        if(map.getAllMaps().getMapMatrix()[x][y+1]==2 || map.getAllMaps().getMapMatrix()[x][y+1]==9 ||
+        map.getAllMaps().getMapMatrix()[x][y+1]==26 || map.getAllMaps().getMapMatrix()[x][y+1]==27 ||
+        map.getAllMaps().getMapMatrix()[x][y+1]==28 || map.getAllMaps().getMapMatrix()[x][y+1]==29||
+        map.getAllMaps().getMapMatrix()[x][y+1]==10 || map.getAllMaps().getMapMatrix()[x][y+1]==14 ||
+        map.getAllMaps().getMapMatrix()[x][y+1]==16 || map.getAllMaps().getMapMatrix()[x][y+1]==22){
+          Position pos4(x,y+1);
+          selectedMap[x+25*(y+1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos4)));
+        }
       }
-      if(map.getAllMaps().getMapMatrix()[x][y-1]!=1 || map.getAllMaps().getMapMatrix()[x][y-1]!=3 ||
-      map.getAllMaps().getMapMatrix()[x][y-1]!=30 || map.getAllMaps().getMapMatrix()[x][y-1]!=31){
-        Position pos5(x,y-1);
-        selectedMap[x+25*(y-1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos5)));
+      if (y-1>=0 && y-1<25){
+        if(map.getAllMaps().getMapMatrix()[x][y-1]==2 || map.getAllMaps().getMapMatrix()[x][y-1]==9 ||
+        map.getAllMaps().getMapMatrix()[x][y-1]==26 || map.getAllMaps().getMapMatrix()[x][y-1]==27 ||
+        map.getAllMaps().getMapMatrix()[x][y-1]==28 || map.getAllMaps().getMapMatrix()[x][y-1]==29||
+        map.getAllMaps().getMapMatrix()[x][y-1]==10 || map.getAllMaps().getMapMatrix()[x][y-1]==14 ||
+        map.getAllMaps().getMapMatrix()[x][y-1]==16 || map.getAllMaps().getMapMatrix()[x][y-1]==22){
+          Position pos5(x,y-1);
+          selectedMap[x+25*(y-1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos5)));
+        }
       }
+
     }
     map.getAllMaps().setSelectedMap(selectedMap);
 

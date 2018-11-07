@@ -14,6 +14,8 @@ using namespace render;
 Engine::Engine (){
   Observable principalMap; // to put in engine
   renderMap map;
+  CreateUnit cu1;
+  cu1.execute(principalMap,0,0,1);
   map.update(principalMap);
   int X=0;
   int Y=0;
@@ -61,12 +63,16 @@ Engine::Engine (){
           std::cout << "Y: " << Y << std::endl;
 
         }
+        break;
     }
 
   }
   CaseIdentifier cs;
   Possibilities ps;
+  PrintStats pst;
+  CreateUnit cu;
   ps.execute(principalMap,X,Y,cs.execute(principalMap,X,Y));
+  pst.execute(principalMap,X,Y,cs.execute(principalMap,X,Y));
   map.update(principalMap);
 
 // draw the layers
@@ -77,6 +83,7 @@ Engine::Engine (){
   window.draw(map.getSelectedMap());
   window.draw(map.getDecorMap());
   window.draw(map.getBuildingMap());
+  window.draw(map.getUnitMap());
   window.draw(map.getStatsMap());
 
   window.display();

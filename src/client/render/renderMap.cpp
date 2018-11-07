@@ -151,6 +151,10 @@ void renderMap::update(state::Observable& principalMap) {
   BuildingTileSet building;
   Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
 
+  vector <int> unitsId = principalMap.getAllMaps().getUnitsMapId();
+  UnitsTileSet units;
+  Layer unitMap(units.getImageFile(),principalMap.getAllMaps().getSize(),unitsId,1);
+
   vector <int> statsId = principalMap.getAllMaps().getStatsMap();
   StatsTileSet stats;
   Layer statsMap(stats.getImageFile(),6,statsId,0);
@@ -158,9 +162,11 @@ void renderMap::update(state::Observable& principalMap) {
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
   this->basicMap=basicMap;
   this->decorMap=decorMap;
+  this->unitMap=unitMap;
   this->buildingMap=buildingMap;
   this->statsMap=statsMap;
   this->selectedMap=selectedMap;
+
 }
 
 Layer renderMap::getBasicMap() const{
