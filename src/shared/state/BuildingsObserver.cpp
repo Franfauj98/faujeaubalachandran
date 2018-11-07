@@ -38,24 +38,28 @@ int position, int action, int unitToCreate, int position2){
           std::unique_ptr<Element> arrow_ptr(new Arrow(level,*pos1,1));
           // barrack->destructArrow(arrow);
           map.addUnitsToMap(arrow_ptr, position);
+          map.getMapMatrix()[x][y] = 14;
           break;
         }
         case 2:
         {
           std::unique_ptr<Element> decurion_ptr(new Decurion(level,*pos1,1));
           map.addUnitsToMap(decurion_ptr, position);
+          map.getMapMatrix()[x][y] = 10;
           break;
         }
         case 3:
         {
           std::unique_ptr<Element> catapult_ptr(new Catapult(level,*pos1,1));
           map.addUnitsToMap(catapult_ptr, position);
+          map.getMapMatrix()[x][y] = 22;
           break;
         }
         case 4:
         {
           std::unique_ptr<Element> cavalier_ptr(new Cavalier(level,*pos1,1));
           map.addUnitsToMap(cavalier_ptr, position);
+          map.getMapMatrix()[x][y] = 18;
           break;
         }
         default: break;

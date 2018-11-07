@@ -14,7 +14,7 @@ Arrow::Arrow () : Units() {
   setIdTextureUnits(ARROW2);
   UnitCost arrowCost(0,0);
   setUnitCost(arrowCost);
-  this->type = 1;
+  this->type = 14;
 }
 
 Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost) :
@@ -33,7 +33,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setIdTextureUnits(ARROW2);
       UnitCost arrowCost(50,50);
       setUnitCost(arrowCost);
-      this->type = 1;
+      this->type = 14;
       break;}
     case 2 :{
       setPosition(p);
@@ -46,7 +46,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setIdTextureUnits(ARROW2);
       UnitCost arrowCost(100,100);
       setUnitCost(arrowCost);
-      this->type = 1;
+      this->type = 14;
       break;}
     case 3 :{
       setPosition(p);
@@ -59,7 +59,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setIdTextureUnits(ARROW2);
       UnitCost arrowCost(150,150);
       setUnitCost(arrowCost);
-      this->type = 1;
+      this->type = 14;
       break;}
     case 4 :{
       setPosition(p);
@@ -72,7 +72,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setIdTextureUnits(ARROW2);
       UnitCost arrowCost(200,200);
       setUnitCost(arrowCost);
-      this->type = 1;
+      this->type = 14;
       break;}
     default :{
       setPosition(p);
@@ -85,7 +85,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setIdTextureUnits(ARROW2);
       UnitCost arrowCost(50,50);
       setUnitCost(arrowCost);
-      this->type = 1;
+      this->type = 14;
       break;}
   }
 }

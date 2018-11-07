@@ -273,7 +273,7 @@ int Map::getSize () const{
   return this->size;
 }
 
-vector<vector<int> > Map::getMapMatrix () const{
+vector<vector<int> >& Map::getMapMatrix (){
   return this->mapMatrix;
 }
 
