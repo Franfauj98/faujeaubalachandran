@@ -16,7 +16,7 @@ void Move::execute(state::Observable& map, int x, int y, int x2, int y2){
       map.getAllMaps().getMapMatrix()[x][y+1]==2 && map.getAllMaps().getMapMatrix()[x][y+1]==9 &&
       map.getAllMaps().getMapMatrix()[x][y-1]==2 && map.getAllMaps().getMapMatrix()[x][y-1]==9){
 
-  map.notifyObserver(map,x+25*y,map.getAllMaps().getMapMatrix()[x][y], 2,-1,x2+25*y2);
+  map.notifyObserver(map,x+24*y,map.getAllMaps().getMapMatrix()[x][y], 2,-1,x2+24*y2);
   }
 
 }

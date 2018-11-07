@@ -13,5 +13,5 @@ CommandTypeId CreateUnit::getTypeId () const{
   return CommandTypeId::CREATEUNIT;
 }
 void CreateUnit::execute (state::Observable& map, int x, int y, int unit){
-  map.notifyObserver(map,x+25*y,30, 2,unit,0);
+  map.notifyObserver(map,x+24*y,30, 2,unit,0);
 }
