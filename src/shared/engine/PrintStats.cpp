@@ -62,7 +62,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     map.getAllMaps().setStatsMap(statsMap);
     //cout<<units->getLife()<<endl;
     //cout<<units->getLevel()<<endl;
-    cout<<units->getDamage()<<endl;
+    // cout<<units->getDamage()<<endl;
   }
   else if (element==26 || element==27 || element==28 || element==30){
     Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[x+25*y].get();

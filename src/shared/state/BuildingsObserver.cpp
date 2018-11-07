@@ -21,11 +21,8 @@ int position, int action, int unitToCreate, int position2){
 
     case 1:
     {
-      std::cout << level << std::endl;
-      std::cout << "levelUp" << std::endl;
       build->setLevel(++level);
       level = build->getLevel();
-      std::cout << level << std::endl;
       break;
     }
 
