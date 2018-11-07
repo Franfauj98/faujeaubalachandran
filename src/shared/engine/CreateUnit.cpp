@@ -13,6 +13,5 @@ CommandTypeId CreateUnit::getTypeId () const{
   return CommandTypeId::CREATEUNIT;
 }
 void CreateUnit::execute (state::Observable& map, int x, int y, int unit){
-  // map.notifyObserver(map,map.getAllMaps().getBuildingsMap()[x+25*y],x+25*y,map.getAllMaps().getMapMatrix()[x][y], 2,unit,
-  // 1,0);
+  map.notifyObserver(map,x+25*y,map.getAllMaps().getMapMatrix()[x][y], 2,unit,0);
 }
