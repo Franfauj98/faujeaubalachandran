@@ -27,6 +27,9 @@ int position, int action, int position2){
   Units* unitToChange2 = (Units *)map.getUnitsMap()[position2].get();
   Units* buildingToAttack = (Units *)map.getBuildingsMap()[position2].get();
 
+  std::cout<<"unitToChange->getType()"<<std::endl;
+  std::cout<<unitToChange->getType()<<std::endl;
+
   switch(action){
     // case 1: //levelup
     // {

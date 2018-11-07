@@ -15,30 +15,25 @@ renderMap::renderMap (){
   //
   // Position pos1(1,1);
   // Position pos2(1,2);
-
-  // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Arrow(2, pos1, 1)),
-  //   1, 26, 2, 1, 1, 0);
+  //
   //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Palace(2,pos2,2)),
-  //   24, 26, 2, 1, 1, 0);
+  //   1, 26, 2, 1, 0);
   //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Palace(2,pos2,2)),
-  //   25, 26, 2, 2, 2, 0);
+  //   24, 26, 2, 1, 0);
   //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Palace(2,pos2,3)),
-  //   49, 26, 2, 3, 1, 0);
+  //   25, 26, 2, 2, 0);
   //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Palace(2,pos2,3)),
-  //   50, 26, 2, 4, 2, 0);
+  //   49, 26, 2, 3, 0);
   //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Palace(2,pos2,3)),
-  //   2, 26, 2, 2, 2, 0);
+  //   50, 26, 2, 4, 0);
+  //
+  // principalMap.notifyObserver(principalMap,
+  //   2, 26, 2, 2, 0);
   //
   // // print to Test
   // vector <int> unitsId = principalMap.getAllMaps().getUnitsMapId();
@@ -57,8 +52,7 @@ renderMap::renderMap (){
   // // print to Test
   //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Arrow(2,pos2,3)),
-  //   2, 10, 1, 2, 2, 0);
+  //   2, 10, 1, -1, 3);
   //
   // std::cout<<"\n";
   // std::cout<<"\n";
@@ -76,9 +70,9 @@ renderMap::renderMap (){
   // }
   // std::cout<<"\n";
   //
+  //
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Arrow(2,pos2,3)),
-  //   2, 10, 2, -1, 2, 3);
+  //   3, 10, 1, -1, 2);
   //
   // std::cout<<"\n";
   //
@@ -91,8 +85,7 @@ renderMap::renderMap (){
   // std::cout<<"\n";
   // std::cout<<"\n";
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Arrow(2,pos2,3)),
-  //   3, 10, 2, -1, 2, 2);
+  //   2, 10, 2, -1, 1);
   //
   // vector <int> unitsId3 = principalMap.getAllMaps().getUnitsMapId();
   // for(size_t i=0; i<unitsId3.size(); i++){
@@ -110,8 +103,7 @@ renderMap::renderMap (){
   // std::cout<<"\n";
   // std::cout<<"\n";
   // principalMap.notifyObserver(principalMap,
-  //   std::unique_ptr<Element> (new Arrow(2,pos2,3)),
-  //   1, 10, 3, -1, -1, 2);
+  //   1, 10, 2, -1, 2);
   //
   // std::vector<unique_ptr<state::Element>> const& unitsMap4 = principalMap.getAllMaps().getUnitsMap();
   // std::cout << ((Units*)unitsMap4[1].get())->getLife()<<endl;
@@ -136,7 +128,7 @@ void renderMap::update(state::Observable& principalMap) {
 
   vector <int> statsId = principalMap.getAllMaps().getStatsMap();
   StatsTileSet stats;
-  Layer statsMap(stats.getImageFile(),4,statsId,0);
+  Layer statsMap(stats.getImageFile(),6,statsId,0);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
   this->basicMap=basicMap;

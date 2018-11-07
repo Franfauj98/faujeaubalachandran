@@ -44,7 +44,7 @@ namespace state {
     std::vector<int> getUnitsMapId ();
     std::vector<int> getBuildingsMapId ();
     int getSize () const;
-    std::vector<std::vector<int> > getMapMatrix () const;
+    std::vector<std::vector<int> >& getMapMatrix ();
     void addUnitsToMap (std::unique_ptr<Element>& unitsToMap, int& position);
     void deleteUnitsOnMap (std::unique_ptr<Element> unit);
     void setStatsMap (std::vector<int>& statsMap);
