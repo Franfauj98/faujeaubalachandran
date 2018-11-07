@@ -15,7 +15,7 @@ Engine::Engine (){
   Observable principalMap; // to put in engine
   renderMap map;
   CreateUnit cu1;
-  cu1.execute(principalMap,0,0,1);
+  cu1.execute(principalMap,10,10,1);
   map.update(principalMap);
   int X=0;
   int Y=0;

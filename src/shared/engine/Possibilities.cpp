@@ -31,6 +31,7 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
         map.getAllMaps().getMapMatrix()[x+1][y]==16 || map.getAllMaps().getMapMatrix()[x+1][y]==22){
           Position pos2(x+1,y);
           selectedMap[x+1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos2)));
+          cout<<map.getAllMaps().getMapMatrix()[x+1][y]<<endl;
         }
       }
       if (x-1>=0 && x-1<25){
@@ -41,6 +42,7 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
         map.getAllMaps().getMapMatrix()[x-1][y]==16 || map.getAllMaps().getMapMatrix()[x-1][y]==22){
           Position pos3(x-1,y);
           selectedMap[x-1+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos3)));
+          cout<<map.getAllMaps().getMapMatrix()[x-1][y]<<endl;
         }
       }
       if (y+1>=0 && y+1<25){
@@ -51,6 +53,7 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
         map.getAllMaps().getMapMatrix()[x][y+1]==16 || map.getAllMaps().getMapMatrix()[x][y+1]==22){
           Position pos4(x,y+1);
           selectedMap[x+25*(y+1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos4)));
+          cout<<map.getAllMaps().getMapMatrix()[x][y+1]<<endl;
         }
       }
       if (y-1>=0 && y-1<25){
@@ -61,6 +64,7 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
         map.getAllMaps().getMapMatrix()[x][y-1]==16 || map.getAllMaps().getMapMatrix()[x][y-1]==22){
           Position pos5(x,y-1);
           selectedMap[x+25*(y-1)]=move(unique_ptr<Element> (new Decor(SELECTED,pos5)));
+          cout<<map.getAllMaps().getMapMatrix()[x][y-1]<<endl;
         }
       }
 
