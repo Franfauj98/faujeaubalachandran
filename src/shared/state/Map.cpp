@@ -146,13 +146,8 @@ Map::Map(){
     }
   }
 
-  for(int i = 0; i<4; i++){
-    for(int j = 0; j<4; j++){
-      Position p(i,j);
-      this->statsMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
-    }
-  }
-
+  std::vector<int> statsMap(16,0);
+  this->statsMap=statsMap;
  // Add decor to maps
   int basicChange=0;
   int decorChange=0;
@@ -306,21 +301,12 @@ void Map::deleteUnitsOnMap (unique_ptr<Element> unit){
   this->unitsMap[pos] = nullptr;
 }
 
-std::vector<unique_ptr<state::Element>>& Map::getStatsMap(){
+std::vector<int> Map::getStatsMap(){
   return this->statsMap;
 }
 std::vector<unique_ptr<state::Element>>& Map::getSelectedMap(){
   return this->selectedMap;
 }
-
-std::vector<int> Map::getStatsMapId () {
-  std::vector<int> toReturn;
-  for(size_t i=0; i<this->statsMap.size(); i++){
-    toReturn.push_back(((Decor *) this->statsMap[i].get())->getIdDecor());
-  }
-  return toReturn;
-}
-
 
 std::vector<int> Map::getSelectedMapId () {
   std::vector<int> toReturn;
@@ -330,8 +316,8 @@ std::vector<int> Map::getSelectedMapId () {
   return toReturn;
 }
 
-void Map::setStatsMap(std::vector<unique_ptr<state::Element>>& statsMap){
-  this->statsMap=move(statsMap);
+void Map::setStatsMap(std::vector<int>& statsMap){
+  this->statsMap=statsMap;
 }
 
 void Map::setSelectedMap(std::vector<unique_ptr<state::Element>>& selectedMap){

@@ -3,6 +3,9 @@
 #define ENGINE__MOVE__H
 
 
+namespace state {
+  class Observable;
+};
 namespace engine {
   class Command;
 }
@@ -18,7 +21,7 @@ namespace engine {
   public:
     ~Move ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& map, int x, int y, int x2, int y2);
     // Setters and Getters
   };
 

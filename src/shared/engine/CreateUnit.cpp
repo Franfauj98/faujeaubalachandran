@@ -1,6 +1,8 @@
 #include "CreateUnit.h"
+#include "state.h"
 #include <iostream>
 using namespace engine;
+using namespace state;
 using namespace std;
 
 CreateUnit::~CreateUnit (){
@@ -10,6 +12,7 @@ CreateUnit::~CreateUnit (){
 CommandTypeId CreateUnit::getTypeId () const{
   return CommandTypeId::CREATEUNIT;
 }
-void CreateUnit::execute (){
-
+void CreateUnit::execute (state::Observable& map, int x, int y, int unit){
+  // map.notifyObserver(map,map.getAllMaps().getBuildingsMap()[x+25*y],x+25*y,map.getAllMaps().getMapMatrix()[x][y], 2,unit,
+  // 1,0);
 }

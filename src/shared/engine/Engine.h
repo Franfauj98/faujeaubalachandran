@@ -11,6 +11,17 @@ namespace state {
 namespace engine {
   class Command;
 };
+namespace sf {
+  class Drawable;
+  class Transformable;
+  class Font;
+  class RenderWindow;
+  class Texture;
+  class Color;
+  class Text;
+  class Sprite;
+  class VertexArray;
+};
 namespace render {
   class renderMap;
 }

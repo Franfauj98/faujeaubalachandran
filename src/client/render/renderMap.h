@@ -6,10 +6,12 @@
 
 namespace render {
   class Layer;
-  class TileSet;
 };
 namespace state {
   class Observable;
+};
+namespace render {
+  class TileSet;
 }
 
 #include "Layer.h"
@@ -45,6 +47,7 @@ namespace render {
     void setUnitMap (Layer* unitLayer);
     void setStatsMap (Layer* statsLayer);
     void setSelectedMap (Layer* selectedLayer);
+    void update (state::Observable& principalMap);
     // Setters and Getters
   };
 

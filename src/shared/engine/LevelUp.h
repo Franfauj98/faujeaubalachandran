@@ -3,6 +3,9 @@
 #define ENGINE__LEVELUP__H
 
 
+namespace state {
+  class Observable;
+};
 namespace engine {
   class Command;
 }
@@ -18,7 +21,7 @@ namespace engine {
   public:
     ~LevelUp ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& map, int x, int y);
     // Setters and Getters
   };
 
