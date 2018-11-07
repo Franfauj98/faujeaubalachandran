@@ -136,7 +136,7 @@ void renderMap::update(state::Observable& principalMap) {
 
   vector <int> statsId = principalMap.getAllMaps().getStatsMap();
   StatsTileSet stats;
-  Layer statsMap(stats.getImageFile(),4,statsId,0);
+  Layer statsMap(stats.getImageFile(),6,statsId,0);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
   this->basicMap=basicMap;

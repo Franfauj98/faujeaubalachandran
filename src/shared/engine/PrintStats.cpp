@@ -93,22 +93,26 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(palace->getLevel()){
       case 1:
-      statsMap[4]=3;
+      statsMap[6]=3;
       break;
 
       case 2:
-      statsMap[4]=4;
+      statsMap[6]=4;
       break;
 
       case 3:
-      statsMap[4]=5;
+      statsMap[6]=5;
       break;
 
       case 4:
-      statsMap[4]=6;
+      statsMap[6]=6;
       break;
     }
 
+    if (element==26 || element==27 || element==28){
+      statsMap[12]=16;
+
+    }
     map.getAllMaps().setStatsMap(statsMap);
     //cout<<palace->getLife()<<endl;
     //cout<<palace->getLevel()<<endl;
@@ -142,19 +146,19 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(barrack->getLevel()){
       case 1:
-      statsMap[4]=3;
+      statsMap[6]=3;
       break;
 
       case 2:
-      statsMap[4]=4;
+      statsMap[6]=4;
       break;
 
       case 3:
-      statsMap[4]=5;
+      statsMap[6]=5;
       break;
 
       case 4:
-      statsMap[4]=6;
+      statsMap[6]=6;
       break;
     }
     switch(barrack->getUnitsNumber()){
@@ -185,21 +189,27 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(barrack->getCapacity()){
       case 1:
-      statsMap[12]=3;
+      statsMap[10]=3;
       break;
 
       case 2:
-      statsMap[12]=4;
+      statsMap[10]=4;
       break;
 
       case 4:
-      statsMap[12]=6;
+      statsMap[10]=6;
       break;
 
       case 6:
-      statsMap[12]=8;
+      statsMap[10]=8;
       break;
     }
+    statsMap[12]=12;
+    statsMap[15]=13;
+    statsMap[18]=14;
+    statsMap[21]=15;
+    statsMap[24]=16;
+
     map.getAllMaps().setStatsMap(statsMap);
 
     //cout<<barrack->getLife()<<endl;
@@ -237,40 +247,42 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     switch(ressource->getLevel()){
       case 1:
-      statsMap[4]=3;
+      statsMap[6]=3;
       break;
 
       case 2:
-      statsMap[4]=4;
+      statsMap[6]=4;
       break;
 
       case 3:
-      statsMap[4]=5;
+      statsMap[6]=5;
       break;
 
       case 4:
-      statsMap[4]=6;
+      statsMap[6]=6;
       break;
     }
 
     switch(ressource->getProduction()){
       case 2:
-      statsMap[8]=4;
+      statsMap[12]=4;
       break;
 
       case 4:
-      statsMap[8]=6;
+      statsMap[12]=6;
       break;
 
       case 6:
-      statsMap[8]=8;
+      statsMap[12]=8;
       break;
 
       case 8:
-      statsMap[8]=10;
+      statsMap[12]=10;
       break;
     }
-
+    if (ressource->getLevel()<4){
+      statsMap[18]=16;
+    }
     map.getAllMaps().setStatsMap(statsMap);
 
     //cout<<ressource->getLife()<<endl;

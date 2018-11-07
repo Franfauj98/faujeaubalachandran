@@ -146,7 +146,7 @@ Map::Map(){
     }
   }
 
-  std::vector<int> statsMap(24,0);
+  std::vector<int> statsMap(36,0);
   this->statsMap=statsMap;
  // Add decor to maps
   int basicChange=0;
