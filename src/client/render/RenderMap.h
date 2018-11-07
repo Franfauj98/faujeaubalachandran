@@ -20,8 +20,8 @@ namespace render {
 
 namespace render {
 
-  /// class renderMap - 
-  class renderMap {
+  /// class RenderMap - 
+  class RenderMap {
     // Associations
     // Attributes
   private:
@@ -34,8 +34,8 @@ namespace render {
     Layer selectedMap;
     // Operations
   public:
-    renderMap ();
-    ~renderMap ();
+    RenderMap ();
+    ~RenderMap ();
     Layer getBuildingMap () const;
     Layer getBasicMap () const;
     Layer getDecorMap () const;

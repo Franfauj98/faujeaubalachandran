@@ -1,4 +1,4 @@
-#include "renderMap.h"
+#include "RenderMap.h"
 #include "BuildingTileSet.h"
 #include "DecorTileSet.h"
 #include "UnitsTileSet.h"
@@ -10,7 +10,7 @@ using namespace render;
 using namespace state;
 using namespace std;
 
-renderMap::renderMap (){
+RenderMap::RenderMap (){
   // Observable principalMap; // to put in engine
   //
   // Position pos1(1,1);
@@ -135,7 +135,7 @@ renderMap::renderMap (){
   // std::cout << ((Units*)unitsMap4[2].get())->getLife()<<endl;
 }
 
-void renderMap::update(state::Observable& principalMap) {
+void RenderMap::update(state::Observable& principalMap) {
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;
@@ -169,51 +169,51 @@ void renderMap::update(state::Observable& principalMap) {
 
 }
 
-Layer renderMap::getBasicMap() const{
+Layer RenderMap::getBasicMap() const{
   return this->basicMap;
 }
 
-Layer renderMap::getDecorMap() const {
+Layer RenderMap::getDecorMap() const {
   return this->decorMap;
 }
 
-Layer renderMap::getBuildingMap() const {
+Layer RenderMap::getBuildingMap() const {
   return this->buildingMap;
 }
 
-Layer renderMap::getUnitMap() const {
+Layer RenderMap::getUnitMap() const {
   return this->unitMap;
 }
 
-Layer renderMap::getStatsMap() const {
+Layer RenderMap::getStatsMap() const {
   return this->statsMap;
 }
 
-Layer renderMap::getSelectedMap() const {
+Layer RenderMap::getSelectedMap() const {
   return this->selectedMap;
 }
 
-std::unique_ptr<Layer> const& renderMap::getBackground() const {
+std::unique_ptr<Layer> const& RenderMap::getBackground() const {
   return this->background;
 }
 
-void renderMap::setStatsMap(Layer* statsLayer) {
+void RenderMap::setStatsMap(Layer* statsLayer) {
   this->statsMap=*statsLayer;
 }
 
-void renderMap::setSelectedMap(Layer* selectedLayer) {
+void RenderMap::setSelectedMap(Layer* selectedLayer) {
   this->selectedMap=*selectedLayer;
 }
 
-void renderMap::setBuildingMap(Layer* buildingLayer) {
+void RenderMap::setBuildingMap(Layer* buildingLayer) {
   this->buildingMap=*buildingLayer;
 }
 
-void renderMap::setUnitMap(Layer* unitLayer) {
+void RenderMap::setUnitMap(Layer* unitLayer) {
   this->unitMap=*unitLayer;
 }
 
-  renderMap::~renderMap (){
+  RenderMap::~RenderMap (){
 
 
   }

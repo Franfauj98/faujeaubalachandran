@@ -9,7 +9,7 @@ using namespace state;
 using namespace std;
 using namespace render;
 
-sf::Vector2i getClick(sf::RenderWindow& window, renderMap& map){
+sf::Vector2i getClick(sf::RenderWindow& window, RenderMap& map){
   // manage the events
   int X=0;
   int Y=0;
@@ -49,7 +49,7 @@ sf::Vector2i getClick(sf::RenderWindow& window, renderMap& map){
   return click;
 }
 
-void drawMap(sf::RenderWindow& window, renderMap& map){
+void drawMap(sf::RenderWindow& window, RenderMap& map){
   // draw the layers
     window.clear();
     map.getBackground()->drawSprite(window);
@@ -64,7 +64,7 @@ void drawMap(sf::RenderWindow& window, renderMap& map){
 
 Engine::Engine (){
   Observable principalMap; // to put in engine
-  renderMap map;
+  RenderMap map;
   CreateUnit cu1;
   cu1.execute(principalMap,10,10,1);
   cu1.execute(principalMap,12,12,3);

@@ -23,11 +23,11 @@ namespace sf {
   class VertexArray;
 };
 namespace render {
-  class renderMap;
+  class RenderMap;
 }
 
 #include "state/Observable.h"
-#include "render/renderMap.h"
+#include "render/RenderMap.h"
 #include "Command.h"
 
 namespace engine {

@@ -43,7 +43,7 @@ int main(int argc,char* argv[])
     //tileTest();
     //tileSetTest();
     //layerTest();
-  //   renderMap map;
+  //   RenderMap map;
   //   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
   //   window.setVerticalSyncEnabled(false);
   //

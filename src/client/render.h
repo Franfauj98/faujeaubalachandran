@@ -5,7 +5,7 @@
 #include "render/Layer.h"
 #include "render/Tile.h"
 #include "render/TileSet.h"
-#include "render/renderMap.h"
+#include "render/RenderMap.h"
 #include "render/DecorTileSet.h"
 #include "render/UnitsTileSet.h"
 #include "render/BuildingTileSet.h"

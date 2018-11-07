@@ -61,10 +61,10 @@ void Layer::setSpriteLocation (int size, int x, int y, int iso){
     quad[3].position = sf::Vector2f(x*32 - y*32 + 12*64, y*16 + x*16 + 16 + 0*64);
 
   } else {
-    quad[0].position = sf::Vector2f(x *64, y * 96);
-    quad[1].position = sf::Vector2f((x + 1) * 64, y * 96);
-    quad[2].position = sf::Vector2f((x + 1) * 64, (y + 1) * 96);
-    quad[3].position = sf::Vector2f(x * 64, (y + 1) * 96);
+    quad[0].position = sf::Vector2f(x *32, y * 64);
+    quad[1].position = sf::Vector2f((x + 1) * 32, y * 64);
+    quad[2].position = sf::Vector2f((x + 1) * 32, (y + 1) * 64);
+    quad[3].position = sf::Vector2f(x * 32, (y + 1) * 64);
   }
 
 }
@@ -85,10 +85,10 @@ void Layer::setSpriteTexture (int size, vector<int> tiles,int x, int y, int iso)
     quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32-32/2);
   }
   else {
-    quad[0].texCoords = sf::Vector2f(tu * 64, tv * 96);
-    quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 96);
-    quad[2].texCoords = sf::Vector2f((tu + 1) * 64, (tv + 1) * 96);
-    quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 96);
+    quad[0].texCoords = sf::Vector2f(tu * 32, tv * 64);
+    quad[1].texCoords = sf::Vector2f((tu + 1) * 32, tv * 64);
+    quad[2].texCoords = sf::Vector2f((tu + 1) * 32, (tv + 1) * 64);
+    quad[3].texCoords = sf::Vector2f(tu * 32, (tv + 1) * 64);
 
   }
 }
