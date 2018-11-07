@@ -3,9 +3,8 @@
 #include "../../shared/state.h"
 using namespace state;
 
-void BuildingsObserver::changeBuildings(std::unique_ptr<Element> buildings,
-Observable& mapToChange,
-int position, int action, int unitToCreate, int level, int position2){
+void BuildingsObserver::changeBuildings(Observable& mapToChange,
+int position, int action, int unitToCreate, int position2){
   Map& map = mapToChange.getAllMaps();
   Buildings* build = (Buildings *)map.getBuildingsMap()[position].get();
   std::cout << "BuildingsObserver" << std::endl;
@@ -16,12 +15,12 @@ int position, int action, int unitToCreate, int level, int position2){
     if(i==position) break;
   }
   Position* pos1 = new Position(x,y);
+  int level = build->getLevel();
 
   switch(action){
 
     case 1:
     {
-      int level = build->getLevel();
       std::cout << level << std::endl;
       std::cout << "levelUp" << std::endl;
       build->setLevel(++level);

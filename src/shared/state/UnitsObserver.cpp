@@ -3,9 +3,8 @@
 #include "../../shared/state.h"
 using namespace state;
 
-void UnitsObserver::changeUnits(std::unique_ptr<Element> unit,
-Observable& mapToChange,
-int position, int action, int level, int position2){
+void UnitsObserver::changeUnits(Observable& mapToChange,
+int position, int action, int position2){
   std::cout << "UnitsObserver" << std::endl;
   // int y = position%25;
   // int x=-1;
@@ -29,17 +28,17 @@ int position, int action, int level, int position2){
   Units* buildingToAttack = (Units *)map.getBuildingsMap()[position2].get();
 
   switch(action){
-    case 1: //levelup
-    {
-      int level2 = unitToChange->getLevel();
-      std::cout << level2 << std::endl;
-      std::cout << "levelUp" << std::endl;
-      unitToChange->setLevel(++level2);
-      level2 = unitToChange->getLevel();
-      std::cout << level2 << std::endl;
-      break;
-    }
-    case 2: //move
+    // case 1: //levelup
+    // {
+    //   int level2 = unitToChange->getLevel();
+    //   std::cout << level2 << std::endl;
+    //   std::cout << "levelUp" << std::endl;
+    //   unitToChange->setLevel(++level2);
+    //   level2 = unitToChange->getLevel();
+    //   std::cout << level2 << std::endl;
+    //   break;
+    // }
+    case 1: //move
     {
       unitToChange->move(*pos2, 1);
       std::unique_ptr<Element> tmp = std::move(map.getUnitsMap()[position]);
@@ -48,12 +47,12 @@ int position, int action, int level, int position2){
       map.addUnitsToMap(wideUnit, position);
       break;
     }
-    case 3: //attackUnit
+    case 2: //attackUnit
     {
       unitToChange->attack(*unitToChange2);
       break;
     }
-    case 4: //attackBuilding
+    case 3: //attackBuilding
     {
       unitToChange->attack(*buildingToAttack);
       break;

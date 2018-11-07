@@ -2,11 +2,10 @@
 #ifndef STATE__BUILDINGSOBSERVER__H
 #define STATE__BUILDINGSOBSERVER__H
 
-#include <memory>
 
 namespace state {
-  class Element;
   class Observable;
+  class Element;
 }
 
 #include "Element.h"
@@ -17,7 +16,7 @@ namespace state {
   class BuildingsObserver {
     // Operations
   public:
-    void changeBuildings (std::unique_ptr<Element> buildingsMap, Observable& mapToChange, int position, int action, int unitToCreate, int level, int position2);
+    void changeBuildings (Observable& mapToChange, int position, int action, int unitToCreate, int position2);
     // Setters and Getters
   };
 
