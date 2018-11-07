@@ -18,7 +18,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
   cout<< element << endl;
 
   if (element==10 || element==14 || element==18 || element==22){
-    Units* units = (Units*) map.getAllMaps().getUnitsMap()[x+25*y].get();
+    Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
     if (units->getLife()<=50*units->getLevel() && units->getLife()>3/4*50*units->getLevel()){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -65,7 +65,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     map.getAllMaps().setStatsMap(statsMap);
   }
   else if (element==26 || element==27 || element==28 || element==29){
-    Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[x+25*y].get();
+    Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
     if (palace->getLife()<=50*palace->getLevel() && palace->getLife()>3/4*50*palace->getLevel()){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -116,7 +116,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     map.getAllMaps().setStatsMap(statsMap);
   }
   else if (element==30){
-    Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[x+25*y].get();
+    Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
     if (barrack->getLife()<=50*barrack->getLevel() && barrack->getLife()>3/4*50*barrack->getLevel()){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -212,7 +212,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
   }
   else if (element==31){
-    Ressource* ressource = (Ressource*) map.getAllMaps().getBuildingsMap()[x+25*y].get();
+    Ressource* ressource = (Ressource*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
     if (ressource->getLife()<=50*ressource->getLevel() && ressource->getLife()>3/4*50*ressource->getLevel()){
       statsMap[0]=1;
       statsMap[1]=1;

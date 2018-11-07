@@ -21,7 +21,7 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
       }
     }
     Position pos(x,y);
-    selectedMap[x+25*y]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
+    selectedMap[y+25*x]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
     std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
     if (element==10 || element==14 || element==18 || element==22){
 

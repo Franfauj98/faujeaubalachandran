@@ -11,12 +11,28 @@ CommandTypeId Move::getTypeId () const{
   return CommandTypeId::MOVE;
 }
 void Move::execute(state::Observable& map, int x, int y, int x2, int y2){
-  if (map.getAllMaps().getMapMatrix()[x+1][y]==2 && map.getAllMaps().getMapMatrix()[x+1][y]==9 &&
-      map.getAllMaps().getMapMatrix()[x-1][y]==2 && map.getAllMaps().getMapMatrix()[x-1][y]==9 &&
-      map.getAllMaps().getMapMatrix()[x][y+1]==2 && map.getAllMaps().getMapMatrix()[x][y+1]==9 &&
-      map.getAllMaps().getMapMatrix()[x][y-1]==2 && map.getAllMaps().getMapMatrix()[x][y-1]==9){
+  std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
+  if (mapMatrix[x2][y2]==2){
 
-  map.notifyObserver(map,y+25*x,map.getAllMaps().getMapMatrix()[x][y], 2,-1,y2+25*x2);
+    for(int i =0; i<25;i++){
+      for(int j =0; j<25;j++){
+        cout<< mapMatrix[i][j]<<" ";
+      }
+      cout<<"\n";
+    }
+    cout<<"\n";
+    cout<<"\n";
+
+    map.notifyObserver(map,y+25*x,mapMatrix[x][y], 1,-1,y2+25*x2);
+
+    std::vector<std::vector<int>> mapMatrix2 = map.getAllMaps().getMapMatrix();
+    for(int i =0; i<25;i++){
+      for(int j =0; j<25;j++){
+        cout<< mapMatrix2[i][j]<<" ";
+      }
+      cout<<"\n";
+    }
+
   }
 
 }
