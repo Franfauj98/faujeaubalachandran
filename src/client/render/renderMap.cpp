@@ -134,7 +134,7 @@ void renderMap::update(state::Observable& principalMap) {
   BuildingTileSet building;
   Layer buildingMap(building.getImageFile(),principalMap.getAllMaps().getSize(),buildingsId,1);
 
-  vector <int> statsId = principalMap.getAllMaps().getStatsMap();;
+  vector <int> statsId = principalMap.getAllMaps().getStatsMap();
   StatsTileSet stats;
   Layer statsMap(stats.getImageFile(),4,statsId,0);
 
