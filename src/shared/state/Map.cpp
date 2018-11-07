@@ -191,17 +191,17 @@ Map::Map(){
         break;
 
         case 26:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,2)));
+        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,1)));
         idPalace++;
         break;
 
         case 30:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Barrack(idBarrack,p,2)));
+        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Barrack(idBarrack,p,1)));
         idBarrack++;
         break;
 
         case 31:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Ressource(idRessource,p,2)));
+        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Ressource(idRessource,p,1)));
         idRessource++;
         break;
         default:

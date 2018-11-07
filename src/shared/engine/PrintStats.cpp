@@ -62,7 +62,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       break;
     }
 
-    map.getAllMaps().setStatsMap(statsMap);
+  //  map.getAllMaps().setStatsMap(statsMap);
   }
   else if (element==26 || element==27 || element==28 || element==29){
     Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
@@ -110,10 +110,11 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     }
 
     if (element==26 || element==27 || element==28){
-      statsMap[12]=16;
-
+      statsMap[12]=24;
+      statsMap[13]=25;
+      statsMap[14]=26;
     }
-    map.getAllMaps().setStatsMap(statsMap);
+    //map.getAllMaps().setStatsMap(statsMap);
   }
   else if (element==30){
     Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
@@ -177,13 +178,10 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       statsMap[9]=8;
       break;
     }
-    statsMap[12]=12;
-    statsMap[15]=13;
-    statsMap[18]=14;
-    statsMap[21]=15;
-    statsMap[24]=16;
-
-    map.getAllMaps().setStatsMap(statsMap);
+    for (int i=12;i<27;i++){
+      statsMap[i]=i;
+    }
+  //  map.getAllMaps().setStatsMap(statsMap);
 
   }
   else if (element==31){
@@ -224,11 +222,11 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       break;
     }
     if (ressource->getLevel()<4){
-      statsMap[12]=16;
+      statsMap[12]=24;
+      statsMap[13]=25;
+      statsMap[14]=26;
     }
   }
-
-  else {
     map.getAllMaps().setStatsMap(statsMap);
-  }
+
 }

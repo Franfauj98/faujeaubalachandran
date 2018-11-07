@@ -49,6 +49,35 @@ sf::Vector2i getClick(sf::RenderWindow& window, RenderMap& map){
   return click;
 }
 
+sf::Vector2i getClickButton(sf::RenderWindow& window, RenderMap& map){
+  // manage the events
+  int X=0;
+  int Y=0;
+  sf::Event event;
+  while (window.waitEvent(event))
+  {
+    if(event.type == sf::Event::Closed){
+    window.close();
+    }
+   if (event.type == sf::Event::MouseButtonPressed)
+    {
+      if (event.mouseButton.button == sf::Mouse::Left)
+      {
+        std::cout << "the click button was pressed" << std::endl;
+
+        X=event.mouseButton.x;
+        Y=event.mouseButton.y;
+        std::cout << "X: " << X << std::endl;
+        std::cout << "Y: " << Y << std::endl;
+
+      }
+      break;
+    }
+  }
+  sf::Vector2i click(X,Y);
+  return click;
+}
+
 void drawMap(sf::RenderWindow& window, RenderMap& map){
   // draw the layers
     window.clear();
@@ -108,12 +137,38 @@ Engine::Engine (){
     map.update(principalMap);
     drawMap(window,map);
   }
-  // else if ((element==26||element==27||element==28||element==29||element==31)&&counter=1) {
-  //
-  // }
-  // else if (element==30) {
-  //
-  // }
+  else if ((element==26||element==27||element==28||element==29||element==31)) {
+    LevelUp lu;
+    sf::Vector2i click2 = getClickButton(window, map);
+    if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
+      lu.execute(principalMap,click.x,click.y);
+    }
+  }
+  else if (element==30) {
+    LevelUp lu;
+    CreateUnit cu;
+    sf::Vector2i click2 = getClickButton(window, map);
+    if (click2.x>= 0 && click2.x<=96 && click2.y>= 256 && click2.y<=320){
+      lu.execute(principalMap,click.x,click.y);
+    }
+    if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
+      sf::Vector2i click3 = getClick(window, map);
+      cu.execute(principalMap,click3.x,click3.y,1);
+    }
+    if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
+      sf::Vector2i click3 = getClick(window, map);
+      cu.execute(principalMap,click3.x,click3.y,2);
+    }
+    if (click2.x>= 0 && click2.x<=128 && click2.y>= 192 && click2.y<=256){
+      sf::Vector2i click3 = getClick(window, map);
+      cu.execute(principalMap,click3.x,click3.y,4);
+    }
+    if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
+      sf::Vector2i click3 = getClick(window, map);
+      cu.execute(principalMap,click3.x,click3.y,3);
+    }
+
+  }
 
   }
 
