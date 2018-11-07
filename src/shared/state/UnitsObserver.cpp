@@ -7,13 +7,13 @@ void UnitsObserver::changeUnits(std::unique_ptr<Element> unit,
 Observable& mapToChange,
 int position, int action, int level, int position2){
   std::cout << "UnitsObserver" << std::endl;
-  int y = position%25;
-  int x=-1;
-  for(int i = 0; i < (25*25); i++){
-    if(i%25 == 0) x+=1;
-    if(i==position) break;
-  }
-  Position* pos1 = new Position(x,y);
+  // int y = position%25;
+  // int x=-1;
+  // for(int i = 0; i < (25*25); i++){
+  //   if(i%25 == 0) x+=1;
+  //   if(i==position) break;
+  // }
+  // Position* pos1 = new Position(x,y);
 
   int y2 = position2%25;
   int x2=-1;

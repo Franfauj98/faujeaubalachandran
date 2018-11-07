@@ -6,8 +6,8 @@ using namespace state;
 void BuildingsObserver::changeBuildings(std::unique_ptr<Element> buildings,
 Observable& mapToChange,
 int position, int action, int unitToCreate, int level, int position2){
-  // std::vector<std::unique_ptr<Element>> const& map = mapToChange.getAllMaps().getBuildingsMap();
-  Buildings* build = ((Buildings *) buildings.get());
+  Map& map = mapToChange.getAllMaps();
+  Buildings* build = (Buildings *)map.getBuildingsMap()[position].get();
   std::cout << "BuildingsObserver" << std::endl;
   int y = position%25;
   int x=-1;
@@ -15,8 +15,6 @@ int position, int action, int unitToCreate, int level, int position2){
     if(i%25 == 0) x+=1;
     if(i==position) break;
   }
-  // std::cout << "posx : " << x << std::endl;
-  // std::cout << "posy : " << y << std::endl;
   Position* pos1 = new Position(x,y);
 
   switch(action){
@@ -34,8 +32,6 @@ int position, int action, int unitToCreate, int level, int position2){
 
     case 2:
     {
-      Map& map = mapToChange.getAllMaps();
-      // Barrack* barrack = ((Barrack *) build);
       switch (unitToCreate){
         case 1:
         {
