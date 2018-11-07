@@ -71,8 +71,9 @@ Engine::Engine (){
   Possibilities ps;
   PrintStats pst;
   CreateUnit cu;
-  ps.execute(principalMap,X,Y,cs.execute(principalMap,X,Y));
-  pst.execute(principalMap,X,Y,cs.execute(principalMap,X,Y));
+  int element = cs.execute(principalMap,X,Y);
+  ps.execute(principalMap,X,Y,element);
+  pst.execute(principalMap,X,Y,element);
   map.update(principalMap);
 
 // draw the layers

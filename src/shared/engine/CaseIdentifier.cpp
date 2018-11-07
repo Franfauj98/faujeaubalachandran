@@ -14,5 +14,5 @@ CommandTypeId CaseIdentifier::getTypeId () const{
 }
 
 int CaseIdentifier::execute (state::Observable& map,int x, int y){
-  return map.getAllMaps().getMapMatrix()[x][y];
+  return map.getAllMaps().getMapMatrix()[y][x];
 }

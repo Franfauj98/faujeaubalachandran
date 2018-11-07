@@ -14,6 +14,9 @@ CommandTypeId PrintStats::getTypeId () const{
 }
 void PrintStats::execute (state::Observable& map, int x, int y, int element){
   std::vector<int> statsMap(36,0);
+  cout<< "element" << endl;
+  cout<< element << endl;
+
   if (element==10 || element==14 || element==18 || element==22){
     Units* units = (Units*) map.getAllMaps().getUnitsMap()[x+25*y].get();
     if (units->getLife()<=50*units->getLevel() && units->getLife()>3/4*50*units->getLevel()){
@@ -60,11 +63,8 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     }
 
     map.getAllMaps().setStatsMap(statsMap);
-    //cout<<units->getLife()<<endl;
-    //cout<<units->getLevel()<<endl;
-    // cout<<units->getDamage()<<endl;
   }
-  else if (element==26 || element==27 || element==28 || element==30){
+  else if (element==26 || element==27 || element==28 || element==29){
     Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[x+25*y].get();
     if (palace->getLife()<=50*palace->getLevel() && palace->getLife()>3/4*50*palace->getLevel()){
       statsMap[0]=1;
@@ -114,8 +114,6 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     }
     map.getAllMaps().setStatsMap(statsMap);
-    //cout<<palace->getLife()<<endl;
-    //cout<<palace->getLevel()<<endl;
   }
   else if (element==30){
     Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[x+25*y].get();
@@ -212,11 +210,6 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
     map.getAllMaps().setStatsMap(statsMap);
 
-    //cout<<barrack->getLife()<<endl;
-    //cout<<barrack->getLevel()<<endl;
-    //cout<<barrack->getCapacity()<<endl;
-    //cout<<barrack->getUnitsNumber()<<endl;
-
   }
   else if (element==31){
     Ressource* ressource = (Ressource*) map.getAllMaps().getBuildingsMap()[x+25*y].get();
@@ -283,11 +276,6 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     if (ressource->getLevel()<4){
       statsMap[18]=16;
     }
-
-
-    //cout<<ressource->getLife()<<endl;
-    //cout<<ressource->getLevel()<<endl;
-    //cout<<ressource->getProduction()<<endl;
   }
 
   else {

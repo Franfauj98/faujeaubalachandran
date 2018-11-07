@@ -10,8 +10,8 @@ Layer::Layer () {
 Layer::Layer (const std::string& imageFile, int size, std::vector<int> tiles, int iso) {
   loadTexture(imageFile);
   initQuads(size);
-  for (int x=0;x<size;x++){
-    for(int y=0;y<size;y++){
+  for (int y=0;y<size;y++){
+    for(int x=0;x<size;x++){
       setSpriteLocation (size,x,y,iso);
       setSpriteTexture(size,tiles,x,y,iso);
     }
