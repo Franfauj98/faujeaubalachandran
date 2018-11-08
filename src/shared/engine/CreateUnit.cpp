@@ -14,6 +14,6 @@ CommandTypeId CreateUnit::getTypeId () const{
 }
 void CreateUnit::execute (state::Observable& map, int x, int y, int x2, int y2, int unit){
   if (x2>=x-1 && x2<=x+1 && y2>=y-1 && y2<=y+1){
-    map.notifyObserver(map,y2+25*x2,30, 2,unit,0);
+    map.notifyObserver(map,y+25*x,30, 2,unit,y2+25*x2);
   }
 }

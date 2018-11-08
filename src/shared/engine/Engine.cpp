@@ -104,8 +104,8 @@ Engine::Engine (){
   Observable principalMap; // to put in engine
   RenderMap map;
   CreateUnit cu1;
-  cu1.execute(principalMap,10,10,10,10,1);
-  cu1.execute(principalMap,12,12,12,12,3);
+  // cu1.execute(principalMap,10,10,10,10,1);
+  // cu1.execute(principalMap,12,12,12,12,3);
   map.update(principalMap);
 
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
