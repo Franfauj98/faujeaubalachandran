@@ -2,15 +2,7 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
-#include <map>
-#include <memory>
 
-namespace state {
-  class Observable;
-};
-namespace engine {
-  class Command;
-};
 namespace sf {
   class Drawable;
   class Transformable;
@@ -24,10 +16,16 @@ namespace sf {
 };
 namespace render {
   class RenderMap;
+};
+namespace state {
+  class Observable;
+};
+namespace engine {
+  class Command;
 }
 
-#include "state/Observable.h"
 #include "render/RenderMap.h"
+#include "state/Observable.h"
 #include "Command.h"
 
 namespace engine {
@@ -35,17 +33,10 @@ namespace engine {
   /// class Engine - 
   class Engine {
     // Associations
-    // Attributes
-  private:
-    state::Observable curentMap;
-    std::map<int, std::unique_ptr<Command>> currentCommand;
     // Operations
   public:
     Engine ();
     ~Engine ();
-    const state::Map& getMap () const;
-    void addCommand (int priority, Command* command);
-    void update ();
     // Setters and Getters
   };
 

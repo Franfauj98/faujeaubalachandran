@@ -14,8 +14,6 @@ CommandTypeId PrintStats::getTypeId () const{
 }
 void PrintStats::execute (state::Observable& map, int x, int y, int element){
   std::vector<int> statsMap(36,0);
-  cout<< "element" << endl;
-  cout<< element << endl;
 
   if (element==10 || element==14 || element==18 || element==22){
     Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
@@ -59,6 +57,9 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
       case 4:
       statsMap[6]=6;
+      break;
+
+      default:
       break;
     }
 
@@ -107,6 +108,9 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       case 4:
       statsMap[6]=6;
       break;
+
+      default:
+      break;
     }
 
     if (element==26 || element==27 || element==28){
@@ -134,8 +138,18 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       case 4:
       statsMap[0]=6;
       break;
+
+      default:
+      break;
+
     }
+
     switch(barrack->getUnitsNumber()){
+
+      case 0:
+      statsMap[6]=2;
+      break;
+
       case 1:
       statsMap[6]=3;
       break;
@@ -159,6 +173,9 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       case 6:
       statsMap[6]=8;
       break;
+
+      default:
+      break;
     }
 
     switch(barrack->getCapacity()){
@@ -176,6 +193,9 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
       case 6:
       statsMap[9]=8;
+      break;
+
+      default:
       break;
     }
     for (int i=12;i<27;i++){
@@ -202,6 +222,9 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       case 4:
       statsMap[0]=6;
       break;
+
+      default:
+      break;
     }
 
     switch(ressource->getProduction()){
@@ -219,6 +242,9 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
 
       case 8:
       statsMap[6]=10;
+      break;
+
+      default:
       break;
     }
     if (ressource->getLevel()<4){
