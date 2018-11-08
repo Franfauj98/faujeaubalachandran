@@ -104,8 +104,8 @@ Engine::Engine (){
   Observable principalMap; // to put in engine
   RenderMap map;
   CreateUnit cu1;
-  cu1.execute(principalMap,10,10,1);
-  cu1.execute(principalMap,12,12,3);
+  cu1.execute(principalMap,10,10,10,10,1);
+  cu1.execute(principalMap,12,12,12,12,3);
   map.update(principalMap);
 
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
@@ -143,8 +143,6 @@ Engine::Engine (){
     if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
       at.execute(principalMap, click.x, click.y, click2.x, click2.y);
     }
-    map.update(principalMap);
-    drawMap(window,map);
   }
   else if ((element==26||element==27||element==28||element==29||element==31)) {
     LevelUp lu;
@@ -162,23 +160,32 @@ Engine::Engine (){
     }
     if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
       sf::Vector2i click3 = getClick(window, map);
-      cu.execute(principalMap,click3.x,click3.y,1);
+      map.update(principalMap);
+      drawMap(window,map);
+      cu.execute(principalMap,click.x,click.y,click3.x,click3.y,1);
     }
     if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
       sf::Vector2i click3 = getClick(window, map);
-      cu.execute(principalMap,click3.x,click3.y,2);
+      map.update(principalMap);
+      drawMap(window,map);
+      cu.execute(principalMap,click.x,click.y,click3.x,click3.y,2);
     }
     if (click2.x>= 0 && click2.x<=128 && click2.y>= 192 && click2.y<=256){
       sf::Vector2i click3 = getClick(window, map);
-      cu.execute(principalMap,click3.x,click3.y,4);
+      map.update(principalMap);
+      drawMap(window,map);
+      cu.execute(principalMap,click.x,click.y,click3.x,click3.y,4);
     }
     if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
       sf::Vector2i click3 = getClick(window, map);
-      cu.execute(principalMap,click3.x,click3.y,3);
+      map.update(principalMap);
+      drawMap(window,map);
+      cu.execute(principalMap,click.x,click.y,click3.x,click3.y,3);
     }
 
   }
-
+  map.update(principalMap);
+  drawMap(window,map);
   }
 
 }

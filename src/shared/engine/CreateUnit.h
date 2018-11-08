@@ -21,7 +21,7 @@ namespace engine {
   public:
     ~CreateUnit ();
     CommandTypeId getTypeId () const;
-    void execute (state::Observable& map, int x, int y, int unit);
+    void execute (state::Observable& map, int x, int y, int x2, int y2, int unit);
     // Setters and Getters
   };
 
