@@ -32,7 +32,7 @@ Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost
 Barrack::Barrack (int id, Position position, int level) : Buildings() {
   switch(level){
     case 1 : {
-      this->capacity=(1);
+      this->capacity=(5);
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
@@ -45,7 +45,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
 
       break;}
     case 2 :{
-      this->capacity=(2);
+      this->capacity=(5);
       setIdBuilding(id);
       setPosition(position);
       setLevel(2);
@@ -57,7 +57,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       this->type = 5;
       break;}
     case 3 :{
-      this->capacity=(4);
+      this->capacity=(5);
       setIdBuilding(id);
       setPosition(position);
       setLevel(3);
@@ -81,7 +81,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       this->type = 5;
       break;}
     default :{
-      this->capacity=(2);
+      this->capacity=(5);
       setIdBuilding(id);
       setPosition(position);
       setLevel(1);
@@ -96,8 +96,6 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
 }
 
 int Barrack::getCapacity() const{
-  std::cout << "Coucoucuuucucucucucucucucucucucucucucucucucucucuucucucucucucucucucucu222222222222222222222" << std::endl;
-  std::cout << this->capacity << std::endl;
   return this->capacity;
 }
 
@@ -109,8 +107,6 @@ void Barrack::setCapacity(const int capacity){
       this->capacity=0;
       throw std::string("capacity must be positive or smaller than 6");
     }
-    std::cout << "Coucoucuuucucucucucucucucucucucucucucucucucucucuucucucucucucucucucucu" << std::endl;
-    std::cout << this->capacity << std::endl;
   } catch (std::string error){
     std::cerr << error << std::endl;
     }

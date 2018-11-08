@@ -54,7 +54,7 @@ BALACHANDRAN Chirojean\textsc{} \\
 Rapport du projet logiciel transversal \textsc{} \\[0.5cm]
 \HRule \\[3cm]
 
-\includegraphics[width=1\textwidth]{map.png}\\[3.5cm]
+\includegraphics[width=1\textwidth]{ressources/map.png}\\[3.5cm]
 
 
 \begin{flushleft}
@@ -90,7 +90,7 @@ Nous avons choisi que chaque joueur pourrait seulement utiliser la civilisation 
 \begin{enumerate}
     \item Le palais : bâtiment principal de l'empire. Son niveau correspond au niveau de l'empire. Plus sont niveau est élevé et plus il est possible d'améliorer les autres bâtiments et unités.
     \item La caserne : permet de former des soldats. Quand le niveau de la caserne augmente, le niveau des troupes formées et le nombre des troupes qui peuvent être formées augmentent. Il y aura quatre types d'unités de combat : un cavalier, un épéiste, un archer et une catapulte. A la création d'une unité, le joueur choisira si elle est créée pour défendre l'empire ou si elle peut se déplacer sur la carte de jeu.
-    \item Ressources : le joueur possèdera trois types de ressources à savoir les mines d'or, la réserve de bois et les terres agricoles. Quand le niveau d'une ressource augmente, la capacité de stockage de cette ressource et la quantité produite sont augmentées.
+    \item Ressources : le joueur possèdera trois types de ressources à savoir les mines d'or, la réserve de bois et les terres agricoles. Quand le niveau d'une ressource augmente, la capacitée de stockage de cette ressource et la quantité produite sont augmentées.
 \end{enumerate}
 Pour améliorer les bâtiments, il faudra que le joueur dépense une certaine quantité de bois et d'or et pour la formation de soldats une certaine quantité de récoltes agricoles et d'or.\\
 Pour développer son empire plus rapidement il est possible d'en combatre un autre (détenu soit par l'IA, soit par un joueur) ou de s'en défendre. En effet, en cas de victoire l'empire victorieux reçoit une partie des ressources de l'empire adverse et un bonus de victoire. L'empire qui a perdu recupère, lui, un faible bonus de défaite. \\Le système de combat est le suivant. 
@@ -104,7 +104,7 @@ Un combat se termine lorsque tous les soldats d'un joueur sont éliminés.
 
 \subsection{Ressources}
 
-Voici les différentes ressources (images, textures, sprites) utilisées pour le développement du jeu. Pour créer les cartes de jeu nous utiliserons le logiciel Tiled Map Editor en mode isométrique. 
+Voici les différentes ressources (images, textures, sprites) utilisées pour le développement du jeu. Pour créer les cartes de jeu nous les génèrerons de manière aléatoire en mode isométrique. Ces cartes sont des cartes de jeu 25 x 25.
 
 \begin{figure}[!ht]
     \centering
@@ -144,7 +144,7 @@ La carte est représentée avec une grille composée de cases contenant des él�
 
 \subsubsection{Description des états éléments fixes}
 
-Les éléments fixes sont les décors et les bâtiments et les empires qui sont abstraits. Tous les éléments fixes possèdent une position (x,y).\\
+Les éléments fixes sont les décors et les bâtiments et les empires qui sont abstraits. Tous les éléments fixes possèdent une position (x,y) entre 0 et 24.\\
 
 \uline{Décors}\\
 
@@ -162,14 +162,14 @@ Un empire a plusieurs attributs:
 \item une liste de position permettant d'indiquer où se positionne l'empire sur la carte
 \end{itemize}
 
-Enfin, elle est composée d'une caserne, d'un bâtiment ressource et enfin d'un palais. \\
+Enfin, il est composée d'une caserne, d'un bâtiment ressource et enfin d'un palais. \\
 
 \uline{Bâtiments}\\
 
-Les bâtiments ont tous ces attributs 
+Les bâtiments ont tous ces attributs :
 \begin{itemize}
-\item un identifiantpour le différencier des autres (chiffre)
-\item un niveau qui va de 0 à 4
+\item un identifiant pour le différencier des autres (chiffre)
+\item un niveau qui va de 1 à 4
 \item un coût en bois et en or pour les construire
 \item un identifiant pour leur texture graphique
 \end{itemize}
@@ -181,6 +181,8 @@ La caserne a une capacité maximale de formation de troupes et possède comme at
 Les ressources ont un niveau de production identique pour l'or, le bois ainsi que la nourriture. Ils vont permettre d'augmenter la richesse d'un joueur à chaque tour.
 
 Le palais quant à lui possède des points de vie. C'est lui qui sera attaqué par un joueur et sa destruction mènera à la fin d'une partie.\\
+
+Une carte de jeux typique sera composée de 25 x 25 cases disposées de manière isométrique. Ces cartes seront générées de manière aléatiores. 
 
 \subsubsection{Description des états éléments mobiles}\\
 
@@ -218,8 +220,13 @@ Class "Decor" : Cette classe hérite d'élément, elle permet de créer les diff
 
 Class "Empire" : Dans notre jeu nous avons besoin à tout instant d'avoir une classe qui stocke les éléments importants d'un empire. Par exemple un empire à un nom, une vie, de l'or, du bois, de la nourriture, ... . Ainsi, cette classe va agir comme un conteneur de tous les élements clés de notre empire.\\
 
-Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle permet d'ajouter des élément, de les récupérer ou d'en supprimer.\\
+Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle permet d'ajouter des éléments, de les récupérer ou d'en supprimer.\\
 
+Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs. Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver.\\
+
+Class "UnitsObserver" : Cette classe est un Observer sur les Units. Elle va permettre de réaliser tous les changements nécessaires sur le state des units demandés par le moteur.
+
+Class "BuildingsObserver" : Cette classe est un Observer sur les Buildings. Elle va permettre de réaliser tous les changements nécessaires sur le state des buildings demandés par le moteur.
 
 \begin{figure}[!ht]
 \centering
@@ -228,7 +235,8 @@ Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle per
 \end{figure}
 
 \newpage
-
+ '
+\newpage
 \section{Rendu: Stratégie et conception des états}
 \subsection{Stratégie de rendu d'un état}
 
@@ -292,6 +300,56 @@ Class "Layer" : Cette classe permet de créer des plans de carte. Elle est compo
 \centering
     \includegraphics[width=1\textwidth]{ressources/render.png}
      \caption{Diagramme de classes du rendu}
+\end{figure}
+
+\newpage
+\section{Règles de changements d'états et moteur de jeu}
+
+\subsection{Horloge globale}
+Tous les changements dans le jeu suivent une horloge globale pour le passage d'un état à un autre. \\
+Ces changements sont réalisés en fonction du temps de passage d'un état à un autre. On attend la fin du changement d'état pour en réaliser un nouveau.
+
+\subsection{Changements extérieurs}
+Les changements extérieurs sont générés par des cliques du joueur. Les commandes sont les suivantes : 
+\begin{itemize}
+\item Cliquer sur n'importe quelle texture et consulter les actions qui lui sont associées ainsi que ses attributs (niveau de vie avec les coeurs, niveau, capacité ...).
+\item Augmenter le niveau des bâtiments.
+\item Créer des unités en séléctionnant leurs positions initiales avec un clique.
+\item Déplacer des unités en choississant les cases parmi celles possibles.
+\item Faire attaquer des unités entre elles.
+\item Attaquer un hôtel de ville.
+\end{itemize}
+
+\subsection{Changements autonomes}
+Ces changements sont ceux qui sont gérés par le moteur sans être provoqués par des actions utilisateurs
+\begin{itemize}
+\item Augmentation des ressources à chaque tour.
+\item Disparition des unités qui n'ont plus de vie ainsi que de l'empire du palais n'ayant plus de vie.
+\item Règles de mouvement et d'attaque.
+\item Affichage des statistiques des bâtiments et des unités.
+\end{itemize}
+
+
+\subsection{Conception logiciel}
+Le diagramme des classes du moteur est en figure 9 et diponible dans le dossier src du projet sous le nom de engine.
+Dans cette étape de conception logiciel nous avons utilisé un pattern command. A son exécution, le moteur appelle des commandes en fonction des actions utilisateur.\\
+
+\\Classes de commandes : Elles héritent toutes de la classe Command. Les commandes suivantes sont disponibles :
+\begin{itemize}
+\item CaseIdentifier : Permet d'identifier la case sur laquelle on se trouve.
+\item Possibilities : Permet de déterminer quelles sont les actions possibles à partir de cette case.
+\item PrintStats : Affiche les stats (vie, niveau, bouttons) des joueurs et des bâtiments.
+\item LevelUp : Augmente le niveau d'un bâtiment.
+\item CreateUnit : Créer une unité à partir d'un premier clique sur une caserne. Le second clique permet de positionner l'unité crée sur la map. Des boutons seront disponibles pour choisir le type d'unités à créer.
+\item Move : Permet de déplacer une unité
+\item Attack : Permet d'attaquer une unité ou un hôtel de ville.
+\item Engine : implémente le moteur de jeu.
+\end{itemize}
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=1\textwidth]{ressources/engine.png}
+     \caption{Diagramme de classes du moteur}
 \end{figure}
 
 \end{document}

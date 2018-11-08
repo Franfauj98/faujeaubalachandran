@@ -73,10 +73,15 @@ int main(int argc,char* argv[])
 
   }
   else if (argv[1] &&!strcmp(argv[1],"engine")) {
+    cout << "Click on the map to play" << endl;
+    cout << "Create unit : clik on barrack and then on one button (A, D, CV, CT) then click on a position next to the barrack " << endl;
+    cout << "Move unit : clik on the unit and then on one brighted tile" << endl;
+    cout << "Attack unit : move next to a unit and clik on the other unit brighted" << endl;
+    cout << "Attack palace : move next to a palace and clik on the palace" << endl;
     Engine engine;
  }
   else {
-    cout << "Please type 'hello' or 'state' or 'render'" << endl;
+    cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
     Engine engine;
 }
 
