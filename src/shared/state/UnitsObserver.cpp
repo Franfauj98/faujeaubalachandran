@@ -39,22 +39,28 @@ int position, int action, int position2){
     }
     case 2: //attackUnit
     {
-      unitToChange->attack(*unitToChange2);
-      if(unitToChange2->getLife()==0){
-        map.getUnitsMap()[position2] = std::move(std::unique_ptr<Element> (new Units()));
-        mapMatrix[x2][y2] = 2;
-      }
+      if(unitToChange->getIdUnits()!=unitToChange2->getIdUnits()){
+        unitToChange->attack(*unitToChange2);
+        if(unitToChange2->getLife()==0){
+          map.getUnitsMap()[position2] = std::move(std::unique_ptr<Element> (new Units()));
+          mapMatrix[x2][y2] = 2;
+        }
+      } else std::cout << "Cannot attack your own units" << std::endl;
       break;
     }
     case 3: //attackBuilding
     {
-      unitToChange->attackBuilding(*buildingToAttack);
-      if(buildingToAttack->getLife()==0){
-        map.getBuildingsMap()[position2] = std::move(std::unique_ptr<Element> (new Buildings()));
-        map.getBuildingsMap()[position2+1] = std::move(std::unique_ptr<Element> (new Buildings()));
-        map.getBuildingsMap()[position2-1] = std::move(std::unique_ptr<Element> (new Buildings()));
-        mapMatrix[x2][y2] = 2;
-      }
+      if(unitToChange->getIdUnits()!=buildingToAttack->getIdBuilding()){
+        unitToChange->attackBuilding(*buildingToAttack);
+        if(buildingToAttack->getLife()==0){
+          map.getBuildingsMap()[position2] = std::move(std::unique_ptr<Element> (new Buildings()));
+          map.getBuildingsMap()[position2+1] = std::move(std::unique_ptr<Element> (new Buildings()));
+          map.getBuildingsMap()[position2-1] = std::move(std::unique_ptr<Element> (new Buildings()));
+          mapMatrix[x2][y2] = 2;
+          mapMatrix[x2][y2+1] = 2;
+          mapMatrix[x2][y2-1] = 2;
+        }
+      } else std::cout << "Cannot attack your own Buildings" << std::endl;
       break;
     }
     default: break;

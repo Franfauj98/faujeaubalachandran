@@ -53,28 +53,28 @@ int position, int action, int unitToCreate, int position2){
           switch (unitToCreate){
             case 1:
             {
-              std::unique_ptr<Element> arrow_ptr(new Arrow(level,*pos2,1));
+              std::unique_ptr<Element> arrow_ptr(new Arrow(level,*pos2,barrack->getIdBuilding()));
               map.addUnitsToMap(arrow_ptr, position2);
               map.getMapMatrix()[x2][y2] = 14;
               break;
             }
             case 2:
             {
-              std::unique_ptr<Element> decurion_ptr(new Decurion(level,*pos2,1));
+              std::unique_ptr<Element> decurion_ptr(new Decurion(level,*pos2,barrack->getIdBuilding()));
               map.addUnitsToMap(decurion_ptr, position2);
               map.getMapMatrix()[x2][y2] = 10;
               break;
             }
             case 3:
             {
-              std::unique_ptr<Element> catapult_ptr(new Catapult(level,*pos2,1));
+              std::unique_ptr<Element> catapult_ptr(new Catapult(level,*pos2,barrack->getIdBuilding()));
               map.addUnitsToMap(catapult_ptr, position2);
               map.getMapMatrix()[x2][y2] = 22;
               break;
             }
             case 4:
             {
-              std::unique_ptr<Element> cavalier_ptr(new Cavalier(level,*pos2,1));
+              std::unique_ptr<Element> cavalier_ptr(new Cavalier(level,*pos2,barrack->getIdBuilding()));
               map.addUnitsToMap(cavalier_ptr, position2);
               map.getMapMatrix()[x2][y2] = 18;
               break;
