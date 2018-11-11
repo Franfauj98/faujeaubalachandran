@@ -4,6 +4,7 @@
 #include "Ressource.h"
 #include <iostream>
 using namespace state;
+using namespace std;
 
 Empire::Empire(){
   this->idEmpire=0;
@@ -13,17 +14,18 @@ Empire::Empire(){
   this->goldRessource=0;
   this->woodRessource=0;
   this->foodRessource=0;
+  this->shot=3;
   std::vector<Position> position(1);
   Position pos0(0,0);
   position[0]=pos0;
   this->position=position;
-  this->barrack=new Barrack();
-  this->ressource=new Ressource();
-  this->palace=new Palace();
+  this->barrack=std::unique_ptr<Barrack> (new Barrack());
+  this->ressource=std::unique_ptr<Ressource> (new Ressource());
+  this->palace=std::unique_ptr<Palace> (new Palace());
 }
 
-Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, Barrack* barrack,
-  Ressource* ressource, Palace* palace){
+Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, std::unique_ptr<Barrack>& barrack,
+  std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot){
   try{
     bool a;
     unsigned int count =0;
@@ -45,9 +47,10 @@ Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRes
       this->woodRessource=woodRessource;
       this->foodRessource=foodRessource;
       this->position=position;
-      this->barrack=barrack;
-      this->palace=palace;
-      this->ressource=ressource;
+      this->barrack = move(barrack);
+      this->palace= move(palace);
+      this->ressource= move(ressource);
+      this->shot=shot;
     } else {
       this->idEmpire=0;
       this->name="none";
@@ -56,18 +59,16 @@ Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRes
       this->goldRessource=0;
       this->woodRessource=0;
       this->foodRessource=0;
+      this->shot=shot;
       Position pos0(0,0);
       std::vector<Position> pos;
       for (unsigned int i=0;i<pos.size();i++){
         pos[i]=pos0;
       }
       setPosition(pos);
-      Barrack* barrack0 = new Barrack();
-      Palace* palace0 = new Palace();
-      Ressource* ressource0 = new Ressource();
-      this->barrack=barrack0;
-      this->palace=palace0;
-      this->ressource=ressource0;
+      this->barrack=std::unique_ptr<Barrack> (new Barrack());
+      this->palace=std::unique_ptr<Palace> (new Palace());
+      this->ressource=std::unique_ptr<Ressource> (new Ressource());
       std::string message="idEmpire must be positive";
       message+='\n';
       message+="empireLevel must be positive or smaller than 5";
@@ -205,51 +206,40 @@ void Empire::setPosition (const std::vector<Position> postion){
       }
 }
 
-Barrack* Empire::getBarrack () const{
+std::unique_ptr<Barrack>& Empire::getBarrack (){
   return this->barrack;
 }
-void Empire::setBarrack (Barrack* barrack){
-  this->barrack=barrack;
+
+void Empire::setBarrack (std::unique_ptr<Barrack>& barrack){
+  this->barrack=move(barrack);
 }
 
-Palace* Empire::getPalace () const{
+std::unique_ptr<Palace>& Empire::getPalace (){
   return this->palace;
 }
-void Empire::setPalace (Palace* palace){
-  this->palace=palace;
+void Empire::setPalace (std::unique_ptr<Palace>& palace){
+  this->palace=move(palace);
 }
 
-Ressource* Empire::getRessource () const{
+std::unique_ptr<Ressource>& Empire::getRessource (){
   return this->ressource;
 }
-void Empire::setRessource (Ressource* ressource){
-  this->ressource=ressource;
+
+void Empire::setRessource (std::unique_ptr<Ressource>& ressource){
+  this->ressource=move(ressource);
 }
 
-Barrack* Empire::createBarrack(Barrack* barrack, int id,Position position, int level){
-  barrack=new Barrack(id,position,level);
-  return barrack;
+int Empire::getShot(){
+  return this->shot;
 }
 
-Palace* Empire::createPalace(Palace* palace, int id,Position position, int level){
-  palace=new Palace(id,position,level);
-  return palace;
-}
-Ressource* Empire::createRessource(Ressource* ressource, int id,Position position, int level){
-  ressource=new Ressource(id,position,level);
-  return ressource;
-}
-
-void Empire::destructBarrack(Barrack* barrack){
-  delete barrack;
-}
-
-void Empire::destructPalace(Palace* palace){
-  delete palace;
-}
-
-void Empire::destructRessource(Ressource* ressource){
-  delete ressource;
+void Empire::setShot(int shot){
+  try{
+    if(shot>=0) this->shot=shot;
+    else throw std::string("shot must be positive or null");
+  } catch (std::string error){
+    std::cerr << error << std::endl;
+  }
 }
 
 Empire::~Empire (){

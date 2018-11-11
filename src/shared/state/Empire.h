@@ -4,16 +4,20 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace state {
+  class Position;
   class Barrack;
   class Ressource;
   class Palace;
-  class Position;
   class Buildings;
 }
 
 #include "Position.h"
+#include "Barrack.h"
+#include "Ressource.h"
+#include "Palace.h"
 #include "Buildings.h"
 
 namespace state {
@@ -22,10 +26,6 @@ namespace state {
   class Empire {
     // Associations
     // Attributes
-  public:
-    Barrack* barrack;
-    Ressource* ressource;
-    Palace* palace;
   private:
     int idEmpire;
     std::string name;
@@ -35,10 +35,14 @@ namespace state {
     int woodRessource;
     int foodRessource;
     std::vector<Position> position;
+    std::unique_ptr<Barrack> barrack;
+    std::unique_ptr<Ressource> ressource;
+    std::unique_ptr<Palace> palace;
+    int shot;
     // Operations
   public:
     Empire ();
-    Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, Barrack* barrack, Ressource* ressource, Palace* palace);
+    Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, std::unique_ptr<Barrack>& barrack, std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot);
     int getId () const;
     void setName (const std::string name);
     std::string getName () const;
@@ -54,18 +58,14 @@ namespace state {
     void setFoodRessource (const int food);
     std::vector<Position> getPosition () const;
     void setPosition (const std::vector<Position> postion);
-    Barrack* getBarrack () const;
-    void setBarrack (Barrack* barrack);
-    Palace* getPalace () const;
-    void setPalace (Palace* palace);
-    Ressource* getRessource () const;
-    void setRessource (Ressource* ressource);
-    Barrack* createBarrack (Barrack* barrack, int id, Position position, int level);
-    Ressource* createRessource (Ressource* ressource, int id, Position position, int level);
-    Palace* createPalace (Palace* palace, int id, Position position, int level);
-    void destructBarrack (Barrack* barrack);
-    void destructRessource (Ressource* ressource);
-    void destructPalace (Palace* palace);
+    std::unique_ptr<Barrack>& getBarrack ();
+    void setBarrack (std::unique_ptr<Barrack>& barrack);
+    std::unique_ptr<Palace>& getPalace ();
+    void setPalace (std::unique_ptr<Palace>& palace);
+    std::unique_ptr<Ressource>& getRessource ();
+    void setRessource (std::unique_ptr<Ressource>& ressource);
+    int getShot ();
+    void setShot (int shot);
     ~Empire ();
     // Setters and Getters
   };

@@ -157,6 +157,8 @@ Map::Map(){
   int idBarrack=1;
   int idRessource=1;
 
+  std::vector<unique_ptr<Element>> tmpEmpires;
+
   for(int i = 0; i<this->size; i++){
     for(int j = 0; j<this->size; j++){
       Position p(i,j);
@@ -192,16 +194,19 @@ Map::Map(){
 
         case 26:
         this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,1)));
+        tmpEmpires.push_back(move(unique_ptr<Element> (new Palace(idPalace,p,1))));
         idPalace++;
         break;
 
         case 30:
         this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Barrack(idBarrack,p,1)));
+        tmpEmpires.push_back(move(unique_ptr<Element> (new Barrack(idBarrack,p,1))));
         idBarrack++;
         break;
 
         case 31:
         this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Ressource(idRessource,p,1)));
+        tmpEmpires.push_back(move(unique_ptr<Element> (new Ressource(idRessource,p,1))));
         idRessource++;
         break;
         default:
@@ -212,6 +217,11 @@ Map::Map(){
       buildingChange++;
     }
   }
+  // Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, std::unique_ptr<Barrack>& barrack,
+  //   std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot){
+  //
+  // Empires.push_back(1, "Player1", 1, 200, 500, 500, 500, tmpEmpires[1].get().getPosition(), move(tmpEmpires[2]), )
+
 }
 
 Map::~Map(){
