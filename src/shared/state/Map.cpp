@@ -327,3 +327,7 @@ void Map::setStatsMap(std::vector<int>& statsMap){
 void Map::setSelectedMap(std::vector<unique_ptr<state::Element>>& selectedMap){
   this->selectedMap=move(selectedMap);
 }
+
+std::vector<unique_ptr<state::Empire>>& Map::getEmpires(){
+  return this->Empires;
+}

@@ -94,6 +94,25 @@ Engine::Engine (){
   int element, element2 = 0;
   while (window.isOpen())
   {
+    int counter=0;
+    while (counter<9){
+      //std::vector<std::unique_ptr<state::Empire> > Emp;
+
+      if (counter>=0 && counter <=2){
+        principalMap.getAllMaps().getEmpires()[0]->setShot(1);
+        principalMap.getAllMaps().getEmpires()[1]->setShot(0);
+        principalMap.getAllMaps().getEmpires()[2]->setShot(0);
+      }
+      else if (counter>=3 && counter <=5){
+        principalMap.getAllMaps().getEmpires()[0]->setShot(0);
+        principalMap.getAllMaps().getEmpires()[1]->setShot(1);
+        principalMap.getAllMaps().getEmpires()[2]->setShot(0);
+      }
+      else if (counter>=6 && counter <=8){
+        principalMap.getAllMaps().getEmpires()[0]->setShot(0);
+        principalMap.getAllMaps().getEmpires()[1]->setShot(0);
+        principalMap.getAllMaps().getEmpires()[2]->setShot(1);
+      }
     sf::Vector2i click = getClick(window, map);
 
     CaseIdentifier cs;
@@ -163,7 +182,10 @@ Engine::Engine (){
   }
   map.update(principalMap);
   drawMap(window,map);
+  counter++;
   }
+
+}
 
 }
 

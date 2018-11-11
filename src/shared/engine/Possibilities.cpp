@@ -20,6 +20,31 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
         selectedMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
       }
     }
+    int id,shot;
+    if (element==10 || element==14 || element==18 || element==22){
+      Units* unit =(Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
+      id= unit->getIdUnits();
+      shot = map.getAllMaps().getEmpires()[id-1]->getShot();
+    }
+    else if (element==26 || element==27 || element==28 || element==29){
+      Palace* building =(Palace*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+      id = building->getIdBuilding();
+      shot = map.getAllMaps().getEmpires()[id-1]->getShot();
+    }
+    else if (element ==30){
+      Barrack* building =(Barrack*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+      id = building->getIdBuilding();
+      shot = map.getAllMaps().getEmpires()[id-1]->getShot();
+    }
+    else if (element==31){
+      Ressource* building =(Ressource*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+      id = building->getIdBuilding();
+      shot = map.getAllMaps().getEmpires()[id-1]->getShot();
+    }
+
+
+    if (shot==1){
+
     Position pos(x,y);
     selectedMap[y+25*x]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
     std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
@@ -69,5 +94,5 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
 
     }
     map.getAllMaps().setSelectedMap(selectedMap);
-
+}
 }

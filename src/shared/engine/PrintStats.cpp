@@ -14,7 +14,18 @@ CommandTypeId PrintStats::getTypeId () const{
 }
 void PrintStats::execute (state::Observable& map, int x, int y, int element){
   std::vector<int> statsMap(36,0);
-
+  int id,shot;
+  if (element==10 || element==14 || element==18 || element==22){
+    Units* unit =(Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
+    id= unit->getIdUnits();
+    shot = map.getAllMaps().getEmpires()[id-1]->getShot();
+  }
+  else{
+    Buildings* building =(Buildings*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+    id = building->getIdBuilding();
+    shot = map.getAllMaps().getEmpires()[id-1]->getShot();
+  }
+  if (shot==1){
   if (element==10 || element==14 || element==18 || element==22){
     Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
     if (units->getLife()>=40){
@@ -254,5 +265,5 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     }
   }
     map.getAllMaps().setStatsMap(statsMap);
-
+}
 }
