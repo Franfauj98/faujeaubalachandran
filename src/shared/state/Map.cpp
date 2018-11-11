@@ -156,8 +156,7 @@ Map::Map(){
   int idPalace=0;
   int idBarrack=0;
   int idRessource=0;
-
-  std::vector<unique_ptr<Element>> tmpEmpires;
+  std::string name;
 
   for(int i = 0; i<this->size; i++){
     for(int j = 0; j<this->size; j++){
@@ -192,21 +191,21 @@ Map::Map(){
         this->decorMap[decorChange] = move(unique_ptr<Element> (new Decor(TREE,p)));
         break;
 
-        case 26:
-        this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,1)));
-        tmpEmpires.push_back(move(unique_ptr<Element> (new Palace(idPalace,p,1))));
-        idPalace++;
-        break;
+        case 26: {
+          this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,1)));
+          name = "Player"+idPalace;
+          Empires.push_back(unique_ptr<Empire> (new Empire(idPalace, name, 500, 500, 500, 3)));
+          idPalace++;
+          break;
+        }
 
         case 30:
         this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Barrack(idBarrack,p,1)));
-        tmpEmpires.push_back(move(unique_ptr<Element> (new Barrack(idBarrack,p,1))));
         idBarrack++;
         break;
 
         case 31:
         this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Ressource(idRessource,p,1)));
-        tmpEmpires.push_back(move(unique_ptr<Element> (new Ressource(idRessource,p,1))));
         idRessource++;
         break;
         default:
@@ -217,17 +216,6 @@ Map::Map(){
       buildingChange++;
     }
   }
-
-  int idEmpire = 0;
-  for(size_t i = 0; i <= (tmpEmpires.size()); i+=3){
-    std::string name = "Player"+i;
-    unique_ptr<Barrack> barrack1 ((Barrack*) tmpEmpires[i+2].get());
-    unique_ptr<Ressource> ressource1 ((Ressource*) tmpEmpires[i].get());
-    unique_ptr<Palace> palace1 ((Palace*) tmpEmpires[i+1].get());
-    Empires.push_back(unique_ptr<Empire> (new Empire(idEmpire, name, 500, 500, 500, barrack1, ressource1, palace1, 3)));
-    idEmpire++;
-  }
-
 }
 
 Map::~Map(){

@@ -13,13 +13,9 @@ Empire::Empire(){
   this->woodRessource=0;
   this->foodRessource=0;
   this->shot=3;
-  this->barrack=std::unique_ptr<Barrack> (new Barrack());
-  this->ressource=std::unique_ptr<Ressource> (new Ressource());
-  this->palace=std::unique_ptr<Palace> (new Palace());
 }
 
-Empire::Empire (int id, std::string name, int goldRessource, int woodRessource, int foodRessource, std::unique_ptr<Barrack>& barrack,
-  std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot){
+Empire::Empire (int id, std::string name, int goldRessource, int woodRessource, int foodRessource, int shot){
   try{
     if (id>=0 &&goldRessource>=0 && woodRessource>=0 && foodRessource>=0){
       this->idEmpire=id;
@@ -27,9 +23,6 @@ Empire::Empire (int id, std::string name, int goldRessource, int woodRessource, 
       this->goldRessource=goldRessource;
       this->woodRessource=woodRessource;
       this->foodRessource=foodRessource;
-      this->barrack = move(barrack);
-      this->palace= move(palace);
-      this->ressource= move(ressource);
       this->shot=shot;
     } else {
       this->idEmpire=0;
@@ -38,9 +31,6 @@ Empire::Empire (int id, std::string name, int goldRessource, int woodRessource, 
       this->woodRessource=0;
       this->foodRessource=0;
       this->shot=shot;
-      this->barrack=std::unique_ptr<Barrack> (new Barrack());
-      this->palace=std::unique_ptr<Palace> (new Palace());
-      this->ressource=std::unique_ptr<Ressource> (new Ressource());
       std::string message="idEmpire must be positive";
       message+='\n';
       message+="empireLevel must be positive or smaller than 5";
@@ -117,29 +107,6 @@ void Empire::setFoodRessource (const int food){
   } catch (std::string error){
     std::cerr << error << std::endl;
     }
-}
-
-std::unique_ptr<Barrack>& Empire::getBarrack (){
-  return this->barrack;
-}
-
-void Empire::setBarrack (std::unique_ptr<Barrack>& barrack){
-  this->barrack=move(barrack);
-}
-
-std::unique_ptr<Palace>& Empire::getPalace (){
-  return this->palace;
-}
-void Empire::setPalace (std::unique_ptr<Palace>& palace){
-  this->palace=move(palace);
-}
-
-std::unique_ptr<Ressource>& Empire::getRessource (){
-  return this->ressource;
-}
-
-void Empire::setRessource (std::unique_ptr<Ressource>& ressource){
-  this->ressource=move(ressource);
 }
 
 int Empire::getShot(){

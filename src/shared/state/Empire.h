@@ -3,18 +3,11 @@
 #define STATE__EMPIRE__H
 
 #include <string>
-#include <memory>
 
 namespace state {
-  class Barrack;
-  class Ressource;
-  class Palace;
   class Buildings;
 }
 
-#include "Barrack.h"
-#include "Ressource.h"
-#include "Palace.h"
 #include "Buildings.h"
 
 namespace state {
@@ -29,14 +22,11 @@ namespace state {
     int goldRessource;
     int woodRessource;
     int foodRessource;
-    std::unique_ptr<Barrack> barrack;
-    std::unique_ptr<Ressource> ressource;
-    std::unique_ptr<Palace> palace;
     int shot;
     // Operations
   public:
     Empire ();
-    Empire (int id, std::string name, int goldRessource, int woodRessource, int foodRessource, std::unique_ptr<Barrack>& barrack, std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot);
+    Empire (int id, std::string name, int goldRessource, int woodRessource, int foodRessource, int shot);
     int getId () const;
     void setName (const std::string name);
     std::string getName () const;
@@ -46,12 +36,6 @@ namespace state {
     void setWoodRessource (const int wood);
     int getFoodRessource () const;
     void setFoodRessource (const int food);
-    std::unique_ptr<Barrack>& getBarrack ();
-    void setBarrack (std::unique_ptr<Barrack>& barrack);
-    std::unique_ptr<Palace>& getPalace ();
-    void setPalace (std::unique_ptr<Palace>& palace);
-    std::unique_ptr<Ressource>& getRessource ();
-    void setRessource (std::unique_ptr<Ressource>& ressource);
     int getShot ();
     void setShot (int shot);
     ~Empire ();
