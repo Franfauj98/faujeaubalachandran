@@ -27,6 +27,7 @@ namespace state {
     std::vector<std::unique_ptr<Element>> selectedMap;
     std::vector<int> statsMap;
     std::vector< std::vector<int> >   mapMatrix;
+    std::vector<std::unique_ptr<Empire>> Empires;
     int size     = 25;
     // Operations
   public:
@@ -52,6 +53,7 @@ namespace state {
     std::vector<std::unique_ptr<Element>> & getSelectedMap ();
     std::vector<int> getStatsMap ();
     std::vector<int> getSelectedMapId ();
+    std::vector<std::unique_ptr<Empire>>& getEmpires ();
     // Setters and Getters
   };
 

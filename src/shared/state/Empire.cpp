@@ -9,44 +9,24 @@ using namespace std;
 Empire::Empire(){
   this->idEmpire=0;
   this->name="none";
-  this->empireLevel=0;
-  this->life=0;
   this->goldRessource=0;
   this->woodRessource=0;
   this->foodRessource=0;
   this->shot=3;
-  std::vector<Position> position(1);
-  Position pos0(0,0);
-  position[0]=pos0;
-  this->position=position;
   this->barrack=std::unique_ptr<Barrack> (new Barrack());
   this->ressource=std::unique_ptr<Ressource> (new Ressource());
   this->palace=std::unique_ptr<Palace> (new Palace());
 }
 
-Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, std::unique_ptr<Barrack>& barrack,
+Empire::Empire (int id, std::string name, int goldRessource, int woodRessource, int foodRessource, std::unique_ptr<Barrack>& barrack,
   std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot){
   try{
-    bool a;
-    unsigned int count =0;
-    for (unsigned int i=0;i<position.size();i++){
-      if (position[i].getX()>=0 && position[i].getY()>=0 && position[i].getX()<=25 &&position[i].getY()<=25){
-        count +=1;
-      }
-    }
-    if(count==position.size()) {
-      a=true;
-    }
-    if (idEmpire>=0 && empireLevel>=0 && empireLevel<5 && life>=0 && life<=1000 &&goldRessource>=0 &&
-    woodRessource>=0 && foodRessource>=0 && a==true){
+    if (id>=0 &&goldRessource>=0 && woodRessource>=0 && foodRessource>=0){
       this->idEmpire=id;
       this->name=name;
-      this->empireLevel=empireLevel;
-      this->life=life;
       this->goldRessource=goldRessource;
       this->woodRessource=woodRessource;
       this->foodRessource=foodRessource;
-      this->position=position;
       this->barrack = move(barrack);
       this->palace= move(palace);
       this->ressource= move(ressource);
@@ -54,18 +34,10 @@ Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRes
     } else {
       this->idEmpire=0;
       this->name="none";
-      this->empireLevel=0;
-      this->life=0;
       this->goldRessource=0;
       this->woodRessource=0;
       this->foodRessource=0;
       this->shot=shot;
-      Position pos0(0,0);
-      std::vector<Position> pos;
-      for (unsigned int i=0;i<pos.size();i++){
-        pos[i]=pos0;
-      }
-      setPosition(pos);
       this->barrack=std::unique_ptr<Barrack> (new Barrack());
       this->palace=std::unique_ptr<Palace> (new Palace());
       this->ressource=std::unique_ptr<Ressource> (new Ressource());
@@ -100,38 +72,7 @@ void Empire::setName (const std::string name){
 std::string Empire::getName () const{
   return this->name;
 }
-void Empire::setEmpireLevel (const int level){
-  try{
-    if(level>=0 && level<5){
-      this->empireLevel=level;
-    } else {
-      this->empireLevel=0;
-      throw std::string("empireLevel must be positive or smaller than 5");
-    }
-  } catch (std::string error){
-    std::cerr << error << std::endl;
-    }
-}
 
-int Empire::getEmpireLevel () const{
-  return this->empireLevel;
-
-}
-void Empire::setLife (const int life){
-  try{
-    if(life>=0 && life<=1000){
-      this->life=life;
-    } else {
-      this->life=0;
-      throw std::string("life must be positive or smaller than 1000");
-    }
-  } catch (std::string error){
-    std::cerr << error << std::endl;
-    }
-}
-int Empire::getLife () const{
-  return this->life;
-}
 int Empire::getGoldRessource () const{
   return this->goldRessource;
 }
@@ -176,34 +117,6 @@ void Empire::setFoodRessource (const int food){
   } catch (std::string error){
     std::cerr << error << std::endl;
     }
-}
-std::vector<Position> Empire::getPosition () const{
-  return this->position;
-}
-
-void Empire::setPosition (const std::vector<Position> postion){
-  try{
-    unsigned int count =0;
-    for (unsigned int i=0;i<position.size();i++){
-      if (position[i].getX()>=0 && position[i].getY()>=0 &&position[i].getX()<10000 &&position[i].getY()<10000){
-        count +=1;
-      }
-    }
-    if(count==position.size()) {
-    this->position=position;
-    } else {
-        Position pos0(0,0);
-        std::vector<Position> pos;
-        for (unsigned int i=0;i<pos.size();i++){
-          pos[i]=pos0;
-        }
-        this->position=pos;
-        throw std::string("position vector must be positive or be on the map");
-
-      }
-    } catch (std::string error){
-      std::cerr << error << std::endl;
-      }
 }
 
 std::unique_ptr<Barrack>& Empire::getBarrack (){

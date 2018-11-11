@@ -153,9 +153,9 @@ Map::Map(){
   int decorChange=0;
   int buildingChange=0;
 
-  int idPalace=1;
-  int idBarrack=1;
-  int idRessource=1;
+  int idPalace=0;
+  int idBarrack=0;
+  int idRessource=0;
 
   std::vector<unique_ptr<Element>> tmpEmpires;
 
@@ -217,10 +217,16 @@ Map::Map(){
       buildingChange++;
     }
   }
-  // Empire::Empire (int id, std::string name, int empireLevel, int life, int goldRessource, int woodRessource, int foodRessource, std::vector<Position> position, std::unique_ptr<Barrack>& barrack,
-  //   std::unique_ptr<Ressource>& ressource, std::unique_ptr<Palace>& palace, int shot){
-  //
-  // Empires.push_back(1, "Player1", 1, 200, 500, 500, 500, tmpEmpires[1].get().getPosition(), move(tmpEmpires[2]), )
+
+  int idEmpire = 0;
+  for(size_t i = 0; i <= (tmpEmpires.size()); i+=3){
+    std::string name = "Player"+i;
+    unique_ptr<Barrack> barrack1 ((Barrack*) tmpEmpires[i+2].get());
+    unique_ptr<Ressource> ressource1 ((Ressource*) tmpEmpires[i].get());
+    unique_ptr<Palace> palace1 ((Palace*) tmpEmpires[i+1].get());
+    Empires.push_back(unique_ptr<Empire> (new Empire(idEmpire, name, 500, 500, 500, barrack1, ressource1, palace1, 3)));
+    idEmpire++;
+  }
 
 }
 
