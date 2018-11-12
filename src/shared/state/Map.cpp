@@ -153,9 +153,9 @@ Map::Map(){
   int decorChange=0;
   int buildingChange=0;
 
-  int idPalace=0;
-  int idBarrack=0;
-  int idRessource=0;
+  int idPalace=1;
+  int idBarrack=1;
+  int idRessource=1;
   std::string name;
 
   for(int i = 0; i<this->size; i++){

@@ -135,9 +135,11 @@ Engine::Engine (){
     element2 = cs2.execute(principalMap,click2.x,click2.y);
     if(element2==2){
       mv.execute(principalMap, click.x, click.y, click2.x, click2.y);
+      counter++;
     }
     if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
       at.execute(principalMap, click.x, click.y, click2.x, click2.y);
+      counter++;
     }
   }
   else if ((element==26||element==27||element==28||element==29||element==31)) {
@@ -145,6 +147,7 @@ Engine::Engine (){
     sf::Vector2i click2 = getClickButton(window, map);
     if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
       lu.execute(principalMap,click.x,click.y);
+      counter++;
     }
   }
   else if (element==30) {
@@ -153,36 +156,40 @@ Engine::Engine (){
     sf::Vector2i click2 = getClickButton(window, map);
     if (click2.x>= 0 && click2.x<=96 && click2.y>= 256 && click2.y<=320){
       lu.execute(principalMap,click.x,click.y);
+      counter++;
     }
     if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
       sf::Vector2i click3 = getClick(window, map);
       map.update(principalMap);
       drawMap(window,map);
       cu.execute(principalMap,click.x,click.y,click3.x,click3.y,1);
+      counter++;
     }
     if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
       sf::Vector2i click3 = getClick(window, map);
       map.update(principalMap);
       drawMap(window,map);
       cu.execute(principalMap,click.x,click.y,click3.x,click3.y,2);
+      counter++;
     }
     if (click2.x>= 0 && click2.x<=128 && click2.y>= 192 && click2.y<=256){
       sf::Vector2i click3 = getClick(window, map);
       map.update(principalMap);
       drawMap(window,map);
       cu.execute(principalMap,click.x,click.y,click3.x,click3.y,4);
+      counter++;
     }
     if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
       sf::Vector2i click3 = getClick(window, map);
       map.update(principalMap);
       drawMap(window,map);
       cu.execute(principalMap,click.x,click.y,click3.x,click3.y,3);
+      counter++;
     }
 
   }
   map.update(principalMap);
   drawMap(window,map);
-  counter++;
   }
 
 }

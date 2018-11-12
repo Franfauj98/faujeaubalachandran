@@ -41,6 +41,10 @@ void Possibilities::execute (state::Observable& map,int x, int y, int element){
       id = building->getIdBuilding();
       shot = map.getAllMaps().getEmpires()[id-1]->getShot();
     }
+    else {
+      Position pos(x,y);
+      selectedMap[y+25*x]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
+    }
 
 
     if (shot==1){
