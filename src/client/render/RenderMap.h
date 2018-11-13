@@ -15,11 +15,15 @@ namespace state {
 namespace sf {
   class RenderWindow;
 };
+namespace engine {
+  class Engine;
+};
 namespace render {
   class TileSet;
 }
 
 #include "Layer.h"
+#include "engine/Engine.h"
 #include "TileSet.h"
 #include "state/Observable.h"
 
@@ -62,7 +66,7 @@ namespace render {
     Layer getFood () const;
     Layer getMessage () const;
     void drawMap (sf::RenderWindow& window);
-    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event event);
+    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event& event);
     // Setters and Getters
   };
 

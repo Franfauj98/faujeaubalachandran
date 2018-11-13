@@ -4,11 +4,13 @@
 #include "UnitsTileSet.h"
 #include "StatsTileSet.h"
 #include "../../shared/state.h"
+#include "../../shared/engine.h"
 #include <cmath>
 #include <iostream>
 using namespace render;
 using namespace state;
 using namespace std;
+using namespace engine;
 
 RenderMap::RenderMap (){
 }
@@ -136,7 +138,6 @@ sf::Vector2i getClick(sf::RenderWindow& window, sf::Event& event){
       X= floor(yy-xx);
 
     }
-    break;
   }
   sf::Vector2i click(X,Y);
   return click;
@@ -161,7 +162,6 @@ sf::Vector2i getClickButton(sf::RenderWindow& window, sf::Event& event){
       std::cout << "Y: " << Y << std::endl;
 
     }
-    break;
   }
   sf::Vector2i click(X,Y);
   return click;
@@ -189,7 +189,7 @@ void RenderMap::drawMap(sf::RenderWindow& window){
 }
 
 
-void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, Engine& engine, sf::Event& event){
+void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engine::Engine& engine, sf::Event& event){
 
   sf::Vector2i click = getClick(window,event);
   int element = principalMap.getAllMaps().getMapMatrix()[click.x][click.y];

@@ -82,6 +82,7 @@ int main(int argc,char* argv[])
 
     Observable principalMap;
     RenderMap map;
+    Engine engine;
     map.update(principalMap,"","","","");
 
     sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
@@ -128,6 +129,8 @@ int main(int argc,char* argv[])
 
 
  }
+}
+}
   else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
     Engine engine;
