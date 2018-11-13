@@ -9,6 +9,15 @@ CreateUnit::~CreateUnit (){
 
 }
 
+CreateUnit::CreateUnit (Observable& map, int x, int y, int x2, int y2, int unit){
+  this->map = map;
+  this->x = x;
+  this->y = y;
+  this->x2 = y2;
+  this->y2 = y2;
+  this->unit = unit;
+}
+
 CommandTypeId CreateUnit::getTypeId () const{
   return CommandTypeId::CREATEUNIT;
 }

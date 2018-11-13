@@ -9,6 +9,14 @@ Possibilities::~Possibilities (){
 
 }
 
+Possibilities::Possibilities (Observable& map, int x, int y, int element){
+  this->map = map;
+  this->x = x;
+  this->y = y;
+  this->element = element;
+}
+
+
 CommandTypeId Possibilities::getTypeId () const{
   return CommandTypeId::POSSIBILITIES;
 }

@@ -9,6 +9,14 @@ Attack::~Attack (){
 
 }
 
+Attack::Attack (Observable& map, int x, int y, int x2, int y2){
+  this->map = map;
+  this->x = x;
+  this->y = y;
+  this->x2 = y2;
+  this->y2 = y2;
+}
+
 CommandTypeId Attack::getTypeId () const{
   return CommandTypeId::ATTACK;
 }
