@@ -16,17 +16,14 @@ bool LevelUp::execute (state::Observable& map, int x, int y){
   Buildings* building = (Buildings *)map.getAllMaps().getBuildingsMap()[y+25*x].get();
   for(size_t i = 0; i<map.getAllMaps().getEmpires().size();i++){
     if((map.getAllMaps().getEmpires()[i].get())->getId() == building->getIdBuilding()){
-      // building->getType()
-      // cast ça
-      // if((map.getAllMaps().getEmpires()[i].get())->getGoldRessource() >= ... && map.getAllMaps().getEmpires()[i].get())->getFoodRessource() >= ...){
-        std::cout << "coucou" << '\n';
-        std::cout << i << '\n';
-        std::cout << "BuildingCost" << '\n';
-        std::cout << building->getBuildingCost().getGold() << '\n';
-
-      // }
+      if((map.getAllMaps().getEmpires()[i].get())->getGoldRessource() >= building->getBuildingCost().getGold() &&
+      (map.getAllMaps().getEmpires()[i].get())->getWoodRessource() >= building->getBuildingCost().getWood()){
+        (map.getAllMaps().getEmpires()[i].get())->setGoldRessource((map.getAllMaps().getEmpires()[i].get())->getGoldRessource() - building->getBuildingCost().getGold());
+        (map.getAllMaps().getEmpires()[i].get())->setWoodRessource((map.getAllMaps().getEmpires()[i].get())->getWoodRessource() - building->getBuildingCost().getWood());
+        map.notifyObserver(map,y+25*x,map.getAllMaps().getMapMatrix()[x][y], 1,0,0);
+        return true;
+      }
     }
   }
-  map.notifyObserver(map,y+25*x,map.getAllMaps().getMapMatrix()[x][y], 1,0,0);
-  return true;
+  return false;
 }
