@@ -128,11 +128,35 @@ Engine::Engine (){
       CreateUnit cu;
       element = cs.execute(principalMap,click.x,click.y);
       ps.execute(principalMap,click.x,click.y,element);
-      pst.execute(principalMap,click.x,click.y,element);
-      map.update(principalMap);
 
-      drawMap(window,map);
+      if (element==26 || element==27 || element==28 || element==29 ){
+        pst.execute(principalMap,click.x,click.y,element);
+        Buildings* palace =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+        int id = palace->getIdBuilding();
+        Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
+        string gold= to_string(empire->getGoldRessource());
+        string wood= to_string(empire->getWoodRessource());
+        string food= to_string(empire->getFoodRessource());
+        cout<<gold<<endl;
+        cout<<wood<<endl;
+        cout<<food<<endl;
+        Layer goldLayer("res/calibri.ttf", gold, 30, sf::Color::White, 400, 128);
+        Layer woodLayer("res/calibri.ttf", wood, 14, sf::Color::White, 64, 128);
+        Layer foodLayer("res/calibri.ttf", food, 14, sf::Color::White, 128, 128);
+        map.update(principalMap);
+        drawMap(window,map);
+        goldLayer.drawText(window);
+        woodLayer.drawText(window);
+        foodLayer.drawText(window);
+        cout<<"coucou1"<<endl;
+      } else {
+        pst.execute(principalMap,click.x,click.y,element);
+        map.update(principalMap);
+        drawMap(window,map);
+        cout<<"coucou2"<<endl;
+      }
 
+      cout<<"coucou"<<endl;
     if (element==10||element==14||element==18||element==22) {
       Move mv;
       Attack at;
@@ -220,6 +244,7 @@ Engine::Engine (){
     }
     map.update(principalMap);
     drawMap(window,map);
+    cout<<"coucou2"<<endl;
     }
   }
 }
