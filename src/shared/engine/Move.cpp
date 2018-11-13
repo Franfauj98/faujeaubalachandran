@@ -15,8 +15,10 @@ CommandTypeId Move::getTypeId () const{
 bool Move::execute(state::Observable& map, int x, int y, int x2, int y2){
   std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
   std::vector<int> selectedMapId = map.getAllMaps().getSelectedMapId();
-  if (selectedMapId[y2+25*x2]==9){
+  if (selectedMapId[y2+25*x2]==9 && mapMatrix[x2][y2]==2){
     map.notifyObserver(map,y+25*x,mapMatrix[x][y], 1,-1,y2+25*x2);
+  } else{
+    return false;
   }
   return true;
 }
