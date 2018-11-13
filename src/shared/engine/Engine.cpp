@@ -245,7 +245,7 @@ Engine::Engine (){
             counter++;
           }
         }
-        if (click2.x>= 0 && click2.x<=128 && click2.y>= 192 && click2.y<=256){
+        if (click2.x>= 0 && click2.x<=96 && click2.y>= 192 && click2.y<=256){
           sf::Vector2i click3 = getClick(window, map);
           if(matrix[click3.x][click3.y]==2){
             map.update(principalMap,"","","","");

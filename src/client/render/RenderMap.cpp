@@ -35,11 +35,12 @@ void RenderMap::update(state::Observable& principalMap,string goldText, string w
 
   vector <int> statsId = principalMap.getAllMaps().getStatsMap();
   StatsTileSet stats;
-  Layer statsMap(stats.getImageFile(),6,statsId,0);
+  Layer statsMap(stats.getImageFile(),11,statsId,0);
+
   std::string fontFile="res/calibri.ttf";
-  Layer gold(fontFile,goldText,22, sf::Color::White, 20, 215);
-  Layer wood(fontFile,woodText,22, sf::Color::White, 84, 215);
-  Layer food(fontFile,foodText,22, sf::Color::White, 148, 215);
+  Layer gold(fontFile,goldText,22, sf::Color::White, 185, 22);
+  Layer wood(fontFile,woodText,22, sf::Color::White,249 , 22);
+  Layer food(fontFile,foodText,22, sf::Color::White, 313, 22);
   Layer message(fontFile,messageText,22, sf::Color::White, 1000, 100);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
