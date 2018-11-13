@@ -62,8 +62,8 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       break;
     }
   }
-  else if (element==26 || element==27 || element==28 || element==29){
-    Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+  else if (this->element==26 || this->element==27 || this->element==28 || this->element==29){
+    Palace* palace = (Palace*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     if (palace->getLife()<=200 && palace->getLife()>150){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -120,8 +120,8 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     }
 
   }
-  else if (element==30){
-    Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+  else if (this->element==30){
+    Barrack* barrack = (Barrack*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     switch(barrack->getLevel()){
       case 1:
       statsMap[0]=3;
@@ -226,7 +226,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
   }
 
   else if (element==31){
-    Ressource* ressource = (Ressource*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
+    Ressource* ressource = (Ressource*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     switch(ressource->getLevel()){
       case 1:
       statsMap[0]=3;
@@ -284,5 +284,5 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       statsMap[i]=i+22;
     }
   }
-    map.getAllMaps().setStatsMap(statsMap);
+    this->map.getAllMaps().setStatsMap(statsMap);
 }
