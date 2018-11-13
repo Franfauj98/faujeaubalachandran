@@ -3,6 +3,7 @@
 #define RENDER__RENDERMAP__H
 
 #include <memory>
+#include <string>
 
 namespace render {
   class Layer;
@@ -32,6 +33,10 @@ namespace render {
     Layer statsMap;
     std::unique_ptr<Layer> background;
     Layer selectedMap;
+    Layer gold;
+    Layer wood;
+    Layer food;
+    Layer message;
     // Operations
   public:
     RenderMap ();
@@ -47,7 +52,11 @@ namespace render {
     void setUnitMap (Layer* unitLayer);
     void setStatsMap (Layer* statsLayer);
     void setSelectedMap (Layer* selectedLayer);
-    void update (state::Observable& principalMap);
+    void update (state::Observable& principalMap, std::string gold, std::string wood, std::string food, std::string message);
+    Layer getGold () const;
+    Layer getWood () const;
+    Layer getFood () const;
+    Layer getMessage () const;
     // Setters and Getters
   };
 
