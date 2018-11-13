@@ -193,9 +193,10 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
 
   sf::Vector2i click = getClick(window,event);
   int element = principalMap.getAllMaps().getMapMatrix()[click.x][click.y];
-  engine.addCommand(unique_ptr<Command> (new CaseIdentifier(principalMap,click.x,click.y)),1);
-  engine.addCommand(unique_ptr<Command> (new Possibilities(principalMap,click.x,click.y,element)),2);
-  engine.addCommand(unique_ptr<Command> (new PrintStats(principalMap,click.x,click.y,element)),3);
+  engine.addCommand((unique_ptr<Command> (new CaseIdentifier(click.x,click.y))),1);
+  engine.addCommand(unique_ptr<Command> (new Possibilities(click.x,click.y,element)),2);
+  engine.addCommand(unique_ptr<Command> (new PrintStats(click.x,click.y,element)),3);
+  std::cout << "coucou" << '\n';
 
 }
 

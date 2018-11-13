@@ -275,41 +275,49 @@ Engine::Engine (){
 //   }
 }
 
-void Engine::addCommand(Command cmd, int commandId{
+void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
   this->commandListId.push_back(commandId);
-  this->commandList.push_back(cmd);
+  this->commandList.push_back(std::move(cmd));
 }
 
 void Engine::execute(){
   switch(commandListId.back()){
-    case 1:
-    CaseIdentifier* ci = (CaseIdentifier*) commandList.back().get();
-    ci.execute();
-    break;
-    case 3:
-    PrintStats* pst = (PrintStats*) commandList.back().get();
-    pst.execute();
-    break;
-    case 2:
-    Possibilities* ps = (Possibilities*) commandList.back().get();
-    ps.execute();
-    break;
-    case 6:
-    Move* mv = (Move*) commandList.back().get();
-    mv.execute();
-    break;
-    case 7:
-    Attack* at = (Attack*) commandList.back().get();
-    at.execute();
-    break;
-    case 5:
-    LevelUp* lu = (LevelUp*) commandList.back().get();
-    lu.execute();
-    break;
-    case 4:
-    CreateUnit* cu = (CreateUnit*) commandList.back().get();
-    cu.execute();
-    break;
+    case 1:{
+      CaseIdentifier* ci = (CaseIdentifier*) commandList.back().get();
+      ci->execute();
+      break;
+    }
+    case 3:{
+      PrintStats* pst = (PrintStats*) commandList.back().get();
+      pst->execute();
+      break;
+    }
+    case 2:{
+      Possibilities* ps = (Possibilities*) commandList.back().get();
+      ps->execute();
+      break;
+    }
+    case 6:{
+      Move* mv = (Move*) commandList.back().get();
+      mv->execute();
+      break;
+    }
+    case 7:{
+      Attack* at = (Attack*) commandList.back().get();
+      at->execute();
+      break;
+    }
+    case 5:{
+      LevelUp* lu = (LevelUp*) commandList.back().get();
+      lu->execute();
+      break;
+    }
+    case 4:{
+      CreateUnit* cu = (CreateUnit*) commandList.back().get();
+      cu->execute();
+      break;
+    }
+    default: break;
   }
 
   this->commandList.pop_back();

@@ -8,8 +8,7 @@ using namespace std;
 PrintStats::~PrintStats(){
 
 }
-PrintStats::PrintStats(Observable& map, int x, int y, int element){
-  this->map = map;
+PrintStats::PrintStats(int x, int y, int element){
   this->x = x;
   this->y = y;
   this->element = element;
@@ -19,10 +18,10 @@ PrintStats::PrintStats(Observable& map, int x, int y, int element){
 CommandTypeId PrintStats::getTypeId () const{
   return CommandTypeId::PRINTSTATS;
 }
-void PrintStats::execute (state::Observable& map, int x, int y, int element){
+void PrintStats::execute (){
   std::vector<int> statsMap(121,0);
-  if (element==10 || element==14 || element==18 || element==22){
-    Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
+  if (this->element==10 || this->element==14 || this->element==18 || this->element==22){
+    Units* units = (Units*) this->map.getAllMaps().getUnitsMap()[y+25*x].get();
     if (units->getLife()>=40){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -117,7 +116,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       break;
     }
 
-    if (element==26 || element==27 || element==28){
+    if (this->element==26 || this->element==27 || this->element==28){
       statsMap[22]=24;
       statsMap[23]=25;
       statsMap[24]=26;
@@ -232,7 +231,7 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
     }
   }
 
-  else if (element==31){
+  else if (this->element==31){
     Ressource* ressource = (Ressource*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     switch(ressource->getLevel()){
       case 1:

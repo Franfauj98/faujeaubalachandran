@@ -9,8 +9,7 @@ Possibilities::~Possibilities (){
 
 }
 
-Possibilities::Possibilities (Observable& map, int x, int y, int element){
-  this->map = map;
+Possibilities::Possibilities (int x, int y, int element){
   this->x = x;
   this->y = y;
   this->element = element;
@@ -36,7 +35,7 @@ void Possibilities::execute (){
       if (this->x+1>=0 && this->x+1<25){
         if(mapMatrix[this->x+1][this->y]==2 || mapMatrix[this->x+1][this->y]==9 ||
           mapMatrix[this->x+1][this->y]==26 || mapMatrix[this->x+1][this->y]==27 ||
-          mapMatrix[this->x+1][this->y]==28 || mapMatrix[this->this->x+1][this->y]==29 ||
+          mapMatrix[this->x+1][this->y]==28 || mapMatrix[this->x+1][this->y]==29 ||
           mapMatrix[this->x+1][this->y]==10 || mapMatrix[this->x+1][this->y]==14 ||
           mapMatrix[this->x+1][this->y]==18 || mapMatrix[this->x+1][this->y]==22){
           Position pos2(this->x+1,this->y);
@@ -76,5 +75,5 @@ void Possibilities::execute (){
       }
 
     }
-    map.getAllMaps().setSelectedMap(selectedMap);
+    this->map.getAllMaps().setSelectedMap(selectedMap);
 }

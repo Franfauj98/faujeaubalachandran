@@ -94,8 +94,6 @@ int main(int argc,char* argv[])
     sf::Event event;
     while (window.isOpen())
     {
-
-
       int counter=0;
       Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
       Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
@@ -123,14 +121,12 @@ int main(int argc,char* argv[])
           empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
         }
 
-        while (window.pollEvent(event)){
+        while (window.waitEvent(event)&&(event.type == sf::Event::MouseButtonPressed)){
           map.handle(window, principalMap, engine, event);
         }
-
-
- }
-}
-}
+      }
+    }
+  }
   else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
     Engine engine;

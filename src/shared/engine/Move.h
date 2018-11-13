@@ -30,6 +30,7 @@ namespace engine {
     ~Move ();
     CommandTypeId getTypeId () const;
     void execute ();
+    Move (int x, int y, int x2, int y2);
     // Setters and Getters
   };
 

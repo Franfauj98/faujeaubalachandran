@@ -18,7 +18,6 @@ namespace engine {
     // Operations
   public:
     virtual ~Command ();
-    virtual CommandTypeId getTypeId () const;
     // Setters and Getters
   };
 

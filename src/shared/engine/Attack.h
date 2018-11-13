@@ -30,6 +30,7 @@ namespace engine {
     ~Attack ();
     CommandTypeId getTypeId () const;
     void execute ();
+    Attack (int x, int y, int x2, int y2);
     // Setters and Getters
   };
 

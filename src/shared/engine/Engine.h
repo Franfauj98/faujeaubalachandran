@@ -43,7 +43,7 @@ namespace engine {
   public:
     Engine ();
     ~Engine ();
-    void addCommand (Command cmd, int commandId);
+    void addCommand (std::unique_ptr<Command> cmd, int commandId);
     void execute ();
     // Setters and Getters
   };

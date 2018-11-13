@@ -25,6 +25,7 @@ namespace engine {
     int y;
     // Operations
   public:
+    CaseIdentifier (int x, int y);
     ~CaseIdentifier ();
     CommandTypeId getTypeId () const;
     void execute ();

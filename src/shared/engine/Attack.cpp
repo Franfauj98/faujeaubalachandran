@@ -9,8 +9,7 @@ Attack::~Attack (){
 
 }
 
-Attack::Attack (Observable& map, int x, int y, int x2, int y2){
-  this->map = map;
+Attack::Attack (int x, int y, int x2, int y2){
   this->x = x;
   this->y = y;
   this->x2 = y2;
@@ -20,7 +19,8 @@ Attack::Attack (Observable& map, int x, int y, int x2, int y2){
 CommandTypeId Attack::getTypeId () const{
   return CommandTypeId::ATTACK;
 }
-bool Attack::execute(){
+
+void Attack::execute(){
     std::vector<std::vector<int>> Matrix = this->map.getAllMaps().getMapMatrix();
 
     Units* unitToChange = (Units *)this->map.getAllMaps().getUnitsMap()[this->y+25*this->x].get();
@@ -33,15 +33,10 @@ bool Attack::execute(){
     if ((Matrix[this->x2][this->y2]==26 || Matrix[this->x2][this->y2]==27 || Matrix[this->x2][this->y2]==28 || Matrix[this->x2][this->y2]==29)) {
       if(unitToChange->getIdUnits()!=buildingToAttack->getIdBuilding()){
         this->map.notifyObserver(map,this->y+25*this->x,Matrix[this->x][this->y], 3,-1,this->y2+25*this->x2);
-      } else {
-        return false;
       }
     } else if ((Matrix[this->x2][this->y2]==10 || Matrix[this->x2][this->y2]==14 || Matrix[this->x2][this->y2]==18 || Matrix[this->x2][this->y2]==22)) {
       if(unitToChange->getIdUnits()!=unitToChange2->getIdUnits()){
         this->map.notifyObserver(this->map,this->y+25*this->x,Matrix[this->x][this->y], 2,-1,this->y2+25*this->x2);
-      } else {
-        return false;
       }
     }
-    return true;
 }

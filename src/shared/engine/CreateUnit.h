@@ -31,6 +31,7 @@ namespace engine {
     ~CreateUnit ();
     CommandTypeId getTypeId () const;
     void execute ();
+    CreateUnit (int x, int y, int x2, int y2, int unit);
     // Setters and Getters
   };
 

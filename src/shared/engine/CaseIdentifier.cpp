@@ -6,21 +6,20 @@ using namespace engine;
 using namespace std;
 
 
+CaseIdentifier::CaseIdentifier(int x, int y){
+  this->x = x;
+  this->y = y;
+}
 
 CaseIdentifier::~CaseIdentifier (){
 
 }
 
-CaseIdentifier::CaseIdentifier (Observable& map, int x, int y){
-  this->map = map;
-  this->x = x;
-  this->y = y; 
-}
 
 CommandTypeId CaseIdentifier::getTypeId () const{
   return CommandTypeId::CASEIDENTIFIER;
 }
 
-int CaseIdentifier::execute (){
-  return this->map.getAllMaps().getMapMatrix()[this->x][this->y];
+void CaseIdentifier::execute (){
+  this->map.getAllMaps().getMapMatrix()[this->x][this->y];
 }

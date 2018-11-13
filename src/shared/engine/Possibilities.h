@@ -29,6 +29,7 @@ namespace engine {
     ~Possibilities ();
     CommandTypeId getTypeId () const;
     void execute ();
+    Possibilities (int x, int y, int element);
     // Setters and Getters
   };
 

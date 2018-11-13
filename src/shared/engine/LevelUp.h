@@ -28,6 +28,7 @@ namespace engine {
     ~LevelUp ();
     CommandTypeId getTypeId () const;
     void execute ();
+    LevelUp (int x, int y);
     // Setters and Getters
   };
 

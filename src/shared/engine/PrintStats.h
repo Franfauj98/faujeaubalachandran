@@ -30,6 +30,7 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute ();
     int get () const;
+    PrintStats (int x, int y, int element);
     // Setters and Getters
   };
 
