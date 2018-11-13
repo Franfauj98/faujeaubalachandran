@@ -13,7 +13,7 @@ using namespace std;
 RenderMap::RenderMap (){
 }
 
-void RenderMap::update(state::Observable& principalMap) {
+void RenderMap::update(state::Observable& principalMap,string goldText, string woodText, string foodText, string messageText) {
 
   vector<int> basicId = principalMap.getAllMaps().getBasicMapId();
   DecorTileSet decor;
@@ -36,6 +36,11 @@ void RenderMap::update(state::Observable& principalMap) {
   vector <int> statsId = principalMap.getAllMaps().getStatsMap();
   StatsTileSet stats;
   Layer statsMap(stats.getImageFile(),6,statsId,0);
+  std::string fontFile="res/calibri.ttf";
+  Layer gold(fontFile,goldText,22, sf::Color::White, 20, 215);
+  Layer wood(fontFile,woodText,22, sf::Color::White, 84, 215);
+  Layer food(fontFile,foodText,22, sf::Color::White, 148, 215);
+  Layer message(fontFile,messageText,22, sf::Color::White, 1000, 100);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
   this->basicMap=basicMap;
@@ -44,6 +49,10 @@ void RenderMap::update(state::Observable& principalMap) {
   this->buildingMap=buildingMap;
   this->statsMap=statsMap;
   this->selectedMap=selectedMap;
+  this->gold=gold;
+  this->food=food;
+  this->wood=wood;
+  this->message=message;
 
 }
 
@@ -89,6 +98,22 @@ void RenderMap::setBuildingMap(Layer* buildingLayer) {
 
 void RenderMap::setUnitMap(Layer* unitLayer) {
   this->unitMap=*unitLayer;
+}
+
+Layer RenderMap::getGold() const{
+  return this->gold;
+}
+
+Layer RenderMap::getWood() const{
+  return this->wood;
+}
+
+Layer RenderMap::getFood() const{
+  return this->food;
+}
+
+Layer RenderMap::getMessage() const{
+  return this->message;
 }
 
 RenderMap::~RenderMap (){

@@ -76,6 +76,14 @@ void drawMap(sf::RenderWindow& window, RenderMap& map){
     window.draw(map.getBuildingMap());
     window.draw(map.getUnitMap());
     window.draw(map.getStatsMap());
+    Layer gold = map.getGold();
+    Layer food = map.getFood();
+    Layer wood = map.getWood();
+    Layer message = map.getMessage();
+    gold.drawText(window);
+    food.drawText(window);
+    wood.drawText(window);
+    message.drawText(window);
     window.display();
 }
 
@@ -83,7 +91,7 @@ Engine::Engine (){
   Observable principalMap; // to put in engine
   RenderMap map;
   CreateUnit cu1;
-  map.update(principalMap);
+  map.update(principalMap,"","","","");
 
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
   window.setVerticalSyncEnabled(false);
@@ -98,7 +106,7 @@ Engine::Engine (){
     Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
     Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
     Empire* empire3 = principalMap.getAllMaps().getEmpires()[2].get();
-    while (counter<9&&window.isOpen()){
+    while (counter<9 && window.isOpen()){
 
       if (counter>=0 && counter <=2){
         empire1->setShot(1);
@@ -129,28 +137,52 @@ Engine::Engine (){
       element = cs.execute(principalMap,click.x,click.y);
       ps.execute(principalMap,click.x,click.y,element);
 
-      if (element==26 || element==27 || element==28 || element==29 ){
+      pst.execute(principalMap,click.x,click.y,element);
+      map.update(principalMap,"","","","");
+      drawMap(window,map);
+
+      if (element==26 || element==27 || element==28 || element==29 || element==30 || element==31 ){
         pst.execute(principalMap,click.x,click.y,element);
-        Buildings* palace =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
-        int id = palace->getIdBuilding();
+        Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+        int id = building->getIdBuilding();
         Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
         string gold= to_string(empire->getGoldRessource());
         string wood= to_string(empire->getWoodRessource());
         string food= to_string(empire->getFoodRessource());
-        Layer goldLayer("res/calibri.ttf", gold, 22, sf::Color::Red, 20, 215);
-        Layer woodLayer("res/calibri.ttf", wood, 22, sf::Color::Red, 84, 215);
-        Layer foodLayer("res/calibri.ttf", food, 22, sf::Color::Red, 148, 215);
-        map.update(principalMap);
-        drawMap(window,map);
-        goldLayer.drawText(window);
-        woodLayer.drawText(window);
-        foodLayer.drawText(window);
-        window.display();
-      } else {
         pst.execute(principalMap,click.x,click.y,element);
-        map.update(principalMap);
+        map.update(principalMap,gold,wood,food,"");
         drawMap(window,map);
-      }
+        }
+        else {
+          pst.execute(principalMap,click.x,click.y,element);
+          map.update(principalMap,"","","","");
+          drawMap(window,map);
+        }
+
+
+
+      // if (element==26 || element==27 || element==28 || element==29 ){
+      //   pst.execute(principalMap,click.x,click.y,element);
+      //   Buildings* palace =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+      //   int id = palace->getIdBuilding();
+      //   Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
+      //   string gold= to_string(empire->getGoldRessource());
+      //   string wood= to_string(empire->getWoodRessource());
+      //   string food= to_string(empire->getFoodRessource());
+        //Layer goldLayer("res/calibri.ttf", gold, 22, sf::Color::Red, 20, 215);
+        //Layer woodLayer("res/calibri.ttf", wood, 22, sf::Color::Red, 84, 215);
+      //  Layer foodLayer("res/calibri.ttf", food, 22, sf::Color::Red, 148, 215);
+        // map.update(principalMap);
+        // drawMap(window,map);
+        // goldLayer.drawText(window);
+        // woodLayer.drawText(window);
+        // foodLayer.drawText(window);
+        //window.display();
+      // } else {
+      //   pst.execute(principalMap,click.x,click.y,element);
+      //   map.update(principalMap);
+      //   drawMap(window,map);
+      // }
 
     if (element==10||element==14||element==18||element==22) {
       Move mv;
@@ -198,7 +230,7 @@ Engine::Engine (){
         if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
           sf::Vector2i click3 = getClick(window, map);
           if(matrix[click3.x][click3.y]==2){
-            map.update(principalMap);
+            map.update(principalMap,"","","","");
             drawMap(window,map);
             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,1);
             counter++;
@@ -207,7 +239,7 @@ Engine::Engine (){
         if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
           sf::Vector2i click3 = getClick(window, map);
           if(matrix[click3.x][click3.y]==2){
-            map.update(principalMap);
+            map.update(principalMap,"","","","");
             drawMap(window,map);
             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,2);
             counter++;
@@ -216,7 +248,7 @@ Engine::Engine (){
         if (click2.x>= 0 && click2.x<=128 && click2.y>= 192 && click2.y<=256){
           sf::Vector2i click3 = getClick(window, map);
           if(matrix[click3.x][click3.y]==2){
-            map.update(principalMap);
+            map.update(principalMap,"","","","");
             drawMap(window,map);
             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,4);
             counter++;
@@ -225,7 +257,7 @@ Engine::Engine (){
         if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
           sf::Vector2i click3 = getClick(window, map);
           if(matrix[click3.x][click3.y]==2){
-            map.update(principalMap);
+            map.update(principalMap,"","","","");
             drawMap(window,map);
             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,3);
             counter++;
@@ -237,7 +269,7 @@ Engine::Engine (){
         }
       }
     }
-    map.update(principalMap);
+    map.update(principalMap,"","","","");
     drawMap(window,map);
     }
   }
