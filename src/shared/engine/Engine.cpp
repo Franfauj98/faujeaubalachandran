@@ -137,26 +137,21 @@ Engine::Engine (){
         string gold= to_string(empire->getGoldRessource());
         string wood= to_string(empire->getWoodRessource());
         string food= to_string(empire->getFoodRessource());
-        cout<<gold<<endl;
-        cout<<wood<<endl;
-        cout<<food<<endl;
-        Layer goldLayer("res/calibri.ttf", gold, 30, sf::Color::White, 400, 128);
-        Layer woodLayer("res/calibri.ttf", wood, 14, sf::Color::White, 64, 128);
-        Layer foodLayer("res/calibri.ttf", food, 14, sf::Color::White, 128, 128);
+        Layer goldLayer("res/calibri.ttf", gold, 22, sf::Color::Red, 20, 215);
+        Layer woodLayer("res/calibri.ttf", wood, 22, sf::Color::Red, 84, 215);
+        Layer foodLayer("res/calibri.ttf", food, 22, sf::Color::Red, 148, 215);
         map.update(principalMap);
         drawMap(window,map);
         goldLayer.drawText(window);
         woodLayer.drawText(window);
         foodLayer.drawText(window);
-        cout<<"coucou1"<<endl;
+        window.display();
       } else {
         pst.execute(principalMap,click.x,click.y,element);
         map.update(principalMap);
         drawMap(window,map);
-        cout<<"coucou2"<<endl;
       }
 
-      cout<<"coucou"<<endl;
     if (element==10||element==14||element==18||element==22) {
       Move mv;
       Attack at;
@@ -244,7 +239,6 @@ Engine::Engine (){
     }
     map.update(principalMap);
     drawMap(window,map);
-    cout<<"coucou2"<<endl;
     }
   }
 }
