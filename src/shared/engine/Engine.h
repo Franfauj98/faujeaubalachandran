@@ -2,7 +2,12 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
+#include <vector>
+#include <memory>
 
+namespace engine {
+  class Command;
+};
 namespace sf {
   class Drawable;
   class Transformable;
@@ -19,24 +24,27 @@ namespace render {
 };
 namespace state {
   class Observable;
-};
-namespace engine {
-  class Command;
 }
 
+#include "Command.h"
 #include "render/RenderMap.h"
 #include "state/Observable.h"
-#include "Command.h"
 
 namespace engine {
 
   /// class Engine - 
   class Engine {
     // Associations
+    // Attributes
+  private:
+    std::vector<std::unique_ptr<Command>> commandList;
+    std::vector<int> commandListId;
     // Operations
   public:
     Engine ();
     ~Engine ();
+    void addCommand (Command cmd, int commandId);
+    void execute ();
     // Setters and Getters
   };
 

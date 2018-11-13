@@ -4,12 +4,16 @@
 
 #include <memory>
 #include <string>
+#include <SFML/Graphics.hpp>
 
 namespace render {
   class Layer;
 };
 namespace state {
   class Observable;
+};
+namespace sf {
+  class RenderWindow;
 };
 namespace render {
   class TileSet;
@@ -57,6 +61,8 @@ namespace render {
     Layer getWood () const;
     Layer getFood () const;
     Layer getMessage () const;
+    void drawMap (sf::RenderWindow& window);
+    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event event);
     // Setters and Getters
   };
 

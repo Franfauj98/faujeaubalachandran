@@ -17,11 +17,19 @@ namespace engine {
 
   /// class CreateUnit - 
   class CreateUnit : public engine::Command {
+    // Attributes
+  private:
+    state::Observable& map;
+    int x;
+    int y;
+    int x2;
+    int y2;
+    int unit;
     // Operations
   public:
     ~CreateUnit ();
     CommandTypeId getTypeId () const;
-    bool execute (state::Observable& map, int x, int y, int x2, int y2, int unit);
+    void execute ();
     // Setters and Getters
   };
 

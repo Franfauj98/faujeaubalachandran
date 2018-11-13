@@ -78,7 +78,55 @@ int main(int argc,char* argv[])
     cout << "Move unit : clik on the unit and then on one brighted tile" << endl;
     cout << "Attack unit : move next to a unit and clik on the other unit brighted" << endl;
     cout << "Attack palace : move next to a palace and clik on the palace" << endl;
-    Engine engine;
+    //Engine engine;
+
+    Observable principalMap;
+    RenderMap map;
+    map.update(principalMap,"","","","");
+
+    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+    window.setVerticalSyncEnabled(false);
+  // draw the layers
+    window.clear();
+
+    map.drawMap(window);
+    sf::Event event;
+    while (window.isOpen())
+    {
+
+
+      int counter=0;
+      Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
+      Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
+      Empire* empire3 = principalMap.getAllMaps().getEmpires()[2].get();
+      while (counter<9 && window.isOpen()){
+
+        if (counter>=0 && counter <=2){
+          empire1->setShot(1);
+          empire2->setShot(0);
+          empire3->setShot(0);
+        }
+        else if (counter>=3 && counter <=5){
+          empire1->setShot(0);
+          empire2->setShot(1);
+          empire3->setShot(0);
+        }
+        else if (counter>=6 && counter <=8){
+          empire1->setShot(0);
+          empire2->setShot(0);
+          empire3->setShot(1);
+        }
+        if(counter==8){
+          empire1->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+          empire2->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+          empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+        }
+
+        while (window.pollEvent(event)){
+          map.handle(window, principalMap, engine, event);
+        }
+
+
  }
   else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;

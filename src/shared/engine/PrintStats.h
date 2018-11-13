@@ -19,12 +19,15 @@ namespace engine {
   class PrintStats : public engine::Command {
     // Attributes
   private:
-    int action;
+    state::Observable& map;
+    int x;
+    int y;
+    int element;
     // Operations
   public:
     ~PrintStats ();
     CommandTypeId getTypeId () const;
-    void execute (state::Observable& map, int x, int y, int element);
+    void execute ();
     int get () const;
     // Setters and Getters
   };

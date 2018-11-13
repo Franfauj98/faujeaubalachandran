@@ -7,12 +7,12 @@ namespace engine {
 
   enum CommandTypeId {
     CASEIDENTIFIER     = 1,
-    PRINTSTATS     = 2,
-    POSSIBILITIES     = 3,
-    MOVE     = 4,
-    ATTACK     = 5,
-    LEVELUP     = 6,
-    CREATEUNIT     = 7
+    POSSIBILITIES     = 2,
+    PRINTSTATS     = 3,
+    CREATEUNIT     = 4,
+    LEVELUP     = 5,
+    MOVE     = 6,
+    ATTACK     = 7
   };
 
 };

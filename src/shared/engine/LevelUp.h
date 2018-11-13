@@ -17,11 +17,16 @@ namespace engine {
 
   /// class LevelUp - 
   class LevelUp : public engine::Command {
+    // Attributes
+  private:
+    state::Observable& map;
+    int x;
+    int y;
     // Operations
   public:
     ~LevelUp ();
     CommandTypeId getTypeId () const;
-    bool execute (state::Observable& map, int x, int y);
+    void execute ();
     // Setters and Getters
   };
 

@@ -17,11 +17,16 @@ namespace engine {
 
   /// class CaseIdentifier - 
   class CaseIdentifier : public engine::Command {
+    // Attributes
+  private:
+    state::Observable& map;
+    int x;
+    int y;
     // Operations
   public:
     ~CaseIdentifier ();
     CommandTypeId getTypeId () const;
-    int execute (state::Observable& map, int x, int y);
+    void execute ();
     // Setters and Getters
   };
 

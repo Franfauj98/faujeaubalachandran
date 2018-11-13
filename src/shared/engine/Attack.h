@@ -17,11 +17,18 @@ namespace engine {
 
   /// class Attack - 
   class Attack : public engine::Command {
+    // Attributes
+  private:
+    state::Observable& map;
+    int x;
+    int y;
+    int x2;
+    int y2;
     // Operations
   public:
     ~Attack ();
     CommandTypeId getTypeId () const;
-    bool execute (state::Observable& map, int x, int y, int x2, int y2);
+    void execute ();
     // Setters and Getters
   };
 

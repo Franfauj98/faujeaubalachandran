@@ -17,11 +17,18 @@ namespace engine {
 
   /// class Move - 
   class Move : public engine::Command {
+    // Attributes
+  private:
+    state::Observable& map;
+    int x;
+    int y;
+    int x2;
+    int y2;
     // Operations
   public:
     ~Move ();
     CommandTypeId getTypeId () const;
-    bool execute (state::Observable& map, int x, int y, int x2, int y2);
+    void execute ();
     // Setters and Getters
   };
 

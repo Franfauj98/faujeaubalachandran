@@ -17,11 +17,17 @@ namespace engine {
 
   /// class Possibilities - 
   class Possibilities : public engine::Command {
+    // Attributes
+  private:
+    state::Observable& map;
+    int x;
+    int y;
+    int element;
     // Operations
   public:
     ~Possibilities ();
     CommandTypeId getTypeId () const;
-    void execute (state::Observable& map, int x, int y, int element);
+    void execute ();
     // Setters and Getters
   };
 

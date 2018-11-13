@@ -6,3 +6,7 @@ using namespace std;
 Command::~Command (){
 
 }
+
+Void Command::getTypeId() const{
+  
+}
