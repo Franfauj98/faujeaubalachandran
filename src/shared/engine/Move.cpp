@@ -9,6 +9,15 @@ Move::~Move (){
 
 }
 
+Move::Move (Observable& map, int x, int y, int x2, int y2){
+  this->map = map;
+  this->x = x;
+  this->y = y;
+  this->x2 = x2;
+  this->y2 = y2;
+}
+
+
 CommandTypeId Move::getTypeId () const{
   return CommandTypeId::MOVE;
 }

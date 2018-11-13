@@ -5,9 +5,16 @@ using namespace state;
 using namespace engine;
 using namespace std;
 
-PrintStats::~PrintStats (){
+PrintStats::~PrintStats(){
 
 }
+PrintStats::PrintStats(Observable& map, int x, int y, int element){
+  this->map = map;
+  this->x = x;
+  this->y = y;
+  this->element = element;
+}
+
 
 CommandTypeId PrintStats::getTypeId () const{
   return CommandTypeId::PRINTSTATS;

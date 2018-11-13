@@ -11,6 +11,12 @@ CaseIdentifier::~CaseIdentifier (){
 
 }
 
+CaseIdentifier::CaseIdentifier (Observable& map, int x, int y){
+  this->map = map;
+  this->x = x;
+  this->y = y; 
+}
+
 CommandTypeId CaseIdentifier::getTypeId () const{
   return CommandTypeId::CASEIDENTIFIER;
 }
