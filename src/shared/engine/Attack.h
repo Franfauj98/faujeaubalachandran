@@ -10,7 +10,6 @@ namespace engine {
   class Command;
 }
 
-#include "state/Observable.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -20,7 +19,6 @@ namespace engine {
   class Attack : public engine::Command {
     // Attributes
   private:
-    state::Observable map;
     int x;
     int y;
     int x2;
@@ -29,7 +27,7 @@ namespace engine {
   public:
     ~Attack ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& principalMap);
     Attack (int x, int y, int x2, int y2);
     // Setters and Getters
   };

@@ -10,7 +10,6 @@ namespace engine {
   class Command;
 }
 
-#include "state/Observable.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -20,7 +19,6 @@ namespace engine {
   class CreateUnit : public engine::Command {
     // Attributes
   private:
-    state::Observable map;
     int x;
     int y;
     int x2;
@@ -30,7 +28,7 @@ namespace engine {
   public:
     ~CreateUnit ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& principalMap);
     CreateUnit (int x, int y, int x2, int y2, int unit);
     // Setters and Getters
   };

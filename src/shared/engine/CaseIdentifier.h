@@ -10,7 +10,6 @@ namespace engine {
   class Command;
 }
 
-#include "state/Observable.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -20,7 +19,6 @@ namespace engine {
   class CaseIdentifier : public engine::Command {
     // Attributes
   private:
-    state::Observable map;
     int x;
     int y;
     // Operations
@@ -28,7 +26,7 @@ namespace engine {
     CaseIdentifier (int x, int y);
     ~CaseIdentifier ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& principalMap);
     // Setters and Getters
   };
 

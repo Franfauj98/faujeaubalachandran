@@ -280,41 +280,41 @@ void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
   this->commandList.push_back(std::move(cmd));
 }
 
-void Engine::execute(){
+void Engine::execute(state::Observable& principalMap){
   switch(commandListId.back()){
     case 1:{
       CaseIdentifier* ci = (CaseIdentifier*) commandList.back().get();
-      ci->execute();
+      ci->execute(principalMap);
       break;
     }
     case 3:{
       PrintStats* pst = (PrintStats*) commandList.back().get();
-      pst->execute();
+      pst->execute(principalMap);
       break;
     }
     case 2:{
       Possibilities* ps = (Possibilities*) commandList.back().get();
-      ps->execute();
+      ps->execute(principalMap);
       break;
     }
     case 6:{
       Move* mv = (Move*) commandList.back().get();
-      mv->execute();
+      mv->execute(principalMap);
       break;
     }
     case 7:{
       Attack* at = (Attack*) commandList.back().get();
-      at->execute();
+      at->execute(principalMap);
       break;
     }
     case 5:{
       LevelUp* lu = (LevelUp*) commandList.back().get();
-      lu->execute();
+      lu->execute(principalMap);
       break;
     }
     case 4:{
       CreateUnit* cu = (CreateUnit*) commandList.back().get();
-      cu->execute();
+      cu->execute(principalMap);
       break;
     }
     default: break;

@@ -8,6 +8,9 @@
 namespace engine {
   class Command;
 };
+namespace state {
+  class Observable;
+};
 namespace sf {
   class Drawable;
   class Transformable;
@@ -21,9 +24,6 @@ namespace sf {
 };
 namespace render {
   class RenderMap;
-};
-namespace state {
-  class Observable;
 }
 
 #include "Command.h"
@@ -44,7 +44,7 @@ namespace engine {
     Engine ();
     ~Engine ();
     void addCommand (std::unique_ptr<Command> cmd, int commandId);
-    void execute ();
+    void execute (state::Observable& principalMap);
     // Setters and Getters
   };
 

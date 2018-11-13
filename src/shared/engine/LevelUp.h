@@ -10,7 +10,6 @@ namespace engine {
   class Command;
 }
 
-#include "state/Observable.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -20,14 +19,13 @@ namespace engine {
   class LevelUp : public engine::Command {
     // Attributes
   private:
-    state::Observable map;
     int x;
     int y;
     // Operations
   public:
     ~LevelUp ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& principalMap);
     LevelUp (int x, int y);
     // Setters and Getters
   };

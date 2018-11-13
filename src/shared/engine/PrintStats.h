@@ -10,7 +10,6 @@ namespace engine {
   class Command;
 }
 
-#include "state/Observable.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -20,7 +19,6 @@ namespace engine {
   class PrintStats : public engine::Command {
     // Attributes
   private:
-    state::Observable map;
     int x;
     int y;
     int element;
@@ -28,7 +26,7 @@ namespace engine {
   public:
     ~PrintStats ();
     CommandTypeId getTypeId () const;
-    void execute ();
+    void execute (state::Observable& principalMap);
     int get () const;
     PrintStats (int x, int y, int element);
     // Setters and Getters

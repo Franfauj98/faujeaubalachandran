@@ -20,6 +20,6 @@ CommandTypeId CaseIdentifier::getTypeId () const{
   return CommandTypeId::CASEIDENTIFIER;
 }
 
-void CaseIdentifier::execute (){
-  this->map.getAllMaps().getMapMatrix()[this->x][this->y];
+void CaseIdentifier::execute (state::Observable& map){
+  map.getAllMaps().getMapMatrix()[this->x][this->y];
 }

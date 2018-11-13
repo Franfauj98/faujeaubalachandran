@@ -19,17 +19,17 @@ Possibilities::Possibilities (int x, int y, int element){
 CommandTypeId Possibilities::getTypeId () const{
   return CommandTypeId::POSSIBILITIES;
 }
-void Possibilities::execute (){
+void Possibilities::execute (state::Observable& map){
     std::vector<unique_ptr<state::Element>> selectedMap;
-    for(int i = 0; i<this->map.getAllMaps().getSize(); i++){
-      for(int j = 0; j<this->map.getAllMaps().getSize(); j++){
+    for(int i = 0; i<map.getAllMaps().getSize(); i++){
+      for(int j = 0; j<map.getAllMaps().getSize(); j++){
         Position p(i,j);
         selectedMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
       }
     }
     Position pos(this->x,this->y);
     selectedMap[this->y+25*this->x]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
-    std::vector<std::vector<int>> mapMatrix = this->map.getAllMaps().getMapMatrix();
+    std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
     if (this->element==10 || this->element==14 || this->element==18 || this->element==22){
 
       if (this->x+1>=0 && this->x+1<25){
@@ -75,5 +75,5 @@ void Possibilities::execute (){
       }
 
     }
-    this->map.getAllMaps().setSelectedMap(selectedMap);
+    map.getAllMaps().setSelectedMap(selectedMap);
 }

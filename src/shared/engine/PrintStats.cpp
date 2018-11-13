@@ -18,10 +18,10 @@ PrintStats::PrintStats(int x, int y, int element){
 CommandTypeId PrintStats::getTypeId () const{
   return CommandTypeId::PRINTSTATS;
 }
-void PrintStats::execute (){
+void PrintStats::execute (state::Observable& map){
   std::vector<int> statsMap(121,0);
   if (this->element==10 || this->element==14 || this->element==18 || this->element==22){
-    Units* units = (Units*) this->map.getAllMaps().getUnitsMap()[y+25*x].get();
+    Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
     if (units->getLife()>=40){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -69,7 +69,7 @@ void PrintStats::execute (){
     }
   }
   else if (this->element==26 || this->element==27 || this->element==28 || this->element==29){
-    Palace* palace = (Palace*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
+    Palace* palace = (Palace*) map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     if (palace->getLife()<=200 && palace->getLife()>150){
       statsMap[0]=1;
       statsMap[1]=1;
@@ -127,7 +127,7 @@ void PrintStats::execute (){
 
   }
   else if (this->element==30){
-    Barrack* barrack = (Barrack*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
+    Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     switch(barrack->getLevel()){
       case 1:
       statsMap[0]=3;
@@ -232,7 +232,7 @@ void PrintStats::execute (){
   }
 
   else if (this->element==31){
-    Ressource* ressource = (Ressource*) this->map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
+    Ressource* ressource = (Ressource*) map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
     switch(ressource->getLevel()){
       case 1:
       statsMap[0]=3;
@@ -290,5 +290,5 @@ void PrintStats::execute (){
       statsMap[i]=i+22;
     }
   }
-    this->map.getAllMaps().setStatsMap(statsMap);
+    map.getAllMaps().setStatsMap(statsMap);
 }
