@@ -21,7 +21,7 @@ namespace engine {
   public:
     ~LevelUp ();
     CommandTypeId getTypeId () const;
-    void execute (state::Observable& map, int x, int y);
+    bool execute (state::Observable& map, int x, int y);
     // Setters and Getters
   };
 

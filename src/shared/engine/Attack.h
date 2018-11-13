@@ -21,7 +21,7 @@ namespace engine {
   public:
     ~Attack ();
     CommandTypeId getTypeId () const;
-    void execute (state::Observable& map, int x, int y, int x2, int y2);
+    bool execute (state::Observable& map, int x, int y, int x2, int y2);
     // Setters and Getters
   };
 
