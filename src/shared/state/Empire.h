@@ -3,11 +3,15 @@
 #define STATE__EMPIRE__H
 
 #include <string>
+#include <vector>
+#include <memory>
 
 namespace state {
+  class Element;
   class Buildings;
 }
 
+#include "Element.h"
 #include "Buildings.h"
 
 namespace state {
@@ -39,6 +43,7 @@ namespace state {
     int getShot ();
     void setShot (int shot);
     ~Empire ();
+    void updateRessource (std::vector<std::unique_ptr<Element>>& buildingsMap);
     // Setters and Getters
   };
 

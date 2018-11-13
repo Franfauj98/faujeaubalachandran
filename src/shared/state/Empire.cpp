@@ -122,6 +122,18 @@ void Empire::setShot(int shot){
   }
 }
 
+void Empire::updateRessource(std::vector<std::unique_ptr<Element>>& buildingsMap){
+  for(size_t i = 0; i < buildingsMap.size(); i++){
+    Buildings* build = (Buildings *)(buildingsMap[i].get());
+    if(build->getType() == 7 && build->getIdBuilding()==this->idEmpire){
+      Ressource* ress = (Ressource *) build;
+      this->foodRessource+=ress->getProduction();
+      this->goldRessource+=ress->getProduction();
+      this->woodRessource+=ress->getProduction();
+    }
+  }
+}
+
 Empire::~Empire (){
 
 }
