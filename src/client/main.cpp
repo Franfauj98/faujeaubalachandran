@@ -122,11 +122,65 @@ int main(int argc,char* argv[])
         }
 
         while (window.waitEvent(event)&&(event.type == sf::Event::MouseButtonPressed)){
-          map.handle(window, principalMap, engine, event);
+          map.handle(window, principalMap, engine, event,true,false,false);
+          engine.execute(principalMap);
+          engine.execute(principalMap);
+          engine.execute(principalMap);
+          int element = principalMap.getAllMaps().getMapMatrix()[map.getLastClicks()[0]][map.getLastClicks()[1]];
+          if (element==26 || element==27 || element==28 || element==29 || element==30 || element==31 ){
+            Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[map.getLastClicks()[1]+25*map.getLastClicks()[0]].get();
+            int id = building->getIdBuilding();
+            Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
+            string gold= to_string(empire->getGoldRessource());
+            string wood= to_string(empire->getWoodRessource());
+            string food= to_string(empire->getFoodRessource());
+            map.update(principalMap,gold,wood,food,"");
+            } else {
+              map.update(principalMap,"","","","");
+            }
+
+            map.drawMap(window);
+
+          if (element==10||element==14||element==18||element==22) {
+            map.handle(window, principalMap, engine, event, false, true,false);
+            for(unsigned int i=0;i<engine.getCommandListId().size();i++){
+              engine.execute(principalMap);
+              counter++;
+              map.update(principalMap,"","","","");
+              map.drawMap(window);
+            }
+          }
+          else if ((element==26||element==27||element==28||element==29||element==31)) {
+            map.handle(window, principalMap, engine, event, false, true,false);
+            for(unsigned int i=0;i<engine.getCommandListId().size();i++){
+              engine.execute(principalMap);
+              counter++;
+              map.update(principalMap,"","","","");
+              map.drawMap(window);
+            }
+          }
+
+          else if (element==30) {
+            map.handle(window, principalMap, engine, event, false, true,false);
+            for(unsigned int i=0;i<engine.getCommandListId().size();i++){
+              engine.execute(principalMap);
+              counter++;
+              map.update(principalMap,"","","","");
+              map.drawMap(window);
+            }
+
+            map.handle(window, principalMap, engine, event, false, false, true);
+            for(unsigned int i=0;i<engine.getCommandListId().size();i++){
+              engine.execute(principalMap);
+              counter++;
+              map.update(principalMap,"","","","");
+              map.drawMap(window);
+            }
         }
       }
     }
   }
+}
   else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
     Engine engine;

@@ -13,6 +13,8 @@ using namespace std;
 using namespace engine;
 
 RenderMap::RenderMap (){
+  std::vector<int> lastClick(6,0);
+  this->lastClicks=lastClick;
 }
 
 void RenderMap::update(state::Observable& principalMap,string goldText, string woodText, string foodText, string messageText) {
@@ -85,6 +87,10 @@ Layer RenderMap::getSelectedMap() const {
 
 std::unique_ptr<Layer> const& RenderMap::getBackground() const {
   return this->background;
+}
+
+std::vector<int> RenderMap::getLastClicks(){
+  return this->lastClicks;
 }
 
 void RenderMap::setStatsMap(Layer* statsLayer) {
@@ -189,18 +195,113 @@ void RenderMap::drawMap(sf::RenderWindow& window){
 }
 
 
-void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engine::Engine& engine, sf::Event& event){
+void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engine::Engine& engine, sf::Event& event, bool firstC, bool secondC, bool thirdC){
+  if (firstC){
+    sf::Vector2i click = getClick(window,event);
+    std::vector<int> lastClick ={click.x,click.y,0,0,0,0};
+    this->lastClicks=lastClick;
+    int element = principalMap.getAllMaps().getMapMatrix()[click.x][click.y];
+    engine.addCommand((unique_ptr<Command> (new CaseIdentifier(click.x,click.y))),1);
+    engine.addCommand(unique_ptr<Command> (new Possibilities(click.x,click.y,element)),2);
+    engine.addCommand(unique_ptr<Command> (new PrintStats(click.x,click.y,element)),3);
+    std::cout << "coucou" << '\n';
 
-  sf::Vector2i click = getClick(window,event);
-  int element = principalMap.getAllMaps().getMapMatrix()[click.x][click.y];
-  engine.addCommand((unique_ptr<Command> (new CaseIdentifier(click.x,click.y))),1);
-  engine.addCommand(unique_ptr<Command> (new Possibilities(click.x,click.y,element)),2);
-  engine.addCommand(unique_ptr<Command> (new PrintStats(click.x,click.y,element)),3);
-  std::cout << "coucou" << '\n';
+  }
+  else if(secondC){
+    sf::Vector2i click2 = getClick(window,event);
+    int element = principalMap.getAllMaps().getMapMatrix()[getLastClicks()[0]][getLastClicks()[1]];
+    if (element==10||element==14||element==18||element==22) {
+      int element2 = principalMap.getAllMaps().getMapMatrix()[click2.x][click2.y];
+      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(click2.x,click2.y))),1);
+      std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0 };
+      this->lastClicks=lastClick;
 
-}
+      Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+      int id = unit->getIdUnits();
+      int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+      if(shot==1){
+        if(element2==2){
+          engine.addCommand((unique_ptr<Command> (new Move(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3]))),6);
+        }
+        if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
+          engine.addCommand((unique_ptr<Command> (new Attack(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3]))),7);
+        }
+      }
+    }
+    else if ((element==26||element==27||element==28||element==29||element==31)) {
+      sf::Vector2i click2 = getClickButton(window, event);
+      std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0 };
+      this->lastClicks=lastClick;
 
+      Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+      int id = barrack->getIdBuilding();
+      int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+      if(shot==1){
+        if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[4]<=192){
+          engine.addCommand((unique_ptr<Command> (new LevelUp(getLastClicks()[0],getLastClicks()[1]))),5);
+        }
+      }
+    }
+
+    else if (element==30) {
+      sf::Vector2i click2 = getClickButton(window, event);
+      std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0};
+      this->lastClicks=lastClick;
+
+      Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[getLastClicks()[1]+25*getLastClicks()[1]].get();
+      int id = barrack->getIdBuilding();
+      int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+      std::vector<std::vector<int>> matrix = principalMap.getAllMaps().getMapMatrix();
+      if(shot==1){
+        if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 256 && getLastClicks()[3]<=320){
+          engine.addCommand((unique_ptr<Command> (new LevelUp(getLastClicks()[0],getLastClicks()[1]))),5);
+          }
+        }
+      }
+    }
+
+    else if(thirdC){
+      if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
+        sf::Vector2i click3 = getClick(window, event);
+        std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+        this->lastClicks=lastClick;
+
+        if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],1))),4);
+        }
+      }
+      if (getLastClicks()[2]>= 96 && getLastClicks()[2]<=192 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
+        sf::Vector2i click3 = getClick(window, event);
+        std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+        this->lastClicks=lastClick;
+
+        if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],2))),4);
+        }
+      }
+      if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 192 && getLastClicks()[3]<=256){
+        sf::Vector2i click3 = getClick(window, event);
+        std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+        this->lastClicks=lastClick;
+
+        if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],4))),4);
+        }
+      }
+      if (getLastClicks()[2]>= 96 && getLastClicks()[2]<=192 && getLastClicks()[3]>= 192 && getLastClicks()[3]<=256){
+        sf::Vector2i click3 = getClick(window, event);
+        std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+        this->lastClicks=lastClick;
+
+        if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],3))),4);
+        }
+      }
+    }
+
+      }
 
 
 RenderMap::~RenderMap (){
+
 }

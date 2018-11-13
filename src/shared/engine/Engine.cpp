@@ -88,191 +88,191 @@ using namespace render;
 // }
 
 Engine::Engine (){
-//   // Observable principalMap; // to put in engine
-//   // RenderMap map;
-//   // // CreateUnit cu1;
-//   // map.update(principalMap,"","","","");
+  // Observable principalMap; // to put in engine
+  // RenderMap map;
+  // // CreateUnit cu1;
+  // map.update(principalMap,"","","","");
+
+//   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+//   window.setVerticalSyncEnabled(false);
+// // draw the layers
+//   window.clear();
 //
-// //   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
-// //   window.setVerticalSyncEnabled(false);
-// // // draw the layers
-// //   window.clear();
-// //
-// //   drawMap(window,map);
-//   //int element, element2 = 0;
-//   // while (window.isOpen())
-//   // {
-//   //   int counter=0;
-//   //   Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
-//   //   Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
-//   //   Empire* empire3 = principalMap.getAllMaps().getEmpires()[2].get();
-//   //   while (counter<9 && window.isOpen()){
-//   //
-//   //     if (counter>=0 && counter <=2){
-//   //       empire1->setShot(1);
-//   //       empire2->setShot(0);
-//   //       empire3->setShot(0);
-//   //     }
-//   //     else if (counter>=3 && counter <=5){
-//   //       empire1->setShot(0);
-//   //       empire2->setShot(1);
-//   //       empire3->setShot(0);
-//   //     }
-//   //     else if (counter>=6 && counter <=8){
-//   //       empire1->setShot(0);
-//   //       empire2->setShot(0);
-//   //       empire3->setShot(1);
-//   //     }
-//   //     if(counter==8){
-//   //       empire1->updateRessource(principalMap.getAllMaps().getBuildingsMap());
-//   //       empire2->updateRessource(principalMap.getAllMaps().getBuildingsMap());
-//   //       empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
-//   //     }
-//       sf::Vector2i click = getClick(window, map);
-//
-//       CaseIdentifier cs;
-//       Possibilities ps;
-//       PrintStats pst;
-//       CreateUnit cu;
-//       element = cs.execute(principalMap,click.x,click.y);
-//       ps.execute(principalMap,click.x,click.y,element);
-//
-//       pst.execute(principalMap,click.x,click.y,element);
-//       map.update(principalMap,"","","","");
-//       drawMap(window,map);
-//
-//       if (element==26 || element==27 || element==28 || element==29 || element==30 || element==31 ){
-//         pst.execute(principalMap,click.x,click.y,element);
-//         Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
-//         int id = building->getIdBuilding();
-//         Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
-//         string gold= to_string(empire->getGoldRessource());
-//         string wood= to_string(empire->getWoodRessource());
-//         string food= to_string(empire->getFoodRessource());
-//         pst.execute(principalMap,click.x,click.y,element);
-//         map.update(principalMap,gold,wood,food,"");
-//         drawMap(window,map);
-//         }
-//         else {
-//           pst.execute(principalMap,click.x,click.y,element);
-//           map.update(principalMap,"","","","");
-//           drawMap(window,map);
-//         }
-//
-//
-//
-//       // if (element==26 || element==27 || element==28 || element==29 ){
-//       //   pst.execute(principalMap,click.x,click.y,element);
-//       //   Buildings* palace =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
-//       //   int id = palace->getIdBuilding();
-//       //   Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
-//       //   string gold= to_string(empire->getGoldRessource());
-//       //   string wood= to_string(empire->getWoodRessource());
-//       //   string food= to_string(empire->getFoodRessource());
-//         //Layer goldLayer("res/calibri.ttf", gold, 22, sf::Color::Red, 20, 215);
-//         //Layer woodLayer("res/calibri.ttf", wood, 22, sf::Color::Red, 84, 215);
-//       //  Layer foodLayer("res/calibri.ttf", food, 22, sf::Color::Red, 148, 215);
-//         // map.update(principalMap);
-//         // drawMap(window,map);
-//         // goldLayer.drawText(window);
-//         // woodLayer.drawText(window);
-//         // foodLayer.drawText(window);
-//         //window.display();
-//       // } else {
-//       //   pst.execute(principalMap,click.x,click.y,element);
-//       //   map.update(principalMap);
-//       //   drawMap(window,map);
-//       // }
-//
-//     if (element==10||element==14||element==18||element==22) {
-//       Move mv;
-//       Attack at;
-//       sf::Vector2i click2 = getClick(window, map);
-//
-//       CaseIdentifier cs2;
-//       element2 = cs2.execute(principalMap,click2.x,click2.y);
-//       Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[click.y+25*click.x].get();
-//       int id = unit->getIdUnits();
-//       int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
-//       if(shot==1){
-//         if(element2==2){
-//           mv.execute(principalMap, click.x, click.y, click2.x, click2.y);
-//           counter++;
-//         }
-//         if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
-//           at.execute(principalMap, click.x, click.y, click2.x, click2.y);
-//           counter++;
-//         }
-//       }
-//     }
-//     else if ((element==26||element==27||element==28||element==29||element==31)) {
-//       LevelUp lu;
-//       sf::Vector2i click2 = getClickButton(window, map);
-//       Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
-//       int id = barrack->getIdBuilding();
-//       int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
-//       if(shot==1){
-//         if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
-//           lu.execute(principalMap,click.x,click.y);
-//           counter++;
-//         }
-//       }
-//     }
-//     else if (element==30) {
-//       LevelUp lu;
-//       CreateUnit cu;
-//       sf::Vector2i click2 = getClickButton(window, map);
-//       Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
-//       int id = barrack->getIdBuilding();
-//       int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
-//       std::vector<std::vector<int>> matrix = principalMap.getAllMaps().getMapMatrix();
-//       if(shot==1){
-//         if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
-//           sf::Vector2i click3 = getClick(window, map);
-//           if(matrix[click3.x][click3.y]==2){
-//             map.update(principalMap,"","","","");
-//             drawMap(window,map);
-//             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,1);
-//             counter++;
-//           }
-//         }
-//         if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
-//           sf::Vector2i click3 = getClick(window, map);
-//           if(matrix[click3.x][click3.y]==2){
-//             map.update(principalMap,"","","","");
-//             drawMap(window,map);
-//             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,2);
-//             counter++;
-//           }
-//         }
-//         if (click2.x>= 0 && click2.x<=96 && click2.y>= 192 && click2.y<=256){
-//           sf::Vector2i click3 = getClick(window, map);
-//           if(matrix[click3.x][click3.y]==2){
-//             map.update(principalMap,"","","","");
-//             drawMap(window,map);
-//             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,4);
-//             counter++;
-//           }
-//         }
-//         if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
-//           sf::Vector2i click3 = getClick(window, map);
-//           if(matrix[click3.x][click3.y]==2){
-//             map.update(principalMap,"","","","");
-//             drawMap(window,map);
-//             cu.execute(principalMap,click.x,click.y,click3.x,click3.y,3);
-//             counter++;
-//           }
-//         }
-//         if (click2.x>= 0 && click2.x<=96 && click2.y>= 256 && click2.y<=320){
-//           lu.execute(principalMap,click.x,click.y);
-//           counter++;
-//         }
-//       }
-//     }
-//     map.update(principalMap,"","","","");
-//     drawMap(window,map);
-//     }
-//   }
+//   drawMap(window,map);
+  //int element, element2 = 0;
+  // while (window.isOpen())
+  // {
+  //   int counter=0;
+  //   Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
+  //   Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
+  //   Empire* empire3 = principalMap.getAllMaps().getEmpires()[2].get();
+  //   while (counter<9 && window.isOpen()){
+  //
+  //     if (counter>=0 && counter <=2){
+  //       empire1->setShot(1);
+  //       empire2->setShot(0);
+  //       empire3->setShot(0);
+  //     }
+  //     else if (counter>=3 && counter <=5){
+  //       empire1->setShot(0);
+  //       empire2->setShot(1);
+  //       empire3->setShot(0);
+  //     }
+  //     else if (counter>=6 && counter <=8){
+  //       empire1->setShot(0);
+  //       empire2->setShot(0);
+  //       empire3->setShot(1);
+  //     }
+  //     if(counter==8){
+  //       empire1->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+  //       empire2->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+  //       empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+  //     }
+      // sf::Vector2i click = getClick(window, map);
+      //
+      // CaseIdentifier cs;
+      // Possibilities ps;
+      // PrintStats pst;
+      // CreateUnit cu;
+      // element = cs.execute(principalMap,click.x,click.y);
+      // ps.execute(principalMap,click.x,click.y,element);
+      //
+      // pst.execute(principalMap,click.x,click.y,element);
+      // map.update(principalMap,"","","","");
+      // drawMap(window,map);
+
+      // if (element==26 || element==27 || element==28 || element==29 || element==30 || element==31 ){
+      //   pst.execute(principalMap,click.x,click.y,element);
+      //   Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+      //   int id = building->getIdBuilding();
+      //   Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
+      //   string gold= to_string(empire->getGoldRessource());
+      //   string wood= to_string(empire->getWoodRessource());
+      //   string food= to_string(empire->getFoodRessource());
+      //   pst.execute(principalMap,click.x,click.y,element);
+      //   map.update(principalMap,gold,wood,food,"");
+      //   drawMap(window,map);
+      //   }
+      //   else {
+      //     pst.execute(principalMap,click.x,click.y,element);
+      //     map.update(principalMap,"","","","");
+      //     drawMap(window,map);
+      //   }
+
+
+
+      // if (element==26 || element==27 || element==28 || element==29 ){
+      //   pst.execute(principalMap,click.x,click.y,element);
+      //   Buildings* palace =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+      //   int id = palace->getIdBuilding();
+      //   Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
+      //   string gold= to_string(empire->getGoldRessource());
+      //   string wood= to_string(empire->getWoodRessource());
+      //   string food= to_string(empire->getFoodRessource());
+        //Layer goldLayer("res/calibri.ttf", gold, 22, sf::Color::Red, 20, 215);
+        //Layer woodLayer("res/calibri.ttf", wood, 22, sf::Color::Red, 84, 215);
+      //  Layer foodLayer("res/calibri.ttf", food, 22, sf::Color::Red, 148, 215);
+        // map.update(principalMap);
+        // drawMap(window,map);
+        // goldLayer.drawText(window);
+        // woodLayer.drawText(window);
+        // foodLayer.drawText(window);
+        //window.display();
+      // } else {
+      //   pst.execute(principalMap,click.x,click.y,element);
+      //   map.update(principalMap);
+      //   drawMap(window,map);
+      // }
+
+    // if (element==10||element==14||element==18||element==22) {
+    //   Move mv;
+    //   Attack at;
+    //   sf::Vector2i click2 = getClick(window, map);
+    //
+    //   CaseIdentifier cs2;
+    //   element2 = cs2.execute(principalMap,click2.x,click2.y);
+    //   Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[click.y+25*click.x].get();
+    //   int id = unit->getIdUnits();
+    //   int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+    //   if(shot==1){
+    //     if(element2==2){
+    //       mv.execute(principalMap, click.x, click.y, click2.x, click2.y);
+    //       counter++;
+    //     }
+    //     if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
+    //       at.execute(principalMap, click.x, click.y, click2.x, click2.y);
+    //       counter++;
+    //     }
+    //   }
+    // }
+    // else if ((element==26||element==27||element==28||element==29||element==31)) {
+    //   LevelUp lu;
+    //   sf::Vector2i click2 = getClickButton(window, map);
+    //   Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+    //   int id = barrack->getIdBuilding();
+    //   int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+    //   if(shot==1){
+    //     if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
+    //       lu.execute(principalMap,click.x,click.y);
+    //       counter++;
+    //     }
+    //   }
+    // }
+  //   else if (element==30) {
+  //     LevelUp lu;
+  //     CreateUnit cu;
+  //     sf::Vector2i click2 = getClickButton(window, map);
+  //     Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+  //     int id = barrack->getIdBuilding();
+  //     int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+  //     std::vector<std::vector<int>> matrix = principalMap.getAllMaps().getMapMatrix();
+  //     if(shot==1){
+  //       if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
+  //         sf::Vector2i click3 = getClick(window, map);
+  //         if(matrix[click3.x][click3.y]==2){
+  //           map.update(principalMap,"","","","");
+  //           drawMap(window,map);
+  //           cu.execute(principalMap,click.x,click.y,click3.x,click3.y,1);
+  //           counter++;
+  //         }
+  //       }
+  //       if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
+  //         sf::Vector2i click3 = getClick(window, map);
+  //         if(matrix[click3.x][click3.y]==2){
+  //           map.update(principalMap,"","","","");
+  //           drawMap(window,map);
+  //           cu.execute(principalMap,click.x,click.y,click3.x,click3.y,2);
+  //           counter++;
+  //         }
+  //       }
+  //       if (click2.x>= 0 && click2.x<=96 && click2.y>= 192 && click2.y<=256){
+  //         sf::Vector2i click3 = getClick(window, map);
+  //         if(matrix[click3.x][click3.y]==2){
+  //           map.update(principalMap,"","","","");
+  //           drawMap(window,map);
+  //           cu.execute(principalMap,click.x,click.y,click3.x,click3.y,4);
+  //           counter++;
+  //         }
+  //       }
+  //       if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
+  //         sf::Vector2i click3 = getClick(window, map);
+  //         if(matrix[click3.x][click3.y]==2){
+  //           map.update(principalMap,"","","","");
+  //           drawMap(window,map);
+  //           cu.execute(principalMap,click.x,click.y,click3.x,click3.y,3);
+  //           counter++;
+  //         }
+  //       }
+  //       if (click2.x>= 0 && click2.x<=96 && click2.y>= 256 && click2.y<=320){
+  //         lu.execute(principalMap,click.x,click.y);
+  //         counter++;
+  //       }
+  //     }
+  //   }
+  //   map.update(principalMap,"","","","");
+  //   drawMap(window,map);
+  //   }
+  // }
 }
 
 void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
@@ -322,6 +322,10 @@ void Engine::execute(state::Observable& principalMap){
 
   this->commandList.pop_back();
   this->commandListId.pop_back();
+}
+
+std::vector<int> Engine::getCommandListId(){
+  return this->commandListId;
 }
 
 Engine::~Engine (){

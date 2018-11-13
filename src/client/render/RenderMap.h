@@ -3,6 +3,7 @@
 #define RENDER__RENDERMAP__H
 
 #include <memory>
+#include <vector>
 #include <string>
 #include <SFML/Graphics.hpp>
 
@@ -45,6 +46,7 @@ namespace render {
     Layer wood;
     Layer food;
     Layer message;
+    std::vector<int> lastClicks;
     // Operations
   public:
     RenderMap ();
@@ -66,7 +68,8 @@ namespace render {
     Layer getFood () const;
     Layer getMessage () const;
     void drawMap (sf::RenderWindow& window);
-    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event& event);
+    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event& event, bool firstC, bool secondC, bool thirdC);
+    std::vector<int> getLastClicks ();
     // Setters and Getters
   };
 

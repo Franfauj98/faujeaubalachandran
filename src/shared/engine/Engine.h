@@ -45,6 +45,7 @@ namespace engine {
     ~Engine ();
     void addCommand (std::unique_ptr<Command> cmd, int commandId);
     void execute (state::Observable& principalMap);
+    std::vector<int> getCommandListId ();
     // Setters and Getters
   };
 
