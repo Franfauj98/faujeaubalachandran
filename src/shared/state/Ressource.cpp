@@ -32,7 +32,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
       setLife(0);
-      this->type = 7;
+      this->type = 31;
 
       break;}
     case 2 :{
@@ -44,7 +44,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       BuildingCost ressourceCost(100,100);
       setBuildingCost(ressourceCost);
       setLife(0);
-      this->type = 7;
+      this->type = 31;
       break;}
     case 3 :{
       setProduction(150);
@@ -55,7 +55,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       BuildingCost ressourceCost(150,150);
       setBuildingCost(ressourceCost);
       setLife(0);
-      this->type = 7;
+      this->type = 31;
       break;}
     case 4 :{
       setProduction(200);
@@ -66,7 +66,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       BuildingCost ressourceCost(200,200);
       setBuildingCost(ressourceCost);
       setLife(0);
-      this->type = 7;
+      this->type = 31;
       break;}
     default :{
       setProduction(50);
@@ -77,7 +77,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       BuildingCost ressourceCost(50,50);
       setBuildingCost(ressourceCost);
       setLife(0);
-      this->type = 7;
+      this->type = 31;
       break;}
   }
 }

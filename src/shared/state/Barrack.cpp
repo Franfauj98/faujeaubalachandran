@@ -17,11 +17,11 @@ Barrack::Barrack(int capacity, int id, Position position, int level,BuildingCost
     if (capacity>=0 && capacity<=6){
       this->capacity=capacity;
       this->unitsNumber=0;
-      this->type = 5;
+      this->type = 30;
     } else {
       this->capacity=0;
       this->unitsNumber=0;
-      this->type = 5;
+      this->type = 30;
       throw std::string("capacity must be positive or smaller than 6");
     }
     } catch (std::string error){
@@ -41,7 +41,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
-      this->type = 5;
+      this->type = 30;
 
       break;}
     case 2 :{
@@ -54,7 +54,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
-      this->type = 5;
+      this->type = 30;
       break;}
     case 3 :{
       this->capacity=(5);
@@ -66,7 +66,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
-      this->type = 5;
+      this->type = 30;
       break;}
     case 4 :{
       this->capacity=(6);
@@ -78,7 +78,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
-      this->type = 5;
+      this->type = 30;
       break;}
     default :{
       this->capacity=(5);
@@ -90,7 +90,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
-      this->type = 5;
+      this->type = 30;
       break;}
   }
 }
