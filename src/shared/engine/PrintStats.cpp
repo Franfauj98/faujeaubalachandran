@@ -109,12 +109,15 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       default:
       break;
     }
-
-    if (element==26 || element==27 || element==28){
-      statsMap[12]=24;
-      statsMap[13]=25;
-      statsMap[14]=26;
+    for (int i=12;i<18;i++){
+      statsMap[i]=i+15;
     }
+    if (element==26 || element==27 || element==28){
+      statsMap[18]=24;
+      statsMap[19]=25;
+      statsMap[20]=26;
+    }
+
   }
   else if (element==30){
     Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
@@ -198,11 +201,17 @@ void PrintStats::execute (state::Observable& map, int x, int y, int element){
       default:
       break;
     }
-    for (int i=12;i<27;i++){
-      statsMap[i]=i;
+    if (barrack->getLevel()<4){
+      for (int i=12;i<27;i++){
+        statsMap[i]=i;
+      }
+    } else {
+      for (int i=12;i<24;i++){
+        statsMap[i]=i;
+      }
     }
-
   }
+
   else if (element==31){
     Ressource* ressource = (Ressource*) map.getAllMaps().getBuildingsMap()[y+25*x].get();
     switch(ressource->getLevel()){
