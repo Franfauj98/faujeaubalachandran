@@ -21,7 +21,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       BuildingCost palaceCost(50,50);
       setBuildingCost(palaceCost);
       setLife(200);
-      this->type = 6;
+      this->type = 26;
 
       break;}
     case 2 :{
@@ -32,7 +32,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       BuildingCost palaceCost(100,100);
       setBuildingCost(palaceCost);
       setLife(400);
-      this->type = 6;
+      this->type = 27;
       break;}
     case 3 :{
       setIdBuilding(id);
@@ -42,7 +42,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       BuildingCost palaceCost(150,150);
       setBuildingCost(palaceCost);
       setLife(600);
-      this->type = 6;
+      this->type = 28;
       break;}
     case 4 :{
       setIdBuilding(id);
@@ -52,7 +52,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       BuildingCost palaceCost(200,200);
       setBuildingCost(palaceCost);
       setLife(800);
-      this->type = 6;
+      this->type = 29;
       break;}
     default :{
       setIdBuilding(id);
@@ -62,7 +62,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       BuildingCost palaceCost(50,50);
       setBuildingCost(palaceCost);
       setLife(200);
-      this->type = 6;
+      this->type = 26;
       break;}
   }
 }

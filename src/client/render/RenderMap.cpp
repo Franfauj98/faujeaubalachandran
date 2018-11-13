@@ -117,5 +117,169 @@ Layer RenderMap::getMessage() const{
   return this->message;
 }
 
+
+sf::Vector2i getClick(sf::RenderWindow& window, sf::Event& event){
+  // manage the events
+  int X=0;
+  int Y=0;
+  if(event.type == sf::Event::Closed){
+    window.close();
+  }
+  if (event.type == sf::Event::MouseButtonPressed)
+  {
+    if (event.mouseButton.button == sf::Mouse::Left)
+    {
+      double yy=(double) event.mouseButton.y/32.0;
+      double xx=(double) (event.mouseButton.x-800)/64.0;
+
+      Y= floor(yy+xx);
+      X= floor(yy-xx);
+
+    }
+    break;
+  }
+  sf::Vector2i click(X,Y);
+  return click;
+}
+
+sf::Vector2i getClickButton(sf::RenderWindow& window, sf::Event& event){
+  // manage the events
+  int X=0;
+  int Y=0;
+  if(event.type == sf::Event::Closed){
+    window.close();
+  }
+  if (event.type == sf::Event::MouseButtonPressed)
+  {
+    if (event.mouseButton.button == sf::Mouse::Left)
+    {
+      std::cout << "the click button was pressed" << std::endl;
+
+      X=event.mouseButton.x;
+      Y=event.mouseButton.y;
+      std::cout << "X: " << X << std::endl;
+      std::cout << "Y: " << Y << std::endl;
+
+    }
+    break;
+  }
+  sf::Vector2i click(X,Y);
+  return click;
+}
+
+
+void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, Engine& engine, sf::Event& event){
+  sf::Vector2i click = getClick(window);
+
+  element = 
+  engine.addCommand(unique_ptr<Command> (new CaseIdentifier(principalMap,click.x,click.y)));
+  engine.addCommand(unique_ptr<Command> (new Possibilities(principalMap,click.x,click.y,element)));
+
+  engine.addCommand(unique_ptr<Command> (new PrintStats(principalMap,click.x,click.y,element)));
+  map.update(principalMap,"","","","");
+
+  if (element==26 || element==27 || element==28 || element==29 || element==30 || element==31 ){
+    pst.execute(principalMap,click.x,click.y,element);
+    Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+    int id = building->getIdBuilding();
+    Empire* empire = principalMap.getAllMaps().getEmpires()[id-1].get();
+    string gold= to_string(empire->getGoldRessource());
+    string wood= to_string(empire->getWoodRessource());
+    string food= to_string(empire->getFoodRessource());
+    pst.execute(principalMap,click.x,click.y,element);
+    update(principalMap,gold,wood,food,"");
+    } else {
+      pst.execute(principalMap,click.x,click.y,element);
+      update(principalMap,"","","","");
+    }
+
+  if (element==10||element==14||element==18||element==22) {
+    Move mv;
+    Attack at;
+    sf::Vector2i click2 = getClick(window, map);
+
+    CaseIdentifier cs2;
+    element2 = cs2.execute(principalMap,click2.x,click2.y);
+    Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[click.y+25*click.x].get();
+    int id = unit->getIdUnits();
+    int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+    if(shot==1){
+      if(element2==2){
+        mv.execute(principalMap, click.x, click.y, click2.x, click2.y);
+        counter++;
+      }
+      if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
+        at.execute(principalMap, click.x, click.y, click2.x, click2.y);
+        counter++;
+      }
+    }
+  }
+  else if ((element==26||element==27||element==28||element==29||element==31)) {
+    LevelUp lu;
+    sf::Vector2i click2 = getClickButton(window, map);
+    Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+    int id = barrack->getIdBuilding();
+    int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+    if(shot==1){
+      if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
+        lu.execute(principalMap,click.x,click.y);
+        counter++;
+      }
+    }
+  }
+  else if (element==30) {
+    LevelUp lu;
+    CreateUnit cu;
+    sf::Vector2i click2 = getClickButton(window, map);
+    Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[click.y+25*click.x].get();
+    int id = barrack->getIdBuilding();
+    int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+    std::vector<std::vector<int>> matrix = principalMap.getAllMaps().getMapMatrix();
+    if(shot==1){
+      if (click2.x>= 0 && click2.x<=96 && click2.y>= 128 && click2.y<=192){
+        sf::Vector2i click3 = getClick(window, map);
+        if(matrix[click3.x][click3.y]==2){
+          map.update(principalMap,"","","","");
+          drawMap(window,map);
+          cu.execute(principalMap,click.x,click.y,click3.x,click3.y,1);
+          counter++;
+        }
+      }
+      if (click2.x>= 96 && click2.x<=192 && click2.y>= 128 && click2.y<=192){
+        sf::Vector2i click3 = getClick(window, map);
+        if(matrix[click3.x][click3.y]==2){
+          map.update(principalMap,"","","","");
+          drawMap(window,map);
+          cu.execute(principalMap,click.x,click.y,click3.x,click3.y,2);
+          counter++;
+        }
+      }
+      if (click2.x>= 0 && click2.x<=128 && click2.y>= 192 && click2.y<=256){
+        sf::Vector2i click3 = getClick(window, map);
+        if(matrix[click3.x][click3.y]==2){
+          map.update(principalMap,"","","","");
+          drawMap(window,map);
+          cu.execute(principalMap,click.x,click.y,click3.x,click3.y,4);
+          counter++;
+        }
+      }
+      if (click2.x>= 96 && click2.x<=192 && click2.y>= 192 && click2.y<=256){
+        sf::Vector2i click3 = getClick(window, map);
+        if(matrix[click3.x][click3.y]==2){
+          map.update(principalMap,"","","","");
+          drawMap(window,map);
+          cu.execute(principalMap,click.x,click.y,click3.x,click3.y,3);
+          counter++;
+        }
+      }
+      if (click2.x>= 0 && click2.x<=96 && click2.y>= 256 && click2.y<=320){
+        lu.execute(principalMap,click.x,click.y);
+        counter++;
+      }
+    }
+  }
+
+}
+
 RenderMap::~RenderMap (){
 }
