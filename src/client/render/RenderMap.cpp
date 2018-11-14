@@ -233,11 +233,12 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           if(shot==1){
             if(element2==2){
               engine.addCommand((unique_ptr<Command> (new Move(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3]))),6);
+              counter++;
             }
             if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
               engine.addCommand((unique_ptr<Command> (new Attack(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3]))),7);
+              counter++;
             }
-            counter++;
           }
           firstC = true;
           secondC = false;
@@ -255,8 +256,8 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           if(shot==1){
             if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[4]<=192){
               engine.addCommand((unique_ptr<Command> (new LevelUp(getLastClicks()[0],getLastClicks()[1]))),5);
+              counter++;
             }
-            counter++;
           }
           firstC = true;
           secondC = false;
