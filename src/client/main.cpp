@@ -126,6 +126,8 @@ int main(int argc,char* argv[])
           engine.execute(principalMap);
           engine.execute(principalMap);
           engine.execute(principalMap);
+          cout<<"x"<<map.getLastClicks()[0]<<endl;
+          cout<<"y"<<map.getLastClicks()[1]<<endl;
           int element = principalMap.getAllMaps().getMapMatrix()[map.getLastClicks()[0]][map.getLastClicks()[1]];
           if (element==26 || element==27 || element==28 || element==29 || element==30 || element==31 ){
             Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[map.getLastClicks()[1]+25*map.getLastClicks()[0]].get();

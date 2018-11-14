@@ -208,9 +208,10 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
 
   }
   else if(secondC){
-    sf::Vector2i click2 = getClick(window,event);
+
     int element = principalMap.getAllMaps().getMapMatrix()[getLastClicks()[0]][getLastClicks()[1]];
     if (element==10||element==14||element==18||element==22) {
+      sf::Vector2i click2 = getClick(window,event);
       int element2 = principalMap.getAllMaps().getMapMatrix()[click2.x][click2.y];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(click2.x,click2.y))),1);
       std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0 };
