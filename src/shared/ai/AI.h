@@ -7,10 +7,13 @@ namespace engine {
   class Engine;
 }
 
+#include "engine/Engine.h"
+
 namespace ai {
 
   /// class AI - 
   class AI {
+    // Associations
     // Operations
   public:
     virtual void run (engine::Engine& engine) = 0;

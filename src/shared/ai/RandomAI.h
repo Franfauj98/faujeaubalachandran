@@ -21,8 +21,8 @@ namespace ai {
     int randNumber;
     // Operations
   public:
-    RandomAI (int randNumber);
-    void run (engine::Engine& engine);
+    RandomAI ();
+    void run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id);
     // Setters and Getters
   };
 

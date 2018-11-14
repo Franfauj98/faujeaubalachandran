@@ -151,12 +151,14 @@ int main(int argc,char* argv[])
       food= to_string(empire->getFoodRessource());
       map.update(principalMap,gold,wood,food,"");
       map.drawMap(window);
+    }
+  } else if (argv[1] &&!strcmp(argv[1],"random_ai")) {
+
   }
-}
   else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
     Engine engine;
-}
+  }
 
   return 0;
 }
