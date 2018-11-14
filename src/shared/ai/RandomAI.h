@@ -6,6 +6,9 @@
 namespace engine {
   class Engine;
 };
+namespace state {
+  class Observable;
+};
 namespace ai {
   class AI;
 }
@@ -22,7 +25,7 @@ namespace ai {
     // Operations
   public:
     RandomAI ();
-    void run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id);
+    void run (engine::Engine& engine, state::Observable& principalMap, int& counter, bool& canPlay, int id);
     // Setters and Getters
   };
 

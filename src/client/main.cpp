@@ -1,12 +1,14 @@
 #include <iostream>
 #include <cmath>
 #include "string.h"
+#include <unistd.h>
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include "state.h"
 #include "render.h"
 #include "engine.h"
+#include "ai.h"
 #include "renderTest.h"
 #include "stateTest.h"
 
@@ -15,6 +17,8 @@ using namespace std;
 using namespace state;
 using namespace render;
 using namespace engine;
+using namespace ai;
+
 
 int main(int argc,char* argv[])
 {
@@ -153,8 +157,97 @@ int main(int argc,char* argv[])
       map.drawMap(window);
     }
   } else if (argv[1] &&!strcmp(argv[1],"random_ai")) {
+    Observable principalMap;
+    RenderMap map;
+    Engine engine;
+    RandomAI ia1;
+    RandomAI ia2;
+    RandomAI ia3;
 
+    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+    window.setVerticalSyncEnabled(false);
+  // draw the layers
+    window.clear();
+
+    map.update(principalMap,"","","","");
+    map.drawMap(window);
+
+    bool canPlay1 = true;
+    bool canPlay2 = false;
+    bool canPlay3 = false;
+
+    int counter=0;
+    Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
+    Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
+    Empire* empire3 = principalMap.getAllMaps().getEmpires()[2].get();
+
+    int id = 0;
+
+    string gold= "";
+    string wood= "";
+    string food= "";
+
+    while (window.isOpen())
+    {
+      if (counter>=0 && counter <=2){
+        empire1->setShot(1);
+        empire2->setShot(0);
+        empire3->setShot(0);
+        id = 0;
+        canPlay1 = true;
+        canPlay2 = false;
+        canPlay3 = false;
+        usleep(2000000);
+      }
+      else if (counter>=3 && counter <=5){
+        empire1->setShot(0);
+        empire2->setShot(1);
+        empire3->setShot(0);
+        id = 1;
+        canPlay2 = true;
+        canPlay1 = false;
+        canPlay3 = false;
+        usleep(2000000);
+      }
+      else if (counter>=6 && counter <=8){
+        empire1->setShot(0);
+        empire2->setShot(0);
+        empire3->setShot(1);
+        id = 2;
+        canPlay3 = true;
+        canPlay2 = false;
+        canPlay1 = false;
+        usleep(2000000);
+      }
+
+      if(counter==9){
+        empire1->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+        empire2->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+        empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+        counter=0;
+        empire1->setShot(1);
+        empire2->setShot(0);
+        empire3->setShot(0);
+        canPlay1 = true;
+        canPlay2 = false;
+        canPlay3 = false;
+        id = 0;
+        usleep(2000000);
+      }
+      ia1.run(engine,principalMap,counter, canPlay1,1);
+      ia2.run(engine,principalMap,counter, canPlay2,2);
+      ia3.run(engine,principalMap,counter, canPlay3,3);
+
+      engine.execute(principalMap);
+
+      Empire* empire = principalMap.getAllMaps().getEmpires()[id].get();
+      gold= to_string(empire->getGoldRessource());
+      wood= to_string(empire->getWoodRessource());
+      food= to_string(empire->getFoodRessource());
+      map.update(principalMap,gold,wood,food,"");
+      map.drawMap(window);
   }
+}
   else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
     Engine engine;

@@ -3,10 +3,14 @@
 #define AI__AI__H
 
 
+namespace state {
+  class Observable;
+};
 namespace engine {
   class Engine;
 }
 
+#include "state/Observable.h"
 #include "engine/Engine.h"
 
 namespace ai {
@@ -14,9 +18,6 @@ namespace ai {
   /// class AI - 
   class AI {
     // Associations
-    // Operations
-  public:
-    virtual void run (engine::Engine& engine) = 0;
     // Setters and Getters
   };
 
