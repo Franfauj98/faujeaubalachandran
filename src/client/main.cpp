@@ -190,6 +190,7 @@ int main(int argc,char* argv[])
     while (window.isOpen())
     {
       if (counter>=0 && counter <=2){
+        std::cout << "coucouJ1" << '\n';
         empire1->setShot(1);
         empire2->setShot(0);
         empire3->setShot(0);
@@ -197,9 +198,10 @@ int main(int argc,char* argv[])
         canPlay1 = true;
         canPlay2 = false;
         canPlay3 = false;
-        usleep(2000000);
+        ia1.run(engine,principalMap,counter, canPlay1,1);
       }
       else if (counter>=3 && counter <=5){
+        std::cout << "coucouJ2" << '\n';
         empire1->setShot(0);
         empire2->setShot(1);
         empire3->setShot(0);
@@ -207,9 +209,10 @@ int main(int argc,char* argv[])
         canPlay2 = true;
         canPlay1 = false;
         canPlay3 = false;
-        usleep(2000000);
+        ia2.run(engine,principalMap,counter, canPlay2,2);
       }
       else if (counter>=6 && counter <=8){
+        std::cout << "coucouJ3" << '\n';
         empire1->setShot(0);
         empire2->setShot(0);
         empire3->setShot(1);
@@ -217,7 +220,7 @@ int main(int argc,char* argv[])
         canPlay3 = true;
         canPlay2 = false;
         canPlay1 = false;
-        usleep(2000000);
+        ia3.run(engine,principalMap,counter, canPlay3,3);
       }
 
       if(counter==9){
@@ -232,12 +235,12 @@ int main(int argc,char* argv[])
         canPlay2 = false;
         canPlay3 = false;
         id = 0;
-        usleep(2000000);
       }
-      ia1.run(engine,principalMap,counter, canPlay1,1);
-      ia2.run(engine,principalMap,counter, canPlay2,2);
-      ia3.run(engine,principalMap,counter, canPlay3,3);
 
+      // ia1.run(engine,principalMap,counter, canPlay1,1);
+      // ia2.run(engine,principalMap,counter, canPlay2,2);
+      // ia3.run(engine,principalMap,counter, canPlay3,3);
+      //
       engine.execute(principalMap);
 
       Empire* empire = principalMap.getAllMaps().getEmpires()[id].get();
