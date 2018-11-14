@@ -76,8 +76,6 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
         if(i%25 == 0) x+=1;
         if(i==buildings[buildingChoice]) break;
       }
-      std::cout << x << '\n';
-      std::cout << y << '\n';
       // on fait les troix commandes
       int element=principalMap.getAllMaps().getMapMatrix()[x][y];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x,y))),1);
@@ -99,10 +97,6 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
           int y2= positions[pos];
           int x2=positions[pos+1];
 
-          std::cout << x << '\n';
-          std::cout << y << '\n';
-          std::cout << x2 << '\n';
-          std::cout << y2 << '\n';
           std::cout << "creatuUnit" << '\n';
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,1))),4);
           counter++;
@@ -116,10 +110,6 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
-          std::cout << x << '\n';
-          std::cout << y << '\n';
-          std::cout << x2 << '\n';
-          std::cout << y2 << '\n';
           std::cout << "creatuUnit" << '\n';
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,2))),4);
           counter++;
@@ -133,10 +123,6 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
-          std::cout << x << '\n';
-          std::cout << y << '\n';
-          std::cout << x2 << '\n';
-          std::cout << y2 << '\n';
           std::cout << "creatuUnit" << '\n';
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,3))),4);
           counter++;
@@ -150,10 +136,6 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
-          std::cout << x << '\n';
-          std::cout << y << '\n';
-          std::cout << x2 << '\n';
-          std::cout << y2 << '\n';
           std::cout << "creatuUnit" << '\n';
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,4))),4);
           counter++;
@@ -228,10 +210,6 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
 
         int y2= positions[pos];
         int x2= positions[pos+1];
-        std::cout << x << '\n';
-        std::cout << y << '\n';
-        std::cout << x2 << '\n';
-        std::cout << y2 << '\n';
         if (principalMap.getAllMaps().getMapMatrix()[x2][y2]==2){
           std::cout << "move" << '\n';
           engine.addCommand((unique_ptr<Command> (new Move(x,y,x2,y2))),6);
