@@ -68,7 +68,7 @@ namespace render {
     Layer getFood () const;
     Layer getMessage () const;
     void drawMap (sf::RenderWindow& window);
-    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event& event, bool firstC, bool secondC, bool thirdC);
+    void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event& event, bool& firstC, bool& secondC, bool& thirdC, int& counter);
     std::vector<int> getLastClicks ();
     // Setters and Getters
   };

@@ -2,7 +2,7 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
-#include <vector>
+#include <queue>
 #include <memory>
 
 namespace engine {
@@ -37,15 +37,15 @@ namespace engine {
     // Associations
     // Attributes
   private:
-    std::vector<std::unique_ptr<Command>> commandList;
-    std::vector<int> commandListId;
+    std::queue<std::unique_ptr<Command>> commandList;
+    std::queue<int> commandListId;
     // Operations
   public:
     Engine ();
     ~Engine ();
     void addCommand (std::unique_ptr<Command> cmd, int commandId);
     void execute (state::Observable& principalMap);
-    std::vector<int> getCommandListId ();
+    std::queue<int> getCommandListId ();
     // Setters and Getters
   };
 
