@@ -204,11 +204,11 @@ Dans cette partie nous allons décrire le diagramme UML d'état du jeu. (Voir fi
 
 Class "Element" : Cette classe est la classe mère de tous nos éléments, mobiles ou statiques. Nous avons choisi pour cette classe qu'elle contienne une position, la position de notre élément sur la map, et une méthode isPassable(), qui nous permet de savoir si l'élément peut être traversé par un autre.\\
 
-Class "Units" : Cette classe est la classe mère de toutes nos unités mobiles sur la carte. Elle hérite d'"Element". Elle contient tous les paramètres nécessaires à la création d'une unité (vie, attaque, niveau, ...). \\
+Class "Units" : Cette classe est la classe mère de toutes nos unités mobiles sur la carte. Elle hérite d'"Element". Elle contient tous les paramètres nécessaires à la création d'une unité (vie, attaque, niveau, ...). Cette classe contitent de plus une méthode isPassable pour forcer le fait qu'on ne peut pas passer à travers une unité.\\
 
 Class "Arrow" : Cette classe est la classe fille de Units. Elle hérite d'"Element". Elle permet de construire des unitées de type archer avec leurs attributs initialisés en fontion de leur niveau. Ce sera la façon la plus utilisée de créer un archer. Il existe de même des classes pour Decurion, Cavalier et Catapult.\\
 
-Class "Buildings" : Cette classe est la classe mère de toutes nos unités statiques sur la carte. Elle hérite d'"Element". Elle contient tous les paramètres nécessaires à la création d'un bâtiment (niveau, coût, ...).\\
+Class "Buildings" : Cette classe est la classe mère de toutes nos unités statiques sur la carte. Elle hérite d'"Element". Elle contient tous les paramètres nécessaires à la création d'un bâtiment (niveau, coût, ...). Cette classe contitent de plus une méthode isPassable pour forcer le fait qu'on ne peut pas passer à travers un bâtiment.\\\\
 
 Class "Barrack" : Une caserne est un bâtiment et hérite donc de "Buildings", elle ajoute en plus quelques fonctionnalitées telles que la création d'unités. De même pour les bâtiments de type ressource et palais.\\
 
@@ -220,9 +220,18 @@ Class "Decor" : Cette classe hérite d'élément, elle permet de créer les diff
 
 Class "Empire" : Dans notre jeu nous avons besoin à tout instant d'avoir une classe qui stocke les éléments importants d'un empire. Par exemple un empire à un nom, une vie, de l'or, du bois, de la nourriture, ... . Ainsi, cette classe va agir comme un conteneur de tous les élements clés de notre empire.\\
 
-Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle permet d'ajouter des éléments, de les récupérer ou d'en supprimer.\\
+Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle permet d'ajouter des éléments, de les récupérer ou d'en supprimer. \\Nous avons procédé de la manière suivante : \begin{itemize}
+    \item basicMap : ce tableau de "unique\_ptr" contient seulement des pointeurs de "Decor" de type herbe. Il s'agit de la carte de base sur laquelle va se supperposer le reste des textures. 
+    \item decorMap : ce tableau de "unique\_ptr" va contenir tous les autres décors que l'herbe à savoir les forêts, les montagnes, les oceans et les animaux. 
+    \item unitsMap : ce tableau de "unique\_ptr" contiendra les unités lorsqu'elles seront crées par nos observeurs. 
+    \item buildingsMap : ce tableau de "unique\_ptr" contient tous les batiments des différents empires qui jouent. 
+    \item selectedMap : ce tableau de "unique\_ptr" contient a chaque état du jeu, la ou les cases qui doivent être affichées en surbrillance pour aider le joueur. 
+    \item statsMap : ce tableau de "unique\_ptr" contient les stats associées à chaques bâtiments, unités. 
+    \item mapMatrix : ce tableau de "int" contient l'id de chaque type de bâtiments. Il nous permet de créer les autres tableaux pour éviter que les décors, les bâtiments, les unités se chevauchent.
+\end{itemize}
+Il y a ensuite un getter pour chacun de ces tableaux. \\
 
-Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs. Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver.\\
+Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs. Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver. NotifyObservers appelle ensuite le bon observeur en fonction des paramètre qu'on lui donne. La classe "Observable" contient de plus une méthode "getAllMaps" qui va permettre de récupérer les maps générées par le constructeur de Map. Par la suite, pour créer nos cartes de jeu initiales on créera une instance de "Obsevable".\\
 
 Class "UnitsObserver" : Cette classe est un Observer sur les Units. Elle va permettre de réaliser tous les changements nécessaires sur le state des units demandés par le moteur.
 
@@ -234,8 +243,6 @@ Class "BuildingsObserver" : Cette classe est un Observer sur les Buildings. Elle
      \caption{Diagramme de classes d'état}
 \end{figure}
 
-\newpage
- '
 \newpage
 \section{Rendu: Stratégie et conception des états}
 \subsection{Stratégie de rendu d'un état}
@@ -265,7 +272,7 @@ Les trois premiers plans seront initialisés au départ du jeu grâce aux textur
 \item Enfin, trois positions pour les empires sont tirées au sort et les trois bâtiments sont placés côte à côte
 \end{itemize}\\
 
-Tous les plans seront ensuite superposés pour former la carte. Les troix premiers plans seront fixes et seul le plan des unités changera. Ce dernier sera en effet modifié à chaque tour lorsque l'utilisateur fera déplacer ses unités mobiles. La mise à jour de l'affichage et du changement d'états se fera à une fréquence de quelques hertz.
+Tous les plans seront ensuite superposés pour former la carte. Les troix premiers plans seront fixes et seuls les plans des unités et des sélections des cases changeront. Ce dernier sera en effet modifié à chaque tour lorsque l'utilisateur fera déplacer ses unités mobiles. La mise à jour de l'affichage et du changement d'états se fera à une fréquence de quelques hertz.
 
 \newpage
 
@@ -278,7 +285,7 @@ Tous les plans seront ensuite superposés pour former la carte. Les troix premie
 \subsection{Conception de rendu d'un état}
 Dans cette partie nous allons décrire le diagramme UML de rendu d'un état du jeu.
 
-Class "Tiles" : C'est un élément de base des tilesets. Ils ont une longueur et une largeur comme attributs ainsi qu'une position dans le tileset.
+Class "Tiles" : C'est un élément de base des tilesets. Ils ont une longueur et une largeur comme attributs ainsi qu'une position dans le tileset.\\
 
 Class "TileSet" : Cette classe est la classe mère de tous les tilesets (tableaux de tuiles associés aux éléments). Elle est composée de tuiles. Nous avons choisi pour cette classe qu'elle contienne une méthode pour connaître la largeur d'une tuile et une autre qui permet de renvoyer la hauteur d'une tuile.\\
 
@@ -288,12 +295,10 @@ Class "DecorTileSet" :  Elle hérite de "TileSet". Elle contient un tableau de t
 
 Class "UnitsTileSet" :  Elle hérite de "TileSet". Elle contient quatre tableaux de tuiles comme attributs (un pour les archers, un pour les cavaliers, un pour les décurions et un pour les catapultes) permettant de donner la texture associée à chaque unité. Elle possède une méthode permettant de renvoyer le chemin du fichier png contenant le tileset et une autre pour obtenir la tuile d'une unité donnée. \\
 
-Class "MapCreator" : Cette classe permet de créer une carte avec des textures d'un tileset. Elle constitue les plans d'une carte. Elle contient des textures et un tableau en attributs. Elle a des méthodes pour charger un fichier de texture, d'initialiser lee tableau, pour positionner un sprite sur une carte et lui donner sa texture et enfin d'afficher cette carte.\\
+Class "RenderMap" : Cette classe permet de créer une carte avec les textures d'un tileset. Elle constitue les plans d'une carte On empile ici les différents layers pour les différentes maps dans leur ordre de priorité. Cette classe contient des textures et un tableau en attributs. Elle permet d'ajouter une image de fond d'écran pour le jeu, de mettre à jour tous les layers et de les réaffficher à l'écran.\\
+Cette classe contient aussi la méthode "handle" qui permet de gérer l'intéraction du joueur avec le rendu et d'envoyer les commandes correspondantes au moteur. Cette méthode utilise une méthode de récupération de click pour savoir où le joueur a cliqué sur l'écran et réagir en fonction.\\
 
-Class "MenuLayer" : Cette classe permet le menu permettant d'indiquer le niveau, la vie et les dommages.
-
-Class "Layer" : Cette classe permet de créer des plans de carte. Elle est composée de MapCreator. Elle a comme attributs les tableaux de textures, selon leurs position, des éléments de base (herbe, eau), des décors et des bâtiments. Elle fait le lien entre la map du jeu contenue dans le diagramme d'état et le rendu.\\
-
+Class "Layer" : Cette classe permet de créer des plans de carte. Elle est composée de RenderMap. Elle a comme attributs les tableaux de textures, selon leurs position, des éléments de base (herbe, eau), des décors et des bâtiments. Elle fait le lien entre la map du jeu contenue dans le diagramme d'état et le rendu. Elle a des méthodes qui permettent de charger un fichier de texture, de positionner un sprite sur une carte et lui donner sa texture et enfin d'afficher cette carte. Elle permet de plus d'initialiser le layer des stats qui affichent la vie, les ressources, les niveaux ainsi que le layer qui affiche les boutons lorsque le joueur a sélectionné une caserne pour créer une unité ou faire une amélioration de bâtiment. Cette classe nous permet aussi d'afficher du texte à l'écran.
 
 
 \begin{figure}[!ht]
@@ -303,6 +308,9 @@ Class "Layer" : Cette classe permet de créer des plans de carte. Elle est compo
 \end{figure}
 
 \newpage
+'
+\newpage
+
 \section{Règles de changements d'états et moteur de jeu}
 
 \subsection{Horloge globale}
@@ -336,14 +344,21 @@ Dans cette étape de conception logiciel nous avons utilisé un pattern command.
 
 \\Classes de commandes : Elles héritent toutes de la classe Command. Les commandes suivantes sont disponibles :
 \begin{itemize}
-\item CaseIdentifier : Permet d'identifier la case sur laquelle on se trouve.
-\item Possibilities : Permet de déterminer quelles sont les actions possibles à partir de cette case.
-\item PrintStats : Affiche les stats (vie, niveau, bouttons) des joueurs et des bâtiments.
-\item LevelUp : Augmente le niveau d'un bâtiment.
-\item CreateUnit : Créer une unité à partir d'un premier clique sur une caserne. Le second clique permet de positionner l'unité crée sur la map. Des boutons seront disponibles pour choisir le type d'unités à créer.
-\item Move : Permet de déplacer une unité
-\item Attack : Permet d'attaquer une unité ou un hôtel de ville.
-\item Engine : implémente le moteur de jeu.
+\item Engine : cette classe contient deux contener : \begin{itemize}
+    \item CommandList : Ce conteneur contiendra la liste des commandes à exécuter. On met en queue toute les commandes qui doivent être exécutées lorsqu'un joueur (physique ou ia) veut réaliser une action.
+    \item CommandListId : qui contient l'id de chaque commande mise en queue pour pouvoir caster ses comandes sur leurs bon types et les lancer. On empile et dépile en même temps dans ces deux conteneurs. 
+\end{itemize}
+Engine contient de plus une méthode "execute" qui, tant que la queue n'est pas vide, exécute les actions et les dépiles. 
+\\Les différentes commandes sont les suivantes : 
+    \begin{itemize}
+        \item CaseIdentifier : Permet d'identifier la case sur laquelle on se trouve.
+        \item Possibilities : Permet de déterminer quelles sont les actions possibles à partir de cette case.
+        \item PrintStats : Affiche les stats (vie, niveau, bouttons) des joueurs et des bâtiments.
+        \item LevelUp : Augmente le niveau d'un bâtiment.
+        \item CreateUnit : Créer une unité à partir d'un premier clique sur une caserne. Le second clique permet de positionner l'unité crée sur la map. Des boutons seront disponibles pour choisir le type d'unités à créer.
+        \item Move : Permet de déplacer une unité
+        \item Attack : Permet d'attaquer une unité ou un hôtel de ville.
+    \end{itemize}
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -351,5 +366,36 @@ Dans cette étape de conception logiciel nous avons utilisé un pattern command.
     \includegraphics[width=1\textwidth]{ressources/engine.png}
      \caption{Diagramme de classes du moteur}
 \end{figure}
+\newpage
+Voici une description de comment est implémenté le jeu grâce au moteur : \begin{itemize}
+    \item On instancie un Observable qui instancie toutes les cartes de jeu.
+    \item On instancie un objet pour actualiser le rendu. 
+    \item On instancie le moteur pour pouvoir l'utiliser par la suite.
+    \item On réalise le premier affichage de la map. 
+    \item On ouvre une boucle qui tourne tant que la fenêtre est ouverte. C'est dans cette boucle que le jeu est réelement. 
+    \item On met en place une logique de gestion de tours
+    \item On appelle une méthode "handle" qui permet d'ajouter les actions du joueur en tant que commandes dans les listes de commandes du moteur. 
+    \item On appelle la méthode execute du moteur qui exécute toutes les commandes contenues dans sa liste de commandes.
+    \item On met à jour l'affichage. 
+\end{itemize}
+\newpage
+\section{Intelligence artificielle}
+
+\subsection{Stratégies}
+\subsubsection{Intelligence aléatoire}
+Cette stratégie est la même pour tous les empires. A chaque tour, chaque empire peut effectuer 3 actions : créer une unité, améliorer un bâtiment, déplacer une unité, attaquer un bâtiment ou une unité ennemie avec un de ses soldats. On choisit donc trois actions au hasard parmis celles-ci et on les effectue. 
+
+\subsection{Conception logiciel}
+\begin{itemize}
+    \item Classe AI : qui sera le mère des trois différentes intelligences artificielles.
+    \item Classe RandomAI : contient un méthode run qui permet à l'intelligence artificielle naïve de lancer ses coups. 
+\end{itemize}
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=1\textwidth]{ressources/ai.png}
+     \caption{Diagramme de classes de l'ia}
+\end{figure}
+
 
 \end{document}
