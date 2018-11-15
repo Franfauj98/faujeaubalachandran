@@ -61,6 +61,7 @@ void RenderMap::update(state::Observable& principalMap,string goldText, string w
 
 }
 
+
 Layer RenderMap::getBasicMap() const{
   return this->basicMap;
 }
