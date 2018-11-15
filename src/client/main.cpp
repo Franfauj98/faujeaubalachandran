@@ -189,8 +189,15 @@ int main(int argc,char* argv[])
 
     while (window.isOpen())
     {
+
+      sf::Event event;
+      while (window.pollEvent(event))
+      {
+    // évènement "fermeture demandée" : on ferme la fenêtre
+      if (event.type == sf::Event::Closed)
+          window.close();
+      }
       if (counter>=0 && counter <=2){
-        std::cout << "J1" << '\n';
         empire1->setShot(1);
         empire2->setShot(0);
         empire3->setShot(0);
@@ -201,7 +208,6 @@ int main(int argc,char* argv[])
         ia1.run(engine,principalMap,counter, canPlay1,1);
       }
       else if (counter>=3 && counter <=5){
-        std::cout << "J2" << '\n';
         empire1->setShot(0);
         empire2->setShot(1);
         empire3->setShot(0);
@@ -212,7 +218,6 @@ int main(int argc,char* argv[])
         ia2.run(engine,principalMap,counter, canPlay2,2);
       }
       else if (counter>=6 && counter <=8){
-        std::cout << "J3" << '\n';
         empire1->setShot(0);
         empire2->setShot(0);
         empire3->setShot(1);

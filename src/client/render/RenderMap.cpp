@@ -130,9 +130,6 @@ sf::Vector2i getClick(sf::RenderWindow& window, sf::Event& event){
   // manage the events
   int X=0;
   int Y=0;
-  if(event.type == sf::Event::Closed){
-    window.close();
-  }
   if (event.type == sf::Event::MouseButtonPressed)
   {
     if (event.mouseButton.button == sf::Mouse::Left)
@@ -156,7 +153,7 @@ sf::Vector2i getClickButton(sf::RenderWindow& window, sf::Event& event){
   if(event.type == sf::Event::Closed){
     window.close();
   }
-  if (event.type == sf::Event::MouseButtonPressed)
+  else if (event.type == sf::Event::MouseButtonPressed)
   {
     if (event.mouseButton.button == sf::Mouse::Left)
     {
@@ -197,6 +194,9 @@ void RenderMap::drawMap(sf::RenderWindow& window){
 
 void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engine::Engine& engine, sf::Event& event, bool& firstC, bool& secondC, bool& thirdC, int& counter){
   while (window.pollEvent(event)){
+    if (event.type == sf::Event::Closed){
+        window.close();
+    }
     if((event.type == sf::Event::MouseButtonPressed)){
       if (firstC){
         sf::Vector2i click = getClick(window,event);
