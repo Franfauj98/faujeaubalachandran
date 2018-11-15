@@ -83,7 +83,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x,y))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x,y,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x,y,element)),3);
-      usleep(1000000);
+      usleep(2000000);
 
       // si c'est une caserne
 
@@ -163,7 +163,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x,y))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x,y,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x,y,element)),3);
-      usleep(1000000);
+      usleep(2000000);
 
       // si c'est une caserne
 
@@ -241,7 +241,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x,y))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x,y,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x,y,element)),3);
-      usleep(1000000);
+      usleep(2000000);
       // choix positions possibles autour de l'unitéswitch
 
 
