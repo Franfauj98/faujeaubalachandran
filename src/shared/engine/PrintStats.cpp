@@ -20,6 +20,9 @@ CommandTypeId PrintStats::getTypeId () const{
 }
 void PrintStats::execute (state::Observable& map){
   std::vector<int> statsMap(121,0);
+  for (int i=5;i<11;i++){
+    statsMap[i]=i+22;
+  }
   if (this->element==10 || this->element==14 || this->element==18 || this->element==22){
     Units* units = (Units*) map.getAllMaps().getUnitsMap()[y+25*x].get();
     if (units->getLife()>=40){
@@ -121,9 +124,7 @@ void PrintStats::execute (state::Observable& map){
       statsMap[23]=25;
       statsMap[24]=26;
     }
-    for (int i=5;i<11;i++){
-      statsMap[i]=i+22;
-    }
+
 
   }
   else if (this->element==30){
@@ -226,9 +227,6 @@ void PrintStats::execute (state::Observable& map){
         statsMap[i]=i-15;
       }
     }
-    for (int i=5;i<11;i++){
-      statsMap[i]=i+22;
-    }
   }
 
   else if (this->element==31){
@@ -285,9 +283,6 @@ void PrintStats::execute (state::Observable& map){
       statsMap[22]=24;
       statsMap[23]=25;
       statsMap[24]=26;
-    }
-    for (int i=5;i<11;i++){
-      statsMap[i]=i+22;
     }
   }
     map.getAllMaps().setStatsMap(statsMap);
