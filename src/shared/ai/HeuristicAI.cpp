@@ -36,8 +36,8 @@ using namespace std;
 HeuristicAI::HeuristicAI (){}
 
 /*
-améliorer batiments dès qu'il peut: hdv caserne ressources
-créer unités dès qu'il peut
+améliorer batiments dès qu'il peut: hdv caserne ressources OK
+créer unités dès qu'il peut OK
 choisir un empire et l'attaquer
 envoyer toutes les unités ensemble: pour ca on choisit l'unité le plus loin de l'hdv adverse en distance puis A*
 si en route unités adverse attaquer
@@ -55,9 +55,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       if (idBuilding==id){
         buildings.push_back(i);
       }
+    }
 
     Empire* empire=principalMap.getAllMaps().getEmpires()[0].get();
-    for (i=1;i<3;i++){
+    for (int i=1;i<3;i++){
       if (principalMap.getAllMaps().getEmpires()[i].get()->getId()==id){
         empire=principalMap.getAllMaps().getEmpires()[i].get();
       }
@@ -153,7 +154,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     }
   }
 }
-}
+
     // std::vector<int> units;
     // // parcourt le tableau pour voir s'il y a des unités et rentre kleurs positions
     // for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
