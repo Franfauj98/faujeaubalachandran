@@ -47,7 +47,7 @@ choisir autre empire
 
 void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   if(canPlay){
-
+    srand(time(NULL));
     std::vector<int> buildings;
     for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
         Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
@@ -130,27 +130,37 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       }
       int y= positions[pos];
       int x=positions[pos+1];
-
-      if (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()){
-        engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
-        counter++;
-        return;
-      }
-      else if(decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()){
-        engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
-        counter++;
-        return;
-      }
-      else if(cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()){
-        engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
-        counter++;
-        return;
-      }
-      else if(catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource()){
-        engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
-        counter++;
-        return;
-      }
+      int unitChoice=rand() % 4+1;
+      switch(unitChoice){
+        case 1:
+          if (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()){
+            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
+            counter++;
+            return;
+          }
+          break;
+        case 2:
+          if(decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()){
+            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
+            counter++;
+            return;
+          }
+          break;
+        case 3:
+          if(cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()){
+            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
+            counter++;
+            return;
+          }
+          break;
+        case 4:
+          if(catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource()){
+            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
+            counter++;
+            return;
+          }
+          break;
+        }
     }
   }
 }
