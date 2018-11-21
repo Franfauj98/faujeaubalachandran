@@ -45,13 +45,24 @@ attaquer hdv
 choisir autre empire
 */
 
+void positionElement(int& x, int& y, int position){
+  y = position%25;
+  x=-1;
+  for(int i = 0; i < (25*25); i++){
+    if(i%25 == 0) x+=1;
+    if(i==position) break;
+  }
+}
+
 void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   if(canPlay){
     srand(time(NULL));
+
     std::vector<int> buildings;
+
     for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
-        Buildings* building =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
-        int idBuilding=building->getIdBuilding();
+      Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
+      int idBuilding=building->getIdBuilding();
       if (idBuilding==id){
         buildings.push_back(i);
       }
@@ -64,29 +75,23 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       }
     }
 
-    int y1 = buildings[0]%25;
-    int x1=-1;
-    for(int i = 0; i < (25*25); i++){
-      if(i%25 == 0) x1+=1;
-      if(i==buildings[0]) break;
-    }
-    int y2 = buildings[1]%25;
-    int x2=-1;
-    for(int i = 0; i < (25*25); i++){
-      if(i%25 == 0) x2+=1;
-      if(i==buildings[1]) break;
-    }
-    int y3 = buildings[2]%25;
+    int y1 = 0;
+    int x1 = -1;
+    positionElement(x1, y1, buildings[0]);
+
+    int y2 = 0;
+    int x2 = -1;
+    positionElement(x2, y2, buildings[1]);
+
+    int y3 = 0;
     int x3=-1;
-    for(int i = 0; i < (25*25); i++){
-      if(i%25 == 0) x3+=1;
-      if(i==buildings[2]) break;
-    }
+    positionElement(x3, y3, buildings[2]);
+
     Ressource* ressource =(Ressource*) principalMap.getAllMaps().getBuildingsMap()[y1+25*x1].get();
     Palace* palace =(Palace*) principalMap.getAllMaps().getBuildingsMap()[y2+25*x2].get();
     Barrack* barrack =(Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get();
     int element;
-    if(palace->getLevel()<4 && palace->getBuildingCost().getWood()<empire->getWoodRessource() && palace->getBuildingCost().getGold()<empire->getGoldRessource()){
+    if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<empire->getWoodRessource() && palace->getBuildingCost().getGold()<empire->getGoldRessource()){
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
@@ -95,8 +100,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
       counter++;
       return;
-    }
-    else if(barrack->getLevel()<4 && barrack->getBuildingCost().getWood()<empire->getWoodRessource() && barrack->getBuildingCost().getGold()<empire->getGoldRessource()){
+    } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<empire->getWoodRessource() && barrack->getBuildingCost().getGold()<empire->getGoldRessource()){
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
@@ -105,8 +109,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
       counter++;
       return;
-    }
-    else if(ressource->getLevel()<4 && ressource->getBuildingCost().getWood()<empire->getWoodRessource() && ressource->getBuildingCost().getGold()<empire->getGoldRessource()){
+    } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<empire->getWoodRessource() && ressource->getBuildingCost().getGold()<empire->getGoldRessource()){
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
@@ -115,8 +118,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
       counter++;
       return;
-    }
-    else if (barrack->getUnitsNumber()<barrack->getCapacity()){
+    } else if (barrack->getUnitsNumber()<barrack->getCapacity()){
       Position pos0(0,0);
       Arrow arrow(1,pos0,0);
       Decurion decurion(1,pos0,0);
@@ -161,19 +163,49 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           }
           break;
         }
+    } else {
+
+      // select empire to Attack
+      int toAttack = 0;
+
+      int distance = 100000000;
+
+      for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
+        Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
+        if(building->getIdBuilding() == id && (building->getType()== 26 || building->getType()== 27 || building->getType()== 28 || building->getType()== 29)){
+          for(size_t j = 0; j < principalMap.getAllMaps().getBuildingsMap().size(); j++){
+            Buildings* building2 = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[j].get();
+            if(building2->getIdBuilding() != id && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
+              if(building->distance(building->getPosition(), building2->getPosition()) < distance){
+                distance = (building->distance(building->getPosition(), building2->getPosition()));
+                toAttack = j;
+              }
+            }
+          }
+          break;
+        }
+      }
+
+      int y4 = 0;
+      int x4 =- 1;
+      positionElement(x4, y4, toAttack);
+
+      std::vector<int> units;
+      // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
+      for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
+        Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
+        int idUnit=unit->getIdUnits();
+        if (idUnit==id){
+          units.push_back(i);
+        }
+      }
+
+
     }
+
   }
 }
 
-    // std::vector<int> units;
-    // // parcourt le tableau pour voir s'il y a des unités et rentre kleurs positions
-    // for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
-    //   Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
-    //   int idUnit=unit->getIdUnits();
-    //   if (idUnit==id){
-    //     units.push_back(i);
-    //   }
-    // }
     // // choix de l'unité
     // int unitChoice=rand() % (units.size());
     // int y = units[unitChoice]%25;

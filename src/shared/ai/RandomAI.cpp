@@ -40,7 +40,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
     srand(time(NULL));
     int elementChoice=0;
     std::vector<int> units;
-    // parcourt le tableau pour voir s'il y a des unités et rentre kleurs positions
+    // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
     for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
       Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
       int idUnit=unit->getIdUnits();
