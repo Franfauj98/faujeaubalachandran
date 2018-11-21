@@ -85,89 +85,11 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
       engine.addCommand(unique_ptr<Command> (new PrintStats(x,y,element)),3);
       usleep(2000000);
 
-    // si c'est une caserne
-
-    if (buildingChoice==2){
-      // on choisit une commande parmi ()
-      switch (rand() % 5){
-        case 0:{
-            // on prend des positions autour de caserne et on tire au sort une qui a de l'herbe
-          std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
-          int pos=0;
-          while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
-            pos +=2;
-          }
-          int y2= positions[pos];
-          int x2=positions[pos+1];
-
-
-          engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,1))),4);
-          counter++;
-          break;
-        }
-        case 1:{
-          std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
-          int pos=0;
-          while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
-            pos +=2;
-          }
-          int y2= positions[pos];
-          int x2=positions[pos+1];
-
-          engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,2))),4);
-          counter++;
-          break;
-        }
-        case 2:{
-          std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
-          int pos=0;
-          while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
-            pos +=2;
-          }
-          int y2= positions[pos];
-          int x2=positions[pos+1];
-
-          engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,3))),4);
-          counter++;
-          break;
-        }
-        case 3:{
-          std::vector<int> positions {y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
-          int pos=0;
-          while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
-            pos +=2;
-          }
-          int y2= positions[pos];
-          int x2=positions[pos+1];
-
-          engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,4))),4);
-          counter++;
-          break;
-        }
-        case 4:
-          engine.addCommand((unique_ptr<Command> (new LevelUp(x,y))),5);
-          counter++;
-          break;
-          default:
-          break;
-        }
-        // si hdv ou ressource on levelUp
-      } else{
-        engine.addCommand((unique_ptr<Command> (new LevelUp(x,y))),5);
-        counter++;
-      }
-    } else{
-      int element=principalMap.getAllMaps().getMapMatrix()[x][y];
-      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x,y))),1);
-      engine.addCommand(unique_ptr<Command> (new Possibilities(x,y,element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(x,y,element)),3);
-      usleep(2000000);
-
       // si c'est une caserne
 
       if (buildingChoice==2){
         // on choisit une commande parmi ()
-        switch (rand() % 4){
+        switch (rand() % 5){
           case 0:{
               // on prend des positions autour de caserne et on tire au sort une qui a de l'herbe
             std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
@@ -177,6 +99,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
+
 
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,1))),4);
             counter++;
@@ -190,6 +113,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
+
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,2))),4);
             counter++;
             break;
@@ -202,6 +126,7 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
+
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,3))),4);
             counter++;
             break;
@@ -214,17 +139,92 @@ void RandomAI::run (engine::Engine& engine, Observable& principalMap, int& count
             }
             int y2= positions[pos];
             int x2=positions[pos+1];
+
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,4))),4);
             counter++;
             break;
           }
-          default:
-          break;
+          case 4:
+            engine.addCommand((unique_ptr<Command> (new LevelUp(x,y))),5);
+            counter++;
+            break;
+            default:
+            break;
+          }
+          // si hdv ou ressource on levelUp
+        } else{
+          engine.addCommand((unique_ptr<Command> (new LevelUp(x,y))),5);
+          counter++;
         }
-        // si hdv ou ressource on levelUp
-      }
+      } else{
+        int element=principalMap.getAllMaps().getMapMatrix()[x][y];
+        engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x,y))),1);
+        engine.addCommand(unique_ptr<Command> (new Possibilities(x,y,element)),2);
+        engine.addCommand(unique_ptr<Command> (new PrintStats(x,y,element)),3);
+        usleep(2000000);
 
-    }
+        // si c'est une caserne
+
+        if (buildingChoice==2){
+          // on choisit une commande parmi ()
+          switch (rand() % 4){
+            case 0:{
+                // on prend des positions autour de caserne et on tire au sort une qui a de l'herbe
+              std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
+              int pos=0;
+              while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
+                pos +=2;
+              }
+              int y2= positions[pos];
+              int x2=positions[pos+1];
+
+              engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,1))),4);
+              counter++;
+              break;
+            }
+            case 1:{
+              std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
+              int pos=0;
+              while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
+                pos +=2;
+              }
+              int y2= positions[pos];
+              int x2=positions[pos+1];
+              engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,2))),4);
+              counter++;
+              break;
+            }
+            case 2:{
+              std::vector<int> positions={y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
+              int pos=0;
+              while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
+                pos +=2;
+              }
+              int y2= positions[pos];
+              int x2=positions[pos+1];
+              engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,3))),4);
+              counter++;
+              break;
+            }
+            case 3:{
+              std::vector<int> positions {y,(x+1),y+1,(x+1),y+1,x,y+1,(x-1),y,(x-1)};
+              int pos=0;
+              while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
+                pos +=2;
+              }
+              int y2= positions[pos];
+              int x2=positions[pos+1];
+              engine.addCommand((unique_ptr<Command> (new CreateUnit(x,y,x2,y2,4))),4);
+              counter++;
+              break;
+            }
+            default:
+            break;
+          }
+          // si hdv ou ressource on levelUp
+        }
+
+      }
  // si unités
     } else {
     // choix de l'unité
