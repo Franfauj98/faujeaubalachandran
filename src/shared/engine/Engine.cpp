@@ -14,6 +14,7 @@ Engine::Engine (){
 
 void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
   this->commandListId.push(commandId);
+  std::cout << "commandID " << commandId << '\n';
   this->commandList.push(std::move(cmd));
 }
 
@@ -37,6 +38,7 @@ void Engine::execute(state::Observable& principalMap){
       }
       case 6:{
         Move* mv = (Move*) commandList.front().get();
+        std::cout << "je devrais move" << '\n';
         mv->execute(principalMap);
         break;
       }

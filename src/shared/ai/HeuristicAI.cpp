@@ -64,6 +64,7 @@ void positionElement(int& x, int& y, int position){
 void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   if(canPlay){
     srand(time(NULL));
+    std::cout << "/* NewTour */" << '\n';
 
     std::vector<int> buildings;
 
@@ -94,11 +95,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     int x3=-1;
     positionElement(x3, y3, buildings[2]);
 
+    Position pos0(0,0);
+    Arrow arrow(1,pos0,0);
+    Decurion decurion(1,pos0,0);
+    Catapult catapult(1,pos0,0);
+    Cavalier cavalier(1,pos0,0);
+
     Ressource* ressource =(Ressource*) principalMap.getAllMaps().getBuildingsMap()[y1+25*x1].get();
     Palace* palace =(Palace*) principalMap.getAllMaps().getBuildingsMap()[y2+25*x2].get();
     Barrack* barrack =(Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get();
     int element;
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<empire->getWoodRessource() && palace->getBuildingCost().getGold()<empire->getGoldRessource()){
+      std::cout << "LevelUp palace" << '\n';
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
@@ -108,6 +116,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       counter++;
       return;
     } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<empire->getWoodRessource() && barrack->getBuildingCost().getGold()<empire->getGoldRessource()){
+      std::cout << "LevelUp barrack" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
@@ -117,6 +126,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       counter++;
       return;
     } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<empire->getWoodRessource() && ressource->getBuildingCost().getGold()<empire->getGoldRessource()){
+      std::cout << "LevelUp ressource" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
@@ -125,71 +135,65 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
       counter++;
       return;
-    } else if (barrack->getUnitsNumber()<barrack->getCapacity()){
-      Position pos0(0,0);
-      Arrow arrow(1,pos0,0);
-      Decurion decurion(1,pos0,0);
-      Catapult catapult(1,pos0,0);
-      Cavalier cavalier(1,pos0,0);
-
-      if( (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()) ||
-        (decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()) ||
-        (cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()) ||
-        (catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource())
-      ) {
-        std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
-        int pos=0;
-        while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
-          pos +=2;
+    } else if (barrack->getUnitsNumber()<barrack->getCapacity() &&
+    ((arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()) ||
+      (decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()) ||
+      (cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()) ||
+      (catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource())
+    )
+    ){
+      std::cout << "CreateUnit" << '\n';
+      std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
+      int pos=0;
+      while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
+        pos +=2;
+      }
+      int y= positions[pos];
+      int x=positions[pos+1];
+      int unitChoice=rand() % 4+1;
+      switch(unitChoice){
+        case 1:
+        if (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
+          usleep(2000000);
+          counter++;
+          std::cout << "arrow" << '\n';
+          return;
         }
-        int y= positions[pos];
-        int x=positions[pos+1];
-        int unitChoice=rand() % 4+1;
-        std::cout << "Test" << '\n';
-        switch(unitChoice){
-          case 1:
-          if (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()){
-            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
-            usleep(2000000);
-            counter++;
-            std::cout << "arrow" << '\n';
-            return;
-          }
-          break;
-          case 2:
-          if(decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()){
-            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
-            usleep(2000000);
-            counter++;
-            std::cout << "decurion" << '\n';
-            return;
-          }
-          break;
-          case 3:
-          if(cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()){
-            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
-            usleep(2000000);
-            counter++;
-            std::cout << "cavalier" << '\n';
-            return;
-          }
-          break;
-          case 4:
-          if(catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource()){
-            engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
-            usleep(2000000);
-            counter++;
-            std::cout << "catapult" << '\n';
-            return;
-          }
-          break;
-          default : break;
+        break;
+        case 2:
+        if(decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
+          usleep(2000000);
+          counter++;
+          std::cout << "decurion" << '\n';
+          return;
         }
+        break;
+        case 3:
+        if(cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
+          usleep(2000000);
+          counter++;
+          std::cout << "cavalier" << '\n';
+          return;
+        }
+        break;
+        case 4:
+        if(catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource()){
+          engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
+          usleep(2000000);
+          counter++;
+          std::cout << "catapult" << '\n';
+          return;
+        }
+        break;
+        default : break;
       }
     } else {
 
       // select empire to Attack
-      std::cout << "/* message */" << '\n';
+      std::cout << "/* select empire to Attack */" << '\n';
       int toAttack = 0;
 
       Position posToAttack;
@@ -197,7 +201,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int distance = 100000000;
 
       for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
-        std::cout << "/* message2 */" << '\n';
         Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
         if(building->getIdBuilding() == id && (building->getType()== 26 || building->getType()== 27 || building->getType()== 28 || building->getType()== 29)){
           for(size_t j = 0; j < principalMap.getAllMaps().getBuildingsMap().size(); j++){
@@ -213,6 +216,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           break;
         }
       }
+      std::cout << posToAttack.getX() << '\n';
 
       int y4 = 0;
       int x4 =- 1;
@@ -222,6 +226,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       std::vector<Position> unitsPosition; //units poition
 
       // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
+      std::cout << "/* Recuperation position unités */" << '\n';
       for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
         Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
         int idUnit=unit->getIdUnits();
@@ -236,6 +241,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int minimumDist = 1000000;
       int indexMinimumDist = 1000000;
       std::vector<int> distanceFromEmpireToAttack;
+      std::cout << "/* Recuperation distance entre unités et empire à attaquer */" << '\n';
       for (size_t i=0;i<unitsPosition.size();i++){
         distanceFromEmpireToAttack.push_back(dist(unitsPosition[i], posToAttack));
         if(distanceFromEmpireToAttack[i]<minimumDist){
@@ -259,47 +265,96 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
 
       //go to the next empire and kill ennemies on its way
+      int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
+      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
+      engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
+      engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+
       if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
+        std::cout << "/* Bouge x-1 */" << '\n';
         if(leftElt == 2){
+          std::cout << "/* Bouge x-1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
           usleep(2000000);
           counter++;
+          return;
         } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22 || leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29 ){
+          std::cout << "/* Attack x-1 */" << '\n';
           engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
           usleep(2000000);
           counter++;
-        } //traiterObstacle !!
-      } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX() && principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()] == 2){
+          return;
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+          counter++;
+          return;
+        }//traiterObstacle !!
+      } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX()){
+        std::cout << "/* Bouge x+1 */" << '\n';
         if(rightElt == 2){
+          std::cout << "/* Bouge x+1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
           usleep(2000000);
           counter++;
+          return;
         } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22 || rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29 ){
+          std::cout << "/* Attack x+1 */" << '\n';
           engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
           usleep(2000000);
           counter++;
-        } //traiterObstacle !!
-      } else if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY() && principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1] == 2){
+          return;
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+          counter++;
+          return;
+        }//traiterObstacle !!
+      } else if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
+        std::cout << "/* Bouge y-1 */" << '\n';
         if(topElt == 2){
+          std::cout << "/* Attack y-1 */" << '\n';
+          std::cout << "/* Bouge y-1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
           usleep(2000000);
           counter++;
+          return;
         } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22 || topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29 ){
           engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
           usleep(2000000);
           counter++;
-        } //traiterObstacle !!
-      } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY() && principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1] == 2){
+          return;
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          counter++;
+          return;
+        }//traiterObstacle !!
+      } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
+        std::cout << "/* Bouge y+1 */" << '\n';
         if(bottomElt == 2){
+          std::cout << "/* Attack y+1 */" << '\n';
+          std::cout << "/* Bouge y+1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()+1))),6);
           usleep(2000000);
           counter++;
+          return;
         } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22 || bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29 ){
           engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
           usleep(2000000);
           counter++;
-        } //traiterObstacle !!
-
+          return;
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
+          counter++;
+          return;
+        }//traiterObstacle !!
       }
     }
 
