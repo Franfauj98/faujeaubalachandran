@@ -33,6 +33,13 @@ using namespace std;
 //   return verif;
 // }
 
+int dist(Position pos1, Position pos2){
+  int absdiff, orddiff;
+  absdiff = std::abs(pos1.getX() - pos2.getX());
+  orddiff = std::abs(pos1.getY() - pos2.getY());
+  return(absdiff+orddiff);
+}
+
 HeuristicAI::HeuristicAI (){}
 
 /*
@@ -125,52 +132,72 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       Catapult catapult(1,pos0,0);
       Cavalier cavalier(1,pos0,0);
 
-      std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
-      int pos=0;
-      while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
-        pos +=2;
-      }
-      int y= positions[pos];
-      int x=positions[pos+1];
-      int unitChoice=rand() % 4+1;
-      switch(unitChoice){
-        case 1:
+      if( (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()) ||
+        (decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()) ||
+        (cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()) ||
+        (catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource())
+      ) {
+        std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
+        int pos=0;
+        while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
+          pos +=2;
+        }
+        int y= positions[pos];
+        int x=positions[pos+1];
+        int unitChoice=rand() % 4+1;
+        std::cout << "Test" << '\n';
+        switch(unitChoice){
+          case 1:
           if (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
+            usleep(2000000);
             counter++;
+            std::cout << "arrow" << '\n';
             return;
           }
           break;
-        case 2:
+          case 2:
           if(decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
+            usleep(2000000);
             counter++;
+            std::cout << "decurion" << '\n';
             return;
           }
           break;
-        case 3:
+          case 3:
           if(cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
+            usleep(2000000);
             counter++;
+            std::cout << "cavalier" << '\n';
             return;
           }
           break;
-        case 4:
+          case 4:
           if(catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource()){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
+            usleep(2000000);
             counter++;
+            std::cout << "catapult" << '\n';
             return;
           }
           break;
+          default : break;
         }
+      }
     } else {
 
       // select empire to Attack
+      std::cout << "/* message */" << '\n';
       int toAttack = 0;
+
+      Position posToAttack;
 
       int distance = 100000000;
 
       for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
+        std::cout << "/* message2 */" << '\n';
         Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
         if(building->getIdBuilding() == id && (building->getType()== 26 || building->getType()== 27 || building->getType()== 28 || building->getType()== 29)){
           for(size_t j = 0; j < principalMap.getAllMaps().getBuildingsMap().size(); j++){
@@ -179,6 +206,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               if(building->distance(building->getPosition(), building2->getPosition()) < distance){
                 distance = (building->distance(building->getPosition(), building2->getPosition()));
                 toAttack = j;
+                posToAttack = building2->getPosition();
               }
             }
           }
@@ -190,17 +218,89 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int x4 =- 1;
       positionElement(x4, y4, toAttack);
 
-      std::vector<int> units;
+      std::vector<int> units; //units index in unitMapMatrix
+      std::vector<Position> unitsPosition; //units poition
+
       // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
       for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
         Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
         int idUnit=unit->getIdUnits();
         if (idUnit==id){
           units.push_back(i);
+          unitsPosition.push_back(unit->getPosition());
+        }
+      }
+      //units de l'empire
+
+      //distance Unit -> EmpireToAttack
+      int minimumDist = 1000000;
+      int indexMinimumDist = 1000000;
+      std::vector<int> distanceFromEmpireToAttack;
+      for (size_t i=0;i<unitsPosition.size();i++){
+        distanceFromEmpireToAttack.push_back(dist(unitsPosition[i], posToAttack));
+        if(distanceFromEmpireToAttack[i]<minimumDist){
+          minimumDist = distanceFromEmpireToAttack[i];
+          indexMinimumDist = i;
         }
       }
 
+      // select unit to attak if in range 3 .
+      // for (size_t i=0;i<unitsPosition.size();i++){
+      //   distanceFromEmpireToAttack.push_back(dist(unitsPosition[i], posToAttack));
+      //   if(distanceFromEmpireToAttack[i]<minimumDist){
+      //     minimumDist = distanceFromEmpireToAttack[i];
+      //     indexMinimumDist = i;
+      //   }
+      // }
 
+      int leftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()];
+      int rightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()];
+      int topElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1];
+      int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
+
+      //go to the next empire and kill ennemies on its way
+      if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
+        if(leftElt == 2){
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          usleep(2000000);
+          counter++;
+        } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22 || leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29 ){
+          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+          usleep(2000000);
+          counter++;
+        } //traiterObstacle !!
+      } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX() && principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()] == 2){
+        if(rightElt == 2){
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
+          usleep(2000000);
+          counter++;
+        } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22 || rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29 ){
+          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+          usleep(2000000);
+          counter++;
+        } //traiterObstacle !!
+      } else if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY() && principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1] == 2){
+        if(topElt == 2){
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+          usleep(2000000);
+          counter++;
+        } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22 || topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29 ){
+          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
+          usleep(2000000);
+          counter++;
+        } //traiterObstacle !!
+      } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY() && principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1] == 2){
+        if(bottomElt == 2){
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()+1))),6);
+          usleep(2000000);
+          counter++;
+        } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22 || bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29 ){
+          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+          usleep(2000000);
+          counter++;
+        } //traiterObstacle !!
+
+      }
     }
 
   }
