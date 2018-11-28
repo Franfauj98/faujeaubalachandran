@@ -217,6 +217,9 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
       }
       std::cout << posToAttack.getX() << '\n';
+      std::cout << posToAttack.getX() << '\n';
+      std::cout << '\n';
+      std::cout << '\n';
 
       int y4 = 0;
       int x4 =- 1;
@@ -269,95 +272,99 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+      usleep(2000000);
 
-      if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
-        std::cout << "/* Bouge x-1 */" << '\n';
-        if(leftElt == 2){
-          std::cout << "/* Bouge x-1 */" << '\n';
-          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
-          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-
-          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
-          usleep(2000000);
-          counter++;
-          return;
-        } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22 || leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29 ){
-          std::cout << "/* Attack x-1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        } else {
-          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
-          counter++;
-          return;
-        }//traiterObstacle !!
-      } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX()){
-        std::cout << "/* Bouge x+1 */" << '\n';
-        if(rightElt == 2){
-          std::cout << "/* Bouge x+1 */" << '\n';
-          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
-          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
-          usleep(2000000);
-          counter++;
-          return;
-        } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22 || rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29 ){
-          std::cout << "/* Attack x+1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        } else {
-          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
-          counter++;
-          return;
-        }//traiterObstacle !!
-      } else if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
-        std::cout << "/* Bouge y-1 */" << '\n';
+      if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
         if(topElt == 2){
-          std::cout << "/* Attack y-1 */" << '\n';
           std::cout << "/* Bouge y-1 */" << '\n';
           std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
           std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
           usleep(2000000);
           counter++;
           return;
-        } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22 || topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29 ){
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-          usleep(2000000);
-          counter++;
-          return;
+        // } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22 || topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29 ){
+        //   std::cout << "/* Attack y-1 */" << '\n';
+        //   engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
+        //   usleep(2000000);
+        //   counter++;
+        //   return;
         } else {
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
           counter++;
           return;
         }//traiterObstacle !!
       } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
-        std::cout << "/* Bouge y+1 */" << '\n';
         if(bottomElt == 2){
-          std::cout << "/* Attack y+1 */" << '\n';
           std::cout << "/* Bouge y+1 */" << '\n';
           std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
           std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()+1))),6);
+          std::cout << '\n';
+          std::cout << '\n';
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
           usleep(2000000);
           counter++;
           return;
-        } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22 || bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29 ){
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-          usleep(2000000);
-          counter++;
-          return;
+        // } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22 || bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29 ){
+        //   std::cout << "/* Attack y+1 */" << '\n';
+        //   engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+        //   usleep(2000000);
+        //   counter++;
+        //   return;
         } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          counter++;
+          return;
+        }//traiterObstacle !!
+      } else if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
+        if(leftElt == 2){
+          std::cout << "/* Bouge x-1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
+
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          usleep(2000000);
+          counter++;
+          return;
+        // } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22 || leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29 ){
+        //   std::cout << "/* Attack x-1 */" << '\n';
+        //   engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+        //   usleep(2000000);
+        //   counter++;
+        //   return;
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+          counter++;
+          return;
+        }//traiterObstacle !!
+      } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX()){
+        if(rightElt == 2){
+          std::cout << "/* Bouge x+1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
           engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
+          usleep(2000000);
+          counter++;
+          return;
+        // } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22 || rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29 ){
+        //   std::cout << "/* Attack x+1 */" << '\n';
+        //   engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+        //   usleep(2000000);
+        //   counter++;
+        //   return;
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
           counter++;
           return;
         }//traiterObstacle !!
       }
     }
-
   }
 }
 

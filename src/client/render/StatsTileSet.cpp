@@ -25,7 +25,7 @@ StatsTileSet::StatsTileSet (){
 
 
 const std::string StatsTileSet::getImageFile () const{
-   const std::string file="res/stats2.png";
+   const std::string file="res/stats.png";
    return file;
 
 }
