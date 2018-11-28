@@ -72,22 +72,28 @@ void Layer::setSpriteLocation (int size, int x, int y, int iso){
 void Layer::setSpriteTexture (int size, vector<int> tiles,int x, int y, int iso){
   // curent tile number
   int tileNumber = tiles[x + y * size];
-
-  // on en déduit sa position dans la texture du tileset
-  int tu = tileNumber % (texture.getSize().x / 64);
-  int tv = tileNumber / (texture.getSize().x / 64);
-  sf::Vertex* quad = &quads[(x + y * size) * 4];
   // define the four summits for the texture
   if (iso==1){
+
+    // on en déduit sa position dans la texture du tileset
+    int tu = tileNumber % (texture.getSize().x / 64);
+    int tv = tileNumber / (texture.getSize().x / 64);
+    sf::Vertex* quad = &quads[(x + y * size) * 4];
+
     quad[0].texCoords = sf::Vector2f(tu * 64+64/2, tv * 32);
     quad[1].texCoords = sf::Vector2f((tu + 1) * 64, tv * 32+32/2);
     quad[2].texCoords = sf::Vector2f((tu + 1) * 64-64/2, (tv + 1) * 32);
     quad[3].texCoords = sf::Vector2f(tu * 64, (tv + 1) * 32-32/2);
   }
   else {
+
+    // on en déduit sa position dans la texture du tileset
+    int tu = tileNumber % (texture.getSize().x / 32);
+    int tv = tileNumber / (texture.getSize().x / 32);
+    sf::Vertex* quad = &quads[(x + y * size) * 4];
     quad[0].texCoords = sf::Vector2f(tu * 32, tv * 64);
-    quad[1].texCoords = sf::Vector2f((tu + 1) * 32, tv * 64);
-    quad[2].texCoords = sf::Vector2f((tu + 1) * 32, (tv + 1) * 64);
+    quad[1].texCoords = sf::Vector2f((tu + 1) * 32-1, tv * 64);
+    quad[2].texCoords = sf::Vector2f((tu + 1) * 32-1, (tv + 1) * 64);
     quad[3].texCoords = sf::Vector2f(tu * 32, (tv + 1) * 64);
 
   }

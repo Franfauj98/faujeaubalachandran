@@ -260,8 +260,8 @@ void PrintStats::execute (state::Observable& map){
 
       case 100:
       statsMap[11]=3;
-      statsMap[12]=0;
-      statsMap[13]=0;
+      statsMap[12]=2;
+      statsMap[13]=2;
       break;
 
       case 150:
