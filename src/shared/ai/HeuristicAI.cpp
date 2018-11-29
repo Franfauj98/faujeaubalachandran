@@ -266,10 +266,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int rightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()];
       int topElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1];
       int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
-      int topLeftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()-1];
-      int bottomLeftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()+1];
-      int topRightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()-1];
-      int bottomRightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()+1];
+      // int topLeftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()-1];
+      // int bottomLeftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()+1];
+      // int topRightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()-1];
+      // int bottomRightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()+1];
 
       //go to the next empire and kill ennemies on its way
       int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
@@ -283,333 +283,333 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       std::cout << currentUnit->getType() << '\n';
 
 //regarde si il peut attaquer directement
-      if(topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) {
-        std::cout << "/* message1 */" << '\n';
-        Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
-        if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-          std::cout << "/* Attack y-1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22){
-        std::cout << "/* message2 */" << '\n';
-        Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
-        if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-          std::cout << "/* Attack y-1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) {
-        std::cout << "/* message3 */" << '\n';
-        Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
-        if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-          std::cout << "/* Attack y+1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22){
-        std::cout << "/* message3 */" << '\n';
-        Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
-        if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-          std::cout << "/* Attack y+1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) {
-        std::cout << "/* message4 */" << '\n';
-        Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
-        if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-          std::cout << "/* Attack x-1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22){
-        std::cout << "/* message5 */" << '\n';
-        Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()*25-1) + (unitsPosition[indexMinimumDist].getY())].get();
-        if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-          std::cout << "/* Attack x-1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) {
-        std::cout << "/* message6 */" << '\n';
-        Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()+1)*25 + unitsPosition[indexMinimumDist].getY()].get();
-        if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-          std::cout << "/* Attack x+1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22){
-        std::cout << "/* message7 */" << '\n';
-        Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()+1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
-        if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-          std::cout << "/* Attack x+1 */" << '\n';
-          engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-          usleep(2000000);
-          counter++;
-          return;
-        }
-      } else{
-        std::cout << "/* message */" << '\n';
-        if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
-          std::cout << "go y-1" << '\n';
-          if(topElt == 2){
-            std::cout << "go y-1" << '\n';
-            engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
-            usleep(2000000);
-            counter++;
-            return;
-          } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
-            if(leftElt==2){
-              std::cout << "go x-1" << '\n';
-              engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
-              usleep(2000000);
-              counter++;
-              return;
-            }
-          }
-        } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
-          std::cout << "go y+1" << '\n';
-          if(bottomElt == 2){
-            std::cout << "go y+1" << '\n';
-            engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
-            usleep(2000000);
-            counter++;
-            return;
-          } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
-            if(rightElt==2){
-              std::cout << "go x+1" << '\n';
-              engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
-              usleep(2000000);
-              counter++;
-              return;
-            }
-          }
-        } else if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
-          std::cout << "go x-1" << '\n';
-          if(leftElt == 2){
-            engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
-            usleep(2000000);
-            counter++;
-            return;
-          } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
-            if(topElt==2){
-              std::cout << "go y-1" << '\n';
-              engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
-              usleep(2000000);
-              counter++;
-              return;
-            }
-          }
-        } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
-          std::cout << "go x+1" << '\n';
-          if(rightElt == 2){
-            std::cout << "go x+1" << '\n';
-            engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
-            usleep(2000000);
-            counter++;
-            return;
-          } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
-            if(bottomElt==2){
-              std::cout << "go y+1" << '\n';
-              engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
-              usleep(2000000);
-              counter++;
-              return;
-            }
-          }
-        }
-
-      }//end else
-
-      // if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
-      //   std::cout << "/* Should Bouge y-1 */" << '\n';
-      //   if(topElt == 2){
-      //     std::cout << "/* Bouge y-1 */" << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-      //     std::cout << '\n';
-      //     std::cout << '\n';
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+      // if(topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) {
+      //   std::cout << "/* message1 */" << '\n';
+      //   Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
+      //   if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+      //     std::cout << "/* Attack y-1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
       //     usleep(2000000);
       //     counter++;
       //     return;
-      //   } else if(topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) {
-      //     Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
-      //     std::cout << "buildToAttack->getIdBuilding()" << '\n';
-      //     std::cout << buildToAttack->getIdBuilding() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-      //       std::cout << "/* Attack y-1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22){
-      //     Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
-      //     std::cout << "unitToAttack->getIdUnits()" << '\n';
-      //     std::cout << unitToAttack->getIdUnits() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-      //       std::cout << "/* Attack y-1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else {
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
-      //     counter++;
-      //     return;
       //   }
-      // } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
-      //     std::cout << "/* Should Bouge y+1 */" << '\n';
-      //   if(bottomElt == 2){
-      //     std::cout << "/* Bouge y+1 */" << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-      //     std::cout << '\n';
-      //     std::cout << '\n';
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+      // } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22){
+      //   std::cout << "/* message2 */" << '\n';
+      //   Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
+      //   if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+      //     std::cout << "/* Attack y-1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
       //     usleep(2000000);
       //     counter++;
       //     return;
-      //   } else if(bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) {
-      //     Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
-      //     std::cout << "buildToAttack->getIdBuilding()" << '\n';
-      //     std::cout << buildToAttack->getIdBuilding() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-      //       std::cout << "/* Attack y+1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22){
-      //     Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
-      //     std::cout << "unitToAttack->getIdUnits()" << '\n';
-      //     std::cout << unitToAttack->getIdUnits() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-      //       std::cout << "/* Attack y+1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else {
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+      //   }
+      // } else if(bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) {
+      //   std::cout << "/* message3 */" << '\n';
+      //   Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
+      //   if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+      //     std::cout << "/* Attack y+1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+      //     usleep(2000000);
       //     counter++;
       //     return;
       //   }
-      // } else if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
-      //   std::cout << "/* Should Bouge x-1 */" << '\n';
-      //   if(leftElt == 2){
-      //     std::cout << "/* Bouge x-1 */" << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-      //     std::cout << '\n';
-      //     std::cout << '\n';
+      // } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22){
+      //   std::cout << "/* message3 */" << '\n';
+      //   Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
+      //   if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+      //     std::cout << "/* Attack y+1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+      //     usleep(2000000);
+      //     counter++;
+      //     return;
+      //   }
+      // } else if(leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) {
+      //   std::cout << "/* message4 */" << '\n';
+      //   Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
+      //   if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+      //     std::cout << "/* Attack x-1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+      //     usleep(2000000);
+      //     counter++;
+      //     return;
+      //   }
+      // } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22){
+      //   std::cout << "/* message5 */" << '\n';
+      //   Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()*25-1) + (unitsPosition[indexMinimumDist].getY())].get();
+      //   if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+      //     std::cout << "/* Attack x-1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+      //     usleep(2000000);
+      //     counter++;
+      //     return;
+      //   }
+      // } else if(rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) {
+      //   std::cout << "/* message6 */" << '\n';
+      //   Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()+1)*25 + unitsPosition[indexMinimumDist].getY()].get();
+      //   if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+      //     std::cout << "/* Attack x+1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+      //     usleep(2000000);
+      //     counter++;
+      //     return;
+      //   }
+      // } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22){
+      //   std::cout << "/* message7 */" << '\n';
+      //   Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()+1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
+      //   if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+      //     std::cout << "/* Attack x+1 */" << '\n';
+      //     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+      //     usleep(2000000);
+      //     counter++;
+      //     return;
+      //   }
+      // } else{
+      //   std::cout << "/* message */" << '\n';
+      //   if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
+      //     std::cout << "go y-1" << '\n';
+      //     if(topElt == 2){
+      //       std::cout << "go y-1" << '\n';
+      //       engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+      //       usleep(2000000);
+      //       counter++;
+      //       return;
+      //     } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
+      //       if(leftElt==2){
+      //         std::cout << "go x-1" << '\n';
+      //         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+      //         usleep(2000000);
+      //         counter++;
+      //         return;
+      //       }
+      //     }
+      //   } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
+      //     std::cout << "go y+1" << '\n';
+      //     if(bottomElt == 2){
+      //       std::cout << "go y+1" << '\n';
+      //       engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+      //       usleep(2000000);
+      //       counter++;
+      //       return;
+      //     } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
+      //       if(rightElt==2){
+      //         std::cout << "go x+1" << '\n';
+      //         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
+      //         usleep(2000000);
+      //         counter++;
+      //         return;
+      //       }
+      //     }
+      //   } else if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
+      //     std::cout << "go x-1" << '\n';
+      //     if(leftElt == 2){
+      //       engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+      //       usleep(2000000);
+      //       counter++;
+      //       return;
+      //     } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
+      //       if(topElt==2){
+      //         std::cout << "go y-1" << '\n';
+      //         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+      //         usleep(2000000);
+      //         counter++;
+      //         return;
+      //       }
+      //     }
+      //   } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
+      //     std::cout << "go x+1" << '\n';
+      //     if(rightElt == 2){
+      //       std::cout << "go x+1" << '\n';
+      //       engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
+      //       usleep(2000000);
+      //       counter++;
+      //       return;
+      //     } else if(posToAttack.getX() != unitsPosition[indexMinimumDist].getX()){
+      //       if(bottomElt==2){
+      //         std::cout << "go y+1" << '\n';
+      //         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+      //         usleep(2000000);
+      //         counter++;
+      //         return;
+      //       }
+      //     }
+      //   }
       //
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
-      //     usleep(2000000);
-      //     counter++;
-      //     return;
-      //   } else if(leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) {
-      //     Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
-      //     std::cout << "buildToAttack->getIdBuilding()" << '\n';
-      //     std::cout << buildToAttack->getIdBuilding() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-      //       std::cout << "/* Attack x-1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22){
-      //     Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
-      //     std::cout << "unitToAttack->getIdUnits()" << '\n';
-      //     std::cout << unitToAttack->getIdUnits() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-      //       std::cout << "/* Attack x-1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else {
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
-      //     counter++;
-      //     return;
-      //   }
-      // } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX()){
-      //   std::cout << "/* Should Bouge x+1 */" << '\n';
-      //   if(rightElt == 2){
-      //     std::cout << "/* Bouge x+1 */" << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
-      //     std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
-      //     std::cout << '\n';
-      //     std::cout << '\n';
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
-      //     usleep(2000000);
-      //     counter++;
-      //     return;
-      //   } else if(rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) {
-      //     Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + unitsPosition[indexMinimumDist].getY()].get();
-      //     std::cout << "buildToAttack->getIdBuilding()" << '\n';
-      //     std::cout << buildToAttack->getIdBuilding() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
-      //       std::cout << "/* Attack x+1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22){
-      //     Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
-      //     std::cout << "unitToAttack->getIdUnits()" << '\n';
-      //     std::cout << unitToAttack->getIdUnits() << '\n';
-      //     std::cout << "currentUnit->getIdUnits()" << '\n';
-      //     std::cout << currentUnit->getIdUnits() << '\n';
-      //     if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
-      //       std::cout << "/* Attack x+1 */" << '\n';
-      //       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-      //       usleep(2000000);
-      //       counter++;
-      //       return;
-      //     }
-      //   } else {
-      //     engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
-      //     counter++;
-      //     return;
-      //   }
-      // }
+      // }//end else
+
+      if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
+        std::cout << "/* Should Bouge y-1 */" << '\n';
+        if(topElt == 2){
+          std::cout << "/* Bouge y-1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+          usleep(2000000);
+          counter++;
+          return;
+        } else if(topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) {
+          Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
+          std::cout << "buildToAttack->getIdBuilding()" << '\n';
+          std::cout << buildToAttack->getIdBuilding() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+            std::cout << "/* Attack y-1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else if(topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22){
+          Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get();
+          std::cout << "unitToAttack->getIdUnits()" << '\n';
+          std::cout << unitToAttack->getIdUnits() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+            std::cout << "/* Attack y-1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          counter++;
+          return;
+        }
+      } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
+          std::cout << "/* Should Bouge y+1 */" << '\n';
+        if(bottomElt == 2){
+          std::cout << "/* Bouge y+1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+          usleep(2000000);
+          counter++;
+          return;
+        } else if(bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) {
+          Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
+          std::cout << "buildToAttack->getIdBuilding()" << '\n';
+          std::cout << buildToAttack->getIdBuilding() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+            std::cout << "/* Attack y+1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else if(bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22){
+          Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
+          std::cout << "unitToAttack->getIdUnits()" << '\n';
+          std::cout << unitToAttack->getIdUnits() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+            std::cout << "/* Attack y+1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          counter++;
+          return;
+        }
+      } else if(posToAttack.getX() < unitsPosition[indexMinimumDist].getX()){
+        std::cout << "/* Should Bouge x-1 */" << '\n';
+        if(leftElt == 2){
+          std::cout << "/* Bouge x-1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
+
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),6);
+          usleep(2000000);
+          counter++;
+          return;
+        } else if(leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) {
+          Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
+          std::cout << "buildToAttack->getIdBuilding()" << '\n';
+          std::cout << buildToAttack->getIdBuilding() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+            std::cout << "/* Attack x-1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else if(leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22){
+          Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
+          std::cout << "unitToAttack->getIdUnits()" << '\n';
+          std::cout << unitToAttack->getIdUnits() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+            std::cout << "/* Attack x-1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),6);
+          counter++;
+          return;
+        }
+      } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX()){
+        std::cout << "/* Should Bouge x+1 */" << '\n';
+        if(rightElt == 2){
+          std::cout << "/* Bouge x+1 */" << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getX() << '\n';
+          std::cout << unitsPosition[indexMinimumDist].getY() << '\n';
+          std::cout << '\n';
+          std::cout << '\n';
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),6);
+          usleep(2000000);
+          counter++;
+          return;
+        } else if(rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) {
+          Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + unitsPosition[indexMinimumDist].getY()].get();
+          std::cout << "buildToAttack->getIdBuilding()" << '\n';
+          std::cout << buildToAttack->getIdBuilding() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != buildToAttack->getIdBuilding()){
+            std::cout << "/* Attack x+1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else if(rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22){
+          Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
+          std::cout << "unitToAttack->getIdUnits()" << '\n';
+          std::cout << unitToAttack->getIdUnits() << '\n';
+          std::cout << "currentUnit->getIdUnits()" << '\n';
+          std::cout << currentUnit->getIdUnits() << '\n';
+          if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
+            std::cout << "/* Attack x+1 */" << '\n';
+            engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+            usleep(2000000);
+            counter++;
+            return;
+          }
+        } else {
+          engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),6);
+          counter++;
+          return;
+        }
+      }
     }
   }
 }
