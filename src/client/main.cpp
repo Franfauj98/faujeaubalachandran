@@ -271,6 +271,10 @@ int main(int argc,char* argv[])
   bool canPlay2 = false;
   bool canPlay3 = false;
 
+  std::vector<bool> canMove1 = {true, true, true ,true};
+  std::vector<bool> canMove2 = {true, true, true ,true};
+  std::vector<bool> canMove3 = {true, true, true ,true};
+
   int counter=0;
   Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
   Empire* empire2 = principalMap.getAllMaps().getEmpires()[1].get();
@@ -300,7 +304,7 @@ int main(int argc,char* argv[])
       canPlay1 = true;
       canPlay2 = false;
       canPlay3 = false;
-      ia1.run(engine,principalMap,counter, canPlay1,1);
+      ia1.run(engine,principalMap,counter, canPlay1, 1, canMove1);
     }
     else if (counter>=3 && counter <=5){
       empire1->setShot(0);
@@ -310,7 +314,7 @@ int main(int argc,char* argv[])
       canPlay2 = true;
       canPlay1 = false;
       canPlay3 = false;
-      ia2.run(engine,principalMap,counter, canPlay2,2);
+      ia2.run(engine,principalMap,counter, canPlay2, 2, canMove2);
     }
     else if (counter>=6 && counter <=8){
       empire1->setShot(0);
@@ -320,7 +324,7 @@ int main(int argc,char* argv[])
       canPlay3 = true;
       canPlay2 = false;
       canPlay1 = false;
-      ia3.run(engine,principalMap,counter, canPlay3,3);
+      ia3.run(engine,principalMap,counter, canPlay3, 3, canMove1);
     }
 
     if(counter==9){

@@ -61,7 +61,7 @@ void positionElement(int& x, int& y, int position){
   }
 }
 
-void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
+void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id, std::vector<bool> canMove){
   if(canPlay){
     srand(time(NULL));
     std::cout << "/* NewTour */" << '\n';

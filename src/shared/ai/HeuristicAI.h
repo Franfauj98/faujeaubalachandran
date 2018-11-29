@@ -22,7 +22,7 @@ namespace ai {
     // Operations
   public:
     HeuristicAI ();
-    void run (engine::Engine& engine, state::Observable& principalMap, int& counter, bool& canPlay, int id);
+    void run (engine::Engine& engine, state::Observable& principalMap, int& counter, bool& canPlay, int id,  std::vector<bool> canMove);
     // Setters and Getters
   };
 
