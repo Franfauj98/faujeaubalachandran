@@ -42,9 +42,9 @@ void RenderMap::update(state::Observable& principalMap,string goldText, string w
   Layer statsMap(stats.getImageFile(),11,statsId,0);
 
   std::string fontFile="res/calibri.ttf";
-  Layer gold(fontFile,goldText,22, sf::Color::White, 185, 22);
-  Layer wood(fontFile,woodText,22, sf::Color::White,249 , 22);
-  Layer food(fontFile,foodText,22, sf::Color::White, 313, 22);
+  Layer gold(fontFile,goldText,22, sf::Color::White, 175, 20);
+  Layer wood(fontFile,woodText,22, sf::Color::White,239 , 20);
+  Layer food(fontFile,foodText,22, sf::Color::White, 303, 20);
   Layer message(fontFile,messageText,22, sf::Color::White, 1000, 100);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));

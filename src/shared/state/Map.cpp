@@ -216,6 +216,11 @@ Map::Map(){
       buildingChange++;
     }
   }
+  std::vector<int> statsMapId(121,0);
+  for (int i=5;i<11;i++){
+    statsMapId[i]=i+22;
+  }
+  this->statsMap=statsMapId;
 }
 
 Map::~Map(){
