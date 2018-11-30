@@ -96,7 +96,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     positionElement(x3, y3, buildings[2]);
 
     Position pos0(0,0);
-    Arrow arrow(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
+    Arrow arrow(1,pos0,0);
     Decurion decurion(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
     Catapult catapult(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
     Cavalier cavalier(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
