@@ -487,7 +487,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             usleep(1000000);
             counter++;
             return;
-          } else if( (topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
+          } else if( (bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
             // if((currentUnit->getIdUnits() != buildToAttack->getIdBuilding())){
               std::cout << "/* Attack y+1 */" << '\n';
               engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
@@ -495,7 +495,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               counter++;
               return;
             // }
-          } else if( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
+          } else if( (bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
             // if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
               std::cout << "/* Attack y+1 */" << '\n';
               engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
@@ -520,7 +520,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             usleep(1000000);
             counter++;
             return;
-          } else if( (topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
+          } else if( (leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
             // Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
             // if((currentUnit->getIdUnits() != buildToAttack->getIdBuilding())){
               std::cout << "/* Attack x-1 */" << '\n';
@@ -529,7 +529,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               counter++;
               return;
             // }
-          } else if( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
+          } else if( (leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
             // Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
             // if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
               std::cout << "/* Attack x-1 */" << '\n';
@@ -554,7 +554,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             usleep(1000000);
             counter++;
             return;
-          } else if( (topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
+          } else if( (rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
             // Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + unitsPosition[indexMinimumDist].getY()].get();
             // if((currentUnit->getIdUnits() != buildToAttack->getIdBuilding())){
               std::cout << "/* Attack x+1 */" << '\n';
@@ -563,7 +563,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               counter++;
               return;
             // }
-          } else if( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
+          } else if( (rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
             // Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
             // if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
               std::cout << "/* Attack x+1 */" << '\n';
@@ -591,7 +591,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             usleep(1000000);
             counter++;
             return;
-          } else if( (topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
+          } else if( (leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
             // Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
             // if((currentUnit->getIdUnits() != buildToAttack->getIdBuilding())){
               std::cout << "/* Attack x-1 */" << '\n';
@@ -600,7 +600,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               counter++;
               return;
             // }
-          } else if( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
+          } else if( (leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
             // Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
             // if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
               std::cout << "/* Attack x-1 */" << '\n';
@@ -626,7 +626,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             usleep(1000000);
             counter++;
             return;
-          } else if( (topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
+          } else if( (rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
             // Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + unitsPosition[indexMinimumDist].getY()].get();
             // if((currentUnit->getIdUnits() != buildToAttack->getIdBuilding())){
               std::cout << "/* Attack x+1 */" << '\n';
@@ -635,7 +635,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               counter++;
               return;
             // }
-          } else if( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
+          } else if( (rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
             // Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX() + 1)*25 + (unitsPosition[indexMinimumDist].getY())].get();
             // if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
               std::cout << "/* Attack x+1 */" << '\n';
@@ -694,7 +694,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             usleep(1000000);
             counter++;
             return;
-          } else if( (topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
+          } else if( (bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) && (currentUnit->getIdUnits() != buildToAttack->getIdBuilding())) {
             // Buildings* buildToAttack = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
             // if((currentUnit->getIdUnits() != buildToAttack->getIdBuilding())){
               std::cout << "/* Attack y+1 */" << '\n';
@@ -703,7 +703,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
               counter++;
               return;
             // }
-          } else if( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
+          } else if( (bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22) && currentUnit->getIdUnits() != unitToAttack->getIdUnits() ){
             // Units* unitToAttack = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()+1)].get();
             // if(currentUnit->getIdUnits() != unitToAttack->getIdUnits()){
               std::cout << "/* Attack y+1 */" << '\n';
