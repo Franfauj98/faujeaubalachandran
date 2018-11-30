@@ -2,6 +2,7 @@
 #ifndef AI__HEURISTICAI__H
 #define AI__HEURISTICAI__H
 
+#include <vector>
 
 namespace engine {
   class Engine;
@@ -22,7 +23,7 @@ namespace ai {
     // Operations
   public:
     HeuristicAI ();
-    void run (engine::Engine& engine, state::Observable& principalMap, int& counter, bool& canPlay, int id,  std::vector<bool> canMove);
+    void run (engine::Engine& engine, state::Observable& principalMap, int& counter, bool& canPlay, int id, std::vector<int>& canMove);
     // Setters and Getters
   };
 

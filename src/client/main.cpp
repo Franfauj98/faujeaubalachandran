@@ -271,9 +271,9 @@ int main(int argc,char* argv[])
   bool canPlay2 = false;
   bool canPlay3 = false;
 
-  std::vector<bool> canMove1 = {true, true, true ,true};
-  std::vector<bool> canMove2 = {true, true, true ,true};
-  std::vector<bool> canMove3 = {true, true, true ,true};
+  std::vector<int> canMove1 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
+  std::vector<int> canMove2 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
+  std::vector<int> canMove3 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
 
   int counter=0;
   Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();

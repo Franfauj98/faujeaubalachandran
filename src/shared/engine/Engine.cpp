@@ -52,6 +52,7 @@ void Engine::execute(state::Observable& principalMap){
       }
       case 4:{
         CreateUnit* cu = (CreateUnit*) commandList.front().get();
+        std::cout << "coucouEngine" << '\n';
         cu->execute(principalMap);
         break;
       }
