@@ -273,9 +273,9 @@ int main(int argc,char* argv[])
   bool palace1=false;
   bool palace2=false;
   bool palace3=false;
-  std::vector<int> canMove1 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
-  std::vector<int> canMove2 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
-  std::vector<int> canMove3 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
+  //std::vector<int> canMove1 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
+  // std::vector<int> canMove2 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
+  // std::vector<int> canMove3 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
 
   int counter=0;
   Empire* empire1 = principalMap.getAllMaps().getEmpires()[0].get();
@@ -322,7 +322,7 @@ int main(int argc,char* argv[])
         canPlay1 = true;
         canPlay2 = false;
         canPlay3 = false;
-        ia1.run(engine,principalMap,counter, canPlay1, 1, canMove1);
+        ia1.run(engine,principalMap,counter, canPlay1, 1);
       } else {
         counter=3;
       }
@@ -351,7 +351,7 @@ int main(int argc,char* argv[])
         canPlay1 = false;
         canPlay2 = true;
         canPlay3 = false;
-        ia1.run(engine,principalMap,counter, canPlay2, 2, canMove2);
+        ia1.run(engine,principalMap,counter, canPlay2, 2);
       } else {
         counter=6;
       }
@@ -379,7 +379,7 @@ int main(int argc,char* argv[])
         canPlay1 = false;
         canPlay2 = false;
         canPlay3 = true;
-        ia1.run(engine,principalMap,counter, canPlay3, 3, canMove3);
+        ia1.run(engine,principalMap,counter, canPlay3, 3);
       } else {
         counter=9;
       }

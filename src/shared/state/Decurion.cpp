@@ -17,7 +17,7 @@ Decurion::Decurion () : Units() {
 }
 
 Decurion::Decurion (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost decurionCost) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, decurionCost) {}
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, decurionCost,0) {}
 
 Decurion::Decurion (int level, Position p, int id){
   switch(level){

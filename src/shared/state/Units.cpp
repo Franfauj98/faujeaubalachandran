@@ -14,13 +14,14 @@ Units::Units () {
   setIdTextureUnits(NONE_UNIT);
   UnitCost cost(0,0);
   setUnitCost(cost);
+  setCanMove(0);
 }
 
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
-  int level, IdTextureUnits idTextureUnits, UnitCost uniCost) {
+  int level, IdTextureUnits idTextureUnits, UnitCost uniCost,int canMove) {
   try{
-    if(idUnits>=0 && life>=0 && life <=1000 && damage>=0 && damage <= 100 && strikeRange>=0 && strikeRange <= 10 && movingRange>=0 && movingRange<=5 && level>=0 && level<=5) {
+    if(idUnits>=0 && life>=0 && life <=1000 && damage>=0 && damage <= 100 && strikeRange>=0 && strikeRange <= 10 && movingRange>=0 && movingRange<=5 && level>=0 && level<=5 && canMove<2) {
       this->position = position;
       this->idUnits = idUnits;
       this->life = life;
@@ -30,6 +31,7 @@ Units::Units (int idUnits, Position position, int life,
       this->level = level;
       this->idTextureUnits=idTextureUnits;
       this->unitCost=unitCost;
+      this->canMove=canMove;
     } else {
       UnitCost cost(0,0);
       this->idUnits = 0;
@@ -40,12 +42,14 @@ Units::Units (int idUnits, Position position, int life,
       this->level = 0;
       this->idTextureUnits=ARROW1;
       this->unitCost=cost;
+      this->canMove=canMove;
       std::string message="idUnits must be positive\n";
       message += "life must be positive or be smaller than 1000\n";
       message += "damage must be positive or be smaller than 100\n";
       message += "strikeRange must be positive or be smaller than 10\n";
       message += "movingRange must be positive or be smaller than 5\n";
       message += "level must be positive and smaller than 5\n";
+      message += "canMove must be smaller than 2\n";
 
       throw std::string(message);
     }
@@ -70,6 +74,7 @@ void Units::setLife (int life){
 int Units::getLife() const{
   return this->life;
 }
+
 
 void Units::setDamage (const int damage){
   try{
@@ -235,6 +240,23 @@ bool Units::attackBuildingAllowed (Buildings building){
 
 bool Units::isPassable(){
   return false;
+}
+
+void Units::setCanMove (int canMove){
+    try{
+      if(canMove >= 0 && canMove <=1){
+        this->canMove = canMove;
+      } else {
+        this->canMove = 0;
+        throw std::string("canMove must be smaller than 2");
+      }
+    } catch (std::string error){
+      std::cerr << error << std::endl;
+    }
+}
+
+int Units::getCanMove() const{
+  return this->canMove;
 }
 
 Units::~Units () {}

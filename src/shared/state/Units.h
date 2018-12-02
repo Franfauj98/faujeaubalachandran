@@ -26,6 +26,7 @@ namespace state {
     // Attributes
   private:
     UnitCost unitCost;
+    int canMove;
   protected:
     int idUnits;
     int life;
@@ -35,7 +36,7 @@ namespace state {
     // Operations
   public:
     Units ();
-    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost);
+    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost, int canMove);
     virtual ~Units ();
     void setLife (const int life);
     int getLife () const;
@@ -60,6 +61,8 @@ namespace state {
     bool isPassable ();
     void attackBuilding (Buildings& building);
     bool attackBuildingAllowed (Buildings building);
+    int getCanMove () const;
+    void setCanMove (const int canMove);
     // Setters and Getters
   };
 

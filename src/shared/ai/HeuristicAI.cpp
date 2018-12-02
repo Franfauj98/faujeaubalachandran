@@ -51,7 +51,7 @@ void positionElement(int& x, int& y, int position){
   }
 }
 
-void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id, std::vector<int>& canMove){
+void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   if(canPlay){
     srand(time(NULL));
     std::cout << "/* NewTour */" << '\n';
@@ -333,7 +333,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
      return;
       }
 
-      if(canMove[indexMinimumDist]==0){
+      if(currentUnit->getCanMove()==0){
         if(posToAttack.getY() < unitsPosition[indexMinimumDist].getY()){
           buildToAttack = dynamic_cast<Buildings*> (principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get());
           unitToAttack = dynamic_cast<Units*> (principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get());
@@ -401,7 +401,8 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             counter++;
             return;
           } else {
-            canMove[indexMinimumDist] = 1;
+            currentUnit->setCanMove(1);
+            //canMove[indexMinimumDist] = 1;
             return;
           }
         } else if(posToAttack.getX() > unitsPosition[indexMinimumDist].getX()){
@@ -423,7 +424,8 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             counter++;
             return;
           } else {
-            canMove[indexMinimumDist] = 1;
+            currentUnit->setCanMove(1);
+            //canMove[indexMinimumDist] = 1;
             return;
           }
         }
@@ -496,7 +498,8 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             counter++;
             return;
           } else {
-            canMove[indexMinimumDist] = 0;
+            currentUnit->setCanMove(0);
+            //canMove[indexMinimumDist] = 0;
             return;
           }
         } else if(posToAttack.getY() > unitsPosition[indexMinimumDist].getY()){
@@ -518,12 +521,12 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             counter++;
             return;
           } else {
-            canMove[indexMinimumDist] = 0;
+            currentUnit->setCanMove(0);
+            //canMove[indexMinimumDist] = 0;
             return;
           }
         }
       }
-
     }
     counter++;
     return;

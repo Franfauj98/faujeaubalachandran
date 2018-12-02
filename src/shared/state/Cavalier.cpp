@@ -17,7 +17,7 @@ Cavalier::Cavalier () : Units() {
 }
 
 Cavalier::Cavalier (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost cavalierCost) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, cavalierCost) {}
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, cavalierCost,0) {}
 
 Cavalier::Cavalier (int level, Position p, int id){
   switch(level){

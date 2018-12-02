@@ -18,7 +18,7 @@ Arrow::Arrow () : Units() {
 }
 
 Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, arrowCost) {}
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, arrowCost,0) {}
 
 Arrow::Arrow (int level, Position p, int id) : Units() {
   switch(level){
