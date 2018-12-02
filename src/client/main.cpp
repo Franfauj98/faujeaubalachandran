@@ -270,7 +270,9 @@ int main(int argc,char* argv[])
   bool canPlay1 = true;
   bool canPlay2 = false;
   bool canPlay3 = false;
-
+  bool palace1=false;
+  bool palace2=false;
+  bool palace3=false;
   std::vector<int> canMove1 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
   std::vector<int> canMove2 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
   std::vector<int> canMove3 = {0, 0, 0 ,0, 0 ,0, 0 ,0};
@@ -281,7 +283,7 @@ int main(int argc,char* argv[])
   Empire* empire3 = principalMap.getAllMaps().getEmpires()[2].get();
 
   int id = 0;
-
+  int idPalace=1;
   string gold= "";
   string wood= "";
   string food= "";
@@ -296,49 +298,162 @@ int main(int argc,char* argv[])
     if (event.type == sf::Event::Closed)
         window.close();
     }
+
     if (counter>=0 && counter <=2){
-      empire1->setShot(1);
-      empire2->setShot(0);
-      empire3->setShot(0);
       id = 0;
-      canPlay1 = true;
-      canPlay2 = false;
-      canPlay3 = false;
-      ia1.run(engine,principalMap,counter, canPlay1, 1, canMove1);
+      idPalace=1;
+      for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+        Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
+        if (building!=nullptr){
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idPalace){
+            palace1=true;
+            break;
+          } else {
+            palace1=false;
+          }
+        }
+      }
+      if (palace1){
+        empire1->setShot(1);
+        empire2->setShot(0);
+        empire3->setShot(0);
+
+        canPlay1 = true;
+        canPlay2 = false;
+        canPlay3 = false;
+        ia1.run(engine,principalMap,counter, canPlay1, 1, canMove1);
+      } else {
+        counter=3;
+      }
+
     }
     else if (counter>=3 && counter <=5){
-      empire1->setShot(0);
-      empire2->setShot(1);
-      empire3->setShot(0);
       id = 1;
-      canPlay2 = true;
-      canPlay1 = false;
-      canPlay3 = false;
-      ia2.run(engine,principalMap,counter, canPlay2, 2, canMove2);
+      idPalace=2;
+      for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+        Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
+        if (building!=nullptr){
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idPalace){
+            palace2=true;
+            break;
+          } else {
+            palace2=false;
+          }
+        }
+      }
+      if (palace2){
+        empire1->setShot(0);
+        empire2->setShot(1);
+        empire3->setShot(0);
+
+        canPlay1 = false;
+        canPlay2 = true;
+        canPlay3 = false;
+        ia1.run(engine,principalMap,counter, canPlay2, 2, canMove2);
+      } else {
+        counter=6;
+      }
     }
     else if (counter>=6 && counter <=8){
-      empire1->setShot(0);
-      empire2->setShot(0);
-      empire3->setShot(1);
       id = 2;
-      canPlay3 = true;
-      canPlay2 = false;
-      canPlay1 = false;
-      ia3.run(engine,principalMap,counter, canPlay3, 3, canMove1);
+      idPalace=3;
+      for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+        Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
+        if (building!=nullptr){
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idPalace){
+            palace3=true;
+            break;
+          } else {
+            palace3=false;
+          }
+        }
+      }
+      if (palace3){
+        empire1->setShot(0);
+        empire2->setShot(0);
+        empire3->setShot(1);
+
+        canPlay1 = false;
+        canPlay2 = false;
+        canPlay3 = true;
+        ia1.run(engine,principalMap,counter, canPlay3, 3, canMove3);
+      } else {
+        counter=9;
+      }
     }
 
     if(counter==9){
-      empire1->updateRessource(principalMap.getAllMaps().getBuildingsMap());
-      empire2->updateRessource(principalMap.getAllMaps().getBuildingsMap());
-      empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
-      counter=0;
-      empire1->setShot(1);
-      empire2->setShot(0);
-      empire3->setShot(0);
-      canPlay1 = true;
-      canPlay2 = false;
-      canPlay3 = false;
-      id = 0;
+      idPalace = 1;
+      for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+        Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
+        if (building!=nullptr){
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idPalace){
+            palace1=true;
+            break;
+          } else {
+            palace1=false;
+          }
+        }
+      }
+      idPalace = 2;
+
+      for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+        Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
+        if (building!=nullptr){
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idPalace){
+            palace2=true;
+            break;
+          } else {
+            palace2=false;
+          }
+        }
+      }
+      idPalace = 3;
+
+      for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+        Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
+        if (building!=nullptr){
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idPalace){
+            palace3=true;
+            break;
+          } else {
+            palace3=false;
+          }
+        }
+      }
+      if (palace1){
+        empire1->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+
+      }
+      if (palace2){
+        empire2->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+      }
+      if (palace3){
+        empire3->updateRessource(principalMap.getAllMaps().getBuildingsMap());
+      }
+
+      if ((palace1==true && palace2==false && palace3==false) || (palace1==false && palace2==true && palace3==false) || (palace1==false && palace2==false && palace3==true)){
+        Layer endGame("res/endgame.png");
+        endGame.drawSprite(window);
+        window.display();
+        usleep(60000000);
+        break;
+      }
+      else {
+        counter=0;
+        // canPlay1 = true;
+        // canPlay2 = false;
+        // canPlay3 = false;
+        // id = 0;
+        // idPalace=1;
+      }
+
     }
 
     engine.execute(principalMap);

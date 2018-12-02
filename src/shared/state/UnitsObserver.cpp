@@ -50,12 +50,22 @@ int position, int action, int position2){
     {
       unitToChange->attackBuilding(*buildingToAttack);
       if(buildingToAttack->getLife()==0){
+        int id=buildingToAttack->getIdBuilding();
         map.getBuildingsMap()[position2] = std::move(std::unique_ptr<Element> (new Buildings()));
         map.getBuildingsMap()[position2+1] = std::move(std::unique_ptr<Element> (new Buildings()));
         map.getBuildingsMap()[position2-1] = std::move(std::unique_ptr<Element> (new Buildings()));
         mapMatrix[x2][y2] = 2;
         mapMatrix[x2][y2+1] = 2;
         mapMatrix[x2][y2-1] = 2;
+
+        // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
+        for (unsigned int i=0;i<map.getUnitsMap().size();i++){
+          Units* unit =(Units*) map.getUnitsMap()[i].get();
+          int idUnit=unit->getIdUnits();
+          if (idUnit==id){
+            map.getUnitsMap()[i] = std::move(std::unique_ptr<Element> (new Units()));
+          }
+        }
       }
       break;
     }

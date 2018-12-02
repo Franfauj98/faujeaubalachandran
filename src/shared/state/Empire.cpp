@@ -12,7 +12,7 @@ Empire::Empire(){
   this->goldRessource=0;
   this->woodRessource=0;
   this->foodRessource=0;
-  this->shot=3;
+  this->shot=0;
 }
 
 Empire::Empire (int id, std::string name, int goldRessource, int woodRessource, int foodRessource, int shot){
