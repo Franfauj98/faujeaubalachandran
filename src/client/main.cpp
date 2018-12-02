@@ -442,7 +442,7 @@ int main(int argc,char* argv[])
         Layer endGame("res/endgame.png");
         endGame.drawSprite(window);
         window.display();
-        usleep(60000000);
+        usleep(10000000);
         break;
       }
       else {
