@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../../shared/state.h"
 using namespace state;
+using namespace std;
 
 void BuildingsObserver::changeBuildings(Observable& mapToChange,
 int position, int action, int unitToCreate, int position2){

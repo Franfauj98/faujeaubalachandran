@@ -129,6 +129,7 @@ void PrintStats::execute (state::Observable& map){
   }
   else if (this->element==30){
     Barrack* barrack = (Barrack*) map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
+    cout<<barrack->getLevel()<<endl;
     switch(barrack->getLevel()){
       case 1:
       statsMap[0]=3;

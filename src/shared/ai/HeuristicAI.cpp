@@ -17,6 +17,19 @@ int dist(Position pos1, Position pos2){
   return(absdiff+orddiff);
 }
 
+bool verifUnits(Observable& principalMap,int id){
+  bool verif=false;
+  for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
+    Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
+    int idUnit=unit->getIdUnits();
+    if (idUnit==id){
+      verif=true;
+      break;
+    }
+  }
+  return verif;
+}
+
 HeuristicAI::HeuristicAI (){}
 
 /*
@@ -72,15 +85,24 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     int x3=-1;
     positionElement(x3, y3, buildings[2]);
 
-    Position pos0(0,0);
-    Arrow arrow(1,pos0,0);
-    Decurion decurion(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
-    Catapult catapult(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
-    Cavalier cavalier(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
+    std::vector<int> arrowCost = {50,100,150,200};
+    std::vector<int> decurionCost = {50,100,150,200};
+    std::vector<int> catapultCost = {50,100,150,200};
+    std::vector<int> cavalierCost = {50,100,150,200};
 
     Ressource* ressource =(Ressource*) principalMap.getAllMaps().getBuildingsMap()[y1+25*x1].get();
     Palace* palace =(Palace*) principalMap.getAllMaps().getBuildingsMap()[y2+25*x2].get();
     Barrack* barrack =(Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get();
+    //cout<<"level "<<arrowCost[3]<<endl;
+    int levelUnit = barrack->getLevel();
+    //int levelUnit=1;
+    // Position pos0(0,0);
+    // Arrow arrow(1,pos0,0);
+    // Decurion decurion(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
+    // Catapult catapult(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
+    // Cavalier cavalier(((Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get())->getLevel(),pos0,0);
+
+
     int element;
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<empire->getWoodRessource() && palace->getBuildingCost().getGold()<empire->getGoldRessource()){
       std::cout << "LevelUp palace" << '\n';
@@ -97,7 +119,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y3,element)),3);
+      engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
       usleep(1000000);
       engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
       counter++;
@@ -113,14 +135,19 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       counter++;
       return;
     } else if (barrack->getUnitsNumber()<barrack->getCapacity() &&
-    ((arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()) ||
-      (decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()) ||
-      (cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()) ||
-      (catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource())
+    ((arrowCost[levelUnit-1]<empire->getFoodRessource() && arrowCost[levelUnit-1]<empire->getGoldRessource()) ||
+      (decurionCost[levelUnit-1]<empire->getFoodRessource() && decurionCost[levelUnit-1]<empire->getGoldRessource()) ||
+      (cavalierCost[levelUnit-1]<empire->getFoodRessource() && cavalierCost[levelUnit-1]<empire->getGoldRessource()) ||
+      (catapultCost[levelUnit-1]<empire->getFoodRessource() && catapultCost[levelUnit-1]<empire->getGoldRessource())
     )
     ){
+      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
+      engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
+      engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
+      usleep(1000000);
       std::cout << "CreateUnit" << '\n';
       std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
+
       int pos=0;
       while (principalMap.getAllMaps().getMapMatrix()[positions[pos+1]][positions[pos]]!=2 && pos<10){
         pos +=2;
@@ -130,7 +157,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int unitChoice=rand() % 4+1;
       switch(unitChoice){
         case 1:
-        if (arrow.getUnitCost().getFood()<empire->getFoodRessource() && arrow.getUnitCost().getGold()<empire->getGoldRessource()){
+        if (arrowCost[levelUnit-1]<empire->getFoodRessource() && arrowCost[levelUnit-1]<empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
           usleep(1000000);
           counter++;
@@ -138,7 +165,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
         break;
         case 2:
-        if(decurion.getUnitCost().getFood()<empire->getFoodRessource() && decurion.getUnitCost().getGold()<empire->getGoldRessource()){
+        if(decurionCost[levelUnit-1]<empire->getFoodRessource() && decurionCost[levelUnit-1]<empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
           usleep(1000000);
           counter++;
@@ -146,7 +173,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
         break;
         case 3:
-        if(cavalier.getUnitCost().getFood()<empire->getFoodRessource() && cavalier.getUnitCost().getGold()<empire->getGoldRessource()){
+        if(cavalierCost[levelUnit-1]<empire->getFoodRessource() && cavalierCost[levelUnit-1]<empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
           usleep(1000000);
           counter++;
@@ -154,7 +181,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
         break;
         case 4:
-        if(catapult.getUnitCost().getFood()<empire->getFoodRessource() && catapult.getUnitCost().getGold()<empire->getGoldRessource()){
+        if(catapultCost[levelUnit-1]<empire->getFoodRessource() && catapultCost[levelUnit-1]<empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
           usleep(1000000);
           counter++;
@@ -163,7 +190,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         break;
         default : break;
       }
-    } else {
+    } else if (verifUnits(principalMap,id)){
 
       // select empire to Attack
       std::cout << "/* select empire to Attack */" << '\n';
@@ -221,6 +248,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           indexMinimumDist = i;
         }
       }
+      std::cout << "/* Recuperation distance entre unités et empire à attaquer */" << '\n';
       if (minimumDist>3){
         indexMinimumDist=rand() % (distanceFromEmpireToAttack.size());
       }
