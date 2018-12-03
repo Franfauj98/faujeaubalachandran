@@ -268,7 +268,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       std::cout << unitsPositionE.size() << '\n';
       if(unitsPositionE.size()>0){
         int minimumDistE=1000000;
-        int indexMinimumDistE=0;
+        int indexMinimumDistE=-1;
         std::vector<int> distanceFromUnitToAttack;
         std::cout << "/* Recuperation distance entre unités et unités à attaquer */" << '\n';
         for (size_t i=0;i<unitsPositionE.size();i++){
@@ -278,8 +278,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             indexMinimumDistE = i;
           }
         }
-        if (distanceFromUnitToAttack[indexMinimumDistE]<=3){
-          posToAttack=unitsPositionE[indexMinimumDistE];
+        if(indexMinimumDistE>=0){
+          if (distanceFromUnitToAttack[indexMinimumDistE]<=3){
+            posToAttack=unitsPositionE[indexMinimumDistE];
+          }
         }
       }
 
