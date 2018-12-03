@@ -26,9 +26,6 @@ void Attack::execute(state::Observable& map){
     Units* unitToChange = (Units *)map.getAllMaps().getUnitsMap()[this->y+25*this->x].get();
     Units* unitToChange2 = (Units *)map.getAllMaps().getUnitsMap()[this->y2+25*this->x2].get();
     Buildings* buildingToAttack = (Buildings *)map.getAllMaps().getBuildingsMap()[this->y2+25*this->x2].get();
-    std::cout << unitToChange->getIdUnits() << '\n';
-    std::cout << buildingToAttack->getIdBuilding() << '\n';
-    std::cout << unitToChange2->getIdUnits() << '\n';
 
     if ((Matrix[this->x2][this->y2]==26 || Matrix[this->x2][this->y2]==27 || Matrix[this->x2][this->y2]==28 || Matrix[this->x2][this->y2]==29)) {
       if(unitToChange->getIdUnits()!=buildingToAttack->getIdBuilding()){
