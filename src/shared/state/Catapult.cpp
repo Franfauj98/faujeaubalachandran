@@ -24,8 +24,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(50);
-      setDamage(5);
+      setLife(20);
+      setDamage(40);
       setStrikeRange(4);
       setMovingRange(1);
       setLevel(level);
@@ -37,8 +37,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(60);
-      setDamage(10);
+      setLife(30);
+      setDamage(60);
       setStrikeRange(4);
       setMovingRange(1);
       setLevel(level);
@@ -50,8 +50,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(70);
-      setDamage(15);
+      setLife(40);
+      setDamage(80);
       setStrikeRange(5);
       setMovingRange(1);
       setLevel(level);
@@ -63,8 +63,8 @@ Catapult::Catapult (int level, Position p, int id){
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(80);
-      setDamage(20);
+      setLife(50);
+      setDamage(100);
       setStrikeRange(5);
       setMovingRange(1);
       setLevel(level);

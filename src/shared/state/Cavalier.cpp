@@ -24,8 +24,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(40);
-      setDamage(25);
+      setLife(60);
+      setDamage(15);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -37,8 +37,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(50);
-      setDamage(40);
+      setLife(70);
+      setDamage(20);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -50,8 +50,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(70);
-      setDamage(50);
+      setLife(80);
+      setDamage(25);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -63,8 +63,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(80);
-      setDamage(55);
+      setLife(90);
+      setDamage(30);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -76,8 +76,8 @@ Cavalier::Cavalier (int level, Position p, int id){
     default :{
       setPosition(p);
       setIdUnits(id);
-      setLife(40);
-      setDamage(25);
+      setLife(60);
+      setDamage(15);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(1);

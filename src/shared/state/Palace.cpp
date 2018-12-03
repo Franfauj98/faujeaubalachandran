@@ -18,7 +18,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(1);
       setIdTexture(HDV1);
-      BuildingCost palaceCost(50,50);
+      BuildingCost palaceCost(200,200);
       setBuildingCost(palaceCost);
       setLife(200);
       this->type = 26;
@@ -29,7 +29,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(2);
       setIdTexture(HDV2);
-      BuildingCost palaceCost(100,100);
+      BuildingCost palaceCost(300,300);
       setBuildingCost(palaceCost);
       setLife(400);
       this->type = 27;
@@ -39,7 +39,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(3);
       setIdTexture(HDV3);
-      BuildingCost palaceCost(150,150);
+      BuildingCost palaceCost(400,400);
       setBuildingCost(palaceCost);
       setLife(600);
       this->type = 28;
@@ -49,7 +49,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(4);
       setIdTexture(HDV4);
-      BuildingCost palaceCost(200,200);
+      BuildingCost palaceCost(500,500);
       setBuildingCost(palaceCost);
       setLife(800);
       this->type = 29;
@@ -59,7 +59,7 @@ Palace::Palace (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(1);
       setIdTexture(HDV1);
-      BuildingCost palaceCost(50,50);
+      BuildingCost palaceCost(200,200);
       setBuildingCost(palaceCost);
       setLife(200);
       this->type = 26;

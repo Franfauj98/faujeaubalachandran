@@ -37,7 +37,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(1);
       setIdTexture(BARRACK);
-      BuildingCost barrackCost(50,50);
+      BuildingCost barrackCost(100,100);
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
@@ -50,7 +50,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(2);
       setIdTexture(BARRACK);
-      BuildingCost barrackCost(100,100);
+      BuildingCost barrackCost(200,200);
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
@@ -62,7 +62,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(3);
       setIdTexture(BARRACK);
-      BuildingCost barrackCost(150,150);
+      BuildingCost barrackCost(300,300);
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
@@ -74,7 +74,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(4);
       setIdTexture(BARRACK);
-      BuildingCost barrackCost(200,200);
+      BuildingCost barrackCost(400,400);
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);
@@ -86,7 +86,7 @@ Barrack::Barrack (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(1);
       setIdTexture(BARRACK);
-      BuildingCost barrackCost(50,50);
+      BuildingCost barrackCost(100,100);
       setBuildingCost(barrackCost);
       this->unitsNumber=(0);
       setLife(0);

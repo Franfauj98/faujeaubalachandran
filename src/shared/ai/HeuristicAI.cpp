@@ -104,7 +104,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
 
 
     int element;
-    if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<empire->getWoodRessource() && palace->getBuildingCost().getGold()<empire->getGoldRessource()){
+    if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
       std::cout << "LevelUp palace" << '\n';
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
@@ -114,7 +114,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
       counter++;
       return;
-    } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<empire->getWoodRessource() && barrack->getBuildingCost().getGold()<empire->getGoldRessource()){
+    } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
       std::cout << "LevelUp barrack" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
@@ -124,7 +124,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
       counter++;
       return;
-    } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<empire->getWoodRessource() && ressource->getBuildingCost().getGold()<empire->getGoldRessource()){
+    } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
       std::cout << "LevelUp ressource" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
@@ -135,10 +135,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       counter++;
       return;
     } else if (barrack->getUnitsNumber()<barrack->getCapacity() &&
-    ((arrowCost[levelUnit-1]<empire->getFoodRessource() && arrowCost[levelUnit-1]<empire->getGoldRessource()) ||
-      (decurionCost[levelUnit-1]<empire->getFoodRessource() && decurionCost[levelUnit-1]<empire->getGoldRessource()) ||
-      (cavalierCost[levelUnit-1]<empire->getFoodRessource() && cavalierCost[levelUnit-1]<empire->getGoldRessource()) ||
-      (catapultCost[levelUnit-1]<empire->getFoodRessource() && catapultCost[levelUnit-1]<empire->getGoldRessource())
+    ((arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()) ||
+      (decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()) ||
+      (cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()) ||
+      (catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource())
     )
     ){
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
@@ -158,7 +158,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int unitChoice=rand() % 4+1;
       switch(unitChoice){
         case 1:
-        if (arrowCost[levelUnit-1]<empire->getFoodRessource() && arrowCost[levelUnit-1]<empire->getGoldRessource()){
+        if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
           usleep(1000000);
           counter++;
@@ -166,7 +166,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
         break;
         case 2:
-        if(decurionCost[levelUnit-1]<empire->getFoodRessource() && decurionCost[levelUnit-1]<empire->getGoldRessource()){
+        if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
           usleep(1000000);
           counter++;
@@ -174,7 +174,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
         break;
         case 3:
-        if(cavalierCost[levelUnit-1]<empire->getFoodRessource() && cavalierCost[levelUnit-1]<empire->getGoldRessource()){
+        if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
           usleep(1000000);
           counter++;
@@ -182,7 +182,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
         break;
         case 4:
-        if(catapultCost[levelUnit-1]<empire->getFoodRessource() && catapultCost[levelUnit-1]<empire->getGoldRessource()){
+        if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
           usleep(1000000);
           counter++;
@@ -254,31 +254,34 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         indexMinimumDist=rand() % (distanceFromEmpireToAttack.size());
       }
 
-      // std::vector<int> unitsE; //units index in unitMapMatrix
-      // std::vector<Position> unitsPositionE; //units poition
-      //
-      // for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
-      //   Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
-      //   int idUnit=unit->getIdUnits();
-      //   if (idUnit!=id){
-      //     unitsE.push_back(i);
-      //     unitsPositionE.push_back(unit->getPosition());
-      //   }
-      // }
-      // int minimumDistE=1000000;
-      // int indexMinimumDistE;
-      // std::vector<int> distanceFromUnitToAttack;
-      // std::cout << "/* Recuperation distance entre unités et unités à attaquer */" << '\n';
-      // for (size_t i=0;i<unitsPositionE.size();i++){
-      //   distanceFromUnitToAttack.push_back(dist(unitsPosition[indexMinimumDist], unitsPositionE[i]));
-      //   if(distanceFromUnitToAttack[i]<minimumDist){
-      //     minimumDist = distanceFromEmpireToAttack[i];
-      //     indexMinimumDistE = i;
-      //   }
-      // }
-      // if (distanceFromEmpireToAttack[indexMinimumDistE]<=3){
-      //   posToAttack=unitsPositionE[indexMinimumDistE];
-      // }
+      std::vector<int> unitsE; //units index in unitMapMatrix
+      std::vector<Position> unitsPositionE; //units poition
+
+      for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
+        Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
+        int idUnit=unit->getIdUnits();
+        if (idUnit!=id&&idUnit!=0){
+          unitsE.push_back(i);
+          unitsPositionE.push_back(unit->getPosition());
+        }
+      }
+      std::cout << unitsPositionE.size() << '\n';
+      if(unitsPositionE.size()>0){
+        int minimumDistE=1000000;
+        int indexMinimumDistE=0;
+        std::vector<int> distanceFromUnitToAttack;
+        std::cout << "/* Recuperation distance entre unités et unités à attaquer */" << '\n';
+        for (size_t i=0;i<unitsPositionE.size();i++){
+          distanceFromUnitToAttack.push_back(dist(unitsPosition[indexMinimumDist], unitsPositionE[i]));
+          if(distanceFromUnitToAttack[i]<minimumDist){
+            minimumDistE = distanceFromUnitToAttack[i];
+            indexMinimumDistE = i;
+          }
+        }
+        if (distanceFromUnitToAttack[indexMinimumDistE]<=3){
+          posToAttack=unitsPositionE[indexMinimumDistE];
+        }
+      }
 
       int leftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()];
       int rightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()];

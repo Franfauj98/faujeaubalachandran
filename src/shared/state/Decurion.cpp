@@ -24,8 +24,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 1 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(30);
-      setDamage(30);
+      setLife(50);
+      setDamage(20);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -37,8 +37,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 2 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(40);
-      setDamage(40);
+      setLife(60);
+      setDamage(25);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -50,8 +50,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 3 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(50);
-      setDamage(50);
+      setLife(70);
+      setDamage(30);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -63,8 +63,8 @@ Decurion::Decurion (int level, Position p, int id){
     case 4 :{
       setPosition(p);
       setIdUnits(id);
-      setLife(60);
-      setDamage(55);
+      setLife(80);
+      setDamage(35);
       setStrikeRange(1);
       setMovingRange(1);
       setLevel(level);
@@ -76,7 +76,7 @@ Decurion::Decurion (int level, Position p, int id){
     default :{
       setPosition(p);
       setIdUnits(id);
-      setLife(20);
+      setLife(50);
       setDamage(20);
       setStrikeRange(1);
       setMovingRange(1);

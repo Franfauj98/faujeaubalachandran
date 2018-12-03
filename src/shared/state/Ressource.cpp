@@ -29,7 +29,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(1);
       setIdTexture(RESSOURCE1);
-      BuildingCost ressourceCost(50,50);
+      BuildingCost ressourceCost(100,100);
       setBuildingCost(ressourceCost);
       setLife(0);
       this->type = 31;
@@ -41,7 +41,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(2);
       setIdTexture(RESSOURCE1);
-      BuildingCost ressourceCost(100,100);
+      BuildingCost ressourceCost(200,200);
       setBuildingCost(ressourceCost);
       setLife(0);
       this->type = 31;
@@ -52,7 +52,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(3);
       setIdTexture(RESSOURCE1);
-      BuildingCost ressourceCost(150,150);
+      BuildingCost ressourceCost(300,300);
       setBuildingCost(ressourceCost);
       setLife(0);
       this->type = 31;
@@ -63,7 +63,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(4);
       setIdTexture(RESSOURCE1);
-      BuildingCost ressourceCost(200,200);
+      BuildingCost ressourceCost(400,400);
       setBuildingCost(ressourceCost);
       setLife(0);
       this->type = 31;
@@ -74,7 +74,7 @@ Ressource::Ressource (int id, Position position, int level) : Buildings() {
       setPosition(position);
       setLevel(1);
       setIdTexture(RESSOURCE1);
-      BuildingCost ressourceCost(50,50);
+      BuildingCost ressourceCost(100,100);
       setBuildingCost(ressourceCost);
       setLife(0);
       this->type = 31;

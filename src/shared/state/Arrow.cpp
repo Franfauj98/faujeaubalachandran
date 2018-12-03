@@ -26,7 +26,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setPosition(p);
       setIdUnits(id);
       setLife(40);
-      setDamage(10);
+      setDamage(20);
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(level);
@@ -39,7 +39,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setPosition(p);
       setIdUnits(id);
       setLife(50);
-      setDamage(20);
+      setDamage(25);
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(level);
@@ -65,7 +65,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setPosition(p);
       setIdUnits(id);
       setLife(70);
-      setDamage(40);
+      setDamage(35);
       setStrikeRange(3);
       setMovingRange(1);
       setLevel(level);
@@ -78,7 +78,7 @@ Arrow::Arrow (int level, Position p, int id) : Units() {
       setPosition(p);
       setIdUnits(id);
       setLife(40);
-      setDamage(10);
+      setDamage(20);
       setStrikeRange(2);
       setMovingRange(1);
       setLevel(1);

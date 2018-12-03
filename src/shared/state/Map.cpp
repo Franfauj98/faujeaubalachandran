@@ -194,7 +194,7 @@ Map::Map(){
         case 26: {
           this->buildingsMap[buildingChange] = move(unique_ptr<Element> (new Palace(idPalace,p,1)));
           name = "Player"+idPalace;
-          Empires.push_back(unique_ptr<Empire> (new Empire(idPalace, name, 500, 500, 500, 3)));
+          Empires.push_back(unique_ptr<Empire> (new Empire(idPalace, name, 200, 200, 200, 3)));
           idPalace++;
           break;
         }
