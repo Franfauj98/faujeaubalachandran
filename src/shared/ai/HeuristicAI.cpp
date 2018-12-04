@@ -10,6 +10,7 @@ using namespace engine;
 using namespace state;
 using namespace std;
 
+//find the distance between 2 positions
 int dist(Position pos1, Position pos2){
   int absdiff, orddiff;
   absdiff = std::abs(pos1.getX() - pos2.getX());
@@ -17,6 +18,7 @@ int dist(Position pos1, Position pos2){
   return(absdiff+orddiff);
 }
 
+//Verify if there is at least one unit in the map of id : id
 bool verifUnits(Observable& principalMap,int id){
   bool verif=false;
   for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
@@ -30,6 +32,7 @@ bool verifUnits(Observable& principalMap,int id){
   return verif;
 }
 
+//Verify if the ID of the (x,y) element is the same as the current element one
 bool verifPoss(Observable& principalMap, int x,int y, int id, int element){
   bool verif=true;
   if (element==1){
@@ -53,6 +56,7 @@ bool verifPoss(Observable& principalMap, int x,int y, int id, int element){
   return verif;
 }
 
+//compare 2 positions
 bool posComp(Position pos1, Position pos2){
   if (pos1.getX()==pos2.getX() && pos1.getY()==pos2.getY()){
     return false;
@@ -62,6 +66,7 @@ bool posComp(Position pos1, Position pos2){
   }
 }
 
+//verify if the (x,y) unit id is the same as the current empire playing id
 bool idUnits(Observable& principalMap, int id,int x, int y){
     Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[y+25*x].get();
     int idUnit=unit->getIdUnits();
@@ -75,6 +80,7 @@ bool idUnits(Observable& principalMap, int id,int x, int y){
 
 HeuristicAI::HeuristicAI (){}
 
+//recover the element position in an inline array
 void positionElement(int& x, int& y, int position){
   y = position%25;
   x=-1;
@@ -123,12 +129,13 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     std::vector<int> catapultCost = {50,100,150,200};
     std::vector<int> cavalierCost = {50,100,150,200};
 
-    Ressource* ressource =(Ressource*) principalMap.getAllMaps().getBuildingsMap()[y1+25*x1].get();
-    Palace* palace =(Palace*) principalMap.getAllMaps().getBuildingsMap()[y2+25*x2].get();
-    Barrack* barrack =(Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get();
+    Ressource* ressource = (Ressource*) principalMap.getAllMaps().getBuildingsMap()[y1+25*x1].get();
+    Palace* palace = (Palace*) principalMap.getAllMaps().getBuildingsMap()[y2+25*x2].get();
+    Barrack* barrack = (Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get();
     int levelUnit = barrack->getLevel();
 
     int element;
+    //level up of the palace if possible
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
       std::cout << "LevelUp palace" << '\n';
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
@@ -139,6 +146,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
       counter++;
       return;
+      //level up of the barrack if possible
     } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
       std::cout << "LevelUp barrack" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
@@ -149,6 +157,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
       counter++;
       return;
+      //level up of the ressource if possible
     } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
       std::cout << "LevelUp ressource" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
@@ -159,6 +168,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
       counter++;
       return;
+      //CreateUnit if enough space in barrack and enough ressource
     } else if (barrack->getUnitsNumber()<barrack->getCapacity() &&
     ((arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()) ||
       (decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()) ||
@@ -180,6 +190,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       }
       int y= positions[pos];
       int x=positions[pos+1];
+      //random choice of the unit to create
       int unitChoice=rand() % 4+1;
       switch(unitChoice){
         case 1:
@@ -248,7 +259,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       std::vector<int> units; //units index in unitMapMatrix
       std::vector<Position> unitsPosition; //units poition
 
-      // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
       for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
         Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
         int idUnit=unit->getIdUnits();
@@ -327,8 +337,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
 
       Units* currentUnit = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY())].get();
-      //Buildings* buildToAttack;
-      //Units* unitToAttack;
 
       Units* unitToAttackt = dynamic_cast<Units*> (principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get());
       Buildings* buildToAttackt = dynamic_cast<Buildings*> (principalMap.getAllMaps().getBuildingsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY()-1)].get());
@@ -340,7 +348,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       Units* unitToAttackr = dynamic_cast<Units*> (principalMap.getAllMaps().getUnitsMap()[(unitsPosition[indexMinimumDist].getX()-1)*25 + (unitsPosition[indexMinimumDist].getY())].get());
 
       if (((topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttackt->getIdBuilding())) ||
-      ( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttackt->getIdUnits() )){
+        ( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttackt->getIdUnits() )){
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
@@ -351,92 +359,92 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         return;
       }
       else if(( (bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) && (currentUnit->getIdUnits() != buildToAttackb->getIdBuilding())) ||
-    ( (bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22) && currentUnit->getIdUnits() != unitToAttackb->getIdUnits() )){
-      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-      engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-      usleep(1000000);
-      engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-      usleep(1000000);
-      counter++;
-      return;
+        ( (bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22) && currentUnit->getIdUnits() != unitToAttackb->getIdUnits() )){
+        engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
+        engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
+        engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        usleep(1000000);
+        engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
+        usleep(1000000);
+        counter++;
+        return;
       }
       else if(( (leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) && (currentUnit->getIdUnits() != buildToAttackl->getIdBuilding())) ||
-     ( (leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22) && currentUnit->getIdUnits() != unitToAttackl->getIdUnits() )){
-       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-       engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-       engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-       usleep(1000000);
-       engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-       usleep(1000000);
-       counter++;
-       return;
+        ( (leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22) && currentUnit->getIdUnits() != unitToAttackl->getIdUnits() )){
+        engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
+        engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
+        engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        usleep(1000000);
+        engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+        usleep(1000000);
+        counter++;
+        return;
       }
       else if(( (rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) && (currentUnit->getIdUnits() != buildToAttackr->getIdBuilding())) ||
-   ( (rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22) && currentUnit->getIdUnits() != unitToAttackr->getIdUnits() )  ){
-     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-     engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-     engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-     usleep(1000000);
-     engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-     usleep(1000000);
-     counter++;
-     return;
+        ( (rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22) && currentUnit->getIdUnits() != unitToAttackr->getIdUnits() )  ){
+        engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
+        engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
+        engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        usleep(1000000);
+        engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
+        usleep(1000000);
+        counter++;
+        return;
       }
-        std::vector<state::Position> possibilitiesPos;
-          if(leftElt==2){
-            Position pos2(unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY());
-            if (posComp(pos2,currentUnit->getCanMove()[0]) && posComp(pos2,currentUnit->getCanMove()[1]) && posComp(pos2,currentUnit->getCanMove()[2])){
-              possibilitiesPos.push_back(pos2);
-            }
-          }
-          if(rightElt==2){
-            Position pos3(unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY());
-            if (posComp(pos3,currentUnit->getCanMove()[0]) && posComp(pos3,currentUnit->getCanMove()[1]) && posComp(pos3,currentUnit->getCanMove()[2])){
-              possibilitiesPos.push_back(pos3);
-            }
-          }
-          if(bottomElt==2){
-            Position pos4(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1);
-            if (posComp(pos4,currentUnit->getCanMove()[0]) && posComp(pos4,currentUnit->getCanMove()[1]) && posComp(pos4,currentUnit->getCanMove()[2])){
-              possibilitiesPos.push_back(pos4);
-            }
-          }
-          if(topElt==2){
-            Position pos5(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1);
-            if (posComp(pos5,currentUnit->getCanMove()[0]) && posComp(pos5,currentUnit->getCanMove()[1]) && posComp(pos5,currentUnit->getCanMove()[2])){
-              possibilitiesPos.push_back(pos5);
-            }
-          }
-        int minimumDistG=1000000;
-        int indexMinimumDistG=-1;
-        std::vector<int> distanceFromGToAttack;
-        for (size_t i=0;i<possibilitiesPos.size();i++){
-          distanceFromGToAttack.push_back(dist(possibilitiesPos[i], posToAttack));
-          if(distanceFromGToAttack[i]<minimumDistG){
-            minimumDistG = distanceFromGToAttack[i];
-            indexMinimumDistG = i;
-          }
+      std::vector<state::Position> possibilitiesPos;
+      if(leftElt==2){
+        Position pos2(unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY());
+        if (posComp(pos2,currentUnit->getCanMove()[0]) && posComp(pos2,currentUnit->getCanMove()[1]) && posComp(pos2,currentUnit->getCanMove()[2])){
+          possibilitiesPos.push_back(pos2);
         }
-        if (indexMinimumDistG>=0){
-                engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-                engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-                engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-                usleep(1000000);
-                engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
-                usleep(500000);
-                std::vector<state::Position> unitPos;
-                Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
-                unitPos.push_back(currentUnit->getCanMove()[1]);
-                unitPos.push_back(currentUnit->getCanMove()[2]);
-                unitPos.push_back(possPos);
-                currentUnit->setCanMove(unitPos);
-                counter++;
-                return;
-        } else {
-          counter++;
-          return;
+      }
+      if(rightElt==2){
+        Position pos3(unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY());
+        if (posComp(pos3,currentUnit->getCanMove()[0]) && posComp(pos3,currentUnit->getCanMove()[1]) && posComp(pos3,currentUnit->getCanMove()[2])){
+          possibilitiesPos.push_back(pos3);
         }
+      }
+      if(bottomElt==2){
+        Position pos4(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1);
+        if (posComp(pos4,currentUnit->getCanMove()[0]) && posComp(pos4,currentUnit->getCanMove()[1]) && posComp(pos4,currentUnit->getCanMove()[2])){
+          possibilitiesPos.push_back(pos4);
+        }
+      }
+      if(topElt==2){
+        Position pos5(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1);
+        if (posComp(pos5,currentUnit->getCanMove()[0]) && posComp(pos5,currentUnit->getCanMove()[1]) && posComp(pos5,currentUnit->getCanMove()[2])){
+          possibilitiesPos.push_back(pos5);
+        }
+      }
+      int minimumDistG=1000000;
+      int indexMinimumDistG=-1;
+      std::vector<int> distanceFromGToAttack;
+      for (size_t i=0;i<possibilitiesPos.size();i++){
+        distanceFromGToAttack.push_back(dist(possibilitiesPos[i], posToAttack));
+        if(distanceFromGToAttack[i]<minimumDistG){
+          minimumDistG = distanceFromGToAttack[i];
+          indexMinimumDistG = i;
+        }
+      }
+      if (indexMinimumDistG>=0){
+              engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
+              engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
+              engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+              usleep(1000000);
+              engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
+              usleep(500000);
+              std::vector<state::Position> unitPos;
+              Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
+              unitPos.push_back(currentUnit->getCanMove()[1]);
+              unitPos.push_back(currentUnit->getCanMove()[2]);
+              unitPos.push_back(possPos);
+              currentUnit->setCanMove(unitPos);
+              counter++;
+              return;
+      } else {
+        counter++;
+        return;
+      }
     }
     counter++;
     return;
