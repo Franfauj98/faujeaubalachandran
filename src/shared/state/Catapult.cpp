@@ -1,6 +1,8 @@
 #include "Catapult.h"
 using namespace state;
 
+std::vector<state::Position> poscat;
+
 Catapult::Catapult () : Units() {
   Position p(0,0);
   setPosition(p);
@@ -17,9 +19,9 @@ Catapult::Catapult () : Units() {
 }
 
 Catapult::Catapult (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost catapultCost) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, catapultCost,0) {}
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, catapultCost,poscat) {}
 
-Catapult::Catapult (int level, Position p, int id){
+Catapult::Catapult (int level, Position p, int id): Units(){
   switch(level){
     case 1 :{
       setPosition(p);

@@ -2,6 +2,7 @@
 #ifndef STATE__UNITS__H
 #define STATE__UNITS__H
 
+#include <vector>
 
 namespace state {
   class UnitCost;
@@ -26,7 +27,7 @@ namespace state {
     // Attributes
   private:
     UnitCost unitCost;
-    int canMove;
+    std::vector<state::Position> canMove;
   protected:
     int idUnits;
     int life;
@@ -36,7 +37,7 @@ namespace state {
     // Operations
   public:
     Units ();
-    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost, int canMove);
+    Units (int idUnits, Position position, int life, int damage, int strikeRange, int movingRange, int level, IdTextureUnits idTextureUnits, UnitCost unitCost, std::vector<state::Position> canMove);
     virtual ~Units ();
     void setLife (const int life);
     int getLife () const;
@@ -61,8 +62,8 @@ namespace state {
     bool isPassable ();
     void attackBuilding (Buildings& building);
     bool attackBuildingAllowed (Buildings building);
-    int getCanMove () const;
-    void setCanMove (const int canMove);
+    std::vector<state::Position> getCanMove () const;
+    void setCanMove (const std::vector<state::Position> canMove);
     // Setters and Getters
   };
 

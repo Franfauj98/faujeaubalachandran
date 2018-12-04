@@ -14,14 +14,19 @@ Units::Units () {
   setIdTextureUnits(NONE_UNIT);
   UnitCost cost(0,0);
   setUnitCost(cost);
-  setCanMove(0);
+  std::vector<state::Position> canMove;
+  Position pos00(0,0);
+  canMove.push_back(pos00);
+  canMove.push_back(pos00);
+  canMove.push_back(pos00);
+  setCanMove(canMove);
 }
 
 Units::Units (int idUnits, Position position, int life,
   int damage, int strikeRange, int movingRange,
-  int level, IdTextureUnits idTextureUnits, UnitCost uniCost,int canMove) {
+  int level, IdTextureUnits idTextureUnits, UnitCost uniCost,std::vector<state::Position> canMove) {
   try{
-    if(idUnits>=0 && life>=0 && life <=1000 && damage>=0 && damage <= 100 && strikeRange>=0 && strikeRange <= 10 && movingRange>=0 && movingRange<=5 && level>=0 && level<=5 && canMove<2) {
+    if(idUnits>=0 && life>=0 && life <=1000 && damage>=0 && damage <= 100 && strikeRange>=0 && strikeRange <= 10 && movingRange>=0 && movingRange<=5 && level>=0 && level<=5) {
       this->position = position;
       this->idUnits = idUnits;
       this->life = life;
@@ -42,6 +47,7 @@ Units::Units (int idUnits, Position position, int life,
       this->level = 0;
       this->idTextureUnits=ARROW1;
       this->unitCost=cost;
+      std::vector<state::Position> canMove;
       this->canMove=canMove;
       std::string message="idUnits must be positive\n";
       message += "life must be positive or be smaller than 1000\n";
@@ -242,20 +248,11 @@ bool Units::isPassable(){
   return false;
 }
 
-void Units::setCanMove (int canMove){
-    try{
-      if(canMove >= 0 && canMove <=1){
+void Units::setCanMove (std::vector<state::Position> canMove){
         this->canMove = canMove;
-      } else {
-        this->canMove = 0;
-        throw std::string("canMove must be smaller than 2");
-      }
-    } catch (std::string error){
-      std::cerr << error << std::endl;
-    }
 }
 
-int Units::getCanMove() const{
+std::vector<state::Position> Units::getCanMove() const{
   return this->canMove;
 }
 

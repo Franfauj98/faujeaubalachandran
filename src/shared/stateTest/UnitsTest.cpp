@@ -10,8 +10,9 @@ void unitsTest() {
   Position pos1(1,2);
   UnitCost unitCost(50,50);
   cout << "INSTANCIATION OF UNITS WITH INVALID ARGUMENTS" << endl;
-  Units unit(-1, pos1, -1000, -100, -2, -1, -4, CAVALIER1,unitCost,0);
-  Units unit2(1, pos1, 1000, 100, 2, 1, 4, CAVALIER1,unitCost,0);
+  std::vector<state::Position> post;
+  Units unit(-1, pos1, -1000, -100, -2, -1, -4, CAVALIER1,unitCost,post);
+  Units unit2(1, pos1, 1000, 100, 2, 1, 4, CAVALIER1,unitCost,post);
   cout << "setLife WITH INVALID ARGUMENTS" << endl;
   unit2.setLife(-1);
   cout << "setLevel WITH INVALID ARGUMENTS" << endl;

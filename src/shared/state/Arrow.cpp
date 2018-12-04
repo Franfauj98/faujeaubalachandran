@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace state;
 
+std::vector<state::Position> pos;
+
 Arrow::Arrow () : Units() {
   Position p(0,0);
   setPosition(p);
@@ -18,7 +20,7 @@ Arrow::Arrow () : Units() {
 }
 
 Arrow::Arrow (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost arrowCost) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, arrowCost,0) {}
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, arrowCost,pos) {}
 
 Arrow::Arrow (int level, Position p, int id) : Units() {
   switch(level){

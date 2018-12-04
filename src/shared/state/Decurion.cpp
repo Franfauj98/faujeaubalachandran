@@ -1,6 +1,8 @@
 #include "Decurion.h"
 using namespace state;
 
+std::vector<state::Position> posdec;
+
 Decurion::Decurion () : Units() {
   Position p(0,0);
   setPosition(p);
@@ -17,9 +19,9 @@ Decurion::Decurion () : Units() {
 }
 
 Decurion::Decurion (int level,int id, Position p, int life, int damage, int strikeRange, int movingRange, IdTextureUnits idTextureUnits, UnitCost decurionCost) :
-  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, decurionCost,0) {}
+  Units(id, p, life, damage, strikeRange, movingRange, level, idTextureUnits, decurionCost,posdec) {}
 
-Decurion::Decurion (int level, Position p, int id){
+Decurion::Decurion (int level, Position p, int id): Units(){
   switch(level){
     case 1 :{
       setPosition(p);
