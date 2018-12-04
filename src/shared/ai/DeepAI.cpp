@@ -422,12 +422,14 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       final.x = posToAttack.getX();
       final.y = posToAttack.getY();
       auto path = generator.findPath(initial,final);
-      for(auto& coordinate : path) {
-        std::cout << coordinate.x << " " << coordinate.y << "\n";
-      }
+      // for(auto& coordinate : path) {
+      //   std::cout << coordinate.x << " " << coordinate.y << endl;
+      // }
 
       auto nextTile = path[path.size()-2];
-      std::cout << nextTile.x << " " << nextTile.y << "\n";
+      // std::cout <<endl;
+      // std::cout << unitsPosition[indexMinimumDist].getX() << " " << unitsPosition[indexMinimumDist].getY() << endl;
+      // std::cout << nextTile.x << " " << nextTile.y << endl;
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
