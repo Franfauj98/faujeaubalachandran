@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../../shared/state.h"
 using namespace state;
+using namespace std;
 
 void UnitsObserver::changeUnits(Observable& mapToChange,
 int position, int action, int position2){
@@ -23,6 +24,8 @@ int position, int action, int position2){
   Map& map = mapToChange.getAllMaps();
   Units* unitToChange = (Units *)map.getUnitsMap()[position].get();
   Units* unitToChange2 = (Units *)map.getUnitsMap()[position2].get();
+  int idUnit=unitToChange2->getIdUnits();
+
   Buildings* buildingToAttack = (Buildings *)map.getBuildingsMap()[position2].get();
   std::vector<std::vector<int>>& mapMatrix = map.getMapMatrix();
   switch(action){
@@ -43,9 +46,24 @@ int position, int action, int position2){
       if(unitToChange2->getLife()==0){
         map.getUnitsMap()[position2] = std::move(std::unique_ptr<Element> (new Units()));
         mapMatrix[x2][y2] = 2;
+        std::vector<int> buildings;
+
+        for (unsigned int i=0;i<map.getBuildingsMap().size();i++){
+          Buildings* building = (Buildings*) map.getBuildingsMap()[i].get();
+          int idBuilding=building->getIdBuilding();
+          if (idBuilding==idUnit){
+            buildings.push_back(i);
+          }
+        }
+        Barrack* barrack =(Barrack*) map.getBuildingsMap()[buildings[2]].get();
+        cout<<"un "<<barrack->getUnitsNumber()<<endl;
+        barrack->setUnitsNumber(barrack->getUnitsNumber()-1);
+        cout<<"new un "<<barrack->getUnitsNumber()<<endl;
+        }
+        break;
       }
-      break;
-    }
+
+
     case 3: //attackBuilding
     {
       unitToChange->attackBuilding(*buildingToAttack);
