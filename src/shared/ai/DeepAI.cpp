@@ -415,8 +415,8 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
           if(mapMatrix[i][j]!=2)
           {
               Vec2i collision;
-              collision.x = j;
-              collision.y = i;
+              collision.x = i;
+              collision.y = j;
               generator.addCollision(collision);
           }
         }
@@ -426,8 +426,12 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       initial.x = unitsPosition[indexMinimumDist].getX();
       initial.y = unitsPosition[indexMinimumDist].getY();
 
+      if(posToAttack.getX()>= unitsPosition[indexMinimumDist].getX()){
+        final.x = posToAttack.getX()-1;
+      } else {
+        final.x = posToAttack.getX()+1;
+      }
 
-      final.x = posToAttack.getX();
       final.y = posToAttack.getY();
       std::cout << posToAttack.getX() << " " <<posToAttack.getY() << endl;
       std::cout <<endl;
