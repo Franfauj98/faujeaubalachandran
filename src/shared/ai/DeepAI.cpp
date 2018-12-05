@@ -406,30 +406,40 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::vector<std::vector<int> > mapMatrix = principalMap.getAllMaps().getMapMatrix();
       for (int i =0 ; i<principalMap.getAllMaps().getSize(); i++ ){
         for (int j = 0 ; j<principalMap.getAllMaps().getSize(); j++){
+          // if (i==0 || i==24 || j==0 || j==24){
+          //   Vec2i collision;
+          //   collision.x = i;
+          //   collision.y = j;
+          //   generator.addCollision(collision);
+          // }
           if(mapMatrix[i][j]!=2)
           {
               Vec2i collision;
-              collision.x = i;
-              collision.y = j;
+              collision.x = j;
+              collision.y = i;
               generator.addCollision(collision);
           }
         }
       }
+
       Vec2i initial,final;
       initial.x = unitsPosition[indexMinimumDist].getX();
       initial.y = unitsPosition[indexMinimumDist].getY();
 
+
       final.x = posToAttack.getX();
       final.y = posToAttack.getY();
+      std::cout << posToAttack.getX() << " " <<posToAttack.getY() << endl;
+      std::cout <<endl;
       auto path = generator.findPath(initial,final);
-      // for(auto& coordinate : path) {
-      //   std::cout << coordinate.x << " " << coordinate.y << endl;
-      // }
+      for(auto& coordinate : path) {
+        std::cout << coordinate.x << " " << coordinate.y << endl;
+      }
 
       auto nextTile = path[path.size()-2];
-      // std::cout <<endl;
-      // std::cout << unitsPosition[indexMinimumDist].getX() << " " << unitsPosition[indexMinimumDist].getY() << endl;
-      // std::cout << nextTile.x << " " << nextTile.y << endl;
+      std::cout <<endl;
+      std::cout << unitsPosition[indexMinimumDist].getX() << " " << unitsPosition[indexMinimumDist].getY() << endl;
+      std::cout << nextTile.x << " " << nextTile.y << endl;
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);

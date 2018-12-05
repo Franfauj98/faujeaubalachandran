@@ -469,9 +469,9 @@ int main(int argc,char* argv[])
   Observable principalMap;
   RenderMap map;
   Engine engine;
-  HeuristicAI ia1;
-  HeuristicAI ia2;
-  HeuristicAI ia3;
+  DeepAI ia1;
+  DeepAI ia2;
+  DeepAI ia3;
 
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
   window.setVerticalSyncEnabled(false);
