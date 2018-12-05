@@ -241,7 +241,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         if(building->getIdBuilding() == id && (building->getType()== 26 || building->getType()== 27 || building->getType()== 28 || building->getType()== 29)){
           for(size_t j = 0; j < principalMap.getAllMaps().getBuildingsMap().size(); j++){
             Buildings* building2 = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[j].get();
-            if(building2->getIdBuilding() != id && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
+            if(building2->getIdBuilding() != id && building2->getIdBuilding() != 0 && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
               if(building->distance(building->getPosition(), building2->getPosition()) < distance){
                 distance = (building->distance(building->getPosition(), building2->getPosition()));
                 toAttack = j;
@@ -309,7 +309,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           unitsPositionE.push_back(unit->getPosition());
         }
       }
-      std::cout << unitsPositionE.size() << '\n';
+
       if(unitsPositionE.size()>0){
         int minimumDistE=1000000;
         int indexMinimumDistE=-1;
@@ -424,23 +424,26 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         if(distanceFromGToAttack[i]<minimumDistG){
           minimumDistG = distanceFromGToAttack[i];
           indexMinimumDistG = i;
+          std::cout << "distance " << minimumDistG << '\n';
+          std::cout << "X " << unitsPosition[indexMinimumDistG].getX() << " Y " << unitsPosition[indexMinimumDistG].getY() << '\n';
         }
       }
+      std::cout << "posX" << posToAttack.getX() << "posY" << posToAttack.getY() << '\n';
       if (indexMinimumDistG>=0){
-              engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-              engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-              engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-              usleep(1000000);
-              engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
-              usleep(500000);
-              std::vector<state::Position> unitPos;
-              Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
-              unitPos.push_back(currentUnit->getCanMove()[1]);
-              unitPos.push_back(currentUnit->getCanMove()[2]);
-              unitPos.push_back(possPos);
-              currentUnit->setCanMove(unitPos);
-              counter++;
-              return;
+        engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
+        engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
+        engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        usleep(1000000);
+        engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
+        usleep(500000);
+        std::vector<state::Position> unitPos;
+        Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
+        unitPos.push_back(currentUnit->getCanMove()[1]);
+        unitPos.push_back(currentUnit->getCanMove()[2]);
+        unitPos.push_back(possPos);
+        currentUnit->setCanMove(unitPos);
+        counter++;
+        return;
       } else {
         counter++;
         return;
