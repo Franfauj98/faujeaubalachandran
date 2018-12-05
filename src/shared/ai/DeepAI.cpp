@@ -406,13 +406,15 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::vector<std::vector<int> > mapMatrix = principalMap.getAllMaps().getMapMatrix();
       for (int i =0 ; i<principalMap.getAllMaps().getSize(); i++ ){
         for (int j = 0 ; j<principalMap.getAllMaps().getSize(); j++){
-          if (i==0 || i==24 || j==0 || j==24){
-            Vec2i collision;
-            collision.x = i;
-            collision.y = j;
-            generator.addCollision(collision);
-          }
-          else if(mapMatrix[i][j]!=2)
+          // if (i==0 || i==24 || j==0 || j==24){
+          //   Vec2i collision;
+          //   collision.x = i;
+          //   collision.y = j;
+          //   generator.addCollision(collision);
+          //
+          Units* un =(Units*) principalMap.getAllMaps().getUnitsMap()[i*25+j].get();
+          int idU=un->getIdUnits();
+          if(mapMatrix[i][j]!=2 )//&& mapMatrix[i][j]!=10 && mapMatrix[i][j]!=14 && mapMatrix[i][j]!=18 && mapMatrix[i][j]!=22 && idU!=id)
           {
               Vec2i collision;
               collision.x = i;
@@ -441,6 +443,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       }
 
       auto nextTile = path[path.size()-2];
+      generator.clearCollisions();
       std::cout <<endl;
       std::cout << unitsPosition[indexMinimumDist].getX() << " " << unitsPosition[indexMinimumDist].getY() << endl;
       std::cout << nextTile.x << " " << nextTile.y << endl;
@@ -450,6 +453,8 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       usleep(1000000);
       engine.addCommand(unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),nextTile.x,nextTile.y)),6);
       usleep(500000);
+
+
       counter++;
       return;
       } else {
