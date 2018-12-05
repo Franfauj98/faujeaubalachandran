@@ -56,9 +56,7 @@ int position, int action, int position2){
           }
         }
         Barrack* barrack =(Barrack*) map.getBuildingsMap()[buildings[2]].get();
-        cout<<"un "<<barrack->getUnitsNumber()<<endl;
         barrack->setUnitsNumber(barrack->getUnitsNumber()-1);
-        cout<<"new un "<<barrack->getUnitsNumber()<<endl;
         }
         break;
       }
