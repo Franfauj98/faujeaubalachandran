@@ -284,16 +284,16 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         for (size_t i=0;i<units.size();i++){
           int xu=0; int yu=0;
           positionElement(xu, yu, units[i]);
-          if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnits(principalMap,id,xu+1,yu)) ||
-              ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnits(principalMap,id,xu-1,yu)) ||
-              ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnits(principalMap,id,xu,yu+1))||
-              ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnits(principalMap,id,xu,yu-1))
+          if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnits(principalMap,id,xu+1,yu) && xu+1>=0 && xu+1<=24) ||
+              ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnits(principalMap,id,xu-1,yu) && xu-1>=0 && xu-1<=24) ||
+              ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnits(principalMap,id,xu,yu+1) && yu+1>=0 && yu+1<=24)||
+              ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnits(principalMap,id,xu,yu-1) && yu-1>=0 && yu-1<=24)
             ){
               indexMinimumDist=i;
               break;
             }
             else {
-              indexMinimumDist=rand() % (distanceFromEmpireToAttack.size());
+              indexMinimumDist=rand() % (units.size());
             }
         }
       }
@@ -304,7 +304,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
         Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
         int idUnit=unit->getIdUnits();
-        if (idUnit!=id&&idUnit!=0){
+        if (idUnit!=id && idUnit!=0){
           unitsE.push_back(i);
           unitsPositionE.push_back(unit->getPosition());
         }
@@ -425,10 +425,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           minimumDistG = distanceFromGToAttack[i];
           indexMinimumDistG = i;
           std::cout << "distance " << minimumDistG << '\n';
-          std::cout << "X " << unitsPosition[indexMinimumDistG].getX() << " Y " << unitsPosition[indexMinimumDistG].getY() << '\n';
+          std::cout << "X " << possibilitiesPos[indexMinimumDistG].getX() << " Y " << possibilitiesPos[indexMinimumDistG].getY() << '\n';
         }
       }
-      std::cout << "posX" << posToAttack.getX() << "posY" << posToAttack.getY() << '\n';
+      std::cout << "posX " << posToAttack.getX() << "posY " << posToAttack.getY() << '\n';
       if (indexMinimumDistG>=0){
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
