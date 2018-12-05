@@ -10,7 +10,7 @@ Buildings::Buildings() {
   BuildingCost buildingCost(0,0);
   this->buildingCost=buildingCost;
   this->idTexture=NONE_BUILDING;
-  
+  this->type=0;
 }
 
 Buildings::Buildings (int id, Position position, int level,IdTexture idTexture, BuildingCost buildingCost, int life) {

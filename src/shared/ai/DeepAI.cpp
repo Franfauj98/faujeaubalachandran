@@ -245,7 +245,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         if(building->getIdBuilding() == id && (building->getType()== 26 || building->getType()== 27 || building->getType()== 28 || building->getType()== 29)){
           for(size_t j = 0; j < principalMap.getAllMaps().getBuildingsMap().size(); j++){
             Buildings* building2 = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[j].get();
-            if(building2->getIdBuilding() != id && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
+            if(building2->getIdBuilding() != id && building2->getIdBuilding() != 0 && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
               if(building->distance(building->getPosition(), building2->getPosition()) < distance){
                 distance = (building->distance(building->getPosition(), building2->getPosition()));
                 toAttack = j;
@@ -288,10 +288,10 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         for (size_t i=0;i<units.size();i++){
           int xu=0; int yu=0;
           positionElementDeepAi(xu, yu, units[i]);
-          if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnitsDeepAi(principalMap,id,xu+1,yu)) ||
-              ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnitsDeepAi(principalMap,id,xu-1,yu)) ||
-              ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnitsDeepAi(principalMap,id,xu,yu+1))||
-              ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnitsDeepAi(principalMap,id,xu,yu-1))
+          if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnitsDeepAi(principalMap,id,xu+1,yu) && xu+1>=0 && xu+1<=24) ||
+              ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnitsDeepAi(principalMap,id,xu-1,yu) && xu-1>=0 && xu-1<=24) ||
+              ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnitsDeepAi(principalMap,id,xu,yu+1) && yu+1>=0 && yu+1<=24)||
+              ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnitsDeepAi(principalMap,id,xu,yu-1) && yu-1>=0 && yu-1<=24)
             ){
               indexMinimumDist=i;
               break;
@@ -406,13 +406,13 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::vector<std::vector<int> > mapMatrix = principalMap.getAllMaps().getMapMatrix();
       for (int i =0 ; i<principalMap.getAllMaps().getSize(); i++ ){
         for (int j = 0 ; j<principalMap.getAllMaps().getSize(); j++){
-          // if (i==0 || i==24 || j==0 || j==24){
-          //   Vec2i collision;
-          //   collision.x = i;
-          //   collision.y = j;
-          //   generator.addCollision(collision);
-          // }
-          if(mapMatrix[i][j]!=2)
+          if (i==0 || i==24 || j==0 || j==24){
+            Vec2i collision;
+            collision.x = i;
+            collision.y = j;
+            generator.addCollision(collision);
+          }
+          else if(mapMatrix[i][j]!=2)
           {
               Vec2i collision;
               collision.x = i;
