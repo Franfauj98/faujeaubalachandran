@@ -284,17 +284,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         for (size_t i=0;i<units.size();i++){
           int xu=0; int yu=0;
           positionElement(xu, yu, units[i]);
-          if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnits(principalMap,id,xu+1,yu) && xu+1>=0 && xu+1<=24) ||
-              ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnits(principalMap,id,xu-1,yu) && xu-1>=0 && xu-1<=24) ||
-              ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnits(principalMap,id,xu,yu+1) && yu+1>=0 && yu+1<=24)||
-              ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnits(principalMap,id,xu,yu-1) && yu-1>=0 && yu-1<=24)
+          if(xu+1>=0 && xu+1<=24 && xu-1>=0 && xu-1<=24 && yu+1>=0 && yu+1<=24 && yu-1>=0 && yu-1<=24){
+            if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnits(principalMap,id,xu+1,yu) && xu+1>=0 && xu+1<=24) ||
+            ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnits(principalMap,id,xu-1,yu) && xu-1>=0 && xu-1<=24) ||
+            ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnits(principalMap,id,xu,yu+1) && yu+1>=0 && yu+1<=24)||
+            ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnits(principalMap,id,xu,yu-1) && yu-1>=0 && yu-1<=24)
             ){
               indexMinimumDist=i;
               break;
             }
-            else {
-              indexMinimumDist=rand() % (units.size());
-            }
+          } else {
+            indexMinimumDist=rand() % (units.size());
+          }
         }
       }
 
