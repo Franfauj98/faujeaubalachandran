@@ -385,11 +385,34 @@ Voici une description de comment est implémenté le jeu grâce au moteur : \beg
 \subsubsection{Intelligence aléatoire}
 Cette stratégie est la même pour tous les empires. A chaque tour, chaque empire peut effectuer 3 actions : créer une unité, améliorer un bâtiment, déplacer une unité, attaquer un bâtiment ou une unité ennemie avec un de ses soldats. On choisit donc trois actions au hasard parmis celles-ci et on les effectue. 
 
+
+\subsubsection{Intelligence basée sur des heuristiques}
+Cette intelligence artificielle est basée sur des heuristiques que nous avons définies et qui, selon nos critères, doivent permettre de challenger un joueur humain.\\
+Nous pensons en effet qu'un empire a, par exemple, intérêt à augmenter le niveau de ses bâtiments en fonction de ses moyens dès qu'il peut. Ensuite, l'empire devra créer des unités en fonction de ses capacités (nombre d'unités pouvant être formées pour chaque empire limité). Enfin, l'empire pourra  déplacer ses unités pour les mener à la conquête ou au combat. \\
+Pour cela notre système intelligent va procéder comme suit en fonction de ses ressources et capacités de bâtiments : 
+\begin{enumerate}
+    \item Si l'empire a assez de ressources, l'AI doit améliorer son palace en premier (seul bâtiment pouvant se faire attaque).
+    \item Améliorer la caserne qui permet d'améliorer les unités qui peuvent être formées. 
+    \item Améliorer les ressources pour que la production à chaque tour soit augmentée.
+    \item Créer une unité, le choix de l'unité à créer étant aléatoire.
+\end{enumerate}
+Une fois que ceci est fait nous gérons la partie mobile de notre jeu.\\Voici comment se décompose le système de déplacement et d'attaque de nos unités.
+\begin{enumerate}
+    \item Si une unité ennemie se situe à coté d'une unité de l'empire, on choisit cette unité et l'unité ennemie est attaquée.
+    \item Si une unité de l'empire se situe à côté du Palace d'un empire ennemi, on choisit cette unité et, si elle est aussi à coté d'une unité ennemie elle attaque l'unité en priorité, sinon elle attaque le palace ennemi. Sinon : 
+    \item On choisit une unité aléatoirement de l'empire courant. 
+    \item Si elle se situe à moins de trois cases d'une unité ennemie, on s'en rapproche pour aller au combat.
+    \item Sinon elle se rapproche de l'empire ennemi le plus proche. 
+\end{enumerate}
+Dans notre système, l'amélioration des bâtiments est privilégiée par rapport au déplacement ou attaques de nos unités. Si une unité d'un empire tombe au combat, cet empire pourra en créer une nouvelle en fonction de ses moyens au tour suivant.
+\\Nous pouvons de plus remarquer qu'il y a parfois une unité qui ne va pas vers la bonne direction pendant au maximum 3 coups. Cela est dû à notre heuristique de déplacement qui dans un seul cas peut poser ce problème. Cependant cela arrive que très rarement et n'est pas pénalisant pour notre IA heuristique. 
 \subsection{Conception logiciel}
 \begin{itemize}
     \item Classe AI : qui sera le mère des trois différentes intelligences artificielles.
-    \item Classe RandomAI : contient un méthode run qui permet à l'intelligence artificielle naïve de lancer ses coups. 
+    \item Classe RandomAI : contient une méthode run qui permet à l'intelligence artificielle naïve de lancer ses coups. 
+    \item Classe HeuristicAI : contient une méthode run qui permet à l'intelligence artificielle heuristique de lancer ses coups. Elle utilise les heuristiques définies dans la sous section précédente. Pour réaliser le déplacement des unités nous avons besoin d'une "mémoire". En effet, notre carte contient des obstacles. Ainsi, pour les contourner nous avons besoin à chaque mouvement de rechercher la case la plus proche de la cible mais qui n'implique ni un retour en arrière pénalisant ni d'être bloqué par un obstacle. Nous avons donc ajouté un attribut à la classe Units qui s'appelle "canMove" et qui stocke les 3 dernières cases utilisées par l'unité.
 \end{itemize}
+\newpage
 
 \begin{figure}[!ht]
 \centering
