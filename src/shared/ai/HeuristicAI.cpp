@@ -252,11 +252,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           break;
         }
       }
-      // int y4 = 0;
-      // int x4 =- 1;
-      // positionElement(x4, y4, toAttack);
 
-      std::cout << "posToAttackFirstStep : (" << posToAttack.getX() << "," << posToAttack.getY() << ")" << '\n';
       std::vector<int> units; //units index in unitMapMatrix
       std::vector<Position> unitsPosition; //units poition
 
@@ -393,36 +389,28 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         return;
       }
       std::vector<state::Position> possibilitiesPos;
-      cout<<"current pos"<<unitsPosition[indexMinimumDist].getX() <<" "<<unitsPosition[indexMinimumDist].getY()<<endl;
-      cout<<"cm0 "<<currentUnit->getCanMove()[0].getX() <<" "<<currentUnit->getCanMove()[0].getY()<<endl;
-      cout<<"cm1 "<<currentUnit->getCanMove()[1].getX() <<" "<<currentUnit->getCanMove()[1].getY()<<endl;
-      cout<<"cm2 "<<currentUnit->getCanMove()[2].getX() <<" "<<currentUnit->getCanMove()[2].getY()<<endl;
       if(leftElt==2){
         Position pos2(unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY());
         if (posComp(pos2,currentUnit->getCanMove()[0]) && posComp(pos2,currentUnit->getCanMove()[1]) && posComp(pos2,currentUnit->getCanMove()[2])){
           possibilitiesPos.push_back(pos2);
-          std::cout << "GaucheOK : " << '\n';
         }
       }
       if(rightElt==2){
         Position pos3(unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY());
         if (posComp(pos3,currentUnit->getCanMove()[0]) && posComp(pos3,currentUnit->getCanMove()[1]) && posComp(pos3,currentUnit->getCanMove()[2])){
           possibilitiesPos.push_back(pos3);
-          std::cout << "DroiteOK : " << '\n';
         }
       }
       if(bottomElt==2){
         Position pos4(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1);
         if (posComp(pos4,currentUnit->getCanMove()[0]) && posComp(pos4,currentUnit->getCanMove()[1]) && posComp(pos4,currentUnit->getCanMove()[2])){
           possibilitiesPos.push_back(pos4);
-          std::cout << "BasOK : " << '\n';
         }
       }
       if(topElt==2){
         Position pos5(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1);
         if (posComp(pos5,currentUnit->getCanMove()[0]) && posComp(pos5,currentUnit->getCanMove()[1]) && posComp(pos5,currentUnit->getCanMove()[2])){
           possibilitiesPos.push_back(pos5);
-          std::cout << "HautOK : " << '\n';
         }
       }
       int minimumDistG=1000000;
@@ -441,15 +429,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         }
       }
 
-      std::cout << "minimumDistG : " << indexMinimumDistG << '\n';
-
       if (indexMinimumDistG>=0){
-        std::cout << "posToAttackLastStep : (" << posToAttack.getX() << "," << posToAttack.getY() << ")" << '\n';
-        std::cout << "posToAttackLastStep : (" << possibilitiesPos[indexMinimumDistG].getX() << "," << possibilitiesPos[indexMinimumDistG].getY() << ")" << '\n';
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        // usleep(1000000);
         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
         usleep(500000);
         std::vector<state::Position> unitPos;
