@@ -252,10 +252,11 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           break;
         }
       }
-      int y4 = 0;
-      int x4 =- 1;
-      positionElement(x4, y4, toAttack);
+      // int y4 = 0;
+      // int x4 =- 1;
+      // positionElement(x4, y4, toAttack);
 
+      std::cout << "posToAttackFirstStep : (" << posToAttack.getX() << "," << posToAttack.getY() << ")" << '\n';
       std::vector<int> units; //units index in unitMapMatrix
       std::vector<Position> unitsPosition; //units poition
 
@@ -280,6 +281,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           indexMinimumDist = i;
         }
       }
+
       if (minimumDist>3){
         for (size_t i=0;i<units.size();i++){
           int xu=0; int yu=0;
@@ -317,7 +319,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         std::vector<int> distanceFromUnitToAttack;
         for (size_t i=0;i<unitsPositionE.size();i++){
           distanceFromUnitToAttack.push_back(dist(unitsPosition[indexMinimumDist], unitsPositionE[i]));
-          if(distanceFromUnitToAttack[i]<minimumDist){
+          if(distanceFromUnitToAttack[i]<minimumDistE){
             minimumDistE = distanceFromUnitToAttack[i];
             indexMinimumDistE = i;
           }
@@ -334,6 +336,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int topElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1];
       int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
 
+      std::cout << "posToAttackLastStep : (" << posToAttack.getX() << "," << posToAttack.getY() << ")" << '\n';
       //go to the next empire and kill ennemies on its way
       int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
 
@@ -353,7 +356,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
         usleep(1000000);
         counter++;
@@ -364,7 +366,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
         usleep(1000000);
         counter++;
@@ -432,7 +433,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
+        // usleep(1000000);
         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
         usleep(500000);
         std::vector<state::Position> unitPos;
