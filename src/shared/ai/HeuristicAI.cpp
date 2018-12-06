@@ -336,7 +336,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       int topElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1];
       int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
 
-      std::cout << "posToAttackLastStep : (" << posToAttack.getX() << "," << posToAttack.getY() << ")" << '\n';
       //go to the next empire and kill ennemies on its way
       int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
 
@@ -428,6 +427,9 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           indexMinimumDistG = i;
         }
       }
+
+      std::cout << "posToAttackLastStep : (" << posToAttack.getX() << "," << posToAttack.getY() << ")" << '\n';
+      std::cout << "posToAttackLastStep : (" << possibilitiesPos[indexMinimumDistG].getX() << "," << possibilitiesPos[indexMinimumDistG].getY() << ")" << '\n';
 
       if (indexMinimumDistG>=0){
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
