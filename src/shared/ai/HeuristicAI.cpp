@@ -393,6 +393,10 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         return;
       }
       std::vector<state::Position> possibilitiesPos;
+      cout<<"current pos"<<unitsPosition[indexMinimumDist].getX() <<" "<<unitsPosition[indexMinimumDist].getY()<<endl;
+      cout<<"cm0 "<<currentUnit->getCanMove()[0].getX() <<" "<<currentUnit->getCanMove()[0].getY()<<endl;
+      cout<<"cm1 "<<currentUnit->getCanMove()[1].getX() <<" "<<currentUnit->getCanMove()[1].getY()<<endl;
+      cout<<"cm2 "<<currentUnit->getCanMove()[2].getX() <<" "<<currentUnit->getCanMove()[2].getY()<<endl;
       if(leftElt==2){
         Position pos2(unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY());
         if (posComp(pos2,currentUnit->getCanMove()[0]) && posComp(pos2,currentUnit->getCanMove()[1]) && posComp(pos2,currentUnit->getCanMove()[2])){
@@ -429,6 +433,11 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         if(distanceFromGToAttack[i]<minimumDistG){
           minimumDistG = distanceFromGToAttack[i];
           indexMinimumDistG = i;
+        } else if (distanceFromGToAttack[i]==minimumDistG){
+          if (rand() %2 ==1){
+            minimumDistG = distanceFromGToAttack[i];
+            indexMinimumDistG = i;
+          }
         }
       }
 
@@ -442,7 +451,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
         // usleep(1000000);
         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
-        usleep(5000000);
+        usleep(500000);
         std::vector<state::Position> unitPos;
         Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
         unitPos.push_back(currentUnit->getCanMove()[1]);
