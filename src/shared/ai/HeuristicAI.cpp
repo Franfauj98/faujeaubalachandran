@@ -425,11 +425,9 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         if(distanceFromGToAttack[i]<minimumDistG){
           minimumDistG = distanceFromGToAttack[i];
           indexMinimumDistG = i;
-          std::cout << "distance " << minimumDistG << '\n';
-          std::cout << "X " << possibilitiesPos[indexMinimumDistG].getX() << " Y " << possibilitiesPos[indexMinimumDistG].getY() << '\n';
         }
       }
-      std::cout << "posX " << posToAttack.getX() << "posY " << posToAttack.getY() << '\n';
+
       if (indexMinimumDistG>=0){
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
