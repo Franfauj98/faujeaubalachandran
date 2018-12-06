@@ -292,9 +292,9 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             ){
               indexMinimumDist=i;
               break;
+            } else {
+              indexMinimumDist=rand() % (units.size());
             }
-          } else {
-            indexMinimumDist=rand() % (units.size());
           }
         }
       }
