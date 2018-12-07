@@ -146,7 +146,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y2,element)),3);
-      usleep(1000000);
+      usleep(100000);
       engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
       counter++;
       return;
@@ -157,7 +157,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-      usleep(1000000);
+      usleep(100000);
       engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
       counter++;
       return;
@@ -168,7 +168,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x1,y1,element)),3);
-      usleep(1000000);
+      usleep(100000);
       engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
       counter++;
       return;
@@ -184,7 +184,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-      usleep(1000000);
+      usleep(100000);
       std::cout << "CreateUnit" << '\n';
       std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
@@ -200,7 +200,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         case 1:
         if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
-          usleep(1000000);
+          usleep(100000);
           counter++;
           return;
         }
@@ -208,7 +208,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         case 2:
         if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
-          usleep(1000000);
+          usleep(100000);
           counter++;
           return;
         }
@@ -216,7 +216,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         case 3:
         if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
-          usleep(1000000);
+          usleep(100000);
           counter++;
           return;
         }
@@ -224,7 +224,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         case 4:
         if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
-          usleep(1000000);
+          usleep(100000);
           counter++;
           return;
         }
@@ -238,7 +238,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
 
       Position posToAttack;
 
-      int distance = 100000000;
+      int distance = 10000000;
 
       for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
         Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
@@ -256,9 +256,10 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
           break;
         }
       }
-      int y4 = 0;
-      int x4 =- 1;
-      positionElementDeepAi(x4, y4, toAttack);
+
+      /////////////////////////////////////////////////////
+      /////////UNITES DE L'EMPIRE//////////////////////////
+      /////////////////////////////////////////////////////
 
       std::vector<int> units; //units index in unitMapMatrix
       std::vector<Position> unitsPosition; //units poition
@@ -274,7 +275,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       //units de l'empire
 
       //distance Unit -> EmpireToAttack
-      int minimumDist=1000000;
+      int minimumDist=100000;
       int indexMinimumDist=-1;
       std::vector<int> distanceFromEmpireToAttack;
       for (size_t i=0;i<unitsPosition.size();i++){
@@ -313,14 +314,14 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
           unitsPositionE.push_back(unit->getPosition());
         }
       }
-      std::cout << unitsPositionE.size() << '\n';
+
       if(unitsPositionE.size()>0){
-        int minimumDistE=1000000;
+        int minimumDistE=100000;
         int indexMinimumDistE=-1;
         std::vector<int> distanceFromUnitToAttack;
         for (size_t i=0;i<unitsPositionE.size();i++){
           distanceFromUnitToAttack.push_back(distDeepAi(unitsPosition[indexMinimumDist], unitsPositionE[i]));
-          if(distanceFromUnitToAttack[i]<minimumDist){
+          if(distanceFromUnitToAttack[i]<minimumDistE){
             minimumDistE = distanceFromUnitToAttack[i];
             indexMinimumDistE = i;
           }
@@ -356,9 +357,9 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
+        usleep(100000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-        usleep(1000000);
+        usleep(100000);
         counter++;
         return;
       }
@@ -367,9 +368,9 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
+        usleep(100000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-        usleep(1000000);
+        usleep(100000);
         counter++;
         return;
       }
@@ -378,9 +379,9 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
+        usleep(100000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-        usleep(1000000);
+        usleep(100000);
         counter++;
         return;
       }
@@ -389,9 +390,9 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(1000000);
+        usleep(100000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-        usleep(1000000);
+        usleep(100000);
         counter++;
         return;
       }
@@ -406,15 +407,9 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::vector<std::vector<int> > mapMatrix = principalMap.getAllMaps().getMapMatrix();
       for (int i =0 ; i<principalMap.getAllMaps().getSize(); i++ ){
         for (int j = 0 ; j<principalMap.getAllMaps().getSize(); j++){
-          // if (i==0 || i==24 || j==0 || j==24){
-          //   Vec2i collision;
-          //   collision.x = i;
-          //   collision.y = j;
-          //   generator.addCollision(collision);
-          //
           Units* un =(Units*) principalMap.getAllMaps().getUnitsMap()[i*25+j].get();
           int idU=un->getIdUnits();
-          if(mapMatrix[i][j]!=2 )//&& mapMatrix[i][j]!=10 && mapMatrix[i][j]!=14 && mapMatrix[i][j]!=18 && mapMatrix[i][j]!=22 && idU!=id)
+          if(mapMatrix[i][j]!=2 && mapMatrix[i][j]!=10 && mapMatrix[i][j]!=14 && mapMatrix[i][j]!=18 && mapMatrix[i][j]!=22 && idU!=id)
           {
               Vec2i collision;
               collision.x = i;
@@ -424,35 +419,28 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
         }
       }
 
-      Vec2i initial,final;
+      Vec2i initial,target;
       initial.x = unitsPosition[indexMinimumDist].getX();
       initial.y = unitsPosition[indexMinimumDist].getY();
 
       if(posToAttack.getX()>= unitsPosition[indexMinimumDist].getX()){
-        final.x = posToAttack.getX()-1;
+        target.x = posToAttack.getX()-1;
       } else {
-        final.x = posToAttack.getX()+1;
+        target.x = posToAttack.getX()+1;
       }
 
-      final.y = posToAttack.getY();
-      std::cout << posToAttack.getX() << " " <<posToAttack.getY() << endl;
-      std::cout <<endl;
-      auto path = generator.findPath(initial,final);
-      for(auto& coordinate : path) {
-        std::cout << coordinate.x << " " << coordinate.y << endl;
-      }
+      target.y = posToAttack.getY();
+      auto path = generator.findPath(initial,target);
 
       auto nextTile = path[path.size()-2];
       generator.clearCollisions();
-      std::cout <<endl;
-      std::cout << unitsPosition[indexMinimumDist].getX() << " " << unitsPosition[indexMinimumDist].getY() << endl;
-      std::cout << nextTile.x << " " << nextTile.y << endl;
+      // std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
+      // std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-      usleep(1000000);
       engine.addCommand(unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),nextTile.x,nextTile.y)),6);
-      usleep(500000);
+      usleep(100000);
 
 
       counter++;
