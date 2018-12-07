@@ -12,6 +12,78 @@ using namespace state;
 using namespace std;
 using namespace AStar;
 
+
+
+//Here is our heuristic behaviour function :
+//it should process the gameState to update the weights for each situation
+
+int weightUpdate(){
+
+  int moveWeight;
+  int attackWeight;
+  int createUnitWeight;
+  int levelUpWeight;
+
+  if(unit next to palace){
+    //if a unit/palace is next to you : Attack it, then the others weights are low
+    moveWeight = 10;
+    attackWeight = 40;
+    createUnitWeight = 20; //Maybe not Possible
+    levelUpWeight = 30; //Maybe not Possible
+
+  } else if(unit/palace is in a range of 3 next to you){
+    //if a unit/palace is in a range of 3 next to you : Move to it, then the others weights are low
+    moveWeight = 40;
+    attackWeight = -1; //Not Possible to attack here ==> branch to be cut
+    createUnitWeight = 20; //Maybe not Possible
+    levelUpWeight = 30; //Maybe not Possible
+  } else if(ennemy is in a range of 3 next to your palace){
+    //if an ennemy is in a range of 3 next to your palace : create a unit if it is possible, then the others weights are low
+    moveWeight = 20;
+    attackWeight = -1; //Not Possible to attack here ==> branch to be cut
+    createUnitWeight = 40; //Maybe not Possible
+    levelUpWeight = 30; //Maybe not Possible
+  } else {
+    // Basic weight are given by :
+    moveWeight = 10; //Maybe not Possible
+    attackWeight = 20; //Maybe not Possible to attack here ==> branch to be cut
+    createUnitWeight = 30; //Maybe not Possible
+    levelUpWeight = 40; //Maybe not Possible
+    // This is better to LevelUp, then to CreateUnit, then to Attack, then to Move
+  }
+
+  //if all of the previous heuristic are false, then use the basic weights
+
+}
+
+//When we create the binary tree of all our actions we must cut the branches which cannot be processed.
+//For exemple : No money ==> no levelUp or Unit creation
+
+////////////////////////////////////////////////////////////
+/////////////////////////  MIN  ////////////////////////////
+////////////////////////////////////////////////////////////
+
+int min(){
+
+}
+
+////////////////////////////////////////////////////////////
+/////////////////////////  MAX  ////////////////////////////
+////////////////////////////////////////////////////////////
+
+int max(){
+
+}
+
+////////////////////////////////////////////////////////////
+/////////////////////////  MIN-MAX  ////////////////////////
+////////////////////////////////////////////////////////////
+
+int minMax(){
+
+}
+
+
 //find the distance between 2 positions
 int distDeepAi(Position pos1, Position pos2){
   int absdiff, orddiff;
