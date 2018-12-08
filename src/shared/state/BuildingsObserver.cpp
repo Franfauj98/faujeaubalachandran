@@ -143,19 +143,18 @@ int position, int action, int unitToDestroy, int position2){
 
     case 1:
     {
-      build->setLevel(++level);
-      level = build->getLevel();
+      build->setLevel(--level);
       switch(build->getIdTexture()){
-        case 1: {
-          build->setIdTexture(IdTexture::HDV2);
-          break;
-        }
         case 2: {
-          build->setIdTexture(IdTexture::HDV3);
+          build->setIdTexture(IdTexture::HDV1);
           break;
         }
         case 3: {
-          build->setIdTexture(IdTexture::HDV4);
+          build->setIdTexture(IdTexture::HDV2);
+          break;
+        }
+        case 4: {
+          build->setIdTexture(IdTexture::HDV3);
           break;
         }
         default: {
@@ -169,75 +168,12 @@ int position, int action, int unitToDestroy, int position2){
     {
         Barrack* barrack = (Barrack *)map.getBuildingsMap()[position].get();
         int unitsNumber = barrack->getUnitsNumber();
-        unitsNumber++;
-        if(unitsNumber <= barrack->getCapacity()){
-          barrack->setUnitsNumber(unitsNumber);
-          switch (unitToDestroy){
-            case 1:
-            {
-              std::unique_ptr<Element> arrow_ptr(new Arrow(level,*pos2,barrack->getIdBuilding()));
-              map.addUnitsToMap(arrow_ptr, position2);
-              map.getMapMatrix()[x2][y2] = 14;
-              Units* currentUnit = (Units*) map.getUnitsMap()[x2*25 + y2].get();
-              std::vector<state::Position> unitPos;
-              Position pos0(0,0);
-              Position pos(x2,y2);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos);
-              currentUnit->setCanMove(unitPos);
-              break;
-            }
-            case 2:
-            {
-              std::unique_ptr<Element> decurion_ptr(new Decurion(level,*pos2,barrack->getIdBuilding()));
-              map.addUnitsToMap(decurion_ptr, position2);
-              map.getMapMatrix()[x2][y2] = 10;
-              Units* currentUnit = (Units*) map.getUnitsMap()[x2*25 + y2].get();
-              std::vector<state::Position> unitPos;
-              Position pos0(0,0);
-              Position pos(x2,y2);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos);
-              currentUnit->setCanMove(unitPos);
-              break;
-            }
-            case 3:
-            {
-              std::unique_ptr<Element> catapult_ptr(new Catapult(level,*pos2,barrack->getIdBuilding()));
-              map.addUnitsToMap(catapult_ptr, position2);
-              map.getMapMatrix()[x2][y2] = 22;
-              Units* currentUnit = (Units*) map.getUnitsMap()[x2*25 + y2].get();
-              std::vector<state::Position> unitPos;
-              Position pos0(0,0);
-              Position pos(x2,y2);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos);
-              currentUnit->setCanMove(unitPos);
-              break;
-            }
-            case 4:
-            {
-              std::unique_ptr<Element> cavalier_ptr(new Cavalier(level,*pos2,barrack->getIdBuilding()));
-              map.addUnitsToMap(cavalier_ptr, position2);
-              map.getMapMatrix()[x2][y2] = 18;
-              Units* currentUnit = (Units*) map.getUnitsMap()[x2*25 + y2].get();
-              std::vector<state::Position> unitPos;
-              Position pos0(0,0);
-              Position pos(x2,y2);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos0);
-              unitPos.push_back(pos);
-              currentUnit->setCanMove(unitPos);
-              break;
-            }
-            default: break;
-          }
-
-      }
-      break;
+        unitsNumber--;
+        barrack->setUnitsNumber(unitsNumber);
+        std::unique_ptr<Element> unit_ptr(new Units());
+        map.addUnitsToMap(unit_ptr, position2);
+        map.getMapMatrix()[x2][y2] = 2;
+        break;
     }
 
     default:

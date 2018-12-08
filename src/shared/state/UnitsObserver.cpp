@@ -118,19 +118,29 @@ int position, int action, int position2){
   switch(action){
     case 1: //move
     {
-      unitToChange->move(*pos2, 1);
-      std::unique_ptr<Element> tmp = std::move(map.getUnitsMap()[position]);
+
+      Position* pos = new Position(x,y);
+
+      Map& map = mapToChange.getAllMaps();
+      Units* unitToChange = (Units *)map.getUnitsMap()[position].get();
+      Units* unitToChange2 = (Units *)map.getUnitsMap()[position2].get();
+
+      unitToChange2->move(*pos, 1);
+      std::unique_ptr<Element> tmp = std::move(map.getUnitsMap()[position2]);
       std::unique_ptr<Element> wideUnit(new Units());
-      map.addUnitsToMap(tmp, position2);
-      map.addUnitsToMap(wideUnit, position);
-      mapMatrix[x][y] = 2;
-      mapMatrix[x2][y2] = unitToChange->getType();
+      map.addUnitsToMap(tmp, position);
+      map.addUnitsToMap(wideUnit, position2);
+      mapMatrix[x2][y2] = 2;
+      mapMatrix[x][y] = unitToChange2->getType();
       break;
     }
     case 2: //attackUnit
     {
-      unitToChange->attack(*unitToChange2);
-      if(unitToChange2->getLife()==0){
+
+      if(unitToChange2->getLife()>0){
+        unitToChange2->setLife(unitToChange2->getLife()+unitToChange->getDamage());
+      }
+      else if(unitToChange2->getLife()==0){
         map.getUnitsMap()[position2] = std::move(std::unique_ptr<Element> (new Units()));
         mapMatrix[x2][y2] = 2;
         std::vector<int> buildings;

@@ -3,6 +3,7 @@
 #include "engine.h"
 #include "render.h"
 #include <cmath>
+#include <unistd.h>
 #include <iostream>
 using namespace engine;
 using namespace state;
@@ -87,6 +88,7 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         pst->execute(principalMap);
         ps->execute(principalMap);
+        usleep(500000);
         break;
       }
       case 7:{
@@ -102,6 +104,7 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         pst->execute(principalMap);
         ps->execute(principalMap);
+        usleep(500000);
         break;
       }
       case 5:{
@@ -117,6 +120,7 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         pst->execute(principalMap);
         ps->execute(principalMap);
+        usleep(500000);
         break;
       }
       case 4:{
@@ -132,6 +136,7 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         pst->execute(principalMap);
         ps->execute(principalMap);
+        usleep(500000);
         break;
       }
       default: break;
