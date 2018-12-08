@@ -26,6 +26,7 @@ namespace engine {
     ~LevelUp ();
     CommandTypeId getTypeId () const;
     void execute (state::Observable& principalMap);
+    void rollback  (state::Observable& principalMap);
     LevelUp (int x, int y);
     // Setters and Getters
   };

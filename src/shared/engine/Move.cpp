@@ -27,3 +27,9 @@ void Move::execute(state::Observable& map){
     map.notifyObserver(map,this->y+25*this->x,mapMatrix[this->x][this->y], 1,-1,this->y2+25*this->x2);
   }
 }
+
+void Move::rollback(state::Observable& map){
+  std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
+  map.notifyObserverPrev(map,this->y+25*this->x,mapMatrix[this->x][this->y], 1,-1,this->y2+25*this->x2);
+
+}

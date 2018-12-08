@@ -17,6 +17,7 @@ namespace state {
     // Operations
   public:
     void changeBuildings (Observable& mapToChange, int position, int action, int unitToCreate, int position2);
+    void changeBuildingsPrev (Observable& mapToChange, int position, int action, int unitToDestroy, int position2);
     // Setters and Getters
   };
 

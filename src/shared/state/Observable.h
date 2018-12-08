@@ -26,6 +26,7 @@ namespace state {
   public:
     ~Observable ();
     void notifyObserver (state::Observable& observable, int position, int idToChange, int action, int unitToCreate, int position2) const;
+    void notifyObserverPrev (state::Observable& observable, int position, int idToChange, int action, int unitToDestroy, int position2) const;
     Observable ();
     Map& getAllMaps ();
     // Setters and Getters

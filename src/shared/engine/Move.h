@@ -28,6 +28,7 @@ namespace engine {
     ~Move ();
     CommandTypeId getTypeId () const;
     void execute (state::Observable& principalMap);
+    void rollback (state::Observable& principalMap);
     Move (int x, int y, int x2, int y2);
     // Setters and Getters
   };

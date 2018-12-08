@@ -39,12 +39,15 @@ namespace engine {
   private:
     std::queue<std::unique_ptr<Command>> commandList;
     std::queue<int> commandListId;
+    std::deque<std::unique_ptr<Command>> commandListPrev;
+    std::deque<int> commandListIdPrev;
     // Operations
   public:
     Engine ();
     ~Engine ();
     void addCommand (std::unique_ptr<Command> cmd, int commandId);
     void execute (state::Observable& principalMap);
+    void rollback (state::Observable& principalMap);
     std::queue<int> getCommandListId ();
     // Setters and Getters
   };

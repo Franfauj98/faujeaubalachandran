@@ -15,6 +15,15 @@ Engine::Engine (){
 void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
   this->commandListId.push(commandId);
   this->commandList.push(std::move(cmd));
+  if (commandListPrev.size()<60){
+    this->commandListIdPrev.push_back(commandId);
+    this->commandListPrev.push_back(std::move(cmd));
+  } else {
+    this->commandListIdPrev.pop_front();
+    this->commandListPrev.pop_front();
+    this->commandListIdPrev.push_back(commandId);
+    this->commandListPrev.push_back(std::move(cmd));
+  }
 }
 
 void Engine::execute(state::Observable& principalMap){
@@ -61,6 +70,73 @@ void Engine::execute(state::Observable& principalMap){
     this->commandListId.pop();
   }
 
+}
+
+void Engine::rollback (state::Observable& principalMap){
+    switch(commandListIdPrev.back()){
+      case 6:{
+        Move* mv = (Move*) commandListPrev.back().get();
+        mv->rollback(principalMap);
+        this->commandListPrev.pop_back();
+        Possibilities* ps = (Possibilities*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        PrintStats* pst = (PrintStats*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        CaseIdentifier* ci = (CaseIdentifier*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        ci->execute(principalMap);
+        pst->execute(principalMap);
+        ps->execute(principalMap);
+        break;
+      }
+      case 7:{
+        Attack* at = (Attack*) commandListPrev.back().get();
+        at->rollback(principalMap);
+        this->commandListPrev.pop_back();
+        Possibilities* ps = (Possibilities*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        PrintStats* pst = (PrintStats*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        CaseIdentifier* ci = (CaseIdentifier*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        ci->execute(principalMap);
+        pst->execute(principalMap);
+        ps->execute(principalMap);
+        break;
+      }
+      case 5:{
+        LevelUp* lu = (LevelUp*) commandListPrev.back().get();
+        lu->rollback(principalMap);
+        this->commandListPrev.pop_back();
+        Possibilities* ps = (Possibilities*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        PrintStats* pst = (PrintStats*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        CaseIdentifier* ci = (CaseIdentifier*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        ci->execute(principalMap);
+        pst->execute(principalMap);
+        ps->execute(principalMap);
+        break;
+      }
+      case 4:{
+        CreateUnit* cu = (CreateUnit*) commandListPrev.back().get();
+        cu->rollback(principalMap);
+        this->commandListPrev.pop_back();
+        Possibilities* ps = (Possibilities*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        PrintStats* pst = (PrintStats*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        CaseIdentifier* ci = (CaseIdentifier*) commandListPrev.back().get();
+        this->commandListPrev.pop_back();
+        ci->execute(principalMap);
+        pst->execute(principalMap);
+        ps->execute(principalMap);
+        break;
+      }
+      default: break;
+    }
+    this->commandListIdPrev.pop_back();
 }
 
 std::queue<int> Engine::getCommandListId(){

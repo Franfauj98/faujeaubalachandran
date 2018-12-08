@@ -29,6 +29,7 @@ namespace engine {
     ~CreateUnit ();
     CommandTypeId getTypeId () const;
     void execute (state::Observable& principalMap);
+    void rollback (state::Observable& principalMap);
     CreateUnit (int x, int y, int x2, int y2, int unit);
     // Setters and Getters
   };

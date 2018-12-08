@@ -51,6 +51,47 @@ int position, int id, int action, int unitToCreate, int position2) const{
   }
 }
 
+void Observable::notifyObserverPrev(Observable& observable,
+int position, int id, int action, int unitToDestroy, int position2) const{
+
+  UnitsObserver units;
+  BuildingsObserver buildings;
+  switch(id){
+
+    case 26:
+    buildings.changeBuildingsPrev(observable, position, action, unitToDestroy, position2);
+    break;
+
+    case 30:
+    buildings.changeBuildingsPrev(observable, position, action, unitToDestroy, position2);
+    break;
+
+    case 31:
+    buildings.changeBuildingsPrev(observable, position, action, unitToDestroy, position2);
+    break;
+
+    case 14:
+    units.changeUnitsPrev(observable, position, action, position2);
+    break;
+
+    case 10:
+    units.changeUnitsPrev(observable, position, action, position2);
+    break;
+
+    case 18:
+    units.changeUnitsPrev(observable, position, action, position2);
+    break;
+
+    case 22:
+    units.changeUnitsPrev(observable, position, action, position2);
+    break;
+
+    default:
+    break;
+  }
+}
+
+
 state::Map& Observable::getAllMaps(){
   return allMaps;
 }
