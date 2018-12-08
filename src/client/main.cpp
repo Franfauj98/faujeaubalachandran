@@ -599,7 +599,7 @@ int main(int argc,char* argv[])
       }
     }
 
-    if(counter==9){
+    if(counter>=9){
       idPalace = 1;
       for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
         Palace* building = dynamic_cast<Palace*> (principalMap.getAllMaps().getBuildingsMap()[i].get());
