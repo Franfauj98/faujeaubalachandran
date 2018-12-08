@@ -13,90 +13,6 @@ using namespace std;
 using namespace AStar;
 
 
-// weightUpdate à coder entierement
-// actions possibles en méthodes
-// minmax
-
-
-//Here is our heuristic behaviour function :
-//it should process the gameState to update the weights for each situation
-
-// int weightUpdate(){
-//   int moveWeight;
-//   int attackWeight;
-//   int createUnitWeight;
-//   int levelUpWeight;
-//   if(unit next to palace){
-//     //if a unit/palace is next to you : Attack it, then the others weights are low
-//     moveWeight = 10;
-//     attackWeight = 40;
-//     createUnitWeight = 20; //Maybe not Possible
-//     levelUpWeight = 30; //Maybe not Possible
-//   } else if(unit/palace is in a range of 3 next to you){
-//     //if a unit/palace is in a range of 3 next to you : Move to it, then the others weights are low
-//     moveWeight = 40;
-//     attackWeight = -1; //Not Possible to attack here ==> branch to be cut
-//     createUnitWeight = 20; //Maybe not Possible
-//     levelUpWeight = 30; //Maybe not Possible
-//   } else if(ennemy is in a range of 3 next to your palace){
-//     //if an ennemy is in a range of 3 next to your palace : create a unit if it is possible, then the others weights are low
-//     moveWeight = 20;
-//     attackWeight = -1; //Not Possible to attack here ==> branch to be cut
-//     createUnitWeight = 40; //Maybe not Possible
-//     levelUpWeight = 30; //Maybe not Possible
-//   } else {
-//     // Basic weight are given by :
-//     moveWeight = 10; //Maybe not Possible
-//     attackWeight = 20; //Maybe not Possible to attack here ==> branch to be cut
-//     createUnitWeight = 30; //Maybe not Possible
-//     levelUpWeight = 40; //Maybe not Possible
-//     // This is better to LevelUp, then to CreateUnit, then to Attack, then to Move
-//   }
-
-  //if all of the previous heuristic are false, then use the basic weights
-
-// }
-
-//When we create the binary tree of all our actions we must cut the branches which cannot be processed.
-//For exemple : No money ==> no levelUp or Unit creation
-
-////////////////////////////////////////////////////////////
-/////////////////////////  MIN  ////////////////////////////
-////////////////////////////////////////////////////////////
-
-// int min(){
-//
-// }
-
-////////////////////////////////////////////////////////////
-/////////////////////////  MAX  ////////////////////////////
-////////////////////////////////////////////////////////////
-
-// int max(){
-//
-// }
-
-////////////////////////////////////////////////////////////
-/////////////////////////  MIN-MAX  ////////////////////////
-////////////////////////////////////////////////////////////
-
-// int minMax(){
-
-//profondeur 1 on fait jouer un joueur
-//profondeur 2 on fait jouer deux fois un joueur
-
-  //while(profondeur>0){
-    //weight update for the 3 villages
-    //process tree
-    //minmaxProcedural
-    //addCommandToEngine
-    //profondeur --
-  //}
-
-// }
-
-
-
 //find the distance between 2 positions
 int distDeepAi(Position pos1, Position pos2){
   int absdiff, orddiff;
@@ -143,16 +59,6 @@ bool verifPossDeepAi(Observable& principalMap, int x,int y, int id, int element)
   return verif;
 }
 
-//compare 2 positions
-bool posCompDeepAi(Position pos1, Position pos2){
-  if (pos1.getX()==pos2.getX() && pos1.getY()==pos2.getY()){
-    return false;
-  }
-  else {
-    return true;
-  }
-}
-
 //verify if the (x,y) unit id is the same as the current empire playing id
 bool idUnitsDeepAi(Observable& principalMap, int id,int x, int y){
     Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[y+25*x].get();
@@ -164,6 +70,17 @@ bool idUnitsDeepAi(Observable& principalMap, int id,int x, int y){
       return false;
     }
 }
+
+//compare 2 positions
+bool posCompDeepAi(Position pos1, Position pos2){
+  if (pos1.getX()==pos2.getX() && pos1.getY()==pos2.getY()){
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
 
 //recover the element position in an inline array
 void positionElementDeepAi(int& x, int& y, int position){
@@ -191,7 +108,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y2,element)),3);
-    usleep(100000);
+    usleep(500000);
     engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
     counter++;
     return true;
@@ -202,7 +119,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-    usleep(100000);
+    usleep(500000);
     engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
     counter++;
     return true;
@@ -213,7 +130,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x1,y1,element)),3);
-    usleep(100000);
+    usleep(500000);
     engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
     counter++;
     return true;
@@ -244,7 +161,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-    usleep(100000);
+    usleep(500000);
     std::cout << "CreateUnit" << '\n';
     std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
@@ -260,7 +177,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 1:
       if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
-        usleep(100000);
+        usleep(500000);
         counter++;
         return true;
       }
@@ -268,7 +185,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 2:
       if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
-        usleep(100000);
+        usleep(500000);
         counter++;
         return true;
       }
@@ -276,7 +193,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 3:
       if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
-        usleep(100000);
+        usleep(500000);
         counter++;
         return true;
       }
@@ -284,7 +201,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 4:
       if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
-        usleep(100000);
+        usleep(500000);
         counter++;
         return true;
       }
@@ -296,8 +213,10 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
 
 }
 
-bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int id){
+std::vector<int> attackAvailable(Observable& principalMap, int id){
+  std::vector<int> toAttackNow;
   if (verifUnitsDeepAi(principalMap,id)){
+
     Position posToAttack;
     int distance = 10000000;
     for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
@@ -379,53 +298,162 @@ bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int 
 
     if (((topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttackt->getIdBuilding())) ||
       ( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttackt->getIdUnits() )){
-      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-      engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-      usleep(100000);
-      engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
-      usleep(100000);
-      counter++;
-      return true;
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY()-1);
+      toAttackNow.push_back(element);
+      return toAttackNow;
     }
     else if(( (bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) && (currentUnit->getIdUnits() != buildToAttackb->getIdBuilding())) ||
       ( (bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22) && currentUnit->getIdUnits() != unitToAttackb->getIdUnits() )){
-      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-      engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-      usleep(100000);
-      engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
-      usleep(100000);
-      counter++;
-      return true;
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY()+1);
+      toAttackNow.push_back(element);
+      return toAttackNow;
     }
     else if(( (leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) && (currentUnit->getIdUnits() != buildToAttackl->getIdBuilding())) ||
       ( (leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22) && currentUnit->getIdUnits() != unitToAttackl->getIdUnits() )){
-      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-      engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-      usleep(100000);
-      engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
-      usleep(100000);
-      counter++;
-      return true;
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX()+1);
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toAttackNow.push_back(element);
+      return toAttackNow;
     }
     else if(( (rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) && (currentUnit->getIdUnits() != buildToAttackr->getIdBuilding())) ||
       ( (rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22) && currentUnit->getIdUnits() != unitToAttackr->getIdUnits() )  ){
-      engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-      engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-      engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-      usleep(100000);
-      engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
-      usleep(100000);
-      counter++;
-      return true;
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getX()-1);
+      toAttackNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toAttackNow.push_back(element);
+      return toAttackNow;
     }
+  }
+  return toAttackNow;
+}
+
+bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int id){
+  std::vector<int> v = attackAvailable(principalMap, id);
+  if(v.size()>0){
+    engine.addCommand(unique_ptr<Command> (new CaseIdentifier(v[0],v[1])),1);
+    engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
+    engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
+    usleep(500000);
+    engine.addCommand(unique_ptr<Command> (new Attack(v[0],v[1],v[2],v[3])),7);
+    usleep(500000);
+    counter++;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+bool moveToGetCloser(Observable& principalMap, int id){
+  if (verifUnitsDeepAi(principalMap,id)){
+    // select empire to Attack
+    Position posToAttack;
+    int distance = 10000000;
+    for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
+      Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
+      if(building->getIdBuilding() == id && (building->getType()== 26 || building->getType()== 27 || building->getType()== 28 || building->getType()== 29)){
+        for(size_t j = 0; j < principalMap.getAllMaps().getBuildingsMap().size(); j++){
+          Buildings* building2 = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[j].get();
+          if(building2->getIdBuilding() != id && building2->getIdBuilding() != 0 && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
+            if(building->distance(building->getPosition(), building2->getPosition()) < distance){
+              distance = (building->distance(building->getPosition(), building2->getPosition()));
+              posToAttack = building2->getPosition();
+            }
+          }
+        }
+        break;
+      }
+    }
+
+    std::vector<int> units; //units index in unitMapMatrix
+    std::vector<Position> unitsPosition; //units poition
+
+    for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
+      Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
+      int idUnit=unit->getIdUnits();
+      if (idUnit==id){
+        units.push_back(i);
+        unitsPosition.push_back(unit->getPosition());
+      }
+    }
+    //units de l'empire
+
+    //distance Unit -> EmpireToAttack
+    int minimumDist=100000;
+    int indexMinimumDist=-1;
+    std::vector<int> distanceFromEmpireToAttack;
+    for (size_t i=0;i<unitsPosition.size();i++){
+      distanceFromEmpireToAttack.push_back(distDeepAi(unitsPosition[i], posToAttack));
+      if(distanceFromEmpireToAttack[i]<minimumDist){
+        minimumDist = distanceFromEmpireToAttack[i];
+        indexMinimumDist = i;
+      }
+    }
+    if (minimumDist>3){
+      for (size_t i=0;i<units.size();i++){
+        int xu=0; int yu=0;
+        positionElementDeepAi(xu, yu, units[i]);
+        if (((principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu+1][yu] == 22) && idUnitsDeepAi(principalMap,id,xu+1,yu) && xu+1>=0 && xu+1<=24) ||
+            ((principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 10 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 14 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 18 || principalMap.getAllMaps().getMapMatrix()[xu-1][yu] == 22) && idUnitsDeepAi(principalMap,id,xu-1,yu) && xu-1>=0 && xu-1<=24) ||
+            ((principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu+1] == 22 ) && idUnitsDeepAi(principalMap,id,xu,yu+1) && yu+1>=0 && yu+1<=24)||
+            ((principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 10 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 14 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 18 || principalMap.getAllMaps().getMapMatrix()[xu][yu-1] == 22) && idUnitsDeepAi(principalMap,id,xu,yu-1) && yu-1>=0 && yu-1<=24)
+          ){
+            indexMinimumDist=i;
+            break;
+          }
+          else {
+            indexMinimumDist=rand() % (distanceFromEmpireToAttack.size());
+          }
+      }
+    }
+
+    std::vector<int> unitsE; //units index in unitMapMatrix
+    std::vector<Position> unitsPositionE; //units poition
+
+    for (unsigned int i=0;i<principalMap.getAllMaps().getUnitsMap().size();i++){
+      Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[i].get();
+      int idUnit=unit->getIdUnits();
+      if (idUnit!=id&&idUnit!=0){
+        unitsE.push_back(i);
+        unitsPositionE.push_back(unit->getPosition());
+      }
+    }
+
+    if(unitsPositionE.size()>0){
+      int minimumDistE=100000;
+      int indexMinimumDistE=-1;
+      std::vector<int> distanceFromUnitToAttack;
+      for (size_t i=0;i<unitsPositionE.size();i++){
+        distanceFromUnitToAttack.push_back(distDeepAi(unitsPosition[indexMinimumDist], unitsPositionE[i]));
+        if(distanceFromUnitToAttack[i]<minimumDistE){
+          minimumDistE = distanceFromUnitToAttack[i];
+          indexMinimumDistE = i;
+        }
+      }
+      if(indexMinimumDistE>=0){
+        if (distanceFromUnitToAttack[indexMinimumDistE]<=3){
+          posToAttack=unitsPositionE[indexMinimumDistE];
+          return true;
+        }
+      }
+    }
+    return false;
   }
   return false;
 }
 
-bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id){
+
+std::vector<int> moveAvailable(Observable& principalMap, int id){
+  std::vector<int> toMoveNow;
 
   if (verifUnitsDeepAi(principalMap,id)){
     // select empire to Attack
@@ -560,18 +588,144 @@ bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id
     generator.clearCollisions();
     // std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
     // std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
-    engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
-    engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
-    engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-    engine.addCommand(unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),nextTile.x,nextTile.y)),6);
-    usleep(100000);
+
+    toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
+    toMoveNow.push_back(unitsPosition[indexMinimumDist].getY());
+    toMoveNow.push_back(nextTile.x);
+    toMoveNow.push_back(nextTile.y);
+    toMoveNow.push_back(element);
+    return toMoveNow;
+  }
+  return toMoveNow;
+}
 
 
+bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id){
+  std::vector<int> v = moveAvailable(principalMap, id);
+  if(v.size()>0){
+    engine.addCommand(unique_ptr<Command> (new CaseIdentifier(v[0],v[1])),1);
+    engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
+    engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
+    engine.addCommand(unique_ptr<Command> (new Move(v[0],v[1],v[2],v[3])),6);
+    usleep(500000);
     counter++;
     return true;
+  } else {
+    return false;
+  }
+}
+
+
+bool ennemyNextToPalace(Observable& principalMap, int id){
+
+  Position posPalace;
+
+  for(size_t i = 0; i < principalMap.getAllMaps().getBuildingsMap().size(); i++){
+    Buildings* build = (Buildings *) principalMap.getAllMaps().getBuildingsMap()[i].get();
+    if(build->getIdBuilding()==id && ( build->getType()== 26 || build->getType()== 27 || build->getType()== 28 || build->getType()== 29 ) ){
+      posPalace = build->getPosition();
+    }
+  }
+
+  for(size_t i = 0; i < principalMap.getAllMaps().getUnitsMap().size(); i++){
+    Units* unit = (Units *) principalMap.getAllMaps().getUnitsMap()[i].get();
+    if(unit->getIdUnits()!=id && ( unit->getType()== 10 || unit->getType()== 14 || unit->getType()== 18 || unit->getType()== 22 ) ){
+      if(distDeepAi(posPalace, unit->getPosition())<=3){
+        return true;
+      }
+    }
   }
   return false;
 }
+
+
+// weightUpdate à coder entierement
+// actions possibles en méthodes  ==>  DONE
+// minmax
+
+
+//Here is our heuristic behaviour function :
+//it should process the gameState to update the weights for each situation
+
+std::vector<int> weightUpdate(Observable& principalMap, int id){
+  int moveWeight;
+  int attackWeight;
+  int createUnitWeight;
+  int levelUpWeight;
+  std::vector<int> toReturn;
+
+  if(attackAvailable(principalMap, id).size() > 0){
+    //if a unit/palace is next to you : Attack it, then the others weights are low
+    moveWeight = 10;
+    attackWeight = 40;
+    createUnitWeight = 20; //Maybe not Possible
+    levelUpWeight = 30; //Maybe not Possible
+  } else if(moveToGetCloser(principalMap, id)){
+    //if a unit/palace is in a range of 3 next to you : Move to it, then the others weights are low
+    moveWeight = 40;
+    attackWeight = 10; //Not Possible to attack here ==> branch to be cut
+    createUnitWeight = 20; //Maybe not Possible
+    levelUpWeight = 30; //Maybe not Possible
+  } else if(ennemyNextToPalace(principalMap, id)){
+    //if an ennemy is in a range of 3 next to your palace : create a unit if it is possible, then the others weights are low
+    moveWeight = 20;
+    attackWeight = 10; //Not Possible to attack here ==> branch to be cut
+    createUnitWeight = 40; //Maybe not Possible
+    levelUpWeight = 30; //Maybe not Possible
+  } else {
+    // Basic weight are given by :
+    moveWeight = 10; //Maybe not Possible
+    attackWeight = 20; //Maybe not Possible to attack here ==> branch to be cut
+    createUnitWeight = 30; //Maybe not Possible
+    levelUpWeight = 40; //Maybe not Possible
+    // This is better to LevelUp, then to CreateUnit, then to Attack, then to Move
+  }
+  // if all of the previous heuristic are false, then use the basic weights
+  toReturn.push_back(moveWeight);
+  toReturn.push_back(attackWeight);
+  toReturn.push_back(createUnitWeight);
+  toReturn.push_back(levelUpWeight);
+  return toReturn;
+}
+
+//When we create the binary tree of all our actions we must cut the branches which cannot be processed.
+//For exemple : No money ==> no levelUp or Unit creation
+
+////////////////////////////////////////////////////////////
+/////////////////////////  MIN  ////////////////////////////
+////////////////////////////////////////////////////////////
+
+// int min(){
+//
+// }
+
+////////////////////////////////////////////////////////////
+/////////////////////////  MAX  ////////////////////////////
+////////////////////////////////////////////////////////////
+
+// int max(){
+//
+// }
+
+////////////////////////////////////////////////////////////
+/////////////////////////  MIN-MAX  ////////////////////////
+////////////////////////////////////////////////////////////
+
+// int minMax(){
+
+//profondeur 1 on fait jouer un joueur
+//profondeur 2 on fait jouer deux fois un joueur
+
+  //while(profondeur>0){
+    //weight update for the 3 villages
+    //process tree
+    //minmaxProcedural
+    //addCommandToEngine
+    //profondeur --
+  //}
+
+// }
+
 
 
 void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
@@ -606,6 +760,14 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
   int y3 = 0;
   int x3=-1;
   positionElementDeepAi(x3, y3, buildings[2]);
+
+  std::vector<int> weights = weightUpdate(principalMap, id);
+
+  // std::cout << "Weights" << '\n';
+  // std::cout << "move" << weights[0] << '\n';
+  std::cout << "attack" << weights[1] << '\n';
+  std::cout << "create" << weights[2] << '\n';
+  // std::cout << "level" << weights[3] << '\n';
 
   if(levelUp(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire)){
     return;
