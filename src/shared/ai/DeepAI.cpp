@@ -296,7 +296,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
 
 }
 
-bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int x1, int y1, int x2, int y2, int x3, int y3, Empire* empire, int id){
+bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int id){
   if (verifUnitsDeepAi(principalMap,id)){
     Position posToAttack;
     int distance = 10000000;
@@ -425,7 +425,7 @@ bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int 
   return false;
 }
 
-bool move(engine::Engine& engine, Observable& principalMap, int& counter, int x1, int y1, int x2, int y2, int x3, int y3, Empire* empire, int id){
+bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id){
 
   if (verifUnitsDeepAi(principalMap,id)){
     // select empire to Attack
@@ -611,9 +611,9 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
     return;
   } else if (createUnit(engine, principalMap, counter, x3, y3, empire)){
     return;
-  } else if (attack(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire, id)){
+  } else if (attack(engine, principalMap, counter, id)){
     return;
-  } else if (move(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire, id)){
+  } else if (move(engine, principalMap, counter, id)){
     return;
   } else {
     counter++;
