@@ -14,17 +14,17 @@ Engine::Engine (){
 }
 
 void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
+  //std::shared_ptr<Command> cmd2
   this->commandListId.push(commandId);
   this->commandList.push(std::move(cmd));
-  if (commandListPrev.size()<60){
-    this->commandListIdPrev.push_back(commandId);
-    this->commandListPrev.push_back(std::move(cmd));
-  } else {
-    this->commandListIdPrev.pop_front();
-    this->commandListPrev.pop_front();
-    this->commandListIdPrev.push_back(commandId);
-    this->commandListPrev.push_back(std::move(cmd));
-  }
+  // if (commandListPrev.size()<60){
+  //cout<<"Id:"<< commandListId.back()<<" IdPrev:"<<commandListIdPrev.back()<<endl;
+//  }// else {
+  //   this->commandListIdPrev.pop_front();
+  //   this->commandListPrev.pop_front();
+  //   this->commandListIdPrev.push_back(commandId);
+  //   this->commandListPrev.push_back(std::move(cmd));
+  // }
 }
 
 void Engine::execute(state::Observable& principalMap){
@@ -57,6 +57,7 @@ void Engine::execute(state::Observable& principalMap){
       }
       case 5:{
         LevelUp* lu = (LevelUp*) commandList.front().get();
+        cout<<"x:"<<lu->getX()<<" y:"<<lu->getY()<<endl;
         lu->execute(principalMap);
         break;
       }
@@ -67,6 +68,8 @@ void Engine::execute(state::Observable& principalMap){
       }
       default: break;
     }
+    this->commandListIdPrev.push_back(commandListId.front());
+    this->commandListPrev.push_back(std::move(commandList.front()));
     this->commandList.pop();
     this->commandListId.pop();
   }
@@ -108,7 +111,12 @@ void Engine::rollback (state::Observable& principalMap){
         break;
       }
       case 5:{
-        LevelUp* lu = (LevelUp*) commandListPrev.back().get();
+        //Attack* lu = (Attack*) commandListPrev.back().get();
+        LevelUp* lu = (LevelUp*) (commandListPrev.back().get());
+        cout<<"size:"<<commandListPrev.size()<<endl;
+        cout<<"typeId:"<<lu->getTypeId()<<endl;
+        cout<<"xPrev:"<<lu->getX()<<" yPrev:"<<lu->getY()<<endl;
+        cout<<"coucou"<<endl;
         lu->rollback(principalMap);
         this->commandListPrev.pop_back();
         Possibilities* ps = (Possibilities*) commandListPrev.back().get();
@@ -142,7 +150,12 @@ void Engine::rollback (state::Observable& principalMap){
       default: break;
     }
     this->commandListIdPrev.pop_back();
+    this->commandListIdPrev.pop_back();
+    this->commandListIdPrev.pop_back();
+    this->commandListIdPrev.pop_back();
 }
+
+
 
 std::queue<int> Engine::getCommandListId(){
   return this->commandListId;

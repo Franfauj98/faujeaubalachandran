@@ -38,8 +38,8 @@ namespace engine {
     // Attributes
   private:
     std::queue<std::unique_ptr<Command>> commandList;
-    std::queue<int> commandListId;
     std::deque<std::unique_ptr<Command>> commandListPrev;
+    std::queue<int> commandListId;
     std::deque<int> commandListIdPrev;
     // Operations
   public:

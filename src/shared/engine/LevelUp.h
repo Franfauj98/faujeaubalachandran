@@ -28,6 +28,8 @@ namespace engine {
     void execute (state::Observable& principalMap);
     void rollback  (state::Observable& principalMap);
     LevelUp (int x, int y);
+    int getX ();
+    int getY ();
     // Setters and Getters
   };
 
