@@ -108,7 +108,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y2,element)),3);
-    usleep(500000);
+    usleep(5000000);
     engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
     counter++;
     return true;
@@ -119,7 +119,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-    usleep(500000);
+    usleep(5000000);
     engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
     counter++;
     return true;
@@ -130,7 +130,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x1,y1,element)),3);
-    usleep(500000);
+    usleep(5000000);
     engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
     counter++;
     return true;
@@ -161,7 +161,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-    usleep(500000);
+    usleep(5000000);
     std::cout << "CreateUnit" << '\n';
     std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
@@ -177,7 +177,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 1:
       if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
-        usleep(500000);
+        usleep(5000000);
         counter++;
         return true;
       }
@@ -185,7 +185,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 2:
       if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
-        usleep(500000);
+        usleep(5000000);
         counter++;
         return true;
       }
@@ -193,7 +193,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 3:
       if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
-        usleep(500000);
+        usleep(5000000);
         counter++;
         return true;
       }
@@ -201,7 +201,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       case 4:
       if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
-        usleep(500000);
+        usleep(5000000);
         counter++;
         return true;
       }
@@ -342,9 +342,9 @@ bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int 
     engine.addCommand(unique_ptr<Command> (new CaseIdentifier(v[0],v[1])),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
-    usleep(500000);
+    usleep(5000000);
     engine.addCommand(unique_ptr<Command> (new Attack(v[0],v[1],v[2],v[3])),7);
-    usleep(500000);
+    usleep(5000000);
     counter++;
     return true;
   } else {
@@ -607,7 +607,7 @@ bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id
     engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
     engine.addCommand(unique_ptr<Command> (new Move(v[0],v[1],v[2],v[3])),6);
-    usleep(500000);
+    usleep(5000000);
     counter++;
     return true;
   } else {
@@ -663,23 +663,66 @@ std::vector<int> weightUpdate(Observable& principalMap, int id){
   } else if(moveToGetCloser(principalMap, id)){
     //if a unit/palace is in a range of 3 next to you : Move to it, then the others weights are low
     moveWeight = 40;
-    attackWeight = 10; //Not Possible to attack here ==> branch to be cut
+    attackWeight = -1; //Not Possible to attack here ==> branch to be cut
     createUnitWeight = 20; //Maybe not Possible
     levelUpWeight = 30; //Maybe not Possible
   } else if(ennemyNextToPalace(principalMap, id)){
     //if an ennemy is in a range of 3 next to your palace : create a unit if it is possible, then the others weights are low
     moveWeight = 20;
-    attackWeight = 10; //Not Possible to attack here ==> branch to be cut
+    attackWeight = -1; //Not Possible to attack here ==> branch to be cut
     createUnitWeight = 40; //Maybe not Possible
     levelUpWeight = 30; //Maybe not Possible
   } else {
     // Basic weight are given by :
-    moveWeight = 10; //Maybe not Possible
-    attackWeight = 20; //Maybe not Possible to attack here ==> branch to be cut
+    moveWeight = 20; //Maybe not Possible
+    attackWeight = -1; //Not Possible to attack here ==> branch to be cut
     createUnitWeight = 30; //Maybe not Possible
     levelUpWeight = 40; //Maybe not Possible
     // This is better to LevelUp, then to CreateUnit, then to Attack, then to Move
   }
+
+  //Cost of units according to level
+  std::vector<int> unitCost = {50,100,150,200};
+  std::vector<int> buildingCost = {100,200,300,400};
+
+  Empire* empire=principalMap.getAllMaps().getEmpires()[0].get();
+  for (int i=1;i<3;i++){
+    if (principalMap.getAllMaps().getEmpires()[i].get()->getId()==id){
+      empire=principalMap.getAllMaps().getEmpires()[i].get();
+    }
+  }
+
+  int food = empire->getFoodRessource();
+  int wood = empire->getWoodRessource();
+  int gold = empire->getGoldRessource();
+
+  std::vector<int> buildingsLevel;
+
+  for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
+    Buildings* building = (Buildings*) principalMap.getAllMaps().getBuildingsMap()[i].get();
+    int idBuilding=building->getIdBuilding();
+    if (idBuilding==id){
+      buildingsLevel.push_back(building->getLevel());
+    }
+  }
+
+  if(food < unitCost[buildingsLevel[2]-1] || gold < unitCost[buildingsLevel[2]-1]){
+    createUnitWeight = -1;
+  }
+
+  int min = 100000;
+  for(int i=0; i<3; i++){
+    if(buildingsLevel[i]<min) min = i;
+  }
+
+  if(wood < buildingCost[buildingsLevel[min]-1] || gold < unitCost[buildingsLevel[min]-1]){
+    levelUpWeight = -1;
+  }
+
+  if(!verifUnitsDeepAi(principalMap,id)) moveWeight = -1;
+
+//watch monney levelUp create
+
   // if all of the previous heuristic are false, then use the basic weights
   toReturn.push_back(moveWeight);
   toReturn.push_back(attackWeight);
@@ -715,7 +758,7 @@ std::vector<int> weightUpdate(Observable& principalMap, int id){
 
 //profondeur 1 on fait jouer un joueur
 //profondeur 2 on fait jouer deux fois un joueur
-
+//cours belmega
   //while(profondeur>0){
     //weight update for the 3 villages
     //process tree
@@ -763,11 +806,11 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
 
   std::vector<int> weights = weightUpdate(principalMap, id);
 
-  // std::cout << "Weights" << '\n';
-  // std::cout << "move" << weights[0] << '\n';
+  std::cout << "Weights" << '\n';
+  std::cout << "move" << weights[0] << '\n';
   std::cout << "attack" << weights[1] << '\n';
   std::cout << "create" << weights[2] << '\n';
-  // std::cout << "level" << weights[3] << '\n';
+  std::cout << "level" << weights[3] << '\n';
 
   if(levelUp(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire)){
     return;
