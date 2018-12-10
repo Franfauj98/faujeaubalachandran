@@ -49,6 +49,7 @@ namespace engine {
     void execute (state::Observable& principalMap);
     void rollback (state::Observable& principalMap);
     std::queue<int> getCommandListId ();
+    std::deque<int> getCommandListIdPrev ();
     // Setters and Getters
   };
 

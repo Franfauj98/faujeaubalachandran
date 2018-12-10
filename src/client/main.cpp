@@ -887,7 +887,12 @@ int main(int argc,char* argv[])
         }
         engine.execute(principalMap);
     } else {
-      engine.rollback(principalMap);
+      if(engine.getCommandListIdPrev().size()>0){
+        engine.rollback(principalMap);
+      }
+      else{
+        break;
+      }
     }
 
 
