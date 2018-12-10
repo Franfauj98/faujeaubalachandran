@@ -754,7 +754,11 @@ std::vector<int> weightUpdate(Observable& principalMap, int id){
 /////////////////////////  MIN-MAX  ////////////////////////
 ////////////////////////////////////////////////////////////
 
-// int minMax(){
+int minMax(engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id, int x1, int y1, int x2, int y2, int x3, int y3){
+
+//   empire1Weights = weightUpdate(principalMap, 1);
+//   empire2Weights = weightUpdate(principalMap, 2);
+//   empire3Weights = weightUpdate(principalMap, 3);
 
 //profondeur 1 on fait jouer un joueur
 //profondeur 2 on fait jouer deux fois un joueur
@@ -767,7 +771,9 @@ std::vector<int> weightUpdate(Observable& principalMap, int id){
     //profondeur --
   //}
 
-// }
+// engine.rollback(principalMap); //remove last action
+
+}
 
 
 

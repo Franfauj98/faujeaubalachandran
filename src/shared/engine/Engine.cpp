@@ -129,7 +129,9 @@ void Engine::rollback (state::Observable& principalMap){
       }
       case 5:{
         //Attack* lu = (Attack*) commandListPrev.back().get();
+
         std::cout << "/* message 3*/" << '\n';
+        cout<<"size:"<<commandListPrev.size()<<endl;
         LevelUp* lu = (LevelUp*) commandListPrev.back().get();
         cout<<"x:"<<lu->getX()<<" y:"<<lu->getY()<<endl;
 
