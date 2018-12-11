@@ -95,3 +95,11 @@ int position, int id, int action, int unitToDestroy, int position2) const{
 state::Map& Observable::getAllMaps(){
   return allMaps;
 }
+
+std::vector<std::unique_ptr<Element>>& Observable::getRessurectionElement(){
+  return this->ressurectionElement;
+}
+
+void Observable::setRessurectionElement(std::vector<std::unique_ptr<Element>>& rElement){
+   this->ressurectionElement=move(rElement);
+}
