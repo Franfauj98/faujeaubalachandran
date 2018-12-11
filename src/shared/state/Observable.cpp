@@ -103,3 +103,12 @@ std::vector<std::unique_ptr<Element>>& Observable::getRessurectionElement(){
 void Observable::setRessurectionElement(std::vector<std::unique_ptr<Element>>& rElement){
    this->ressurectionElement=move(rElement);
 }
+
+
+std::vector<int> Observable::getRessurectionId(){
+  return this->ressurectionId;
+}
+
+void Observable::setRessurectionId(std::vector<int> reId){
+   this->ressurectionId=reId;
+}

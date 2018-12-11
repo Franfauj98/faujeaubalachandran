@@ -27,6 +27,7 @@ namespace state {
   private:
     Map allMaps;
     std::vector<std::unique_ptr<Element>> ressurectionElement;
+    std::vector<int> ressurectionId;
     // Operations
   public:
     ~Observable ();
@@ -36,6 +37,8 @@ namespace state {
     Map& getAllMaps ();
     std::vector<std::unique_ptr<Element>>& getRessurectionElement ();
     void setRessurectionElement (std::vector<std::unique_ptr<Element>>& ressurectionElement);
+    std::vector<int> getRessurectionId ();
+    void setRessurectionId (std::vector<int> reId);
     // Setters and Getters
   };
 
