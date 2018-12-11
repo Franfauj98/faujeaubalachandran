@@ -103,7 +103,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
 
   int element;
   if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
-    // std::cout << "LevelUp palace" << '\n';
+    std::cout << "LevelUp palace" << '\n';
     element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
@@ -114,7 +114,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     return true;
     //level up of the barrack if possible
   } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
-    // std::cout << "LevelUp barrack" << '\n';
+    std::cout << "LevelUp barrack" << '\n';
     int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
@@ -125,7 +125,7 @@ bool levelUp(engine::Engine& engine, Observable& principalMap, int& counter, int
     return true;
     //level up of the ressource if possible
   } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
-    // std::cout << "LevelUp ressource" << '\n';
+    std::cout << "LevelUp ressource" << '\n';
     int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
     engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
@@ -176,6 +176,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
     switch(unitChoice){
       case 1:
       if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
+        std::cout << "CreateArrow" << '\n';
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
         //usleep(5000000);
         //counter++;
@@ -184,6 +185,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       break;
       case 2:
       if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
+        std::cout << "CreateDecurion" << '\n';
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
         //usleep(5000000);
         //counter++;
@@ -192,6 +194,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       break;
       case 3:
       if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
+        std::cout << "CreateCavalier" << '\n';
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
         // usleep(5000000);
         //counter++;
@@ -200,6 +203,7 @@ bool createUnit(engine::Engine& engine, Observable& principalMap, int& counter, 
       break;
       case 4:
       if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
+        std::cout << "CreateCatapult" << '\n';
         engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
         // usleep(5000000);
         //counter++;
@@ -339,6 +343,7 @@ std::vector<int> attackAvailable(Observable& principalMap, int id){
 bool attack(engine::Engine& engine, Observable& principalMap, int& counter, int id){
   std::vector<int> v = attackAvailable(principalMap, id);
   if(v.size()>0){
+    std::cout << "Attack" << '\n';
     engine.addCommand(unique_ptr<Command> (new CaseIdentifier(v[0],v[1])),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
@@ -607,6 +612,7 @@ bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id
     engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
     engine.addCommand(unique_ptr<Command> (new Move(v[0],v[1],v[2],v[3])),6);
+    std::cout << "Move" << '\n';
     // usleep(5000000);
     //counter++;
     return true;
@@ -906,7 +912,6 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
 
 //profondeur 1 on fait jouer un joueur
 //profondeur 2 on fait jouer deux fois un joueur
-//cours belmega
   //while(profondeur>0){
     //weight update for the 3 villages
     //process tree
@@ -967,7 +972,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
   std::cout << "result action " << minmax[1] << '\n';
 
   std::cout << '\n';
-  if(minmax[1]==1){
+  if(minmax[1]==4){
     std::cout << "should levelup" << '\n';
     counter++;
     if(levelUp(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire)){
@@ -975,7 +980,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::cout << "levelup" << '\n';
       return;
     }
-  } else if(minmax[1]==2){
+  } else if(minmax[1]==3){
     std::cout << "should create" << '\n';
     counter++;
     if(createUnit(engine, principalMap, counter, x3, y3, empire)){
@@ -983,7 +988,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::cout << "create" << '\n';
       return;
     }
-  } else if(minmax[1]==3){
+  } else if(minmax[1]==2){
     std::cout << "should attack" << '\n';
     counter++;
     if(attack(engine, principalMap, counter, id)){
@@ -991,7 +996,7 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
       std::cout << "attack" << '\n';
       return;
     }
-  } else if(minmax[1]==4){
+  } else if(minmax[1]==1){
     std::cout << "should move" << '\n';
     counter++;
     if(move(engine, principalMap, counter, id)){
