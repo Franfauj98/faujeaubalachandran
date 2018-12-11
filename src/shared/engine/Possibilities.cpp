@@ -52,7 +52,7 @@ void Possibilities::execute (state::Observable& map){
         selectedMap.push_back(unique_ptr<Element> (new Decor(NONE_DECOR,p)));
       }
     }
-    cout<<"posX:"<<this->x<<" posY:"<<this->y<<endl;
+    // cout<<"posX:"<<this->x<<" posY:"<<this->y<<endl;
     Position pos(this->x,this->y);
     selectedMap[this->y+25*this->x]=move(unique_ptr<Element> (new Decor(SELECTED,pos)));
     std::vector<std::vector<int>> mapMatrix = map.getAllMaps().getMapMatrix();
