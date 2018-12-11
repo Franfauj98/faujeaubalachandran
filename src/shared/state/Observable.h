@@ -2,15 +2,19 @@
 #ifndef STATE__OBSERVABLE__H
 #define STATE__OBSERVABLE__H
 
+#include <vector>
+#include <memory>
 
 namespace state {
   class Map;
   class Observable;
+  class Element;
   class UnitsObserver;
   class BuildingsObserver;
 }
 
 #include "Map.h"
+#include "Element.h"
 #include "UnitsObserver.h"
 #include "BuildingsObserver.h"
 
@@ -22,6 +26,7 @@ namespace state {
     // Attributes
   private:
     Map allMaps;
+    std::vector<std::unique_ptr<Element>> ressurectionElement;
     // Operations
   public:
     ~Observable ();
@@ -29,6 +34,8 @@ namespace state {
     void notifyObserverPrev (state::Observable& observable, int position, int idToChange, int action, int unitToDestroy, int position2) const;
     Observable ();
     Map& getAllMaps ();
+    std::vector<std::unique_ptr<Element>>& getRessurectionElement ();
+    void setRessurectionElement (std::vector<std::unique_ptr<Element>>& ressurectionElement);
     // Setters and Getters
   };
 

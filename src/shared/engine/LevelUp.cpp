@@ -33,7 +33,10 @@ void LevelUp::execute (state::Observable& map){
 }
 
 void LevelUp::rollback(state::Observable& map){
+<<<<<<< HEAD
   // cout<<"x:"<<this->x<<" y:"<<this->y<<endl;
+=======
+>>>>>>> 03c18a3fec9dad39e6552b8d5fe83dcb2a3567b6
   Buildings* building = (Buildings *)map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get();
   int level=building->getLevel();
   Palace* palace=dynamic_cast<Palace*>(map.getAllMaps().getBuildingsMap()[this->y+25*this->x].get());

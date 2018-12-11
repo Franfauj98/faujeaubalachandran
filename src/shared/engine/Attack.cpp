@@ -44,14 +44,5 @@ void Attack::rollback(state::Observable& map){
     Units* unitToChange = (Units *)map.getAllMaps().getUnitsMap()[this->y+25*this->x].get();
     Units* unitToChange2 = (Units *)map.getAllMaps().getUnitsMap()[this->y2+25*this->x2].get();
     Buildings* buildingToAttack = (Buildings *)map.getAllMaps().getBuildingsMap()[this->y2+25*this->x2].get();
-
-    if ((Matrix[this->x2][this->y2]==26 || Matrix[this->x2][this->y2]==27 || Matrix[this->x2][this->y2]==28 || Matrix[this->x2][this->y2]==29)) {
-      if(unitToChange->getIdUnits()!=buildingToAttack->getIdBuilding()){
-        map.notifyObserverPrev(map,this->y+25*this->x,Matrix[this->x][this->y], 3,-1,this->y2+25*this->x2);
-      }
-    } else if ((Matrix[this->x2][this->y2]==10 || Matrix[this->x2][this->y2]==14 || Matrix[this->x2][this->y2]==18 || Matrix[this->x2][this->y2]==22)) {
-      if(unitToChange->getIdUnits()!=unitToChange2->getIdUnits()){
-        map.notifyObserverPrev(map,this->y+25*this->x,Matrix[this->x][this->y], 2,-1,this->y2+25*this->x2);
-      }
-    }
+    map.notifyObserverPrev(map,this->y+25*this->x,Matrix[this->x][this->y], 2,-1,this->y2+25*this->x2);
 }
