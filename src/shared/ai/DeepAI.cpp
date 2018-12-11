@@ -745,15 +745,18 @@ std::vector<int> weightUpdate(Observable& principalMap, int id){
 ////////////////////////////////////////////////////////////
 
 std::vector<int> min(std::vector<int> array, size_t begin, size_t end){
+  // std::cout << "taille " << array.size() << '\n';
   int min = 10000000;
   int index = 0;
   std::vector<int> toReturn;
   for(size_t i = begin; i < end; i++){
+    // std::cout << "array " << array[i] << '\n';
     if(array[i]<min && array[i]>0){
       min = array[i];
       index = i;
     }
   }
+  if(min == 10000000) min = 0;
   toReturn.push_back(min);
   toReturn.push_back(index - begin);
   return toReturn;
@@ -774,7 +777,7 @@ std::vector<int> max(std::vector<int> array, size_t begin, size_t end){
     }
   }
   toReturn.push_back(max);
-  toReturn.push_back(index - begin);
+  toReturn.push_back(index - begin + 1);
   return toReturn;
 }
 
@@ -795,39 +798,42 @@ bool performAction(engine::Engine& engine, Observable& principalMap, int& counte
   switch (i) {
     case 1: {
       if(empireWeights[i-1] != -1){
-        std::cout << "Perform move empire : " << id << '\n';
+        // std::cout << "Perform move empire : " << id << '\n';
         move(engine, principalMap, counter, id);
+        engine.execute(principalMap);
         return true;
       }
       break;
     }
     case 2: {
       if(empireWeights[i-1] != -1){
-        std::cout << "Perform attack empire : " << id << '\n';
+        // std::cout << "Perform attack empire : " << id << '\n';
         attack(engine, principalMap, counter, id);
+        engine.execute(principalMap);
         return true;
       }
       break;
     }
     case 3: {
       if(empireWeights[i-1] != -1){
-        std::cout << "Perform create empire : " << id << '\n';
+        // std::cout << "Perform create empire : " << id << '\n';
         createUnit(engine, principalMap, counter, x3, y3, empire);
+        engine.execute(principalMap);
         return true;
       }
       break;
     }
     case 4: {
       if(empireWeights[i-1] != -1){
-        std::cout << "Perform levelUp empire : " << id << '\n';
+        // std::cout << "Perform levelUp empire : " << id << '\n';
         levelUp(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire);
+        engine.execute(principalMap);
         return true;
       }
       break;
     }
     default : break;
   }
-  engine.execute(principalMap);
   return false;
 }
 
@@ -850,13 +856,13 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
     id2 = 2;
     id3 = 3;
   } else if(id == 2){
-    id1 = 3;
-    id2 = 1;
-    id3 = 2;
-  } else{
     id1 = 2;
     id2 = 3;
     id3 = 1;
+  } else{
+    id1 = 3;
+    id2 = 1;
+    id3 = 2;
   }
 
   std::vector<int> toAdd;
@@ -870,32 +876,53 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
           for (size_t k = 1; k < 5; k++) {
             if(performAction(engine, principalMap, counter, canPlay, id3, x1, y1, x2, y2, x3, y3, k)){
               empire3Weights = weightUpdate(principalMap, id3);
-              action4.push_back(k);
               toAdd = min(empire3Weights, 0, empire3Weights.size());
+              action4.push_back(toAdd[1]+1);
               state4.push_back(toAdd[0]);
+              // std::cout << "result score Empire3  coucocuocucoucocuco " << toAdd[0] << '\n';
+              // std::cout << "result action Empire3 coucocuocucoucocuco " << toAdd[1]+1 << '\n';
+              // usleep(1000000);
               engine.rollback(principalMap);
-              std::cout << "PerformRollback" << '\n';
+              // std::cout << "PerformRollback" << '\n';
             } else {
+              // std::cout << "result score if perfAct does not work " << i << '\n';
+              // std::cout << "result score if perfAct does not work " << -1 << '\n';
+              // usleep(1000000);
               action4.push_back(k);
               state4.push_back(-1);
             }
           }
-          toAdd = min(state4, (j-1)*4, j*4);
+          // std::cout << "size state4 " << state4.size() << '\n';
+          // std::cout << "state4.size()-4 = " << state4.size()-4 << '\n';
+          // std::cout << "state4.size() = " << state4.size() << '\n';
+          toAdd = min(state4, state4.size()-4, state4.size());
           state3.push_back(toAdd[0]);
-          action3.push_back(toAdd[1]);
+          action3.push_back(toAdd[1]+1);
+          // std::cout << "result score Empire2  coucocuocucoucocuco " << toAdd[0] << '\n';
+          // std::cout << "result action Empire2 coucocuocucoucocuco " << toAdd[1]+1 << '\n';
+          // usleep(1000000);
           engine.rollback(principalMap);
-          std::cout << "PerformRollback" << '\n';
+          // std::cout << "PerformRollback" << '\n';
         } else {
+          // std::cout << "result score if perfAct does not work " << i << '\n';
+          // std::cout << "result score if perfAct does not work " << -1 << '\n';
+          // usleep(1000000);
           action3.push_back(j);
           state3.push_back(-1);
         }
       }
-      toAdd = min(state3, (i-1)*4, i*4);
+      toAdd = min(state3, state3.size()-4, state3.size());
       state2.push_back(toAdd[0]);
-      action2.push_back(toAdd[1]);
+      action2.push_back(toAdd[1]+1);
+      // std::cout << "result score Empire1  coucocuocucoucocuco " << toAdd[0] << '\n';
+      // std::cout << "result action Empire1 coucocuocucoucocuco " << toAdd[1]+1 << '\n';
+      // usleep(1000000);
       engine.rollback(principalMap);
-      std::cout << "PerformRollback" << '\n';
+      // std::cout << "PerformRollback" << '\n';
     } else {
+      // std::cout << "result score if perfAct does not work " << i << '\n';
+      // std::cout << "result score if perfAct does not work " << -1 << '\n';
+      // usleep(1000000);
       action2.push_back(i);
       state2.push_back(-1);
     }
@@ -961,51 +988,72 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
 
   std::vector<int> weights = weightUpdate(principalMap, id);
 
-  std::cout << "Weights" << '\n';
-  std::cout << "move" << weights[0] << '\n';
-  std::cout << "attack" << weights[1] << '\n';
-  std::cout << "create" << weights[2] << '\n';
-  std::cout << "level" << weights[3] << '\n';
+  // std::cout << '\n';
+  // std::cout << '\n';
+  // std::cout << '\n';
+  // std::cout << '\n';
+
+  // std::cout << "Weights" << '\n';
+  // std::cout << "move" << weights[0] << '\n';
+  // std::cout << "attack" << weights[1] << '\n';
+  // std::cout << "create" << weights[2] << '\n';
+  // std::cout << "level" << weights[3] << '\n';
 
   std::vector<int> minmax = minMax(engine, principalMap, counter, canPlay, id, x1, y1, x2, y2, x3, y3);
-  std::cout << "result score " << minmax[0] << '\n';
-  std::cout << "result action " << minmax[1] << '\n';
-
-  std::cout << '\n';
+  // std::cout << "result score " << minmax[0] << '\n';
+  // std::cout << "result action " << minmax[1] << '\n';
+  // usleep(10000000);
+  // std::cout << '\n';
   if(minmax[1]==4){
-    std::cout << "should levelup" << '\n';
+    // std::cout << "should levelup" << '\n';
     counter++;
     if(levelUp(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire)){
-      usleep(5000000);
-      std::cout << "levelup" << '\n';
+      // usleep(5000000);
+      // std::cout << "levelup" << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
       return;
     }
   } else if(minmax[1]==3){
-    std::cout << "should create" << '\n';
+    // std::cout << "should create" << '\n';
     counter++;
     if(createUnit(engine, principalMap, counter, x3, y3, empire)){
-      usleep(5000000);
-      std::cout << "create" << '\n';
+      // usleep(5000000);
+      // std::cout << "create" << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
       return;
     }
   } else if(minmax[1]==2){
-    std::cout << "should attack" << '\n';
+    // std::cout << "should attack" << '\n';
     counter++;
     if(attack(engine, principalMap, counter, id)){
-      usleep(5000000);
-      std::cout << "attack" << '\n';
+      // usleep(5000000);
+      // std::cout << "attack" << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
       return;
     }
   } else if(minmax[1]==1){
-    std::cout << "should move" << '\n';
+    // std::cout << "should move" << '\n';
     counter++;
     if(move(engine, principalMap, counter, id)){
-      usleep(5000000);
-      std::cout << "move" << '\n';
+      // usleep(5000000);
+      // std::cout << "move" << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
+      // std::cout << '\n';
       return;
     }
   } else {
-    usleep(5000000);
+    // usleep(5000000);
     counter++;
     std::cout << "don't play" << '\n';
     return;
