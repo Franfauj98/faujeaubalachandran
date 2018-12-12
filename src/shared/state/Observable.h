@@ -8,13 +8,13 @@
 namespace state {
   class Map;
   class Observable;
-  class Element;
+  class Units;
   class UnitsObserver;
   class BuildingsObserver;
 }
 
 #include "Map.h"
-#include "Element.h"
+#include "Units.h"
 #include "UnitsObserver.h"
 #include "BuildingsObserver.h"
 
@@ -26,7 +26,8 @@ namespace state {
     // Attributes
   private:
     Map allMaps;
-    std::vector<std::unique_ptr<Element>> ressurectionElement;
+    std::vector<std::unique_ptr<Units>> ressurectionElement;
+    std::vector<int> ressurectionId;
     // Operations
   public:
     ~Observable ();
@@ -34,8 +35,10 @@ namespace state {
     void notifyObserverPrev (state::Observable& observable, int position, int idToChange, int action, int unitToDestroy, int position2) const;
     Observable ();
     Map& getAllMaps ();
-    std::vector<std::unique_ptr<Element>>& getRessurectionElement ();
-    void setRessurectionElement (std::vector<std::unique_ptr<Element>>& ressurectionElement);
+    std::vector<std::unique_ptr<Units>>& getRessurectionElement ();
+    void setRessurectionElement (std::vector<std::unique_ptr<Units>>& ressurectionElement);
+    std::vector<int> getRessurectionId ();
+    void setRessurectionId (std::vector<int> reId);
     // Setters and Getters
   };
 

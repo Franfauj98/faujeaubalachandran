@@ -91,7 +91,7 @@ void PrintStats::execute (state::Observable& map){
       statsMap[2]=0;
       statsMap[3]=0;
     }
-    else if (palace->getLife()<=50 && palace->getLife()>0){
+    else if (palace->getLife()<=50 && palace->getLife()>=0){
       statsMap[0]=1;
       statsMap[1]=0;
       statsMap[2]=0;
