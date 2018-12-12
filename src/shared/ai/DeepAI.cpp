@@ -583,20 +583,25 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
     }
 
     int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
+    Units* currentUnit = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY())].get();
 
+
+/////////////////////////////////////////////// ASTAR ////////////////////////////////////////////////
+/////////////////////////////////////////////// ASTAR ////////////////////////////////////////////////
+/////////////////////////////////////////////// ASTAR ////////////////////////////////////////////////
     AStar::Generator generator;
     // Set 2d map size.
     generator.setWorldSize({principalMap.getAllMaps().getSize(), principalMap.getAllMaps().getSize()});
     // You can use a few heuristics : manhattan, euclidean or octagonal.
-    //generator.setHeuristic(AStar::Heuristic::manhattan);
-    //generator.setDiagonalMovement(false);
+    generator.setHeuristic(AStar::Heuristic::manhattan);
+    generator.setDiagonalMovement(false);
 
     std::vector<std::vector<int> > mapMatrix = principalMap.getAllMaps().getMapMatrix();
     for (int i =0 ; i<principalMap.getAllMaps().getSize(); i++ ){
       for (int j = 0 ; j<principalMap.getAllMaps().getSize(); j++){
         Units* un =(Units*) principalMap.getAllMaps().getUnitsMap()[i*25+j].get();
-        // int idU=un->getIdUnits();
-        if(mapMatrix[i][j]!=2 && mapMatrix[i][j]!=10 && mapMatrix[i][j]!=14 && mapMatrix[i][j]!=18 && mapMatrix[i][j]!=22)
+        // if(mapMatrix[i][j]!=2 && mapMatrix[i][j]!=10 && mapMatrix[i][j]!=14 && mapMatrix[i][j]!=18 && mapMatrix[i][j]!=22)
+        if(mapMatrix[i][j]!=2)
         {
             Vec2i collision;
             collision.x = i;
@@ -621,15 +626,78 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
 
     auto nextTile = path[path.size()-2];
     generator.clearCollisions();
-    // std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
-    // std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
+    std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
+    std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
 
-    toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
-    toMoveNow.push_back(unitsPosition[indexMinimumDist].getY());
-    toMoveNow.push_back(nextTile.x);
-    toMoveNow.push_back(nextTile.y);
-    toMoveNow.push_back(element);
-    return toMoveNow;
+    if(nextTile.x > 0 && nextTile.x < 25 && nextTile.y > 0 && nextTile.y < 25){      
+      toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
+      toMoveNow.push_back(unitsPosition[indexMinimumDist].getY());
+      toMoveNow.push_back(nextTile.x);
+      toMoveNow.push_back(nextTile.y);
+      toMoveNow.push_back(element);
+    }
+
+    // int leftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()];
+    // int rightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()];
+    // int topElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1];
+    // int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
+    //
+    // std::vector<state::Position> possibilitiesPos;
+    // if(leftElt==2){
+    //   Position pos2(unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY());
+    //   if (posCompDeepAi(pos2,currentUnit->getCanMove()[0]) && posCompDeepAi(pos2,currentUnit->getCanMove()[1]) && posCompDeepAi(pos2,currentUnit->getCanMove()[2])){
+    //     possibilitiesPos.push_back(pos2);
+    //   }
+    // }
+    // if(rightElt==2){
+    //   Position pos3(unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY());
+    //   if (posCompDeepAi(pos3,currentUnit->getCanMove()[0]) && posCompDeepAi(pos3,currentUnit->getCanMove()[1]) && posCompDeepAi(pos3,currentUnit->getCanMove()[2])){
+    //     possibilitiesPos.push_back(pos3);
+    //   }
+    // }
+    // if(bottomElt==2){
+    //   Position pos4(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1);
+    //   if (posCompDeepAi(pos4,currentUnit->getCanMove()[0]) && posCompDeepAi(pos4,currentUnit->getCanMove()[1]) && posCompDeepAi(pos4,currentUnit->getCanMove()[2])){
+    //     possibilitiesPos.push_back(pos4);
+    //   }
+    // }
+    // if(topElt==2){
+    //   Position pos5(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1);
+    //   if (posCompDeepAi(pos5,currentUnit->getCanMove()[0]) && posCompDeepAi(pos5,currentUnit->getCanMove()[1]) && posCompDeepAi(pos5,currentUnit->getCanMove()[2])){
+    //     possibilitiesPos.push_back(pos5);
+    //   }
+    // }
+    // int minimumDistG=1000000;
+    // int indexMinimumDistG=-1;
+    // std::vector<int> distanceFromGToAttack;
+    // for (size_t i=0;i<possibilitiesPos.size();i++){
+    //   distanceFromGToAttack.push_back(distDeepAi(possibilitiesPos[i], posToAttack));
+    //   if(distanceFromGToAttack[i]<minimumDistG){
+    //     minimumDistG = distanceFromGToAttack[i];
+    //     indexMinimumDistG = i;
+    //   } else if (distanceFromGToAttack[i]==minimumDistG){
+    //     if (rand() %2 ==1){
+    //       minimumDistG = distanceFromGToAttack[i];
+    //       indexMinimumDistG = i;
+    //     }
+    //   }
+    // }
+    //
+    // if (indexMinimumDistG>=0){
+    //   std::vector<state::Position> unitPos;
+    //   toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
+    //   toMoveNow.push_back(unitsPosition[indexMinimumDist].getY());
+    //   toMoveNow.push_back(possibilitiesPos[indexMinimumDistG].getX());
+    //   toMoveNow.push_back(possibilitiesPos[indexMinimumDistG].getY());
+    //   toMoveNow.push_back(element);
+    //
+    //   Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
+    //   unitPos.push_back(currentUnit->getCanMove()[1]);
+    //   unitPos.push_back(currentUnit->getCanMove()[2]);
+    //   unitPos.push_back(possPos);
+    //   currentUnit->setCanMove(unitPos);
+    //   return toMoveNow;
+    // }
   }
   return toMoveNow;
 }
@@ -638,6 +706,9 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
 bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id){
   std::vector<int> v = moveAvailable(principalMap, id);
   if(v.size()>0){
+
+    std::cout << "posInit : (" << v[0] << "," << v[1] << ")" << '\n';
+    std::cout << "posToGo : (" << v[2] << "," << v[3] << ")" << '\n';
     engine.addCommand(unique_ptr<Command> (new CaseIdentifier(v[0],v[1])),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
@@ -957,7 +1028,6 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
 void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   srand(time(NULL));
   std::cout << "/* NewTour */" << '\n';
-  std::vector<int> weights = weightUpdate(principalMap, id);
   std::vector<int> minmax = minMax(engine, principalMap, counter, canPlay, id);
   if(minmax[1]==1){
     counter++;
