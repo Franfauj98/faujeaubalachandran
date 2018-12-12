@@ -49,10 +49,10 @@ int position, int action, int position2){
           case 10:{
           std::unique_ptr<Units> unitToChange2bis =move(unique_ptr<Units>(new Decurion()));
           *unitToChange2bis= uni;
-          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionElement());
+          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
           re.push_back(std::move(unitToChange2bis));
           Units* unitToChange3bis = (Units *)re.back().get();
-          mapToChange.setRessurectionElement(re);
+          mapToChange.setRessurectionUnits(re);
           std::vector<int> reId= mapToChange.getRessurectionId();
           reId.push_back(0);
           mapToChange.setRessurectionId(reId);
@@ -60,10 +60,10 @@ int position, int action, int position2){
           case 14:{
           std::unique_ptr<Units> unitToChange2bis =move(unique_ptr<Units>(new Arrow()));
           *unitToChange2bis= uni;
-          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionElement());
+          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
           re.push_back(std::move(unitToChange2bis));
           Units* unitToChange3bis = (Units *)re.back().get();
-          mapToChange.setRessurectionElement(re);
+          mapToChange.setRessurectionUnits(re);
           std::vector<int> reId= mapToChange.getRessurectionId();
           reId.push_back(0);
           mapToChange.setRessurectionId(reId);
@@ -71,10 +71,10 @@ int position, int action, int position2){
           case 18:{
           std::unique_ptr<Units> unitToChange2bis =move(unique_ptr<Units>(new Cavalier()));
           *unitToChange2bis= uni;
-          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionElement());
+          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
           re.push_back(std::move(unitToChange2bis));
           Units* unitToChange3bis = (Units *)re.back().get();
-          mapToChange.setRessurectionElement(re);
+          mapToChange.setRessurectionUnits(re);
           std::vector<int> reId= mapToChange.getRessurectionId();
           reId.push_back(0);
           mapToChange.setRessurectionId(reId);
@@ -82,10 +82,10 @@ int position, int action, int position2){
           case 22:{
           std::unique_ptr<Units> unitToChange2bis = move(unique_ptr<Units>(new Catapult()));
           *unitToChange2bis= uni;
-          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionElement());
+          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
           re.push_back(std::move(unitToChange2bis));
           Units* unitToChange3bis = (Units *)re.back().get();
-          mapToChange.setRessurectionElement(re);
+          mapToChange.setRessurectionUnits(re);
           std::vector<int> reId= mapToChange.getRessurectionId();
           reId.push_back(0);
           mapToChange.setRessurectionId(reId);
@@ -114,7 +114,30 @@ int position, int action, int position2){
 
     case 3: //attackBuilding
     {
+
       unitToChange->attackBuilding(*buildingToAttack);
+      if (buildingToAttack->getLife()<=unitToChange->getDamage()){
+        Buildings* palace = (Buildings *)map.getBuildingsMap()[position2].get();
+        Buildings palace1=*(palace);
+        std::unique_ptr<Buildings> palace2 =move(unique_ptr<Buildings>(new Palace()));
+        *palace2= palace1;
+        Buildings* ressource = (Buildings *)map.getBuildingsMap()[position2-1].get();
+        Buildings ressource1=*(ressource);
+        std::unique_ptr<Buildings> ressource2 =move(unique_ptr<Buildings>(new Ressource()));
+        *ressource2= ressource1;
+        Buildings* barrack = (Buildings *)map.getBuildingsMap()[position2+1].get();
+        Buildings barrack1=*(barrack);
+        std::unique_ptr<Buildings> barrack2 =move(unique_ptr<Buildings>(new Barrack()));
+        *barrack2= barrack1;
+        std::vector<std::unique_ptr<Buildings>> re= move(mapToChange.getRessurectionPalace());
+        re.push_back(std::move(palace2));
+        re.push_back(std::move(ressource2));
+        re.push_back(std::move(barrack2));
+        mapToChange.setRessurectionPalace(re);
+        std::vector<int> reId= mapToChange.getRessurectionId();
+        reId.push_back(1);
+        mapToChange.setRessurectionId(reId);
+      }
       if(buildingToAttack->getLife()==0){
         int id=buildingToAttack->getIdBuilding();
         map.getBuildingsMap()[position2] = std::move(std::unique_ptr<Element> (new Buildings()));
@@ -187,11 +210,11 @@ int position, int action, int position2){
       else {
         std::vector<int> reId=mapToChange.getRessurectionId();
         if (reId.back()==0){
-          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionElement());
+          std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
           map.getUnitsMap()[position2] = std::move(re.back());
           re.pop_back();
           reId.pop_back();
-          mapToChange.setRessurectionElement(re);
+          mapToChange.setRessurectionUnits(re);
           mapToChange.setRessurectionId(reId);
           mapMatrix[x2][y2] = map.getUnitsMap()[position2]->getType();
           std::vector<int> buildings;
@@ -207,34 +230,39 @@ int position, int action, int position2){
           Barrack* barrack =(Barrack*) map.getBuildingsMap()[buildings[2]].get();
           barrack->setUnitsNumber(barrack->getUnitsNumber()+1);
         }
+        else {
+          std::vector<std::unique_ptr<Buildings>> re= move(mapToChange.getRessurectionPalace());
+          map.getBuildingsMap()[position2+1] = std::move(re.back());
+          re.pop_back();
+          map.getBuildingsMap()[position2-1] = std::move(re.back());
+          re.pop_back();
+          map.getBuildingsMap()[position2] = std::move(re.back());
+          re.pop_back();
+          reId.pop_back();
+          mapToChange.setRessurectionPalace(re);
+          mapToChange.setRessurectionId(reId);
+          mapMatrix[x2][y2] = map.getUnitsMap()[position2]->getType();
+          mapMatrix[x2][y2-1] = map.getUnitsMap()[position2-1]->getType();
+          mapMatrix[x2][y2+1] = map.getUnitsMap()[position2+1]->getType();
+              // int id=buildingToAttack->getIdBuilding();
+              //
+              // map.getBuildingsMap()[position2+1] = std::move(std::unique_ptr<Element> (new Buildings()));
+              // map.getBuildingsMap()[position2-1] = std::move(std::unique_ptr<Element> (new Buildings()));
+              // mapMatrix[x2][y2] = 2;
+              // mapMatrix[x2][y2+1] = 2;
+              // mapMatrix[x2][y2-1] = 2;
+              //
+              // // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
+              // for (unsigned int i=0;i<map.getUnitsMap().size();i++){
+              //   Units* unit =(Units*) map.getUnitsMap()[i].get();
+              //   int idUnit=unit->getIdUnits();
+              //   if (idUnit==id){
+              //     map.getUnitsMap()[i] = std::move(std::unique_ptr<Element> (new Units()));
+        }
         }
         break;
       }
 
-
-    // case 3: //attackBuilding
-    // {
-    //   unitToChange->attackBuilding(*buildingToAttack);
-    //   if(buildingToAttack->getLife()==0){
-    //     int id=buildingToAttack->getIdBuilding();
-    //     map.getBuildingsMap()[position2] = std::move(std::unique_ptr<Element> (new Buildings()));
-    //     map.getBuildingsMap()[position2+1] = std::move(std::unique_ptr<Element> (new Buildings()));
-    //     map.getBuildingsMap()[position2-1] = std::move(std::unique_ptr<Element> (new Buildings()));
-    //     mapMatrix[x2][y2] = 2;
-    //     mapMatrix[x2][y2+1] = 2;
-    //     mapMatrix[x2][y2-1] = 2;
-    //
-    //     // parcourt le tableau pour voir s'il y a des unités et rentre leurs positions
-    //     for (unsigned int i=0;i<map.getUnitsMap().size();i++){
-    //       Units* unit =(Units*) map.getUnitsMap()[i].get();
-    //       int idUnit=unit->getIdUnits();
-    //       if (idUnit==id){
-    //         map.getUnitsMap()[i] = std::move(std::unique_ptr<Element> (new Units()));
-    //       }
-    //     }
-    //   }
-    //   break;
-    // }
     default: break;
   }
 

@@ -9,12 +9,14 @@ namespace state {
   class Map;
   class Observable;
   class Units;
+  class Buildings;
   class UnitsObserver;
   class BuildingsObserver;
 }
 
 #include "Map.h"
 #include "Units.h"
+#include "Buildings.h"
 #include "UnitsObserver.h"
 #include "BuildingsObserver.h"
 
@@ -26,8 +28,9 @@ namespace state {
     // Attributes
   private:
     Map allMaps;
-    std::vector<std::unique_ptr<Units>> ressurectionElement;
+    std::vector<std::unique_ptr<Units>> ressurectionUnits;
     std::vector<int> ressurectionId;
+    std::vector<std::unique_ptr<Buildings>> ressurectionPalace;
     // Operations
   public:
     ~Observable ();
@@ -35,10 +38,12 @@ namespace state {
     void notifyObserverPrev (state::Observable& observable, int position, int idToChange, int action, int unitToDestroy, int position2) const;
     Observable ();
     Map& getAllMaps ();
-    std::vector<std::unique_ptr<Units>>& getRessurectionElement ();
-    void setRessurectionElement (std::vector<std::unique_ptr<Units>>& ressurectionElement);
+    std::vector<std::unique_ptr<Units>>& getRessurectionUnits ();
+    void setRessurectionUnits (std::vector<std::unique_ptr<Units>>& ressurectionElement);
     std::vector<int> getRessurectionId ();
     void setRessurectionId (std::vector<int> reId);
+    std::vector<std::unique_ptr<Buildings>>& getRessurectionPalace ();
+    void setRessurectionPalace (std::vector<std::unique_ptr<Buildings>>& ressurectionElement);
     // Setters and Getters
   };
 

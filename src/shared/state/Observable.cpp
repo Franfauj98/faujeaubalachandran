@@ -96,12 +96,20 @@ state::Map& Observable::getAllMaps(){
   return allMaps;
 }
 
-std::vector<std::unique_ptr<Units>>& Observable::getRessurectionElement(){
-  return this->ressurectionElement;
+std::vector<std::unique_ptr<Units>>& Observable::getRessurectionUnits(){
+  return this->ressurectionUnits;
 }
 
-void Observable::setRessurectionElement(std::vector<std::unique_ptr<Units>>& rElement){
-   this->ressurectionElement=move(rElement);
+void Observable::setRessurectionUnits(std::vector<std::unique_ptr<Units>>& rElement){
+   this->ressurectionUnits=move(rElement);
+}
+
+std::vector<std::unique_ptr<Buildings>>& Observable::getRessurectionPalace(){
+  return this->ressurectionPalace;
+}
+
+void Observable::setRessurectionPalace(std::vector<std::unique_ptr<Buildings>>& rElement){
+   this->ressurectionPalace=move(rElement);
 }
 
 
