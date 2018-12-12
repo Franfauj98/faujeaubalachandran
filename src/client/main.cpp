@@ -727,7 +727,7 @@ int main(int argc,char* argv[])
     if (event.type == sf::Event::Closed)
         window.close();
     }
-    if(timeCounter<100){
+    if(timeCounter<50){
         timeCounter++;
         if (counter>=0 && counter <=2){
           id = 0;

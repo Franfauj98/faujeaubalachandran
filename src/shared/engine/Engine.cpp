@@ -59,7 +59,7 @@ void Engine::execute(state::Observable& principalMap){
       }
       default: break;
     }
-
+    usleep(500000);
     this->commandListPrev.push_back(std::move(commandList.front()));
     this->commandListIdPrev.push_back(commandListId.front());
     this->commandList.pop();
