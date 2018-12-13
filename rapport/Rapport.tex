@@ -231,7 +231,7 @@ Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle per
 \end{itemize}
 Il y a ensuite un getter pour chacun de ces tableaux. \\
 
-Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs. Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver. NotifyObservers appelle ensuite le bon observeur en fonction des paramètre qu'on lui donne. La classe "Observable" contient de plus une méthode "getAllMaps" qui va permettre de récupérer les maps générées par le constructeur de Map. Par la suite, pour créer nos cartes de jeu initiales on créera une instance de "Obsevable".\\
+Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs et une méthode "notifyObserveurPrev" pour notifier ses observeurs lors du rollback.  Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver. NotifyObservers appelle ensuite le bon observeur en fonction des paramètre qu'on lui donne. La classe "Observable" contient de plus une méthode "getAllMaps" qui va permettre de récupérer les maps générées par le constructeur de Map. Par la suite, pour créer nos cartes de jeu initiales on créera une instance de "Obsevable".Elle contient aussi en attributs deux listes qui permettent de stocker les unités détruites (ressurectionUnits) ainsi que les empires détruits (ressurectionPalace) qui permettront de remettre ces éléments lors d'un rollback.\\
 
 Class "UnitsObserver" : Cette classe est un Observer sur les Units. Elle va permettre de réaliser tous les changements nécessaires sur le state des units demandés par le moteur.
 
@@ -340,15 +340,18 @@ Ces changements sont ceux qui sont gérés par le moteur sans être provoqués p
 
 \subsection{Conception logiciel}
 Le diagramme des classes du moteur est en figure 9 et diponible dans le dossier src du projet sous le nom de engine.
-Dans cette étape de conception logiciel nous avons utilisé un pattern command. A son exécution, le moteur appelle des commandes en fonction des actions utilisateur.\\
+Dans cette étape de conception logiciel nous avons utilisé un pattern command. A son exécution, le moteur appelle des commandes en fonction des actions utilisateur. \\
 
 \\Classes de commandes : Elles héritent toutes de la classe Command. Les commandes suivantes sont disponibles :
 \begin{itemize}
-\item Engine : cette classe contient deux contener : \begin{itemize}
+\item Engine : cette classe contient quatre contener : \begin{itemize}
     \item CommandList : Ce conteneur contiendra la liste des commandes à exécuter. On met en queue toute les commandes qui doivent être exécutées lorsqu'un joueur (physique ou ia) veut réaliser une action.
     \item CommandListId : qui contient l'id de chaque commande mise en queue pour pouvoir caster ses comandes sur leurs bon types et les lancer. On empile et dépile en même temps dans ces deux conteneurs. 
+    On empile et dépile en même temps dans ces deux conteneurs. 
+    \item CommandListPrev : Ce conteneur contiendra la liste des commandes à exécuter. On met en deque toute les commandes qui doivent être exécutées lorsqu'un joueur (physique ou ia) veut réaliser un rollback.
+    \item CommandListIdPrev : qui contient l'id de chaque commande mise en deque pour pouvoir caster ses comandes sur leurs bon types et les lancer. 
 \end{itemize}
-Engine contient de plus une méthode "execute" qui, tant que la queue n'est pas vide, exécute les actions et les dépiles. 
+Engine contient de plus une méthode "execute" qui, tant que la queue n'est pas vide, exécute les actions et les dépiles. Le moteur a aussi une méthode rollback qui permet de revenir à un état précédent.
 \\Les différentes commandes sont les suivantes : 
     \begin{itemize}
         \item CaseIdentifier : Permet d'identifier la case sur laquelle on se trouve.
@@ -360,7 +363,7 @@ Engine contient de plus une méthode "execute" qui, tant que la queue n'est pas 
         \item Attack : Permet d'attaquer une unité ou un hôtel de ville.
     \end{itemize}
 \end{itemize}
-
+Chaque commande a une méthode pour éxecuter et une méthode pour faire la commande inverse correspondante.
 \begin{figure}[!ht]
 \centering
     \includegraphics[width=1\textwidth]{ressources/engine.png}
@@ -405,12 +408,31 @@ Une fois que ceci est fait nous gérons la partie mobile de notre jeu.\\Voici co
     \item Sinon elle se rapproche de l'empire ennemi le plus proche. 
 \end{enumerate}
 Dans notre système, l'amélioration des bâtiments est privilégiée par rapport au déplacement ou attaques de nos unités. Si une unité d'un empire tombe au combat, cet empire pourra en créer une nouvelle en fonction de ses moyens au tour suivant.
-\\Nous pouvons de plus remarquer qu'il y a parfois une unité qui ne va pas vers la bonne direction pendant au maximum 3 coups. Cela est dû à notre heuristique de déplacement qui dans un seul cas peut poser ce problème. Cependant cela arrive que très rarement et n'est pas pénalisant pour notre IA heuristique. 
+\\Nous pouvons de plus remarquer qu'il y a parfois une unité qui ne va pas vers la bonne direction pendant au maximum 3 coups. Cela est dû à notre heuristique de déplacement qui dans un seul cas peut poser ce problème. Cependant cela arrive que très rarement et n'est pas pénalisant pour notre IA heuristique.
+
+\subsubsection{Intelligence avancée}
+Cette intelligence artificielle est basée sur des méthodes de résolution de problèmes à états finis. Pour cette intelligence artificielle nous avons choisi d'utiliser un algorithme de type min-max pour déterminer la meilleure action à réaliser. Ensuite, l'action déterminée par l'algorithme est réalisée avec l'heuristique de chaque action. Si l'action renvoyée par le min-max est un move, on appelle l'heuristique de move pour le réaliser... \\
+Pour réaliser le min max nous avons dû limiter le nombre d'actions qu'il prend. En effet, nous avons 3 empires. Chaque empire peut réaliser 1 coup parmi 55 et ceux trois fois de suite. Ainsi, si on utilise toutes ces actions nous avons un nombre trop important de coups possibles et le temps de calcul pour optimiser une action serait très important.\\
+Le min-max fonctionne de la façon suivante : 
+\begin{enumerate}
+    \item On fait réaliser à l'empire en cours une de ses actions possibles. 
+    \item On fait réaliser à l'empire suivant une de ses actions possibles. 
+    \item On fait réaliser au dernier empire une de ses actions possibles. 
+    \item On actualise les poids
+    \item A la fin de chaque action et actualisation des poids on effectue un rollback de l'action précédente pour ne pas que l'état soit modifié indéfiniemment.
+\end{enumerate}
+On itère ce processus pour toutes les actions possibles de chaque empire. Une fois que toutes les branches du dernier empire sont explorées, on fait remonter les poids en les minimisant au second empire à traiter. Une fois que toutes les branches du second empire sont explorées, on fait remonter les poids en les minimisant au premier empire à traiter. A la dernière étape, on maximise les poids pour maximiser l'influence du coup de l'empire 1 sur les deux autres. 
+\\Lors de notre exploration des branches, celles qui ne sont pas réalisables ne sont pas explorées. Par exemple, lorsqu'il n'y a pas d'unités sur la map on n'essaie pas de faire de actions de type "move" ou "attack".
+\\Cette intelligence avancée pourrait être très efficace si elle pouvait prévoir la meilleure chose à faire en fonction de toutes les actions de chaque tour de chaque empire possibles. Seulement, ceci serait bien trop long. Ainsi, le modèle proposé réalise une recherche sur un coup de chaque empire et ne prend pas en compte le fait qu'un empire peut réaliser 3 actions à chaque tour. 
+
+Pour cette IA, un rollback, qui permet de revenir à un état précédent, a été implémenté afin de faire le min-max. Nous avons décidé de mémoriser les commandes dans un deque puis de dépiler la dernière lorsque le rollback est utilisé. Chaque commande a une méthode execute qui permet d'exécuter la commande et une méthode rollback qui permet de faire la commande inverse et ainsi revenir à l'état précédent.
+
 \subsection{Conception logiciel}
 \begin{itemize}
-    \item Classe AI : qui sera le mère des trois différentes intelligences artificielles.
+    \item Classe AI : qui sera la mère des trois différentes intelligences artificielles.
     \item Classe RandomAI : contient une méthode run qui permet à l'intelligence artificielle naïve de lancer ses coups. 
     \item Classe HeuristicAI : contient une méthode run qui permet à l'intelligence artificielle heuristique de lancer ses coups. Elle utilise les heuristiques définies dans la sous section précédente. Pour réaliser le déplacement des unités nous avons besoin d'une "mémoire". En effet, notre carte contient des obstacles. Ainsi, pour les contourner nous avons besoin à chaque mouvement de rechercher la case la plus proche de la cible mais qui n'implique ni un retour en arrière pénalisant ni d'être bloqué par un obstacle. Nous avons donc ajouté un attribut à la classe Units qui s'appelle "canMove" et qui stocke les 3 dernières cases utilisées par l'unité.
+    \item Classe DeepAI : Contient une méthode "run" qui fait appel à une fonction minmax. Cette fonction minmax fait appel à une fonction min et une fonction max qui permettent de trouver le min ou le max d'une portion de tableau. La fonction min max réalise de plus des actions avec la méthodes preformActions puis elle les rollback et renvoie le meilleur coup à jouer à la méthode "run". Le poids de chaque action lorsqu'on est en bas de l'arbre est calculé par la fonction weightUpdate. Cette fonction permet de vérifier ce que peut faire le joueur et de renvoyer le poids de chaque action possible ou -1 dans le cas ou l'action ne peut pas être faite. Chaque action renvoie à une heuristique qui vérifie sa faisabilité et l'exécute ensuite. 
 \end{itemize}
 \newpage
 

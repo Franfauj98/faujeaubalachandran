@@ -629,75 +629,13 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
     std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
     std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
 
-    if(nextTile.x > 0 && nextTile.x < 25 && nextTile.y > 0 && nextTile.y < 25){      
+    if(nextTile.x > 0 && nextTile.x < 25 && nextTile.y > 0 && nextTile.y < 25){
       toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
       toMoveNow.push_back(unitsPosition[indexMinimumDist].getY());
       toMoveNow.push_back(nextTile.x);
       toMoveNow.push_back(nextTile.y);
       toMoveNow.push_back(element);
     }
-
-    // int leftElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()+1][unitsPosition[indexMinimumDist].getY()];
-    // int rightElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()-1][unitsPosition[indexMinimumDist].getY()];
-    // int topElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()-1];
-    // int bottomElt = principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()+1];
-    //
-    // std::vector<state::Position> possibilitiesPos;
-    // if(leftElt==2){
-    //   Position pos2(unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY());
-    //   if (posCompDeepAi(pos2,currentUnit->getCanMove()[0]) && posCompDeepAi(pos2,currentUnit->getCanMove()[1]) && posCompDeepAi(pos2,currentUnit->getCanMove()[2])){
-    //     possibilitiesPos.push_back(pos2);
-    //   }
-    // }
-    // if(rightElt==2){
-    //   Position pos3(unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY());
-    //   if (posCompDeepAi(pos3,currentUnit->getCanMove()[0]) && posCompDeepAi(pos3,currentUnit->getCanMove()[1]) && posCompDeepAi(pos3,currentUnit->getCanMove()[2])){
-    //     possibilitiesPos.push_back(pos3);
-    //   }
-    // }
-    // if(bottomElt==2){
-    //   Position pos4(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1);
-    //   if (posCompDeepAi(pos4,currentUnit->getCanMove()[0]) && posCompDeepAi(pos4,currentUnit->getCanMove()[1]) && posCompDeepAi(pos4,currentUnit->getCanMove()[2])){
-    //     possibilitiesPos.push_back(pos4);
-    //   }
-    // }
-    // if(topElt==2){
-    //   Position pos5(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1);
-    //   if (posCompDeepAi(pos5,currentUnit->getCanMove()[0]) && posCompDeepAi(pos5,currentUnit->getCanMove()[1]) && posCompDeepAi(pos5,currentUnit->getCanMove()[2])){
-    //     possibilitiesPos.push_back(pos5);
-    //   }
-    // }
-    // int minimumDistG=1000000;
-    // int indexMinimumDistG=-1;
-    // std::vector<int> distanceFromGToAttack;
-    // for (size_t i=0;i<possibilitiesPos.size();i++){
-    //   distanceFromGToAttack.push_back(distDeepAi(possibilitiesPos[i], posToAttack));
-    //   if(distanceFromGToAttack[i]<minimumDistG){
-    //     minimumDistG = distanceFromGToAttack[i];
-    //     indexMinimumDistG = i;
-    //   } else if (distanceFromGToAttack[i]==minimumDistG){
-    //     if (rand() %2 ==1){
-    //       minimumDistG = distanceFromGToAttack[i];
-    //       indexMinimumDistG = i;
-    //     }
-    //   }
-    // }
-    //
-    // if (indexMinimumDistG>=0){
-    //   std::vector<state::Position> unitPos;
-    //   toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
-    //   toMoveNow.push_back(unitsPosition[indexMinimumDist].getY());
-    //   toMoveNow.push_back(possibilitiesPos[indexMinimumDistG].getX());
-    //   toMoveNow.push_back(possibilitiesPos[indexMinimumDistG].getY());
-    //   toMoveNow.push_back(element);
-    //
-    //   Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
-    //   unitPos.push_back(currentUnit->getCanMove()[1]);
-    //   unitPos.push_back(currentUnit->getCanMove()[2]);
-    //   unitPos.push_back(possPos);
-    //   currentUnit->setCanMove(unitPos);
-    //   return toMoveNow;
-    // }
   }
   return toMoveNow;
 }
@@ -742,11 +680,6 @@ bool ennemyNextToPalace(Observable& principalMap, int id){
   }
   return false;
 }
-
-
-// weightUpdate à coder entierement
-// actions possibles en méthodes  ==>  DONE
-// minmax
 
 
 //Here is our heuristic behaviour function :
@@ -1015,14 +948,6 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
   return toAdd;
 
 }
-//while(profondeur>0){
-//weight update for the 3 villages
-//process tree
-//minmaxProcedural
-//addCommandToEngine
-//profondeur --
-//}
-
 
 
 void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
@@ -1054,21 +979,4 @@ void DeepAI::run (engine::Engine& engine, Observable& principalMap, int& counter
     std::cout << "don't play" << '\n';
     return;
   }
-  // if(levelUp(engine, principalMap, counter, x1, y1, x2, y2, x3, y3, empire)){
-  //   usleep(5000000);
-  //   return;
-  // } else if (createUnit(engine, principalMap, counter, x3, y3, empire)){
-  //   usleep(5000000);
-  //   return;
-  // } else if (attack(engine, principalMap, counter, id)){
-  //   usleep(5000000);
-  //   return;
-  // } else if (move(engine, principalMap, counter, id)){
-  //   usleep(5000000);
-  //   return;
-  // } else {
-  //   //counter++;
-  //   std::cout << "counter : " << ounter << '\n';
-  //   return;
-  // }
 }
