@@ -175,20 +175,22 @@ int position, int action, int position2){
               *unitToChange2bis= uni;
               std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
               re.push_back(std::move(unitToChange2bis));
+              mapToChange.setRessurectionUnits(re);
               Units* unit3 =(Units*) re.back().get();
               Position pos = unit3->getPosition();
               cout<<"x:"<<pos.getX()<<" y:"<<pos.getY()<<endl;
-              mapToChange.setRessurectionUnits(re);
+
               break;}
               case 14:{
               std::unique_ptr<Units> unitToChange2bis =move(unique_ptr<Units>(new Arrow()));
               *unitToChange2bis= uni;
               std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
               re.push_back(std::move(unitToChange2bis));
+              mapToChange.setRessurectionUnits(re);
               Units* unit3 =(Units*) re.back().get();
               Position pos = unit3->getPosition();
               cout<<"x:"<<pos.getX()<<" y:"<<pos.getY()<<endl;
-              mapToChange.setRessurectionUnits(re);
+
 
               break;}
               case 18:{
@@ -197,6 +199,10 @@ int position, int action, int position2){
               std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
               re.push_back(std::move(unitToChange2bis));
               mapToChange.setRessurectionUnits(re);
+              Units* unit3 =(Units*) re.back().get();
+              Position pos = unit3->getPosition();
+              cout<<"x:"<<pos.getX()<<" y:"<<pos.getY()<<endl;
+
 
               break;}
               case 22:{
@@ -204,10 +210,11 @@ int position, int action, int position2){
               *unitToChange2bis= uni;
               std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
               re.push_back(std::move(unitToChange2bis));
+              mapToChange.setRessurectionUnits(re);
               Units* unit3 =(Units*) re.back().get();
               Position pos = unit3->getPosition();
               cout<<"x:"<<pos.getX()<<" y:"<<pos.getY()<<endl;
-              mapToChange.setRessurectionUnits(re);
+
               break;}
               default: break;
           }
@@ -312,15 +319,16 @@ int position, int action, int position2){
           map.getBuildingsMap()[position2] = std::move(re.back());
           re.pop_back();
           mapToChange.setRessurectionPalace(re);
-          mapMatrix[x2][y2] = map.getUnitsMap()[position2]->getType();
-          mapMatrix[x2][y2-1] = map.getUnitsMap()[position2-1]->getType();
-          mapMatrix[x2][y2+1] = map.getUnitsMap()[position2+1]->getType();
+          mapMatrix[x2][y2] = map.getBuildingsMap()[position2]->getType();
+          mapMatrix[x2][y2-1] = map.getBuildingsMap()[position2-1]->getType();
+          mapMatrix[x2][y2+1] = map.getBuildingsMap()[position2+1]->getType();
           int counter=reId.back();
           Barrack* barrack =(Barrack*) map.getBuildingsMap()[position2+1].get();
+          std::vector<std::unique_ptr<Units>> re2= move(mapToChange.getRessurectionUnits());
           while(counter!=0){
             cout<<"counter:"<<counter<<endl;
-            std::vector<std::unique_ptr<Units>> re= move(mapToChange.getRessurectionUnits());
-            std::unique_ptr<Units> tmp = std::move(re.back());
+
+            std::unique_ptr<Units> tmp = std::move(re2.back());
             // Units* unitr = (Units*) re.back().get();
             cout<<"IdU:"<<tmp->getIdUnits()<<endl;
             //cout<<"IdU:"<<unitr->getIdUnits()<<endl;
@@ -328,9 +336,9 @@ int position, int action, int position2){
             cout<<"x:"<<pos.getX()<<" y:"<<pos.getY()<<endl;
             map.getUnitsMap()[pos.getX()*25+pos.getY()] = std::move(tmp);
             re.pop_back();
-            mapToChange.setRessurectionUnits(re);
+
             mapMatrix[pos.getX()][pos.getY()] = map.getUnitsMap()[pos.getX()*25+pos.getY()]->getType();
-            
+
             // std::vector<int> buildings;
             // unitToChange2 = (Units *)map.getUnitsMap()[pos.getX()*25+pos.getY()].get();
             // int idUnit=unitToChange2->getIdUnits();
@@ -345,6 +353,7 @@ int position, int action, int position2){
             barrack->setUnitsNumber(barrack->getUnitsNumber()+1);
             counter--;
           }
+          mapToChange.setRessurectionUnits(re2);
           reId.pop_back();
           mapToChange.setRessurectionId(reId);
               // int id=buildingToAttack->getIdBuilding();
