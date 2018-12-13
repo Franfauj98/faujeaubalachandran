@@ -93,7 +93,7 @@ void positionElement(int& x, int& y, int position){
 void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   if(canPlay){
     srand(time(NULL));
-    std::cout << "/* NewTour */" << '\n';
+    // std::cout << "/* NewTour */" << '\n';
 
     std::vector<int> buildings;
 
@@ -137,7 +137,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     int element;
     //level up of the palace if possible
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      std::cout << "LevelUp palace" << '\n';
+      // std::cout << "LevelUp palace" << '\n';
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
@@ -148,7 +148,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       return;
       //level up of the barrack if possible
     } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      std::cout << "LevelUp barrack" << '\n';
+      // std::cout << "LevelUp barrack" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
@@ -159,7 +159,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       return;
       //level up of the ressource if possible
     } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      std::cout << "LevelUp ressource" << '\n';
+      // std::cout << "LevelUp ressource" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
@@ -181,7 +181,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
       usleep(500000);
-      std::cout << "CreateUnit" << '\n';
+      // std::cout << "CreateUnit" << '\n';
       std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
       int pos=0;

@@ -626,8 +626,8 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
 
     auto nextTile = path[path.size()-2];
     generator.clearCollisions();
-    std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
-    std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
+    // std::cout << "unitsPosition : (" << unitsPosition[indexMinimumDist].getX() << "," << unitsPosition[indexMinimumDist].getY() << ")" << endl;
+    // std::cout << "nextTile : (" << nextTile.x << "," << nextTile.y << ")" << endl;
 
     if(nextTile.x > 0 && nextTile.x < 25 && nextTile.y > 0 && nextTile.y < 25){
       toMoveNow.push_back(unitsPosition[indexMinimumDist].getX());
@@ -645,8 +645,8 @@ bool move(engine::Engine& engine, Observable& principalMap, int& counter, int id
   std::vector<int> v = moveAvailable(principalMap, id);
   if(v.size()>0){
 
-    std::cout << "posInit : (" << v[0] << "," << v[1] << ")" << '\n';
-    std::cout << "posToGo : (" << v[2] << "," << v[3] << ")" << '\n';
+    // std::cout << "posInit : (" << v[0] << "," << v[1] << ")" << '\n';
+    // std::cout << "posToGo : (" << v[2] << "," << v[3] << ")" << '\n';
     engine.addCommand(unique_ptr<Command> (new CaseIdentifier(v[0],v[1])),1);
     engine.addCommand(unique_ptr<Command> (new Possibilities(v[0],v[1],v[4])),2);
     engine.addCommand(unique_ptr<Command> (new PrintStats(v[0],v[1],v[4])),3);
