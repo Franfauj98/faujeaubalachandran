@@ -115,7 +115,6 @@ int position, int action, int position2){
       if (buildingToAttack->getLife()<=unitToChange->getDamage()){
         Buildings* palace = (Buildings *)map.getBuildingsMap()[position2].get();
         Buildings palace1=*(palace);
-        cout<<"pos2:"<<position2<<endl;
         std::unique_ptr<Buildings> palace2 =move(unique_ptr<Buildings>(new Palace()));
         *palace2= palace1;
         // Buildings* ressource = (Buildings *)map.getBuildingsMap()[position2-1].get();
