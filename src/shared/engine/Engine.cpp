@@ -19,6 +19,7 @@ using namespace render;
 
 //global jsonFile for engine.
 std::ofstream outputFileJson, outputFileTxt;
+std::ifstream inputFileTxt;
 
 Engine::Engine (){
 }
@@ -274,6 +275,123 @@ void Engine::rollback (state::Observable& principalMap){
 }
 
 
+vector<string> explode2(string const & s, const char& c){
+  string buff{""};
+  vector<string> v;
+  for(auto n:s){
+    if(n!=c) buff+=n;
+    else if(n==c && buff != "") {
+      v.push_back(buff);
+      buff="";
+    }
+  }
+  if(buff!="") v.push_back(buff);
+  return v;
+}
+
+
+void Engine::replay(state::Observable& principalMap){
+  inputFileTxt.open("cmdTxt.txt");
+  string tmp;
+  if(inputFileTxt.is_open()){
+    while(getline(inputFileTxt, tmp)){
+      cout<<tmp;
+      vector<string> commands = explode2(tmp, ';');
+      if(commands.size()<7){
+        std::cout << "id" << commands[0] << '\n';
+        switch(stoi(commands[0], nullptr, 10)){
+          case 1:{
+            addCommand((unique_ptr<Command> (new CaseIdentifier(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10)))),1);
+            break;
+          }
+          case 2:{
+            addCommand(unique_ptr<Command> (new Possibilities(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10))),2);
+            break;
+          }
+          case 3:{
+            addCommand(unique_ptr<Command> (new PrintStats(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10))),3);
+            break;
+          }
+
+          case 6:{
+            addCommand((unique_ptr<Command> (new Move(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10),stoi(commands[4], nullptr, 10)))),6);
+            break;
+          }
+          case 7:{
+            addCommand((unique_ptr<Command> (new Attack(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10),stoi(commands[4], nullptr, 10)))),7);
+            break;
+          }
+          case 5:{
+            addCommand((unique_ptr<Command> (new LevelUp(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10)))),5);
+            break;
+          }
+          case 4:{
+            addCommand((unique_ptr<Command> (new CreateUnit(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10),stoi(commands[4], nullptr, 10),stoi(commands[5], nullptr, 10)))),4);
+            break;
+          }
+          default: break;
+        }
+
+      }
+    }
+
+    inputFileTxt.close();
+  }
+}
+
+void Engine::execReplay(state::Observable& principalMap){
+  int i=0;
+  while(i<4){
+    if(this->commandList.size()>0){
+      std::cout << "coucou1" << '\n';
+      switch(commandListId.front()){
+        case 1:{
+          std::cout << "coucou2" << '\n';
+          CaseIdentifier* ci = (CaseIdentifier*) commandList.front().get();
+          ci->execute(principalMap);
+          break;
+        }
+        case 2:{
+          Possibilities* ps = (Possibilities*) commandList.front().get();
+          ps->execute(principalMap);
+          break;
+        }
+        case 3:{
+          PrintStats* pst = (PrintStats*) commandList.front().get();
+          pst->execute(principalMap);
+          break;
+        }
+
+        case 6:{
+          Move* mv = (Move*) commandList.front().get();
+          mv->execute(principalMap);
+          break;
+        }
+        case 7:{
+          Attack* at = (Attack*) commandList.front().get();
+          at->execute(principalMap);
+          break;
+        }
+        case 5:{
+          LevelUp* lu = (LevelUp*) commandList.front().get();
+          lu->execute(principalMap);
+          break;
+        }
+        case 4:{
+          CreateUnit* cu = (CreateUnit*) commandList.front().get();
+          cu->execute(principalMap);
+          break;
+        }
+        default: break;
+      }
+
+      usleep(500000);
+      this->commandList.pop();
+      this->commandListId.pop();
+    }
+    i++;
+  }
+}
 
 std::queue<int> Engine::getCommandListId(){
   return this->commandListId;

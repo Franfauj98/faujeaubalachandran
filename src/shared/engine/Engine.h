@@ -53,6 +53,8 @@ namespace engine {
     std::deque<int> getCommandListIdPrev ();
     void beginRecord ();
     void openFiles ();
+    void replay (state::Observable& principalMap);
+    void execReplay (state::Observable& principalMap);
     // Setters and Getters
   };
 

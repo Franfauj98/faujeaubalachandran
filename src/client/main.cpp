@@ -1121,6 +1121,7 @@ int main(int argc,char* argv[])
   window.clear();
   map.update(*principalMap,"","","","");
   map.drawMap(window);
+  engine.replay(*principalMap);
 
   while (window.isOpen())
   {
@@ -1132,6 +1133,11 @@ int main(int argc,char* argv[])
     if (event.type == sf::Event::Closed)
         window.close();
     }
+
+    engine.execReplay(*principalMap);
+
+    map.update(*principalMap,"","","","");
+    map.drawMap(window);
   }
 
 } else {
