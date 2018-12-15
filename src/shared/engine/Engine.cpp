@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <cstdlib>
 #include "../../extern/jsoncpp-1.8.0/json/json-forwards.h"
 #include "../../extern/jsoncpp-1.8.0/json/json.h"
@@ -17,10 +18,11 @@ using namespace std;
 using namespace render;
 
 //global jsonFile for engine.
-std::ofstream outputFile;
+std::ofstream outputFileJson, outputFileTxt;
 
 Engine::Engine (){
-  outputFile.open("outputFile.json");
+  outputFileJson.open("cmdJson.json");
+  outputFileTxt.open("cmdTxt.txt");
 }
 
 void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
@@ -43,6 +45,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["x"]=ci->getX();
         value2["y"]=ci->getY();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"1;"+to_string(ci->getX())+";"+to_string(ci->getY())+"\n";
+        }
         ci->execute(principalMap);
         break;
       }
@@ -54,6 +60,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["y"]=ps->getY();
         value2["element"]=ps->getElement();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"2;"+to_string(ps->getX())+";"+to_string(ps->getY()) +";"+ to_string(ps->getElement())+"\n";
+        }
         ps->execute(principalMap);
         break;
       }
@@ -65,6 +75,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["y"]=pst->getY();
         value2["element"]=pst->getElement();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"3;"+to_string(pst->getX())+";"+to_string(pst->getY()) +";"+ to_string(pst->getElement())+"\n";
+        }
         pst->execute(principalMap);
         break;
       }
@@ -78,6 +92,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["x2"]=mv->getX2();
         value2["y2"]=mv->getY2();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"6;"+to_string(mv->getX())+";"+to_string(mv->getY()) + ";" +to_string(mv->getX2())+";"+to_string(mv->getY2())+"\n";
+        }
         mv->execute(principalMap);
         break;
       }
@@ -90,6 +108,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["x2"]=at->getX2();
         value2["y2"]=at->getY2();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"7;"+to_string(at->getX())+";"+to_string(at->getY()) + ";" +to_string(at->getX2())+";"+to_string(at->getY2())+"\n";
+        }
         at->execute(principalMap);
         break;
       }
@@ -100,6 +122,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["x"]=lu->getX();
         value2["y"]=lu->getY();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"5;"+to_string(lu->getX())+";"+to_string(lu->getY())+"\n";
+        }
         lu->execute(principalMap);
         break;
       }
@@ -113,6 +139,10 @@ void Engine::execute(state::Observable& principalMap){
         value2["y2"]=cu->getY2();
         value2["unit"]=cu->getUnit();
         value["properties"]=value2;
+
+        if(outputFileTxt.is_open()){
+          outputFileTxt<<"4;"+to_string(cu->getX())+";"+to_string(cu->getY()) + ";" +to_string(cu->getX2())+";"+to_string(cu->getY2()) +";"+ to_string(cu->getUnit())+"\n";
+        }
         cu->execute(principalMap);
         break;
       }
@@ -123,7 +153,7 @@ void Engine::execute(state::Observable& principalMap){
     this->commandListIdPrev.push_back(commandListId.front());
     this->commandList.pop();
     this->commandListId.pop();
-    writer.write(outputFile, value);
+    writer.write(outputFileJson, value);
   }
 }
 
@@ -230,5 +260,6 @@ std::deque<int> Engine::getCommandListIdPrev(){
 }
 
 Engine::~Engine (){
-  outputFile.close();
+  outputFileJson.close();
+  outputFileTxt.close();
 }
