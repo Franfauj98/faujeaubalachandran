@@ -14,7 +14,6 @@ LevelUp::LevelUp (int x, int y){
   this->y = y;
 }
 
-
 CommandTypeId LevelUp::getTypeId () const{
   return CommandTypeId::LEVELUP;
 }

@@ -29,6 +29,9 @@ namespace engine {
     void execute (state::Observable& principalMap);
     int get () const;
     PrintStats (int x, int y, int element);
+    int getX () const;
+    int getY () const;
+    int getElement () const;
     // Setters and Getters
   };
 

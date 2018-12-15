@@ -28,6 +28,9 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::Observable& principalMap);
     Possibilities (int x, int y, int element);
+    int getX () const;
+    int getY () const;
+    int getElement () const;
     // Setters and Getters
   };
 

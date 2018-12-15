@@ -16,6 +16,20 @@ Attack::Attack (int x, int y, int x2, int y2){
   this->y2 = y2;
 }
 
+int Attack::getX() const{
+  return this->x;
+}
+int Attack::getY() const{
+  return this->y;
+}
+int Attack::getX2() const{
+  return this->x2;
+}
+int Attack::getY2() const{
+  return this->y2;
+}
+
+
 CommandTypeId Attack::getTypeId () const{
   return CommandTypeId::ATTACK;
 }

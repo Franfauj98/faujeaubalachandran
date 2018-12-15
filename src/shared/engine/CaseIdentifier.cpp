@@ -15,6 +15,12 @@ CaseIdentifier::~CaseIdentifier (){
 
 }
 
+int CaseIdentifier::getX() const{
+  return this->x;
+}
+int CaseIdentifier::getY() const{
+  return this->y;
+}
 
 CommandTypeId CaseIdentifier::getTypeId () const{
   return CommandTypeId::CASEIDENTIFIER;
