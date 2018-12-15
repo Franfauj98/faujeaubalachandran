@@ -41,6 +41,7 @@ namespace engine {
     std::deque<std::unique_ptr<Command>> commandListPrev;
     std::queue<int> commandListId;
     std::deque<int> commandListIdPrev;
+    bool record     = false;
     // Operations
   public:
     Engine ();
@@ -50,6 +51,8 @@ namespace engine {
     void rollback (state::Observable& principalMap);
     std::queue<int> getCommandListId ();
     std::deque<int> getCommandListIdPrev ();
+    void beginRecord ();
+    void openFiles ();
     // Setters and Getters
   };
 

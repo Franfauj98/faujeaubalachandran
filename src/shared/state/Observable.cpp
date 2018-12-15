@@ -11,6 +11,16 @@ Observable::~Observable(){
 Observable::Observable(){
 }
 
+Observable::Observable(bool record, bool replay){
+  if(record){
+    this->allMaps.beginRecord();
+  }
+  if(replay){
+    this->allMaps.beginReplay();
+  }
+  this->allMaps.constructMap();
+}
+
 void Observable::notifyObserver(Observable& observable,
 int position, int id, int action, int unitToCreate, int position2) const{
 

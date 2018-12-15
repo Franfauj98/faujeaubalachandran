@@ -34,9 +34,9 @@ namespace state {
     // Operations
   public:
     ~Observable ();
+    Observable ();
     void notifyObserver (state::Observable& observable, int position, int idToChange, int action, int unitToCreate, int position2) const;
     void notifyObserverPrev (state::Observable& observable, int position, int idToChange, int action, int unitToDestroy, int position2) const;
-    Observable ();
     Map& getAllMaps ();
     std::vector<std::unique_ptr<Units>>& getRessurectionUnits ();
     void setRessurectionUnits (std::vector<std::unique_ptr<Units>>& ressurectionElement);
@@ -44,6 +44,7 @@ namespace state {
     void setRessurectionId (std::vector<int> reId);
     std::vector<std::unique_ptr<Buildings>>& getRessurectionPalace ();
     void setRessurectionPalace (std::vector<std::unique_ptr<Buildings>>& ressurectionElement);
+    Observable (bool record, bool replay);
     // Setters and Getters
   };
 

@@ -1,7 +1,12 @@
 #include "Map.h"
-#include <iostream>
 #include "../state.h"
 #include <time.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include <stdio.h>
+
 using namespace state;
 using namespace std;
 
@@ -22,118 +27,199 @@ bool compare(int map[25][25],int positionX,int positionY,int rangeX,int rangeY, 
   return boolean;
 }
 
+vector<string> explode(string const & s, const char& c){
+  string buff{""};
+  vector<string> v;
+  for(auto n:s){
+    if(n!=c) buff+=n;
+    else if(n==c && buff != "") {
+      v.push_back(buff);
+      buff="";
+    }
+  }
+  if(buff!="") v.push_back(buff);
+  return v;
+}
 
-Map::Map(){
-  // Create sea
+std::ofstream outputFileTxtToWrite;
+std::ifstream inputFileTxtToRead;
+
+void Map::beginRecord(){
+  this->record = true;
+}
+
+void Map::beginReplay(){
+  this->replay = true;
+}
+
+Map::Map(){}
+
+void Map::constructMap(){
+  // if(this->record){
   srand(time(NULL));
-  this->size=25;
-  // decor wide in one direction
-  int rangeX=1;
-  int rangeY=1;
-  int map[25][25];
-  // map is a full array of grass at the beginning
-  for (int i=0;i<this->size;i++){
-    for (int j=0;j<this->size;j++){
-      map[i][j]=2;
-    }
-  }
+  //   outputFileTxt.close();
+  // }
 
-  int sizeBuilding = 1;
-  int buildingRandx = 0; // avoid borders
-  int buildingRandy = 0;
-  for(int i = 0; i<3; i++){
-    buildingRandx = rand() % (this->size-6)+3; // avoid borders
-    buildingRandy = rand() % (this->size-6)+3;
-    while( !(compare(map,buildingRandx,buildingRandy,sizeBuilding*5,sizeBuilding*5,26)))
-    {
-      buildingRandx = rand() % (this->size-6)+3;
+  if(this->replay){
+    inputFileTxtToRead.open("cmdTxt.txt");
+    string tmp;
+    if(inputFileTxtToRead.is_open()){
+      getline(inputFileTxtToRead, tmp);
+      cout<<tmp;
+      vector<string> map = explode(tmp, ';');
+      std::cout << "size " << map.size() << '\n';
+      int x=0;
+      int y=0;
+      int mapTest[25][25];
+      for(int i = 0; i<map.size(); i++){
+        if(i%25==0&& i!=0) x++;
+        if(y%25==0&& y!=0) y = 0;
+        std::cout << "x : " << x << '\n';
+        std::cout << "y : " << y << '\n';
+        mapTest[x][y]=stoi(map[i], nullptr, 10);
+        y++;
+      }
+
+      vector <vector <int> > matrixcp(this->size,vector<int> (this->size,0));
+      for (int i=0;i<this->size;i++){
+        for (int j=0;j<this->size;j++){
+          matrixcp[i][j]=mapTest[i][j];
+        }
+      }
+
+      this->mapMatrix = matrixcp;
+
+
+      inputFileTxtToRead.close();
+    }
+
+  } else {
+    // Create sea
+    this->size=25;
+    // decor wide in one direction
+    int rangeX=1;
+    int rangeY=1;
+    int map[25][25];
+    // map is a full array of grass at the beginning
+    for (int i=0;i<this->size;i++){
+      for (int j=0;j<this->size;j++){
+        map[i][j]=2;
+      }
+    }
+
+    int sizeBuilding = 1;
+    int buildingRandx = 0; // avoid borders
+    int buildingRandy = 0;
+    for(int i = 0; i<3; i++){
+      buildingRandx = rand() % (this->size-6)+3; // avoid borders
       buildingRandy = rand() % (this->size-6)+3;
+      while( !(compare(map,buildingRandx,buildingRandy,sizeBuilding*5,sizeBuilding*5,26)))
+      {
+        buildingRandx = rand() % (this->size-6)+3;
+        buildingRandy = rand() % (this->size-6)+3;
+      }
+      map[buildingRandx][buildingRandy-1] = 31;
+      map[buildingRandx][buildingRandy] = 26;
+      map[buildingRandx][buildingRandy+1] = 30;
     }
-    map[buildingRandx][buildingRandy-1] = 31;
-    map[buildingRandx][buildingRandy] = 26;
-    map[buildingRandx][buildingRandy+1] = 30;
-  }
 
-  // feeding of sea decor random array positions
-  int seaRandx = 0;
-  int seaRandy = 0;
-  for(int i = 0; i < 3; i++){
-    seaRandx = rand() % this->size;
-    seaRandy = rand() % this->size;
-    while(!(compare(map,seaRandx,seaRandy,rangeX,rangeY,26) && compare(map,seaRandx,seaRandy,rangeX,rangeY,30)
-    && compare(map,seaRandx,seaRandy,rangeX,rangeY,31))){
+    // feeding of sea decor random array positions
+    int seaRandx = 0;
+    int seaRandy = 0;
+    for(int i = 0; i < 3; i++){
       seaRandx = rand() % this->size;
       seaRandy = rand() % this->size;
-    }
-    for (int i=0;i<(2*rangeX+1);i++){
-      for (int j=0;j<(2*rangeY+1);j++){
-        map[seaRandx+i-rangeX][seaRandy+j-rangeY] = 1;
+      while(!(compare(map,seaRandx,seaRandy,rangeX,rangeY,26) && compare(map,seaRandx,seaRandy,rangeX,rangeY,30)
+      && compare(map,seaRandx,seaRandy,rangeX,rangeY,31))){
+        seaRandx = rand() % this->size;
+        seaRandy = rand() % this->size;
       }
+      for (int i=0;i<(2*rangeX+1);i++){
+        for (int j=0;j<(2*rangeY+1);j++){
+          map[seaRandx+i-rangeX][seaRandy+j-rangeY] = 1;
+        }
+      }
+      map[seaRandx][seaRandy] = 6;
     }
-    map[seaRandx][seaRandy] = 6;
-  }
 
-  int woodRandx = 0;
-  int woodRandy = 0;
-  // feeding of wood decor random array positions
-  for(int i = 0; i<3; i++){
-    woodRandx = rand() % this->size;
-    woodRandy = rand() % this->size;
-    while(!(compare(map,woodRandx,woodRandy,rangeX,rangeY,1) && compare(map,woodRandx,woodRandy,rangeX,rangeY,26)
-         && compare(map,woodRandx,woodRandy,rangeX,rangeY,30)&& compare(map,woodRandx,woodRandy,rangeX,rangeY,31))){
+    int woodRandx = 0;
+    int woodRandy = 0;
+    // feeding of wood decor random array positions
+    for(int i = 0; i<3; i++){
       woodRandx = rand() % this->size;
       woodRandy = rand() % this->size;
-    }
-    for (int i=0;i<2*rangeX+1;i++){
-      for (int j=0;j<2*rangeY+1;j++){
-        map[woodRandx+i-rangeX][woodRandy+j-rangeY] = 8;
+      while(!(compare(map,woodRandx,woodRandy,rangeX,rangeY,1) && compare(map,woodRandx,woodRandy,rangeX,rangeY,26)
+      && compare(map,woodRandx,woodRandy,rangeX,rangeY,30)&& compare(map,woodRandx,woodRandy,rangeX,rangeY,31))){
+        woodRandx = rand() % this->size;
+        woodRandy = rand() % this->size;
+      }
+      for (int i=0;i<2*rangeX+1;i++){
+        for (int j=0;j<2*rangeY+1;j++){
+          map[woodRandx+i-rangeX][woodRandy+j-rangeY] = 8;
+        }
       }
     }
-  }
-  int mountainRandx = 0;
-  int mountainRandy = 0;
-  // feeding of mountain decor random array positions
-  for(int i = 0; i<3; i++){
-    mountainRandx = rand() % this->size;
-    mountainRandy = rand() % this->size;
-    while( !(compare(map,mountainRandx,mountainRandy,rangeX,rangeY,1) && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,8)
-           && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,26)&& compare(map,mountainRandx,mountainRandy,rangeX,rangeY,30)
-           && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,31))) {
+    int mountainRandx = 0;
+    int mountainRandy = 0;
+    // feeding of mountain decor random array positions
+    for(int i = 0; i<3; i++){
       mountainRandx = rand() % this->size;
       mountainRandy = rand() % this->size;
+      while( !(compare(map,mountainRandx,mountainRandy,rangeX,rangeY,1) && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,8)
+      && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,26)&& compare(map,mountainRandx,mountainRandy,rangeX,rangeY,30)
+      && compare(map,mountainRandx,mountainRandy,rangeX,rangeY,31))) {
+        mountainRandx = rand() % this->size;
+        mountainRandy = rand() % this->size;
+      }
+      for (int i=0;i<2*rangeX+1;i++){
+        for (int j=0;j<2*rangeY+1;j++){
+          map[mountainRandx+i-rangeX][mountainRandy+j-rangeY] = 3;
+        }
+      }
     }
-    for (int i=0;i<2*rangeX+1;i++){
-      for (int j=0;j<2*rangeY+1;j++){
-        map[mountainRandx+i-rangeX][mountainRandy+j-rangeY] = 3;
-    }
-  }
-  }
 
-  // feeding of building decor random array positions in few steps. A building cannot be on an other one
+    // feeding of building decor random array positions in few steps. A building cannot be on an other one
 
-  int elementRandx = 0;
-  int elementRandy = 0;
-  int decorArray[] = {1,3,4,5,7,8};
-  int decor = 0;
-  for (int i=0;i<15;i++){
-    elementRandx = rand () % this->size;
-    elementRandy = rand () % this->size;
-    decor = rand () % 6;
-    while (map[elementRandx][elementRandy]!=2){
+    int elementRandx = 0;
+    int elementRandy = 0;
+    int decorArray[] = {1,3,4,5,7,8};
+    int decor = 0;
+    for (int i=0;i<15;i++){
       elementRandx = rand () % this->size;
       elementRandy = rand () % this->size;
+      decor = rand () % 6;
+      while (map[elementRandx][elementRandy]!=2){
+        elementRandx = rand () % this->size;
+        elementRandy = rand () % this->size;
+      }
+      map[elementRandx][elementRandy]= decorArray[decor];
     }
-    map[elementRandx][elementRandy]= decorArray[decor];
+
+    vector <vector <int> > matrix(this->size,vector<int> (this->size,0));
+    for (int i=0;i<this->size;i++){
+      for (int j=0;j<this->size;j++){
+        matrix[i][j]=map[i][j];
+      }
+    }
+
+    this->mapMatrix = matrix;
+
+    if(this->record){
+      outputFileTxtToWrite.open("cmdTxt.txt");
+      if(outputFileTxtToWrite.is_open()){
+        for (int i=0;i<this->size;i++){
+          for (int j=0;j<this->size;j++){
+            outputFileTxtToWrite<<to_string(this->mapMatrix[i][j])+";";
+          }
+        }
+        outputFileTxtToWrite<<"\n";
+      }
+      outputFileTxtToWrite.close();
+    }
+
   }
 
-  vector <vector <int> > matrix(this->size,vector<int> (this->size,0));
-  for (int i=0;i<this->size;i++){
-    for (int j=0;j<this->size;j++){
-      matrix[i][j]=map[i][j];
-    }
-  }
 
-  this->mapMatrix = matrix;
   //Map Init
   for(int i = 0; i<this->size; i++){
     for(int j = 0; j<this->size; j++){
@@ -161,7 +247,7 @@ Map::Map(){
   for(int i = 0; i<this->size; i++){
     for(int j = 0; j<this->size; j++){
       Position p(i,j);
-      switch(map[i][j]){
+      switch(this->mapMatrix[i][j]){
         case 1:
         this->basicMap[basicChange] = move(unique_ptr<Element> (new Decor(SEA,p)));
         break;
