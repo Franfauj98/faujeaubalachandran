@@ -295,10 +295,8 @@ void Engine::replay(state::Observable& principalMap){
   string tmp;
   if(inputFileTxt.is_open()){
     while(getline(inputFileTxt, tmp)){
-      cout<<tmp;
       vector<string> commands = explode2(tmp, ';');
       if(commands.size()<7){
-        std::cout << "id" << commands[0] << '\n';
         switch(stoi(commands[0], nullptr, 10)){
           case 1:{
             addCommand((unique_ptr<Command> (new CaseIdentifier(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10)))),1);
@@ -339,14 +337,12 @@ void Engine::replay(state::Observable& principalMap){
   }
 }
 
-void Engine::execReplay(state::Observable& principalMap){
+int Engine::execReplay(state::Observable& principalMap){
   int i=0;
   while(i<4){
     if(this->commandList.size()>0){
-      std::cout << "coucou1" << '\n';
       switch(commandListId.front()){
         case 1:{
-          std::cout << "coucou2" << '\n';
           CaseIdentifier* ci = (CaseIdentifier*) commandList.front().get();
           ci->execute(principalMap);
           break;
@@ -385,12 +381,15 @@ void Engine::execReplay(state::Observable& principalMap){
         default: break;
       }
 
-      usleep(500000);
+      usleep(100000);
       this->commandList.pop();
       this->commandListId.pop();
+      i++;
+    } else {
+      return -1;
     }
-    i++;
   }
+  return 1;
 }
 
 std::queue<int> Engine::getCommandListId(){

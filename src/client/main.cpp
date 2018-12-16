@@ -1123,6 +1123,16 @@ int main(int argc,char* argv[])
   map.drawMap(window);
   engine.replay(*principalMap);
 
+  // string gold, wood, food;
+  
+  Empire* empire1 = principalMap->getAllMaps().getEmpires()[0].get();
+  Empire* empire2 = principalMap->getAllMaps().getEmpires()[1].get();
+  Empire* empire3 = principalMap->getAllMaps().getEmpires()[2].get();
+
+  // int counter = 0;
+
+  Empire* empire;
+  int play;
   while (window.isOpen())
   {
 
@@ -1134,8 +1144,30 @@ int main(int argc,char* argv[])
         window.close();
     }
 
-    engine.execReplay(*principalMap);
+    play = engine.execReplay(*principalMap);
 
+    if(play==-1){
+      return 0;
+    }
+    // counter++;
+    //
+    // std::cout << "counter " << counter << '\n';
+    //
+    // if(counter<=2) empire = principalMap->getAllMaps().getEmpires()[0].get();
+    // if(counter>2&&counter<=5) empire = principalMap->getAllMaps().getEmpires()[1].get();
+    // if(counter>5) empire = principalMap->getAllMaps().getEmpires()[2].get();
+
+
+    // if(counter>=9){
+    //   counter=0;
+      empire1->updateRessource(principalMap->getAllMaps().getBuildingsMap());
+      empire2->updateRessource(principalMap->getAllMaps().getBuildingsMap());
+      empire3->updateRessource(principalMap->getAllMaps().getBuildingsMap());
+    // }
+
+    // gold= to_string(empire1->getGoldRessource());
+    // wood= to_string(empire1->getWoodRessource());
+    // food= to_string(empire1->getFoodRessource());
     map.update(*principalMap,"","","","");
     map.drawMap(window);
   }

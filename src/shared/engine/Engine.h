@@ -54,7 +54,7 @@ namespace engine {
     void beginRecord ();
     void openFiles ();
     void replay (state::Observable& principalMap);
-    void execReplay (state::Observable& principalMap);
+    int execReplay (state::Observable& principalMap);
     // Setters and Getters
   };
 

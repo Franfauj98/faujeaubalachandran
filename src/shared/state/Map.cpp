@@ -65,17 +65,13 @@ void Map::constructMap(){
     string tmp;
     if(inputFileTxtToRead.is_open()){
       getline(inputFileTxtToRead, tmp);
-      cout<<tmp;
       vector<string> map = explode(tmp, ';');
-      std::cout << "size " << map.size() << '\n';
       int x=0;
       int y=0;
       int mapTest[25][25];
-      for(int i = 0; i<map.size(); i++){
+      for(size_t i = 0; i<map.size(); i++){
         if(i%25==0&& i!=0) x++;
         if(y%25==0&& y!=0) y = 0;
-        std::cout << "x : " << x << '\n';
-        std::cout << "y : " << y << '\n';
         mapTest[x][y]=stoi(map[i], nullptr, 10);
         y++;
       }
