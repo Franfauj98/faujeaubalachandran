@@ -19,7 +19,7 @@ using namespace render;
 
 //global jsonFile for engine.
 std::ofstream outputFileJson, outputFileTxt;
-std::ifstream inputFileTxt;
+std::ifstream inputFileTxt, inputFileJson;
 Json::StyledStreamWriter writer;
 std::vector<std::string> vectTest;
 string commands;
@@ -360,13 +360,15 @@ vector<string> explode2(string const & s, const char& c){
 
 void Engine::replay(state::Observable& principalMap){
   inputFileTxt.open("cmdTxt.txt");
-  Json::Reader reader;
-  Json::Value val;
-  reader.parse("command", val);
+  inputFileJson.open("cmdJson.json");
   string tmp;
 
   Json::Value commands;
-  Json::Reader reader;
+  Json::Reader reader1;
+  reader1.parse(inputFileJson, commands);
+  Json::Value myCommands = commands["commands"];
+
+  for(int i = 0; i < myCommands.size(); i++) std::cout << myCommands[i]["id"] << '\n';
 
   if(inputFileTxt.is_open()){
     while(getline(inputFileTxt, tmp)){
