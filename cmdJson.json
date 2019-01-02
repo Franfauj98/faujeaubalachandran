@@ -3,163 +3,7 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "5",
-	"name" : "LevelUp",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "5",
-	"name" : "LevelUp",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 13,
-		"y" : 19
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "5",
-	"name" : "LevelUp",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "5",
-	"name" : "LevelUp",
-	"properties" : 
-	{
-		"element" : 26,
-		"x" : 16,
-		"y" : 6
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -169,7 +13,7 @@
 	"properties" : 
 	{
 		"element" : 26,
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -179,7 +23,7 @@
 	"properties" : 
 	{
 		"element" : 26,
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -189,7 +33,7 @@
 	"properties" : 
 	{
 		"element" : 26,
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -198,7 +42,7 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -208,7 +52,7 @@
 	"properties" : 
 	{
 		"element" : 26,
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -218,7 +62,7 @@
 	"properties" : 
 	{
 		"element" : 26,
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -228,7 +72,7 @@
 	"properties" : 
 	{
 		"element" : 26,
-		"x" : 16,
+		"x" : 11,
 		"y" : 12
 	}
 }
@@ -237,8 +81,8 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 13,
-		"y" : 20
+		"x" : 14,
+		"y" : 18
 	}
 }
 {
@@ -246,9 +90,9 @@
 	"name" : "Possibilities",
 	"properties" : 
 	{
-		"element" : 30,
-		"x" : 13,
-		"y" : 20
+		"element" : 26,
+		"x" : 14,
+		"y" : 18
 	}
 }
 {
@@ -256,22 +100,19 @@
 	"name" : "PrintStats",
 	"properties" : 
 	{
-		"element" : 30,
-		"x" : 13,
-		"y" : 20
+		"element" : 26,
+		"x" : 14,
+		"y" : 18
 	}
 }
 {
-	"id" : "4",
-	"name" : "Attack",
+	"id" : "5",
+	"name" : "LevelUp",
 	"properties" : 
 	{
-		"element" : 30,
-		"unit" : 4,
-		"x" : 13,
-		"x2" : 14,
-		"y" : 20,
-		"y2" : 20
+		"element" : 26,
+		"x" : 14,
+		"y" : 18
 	}
 }
 {
@@ -280,7 +121,7 @@
 	"properties" : 
 	{
 		"x" : 14,
-		"y" : 20
+		"y" : 18
 	}
 }
 {
@@ -288,9 +129,9 @@
 	"name" : "Possibilities",
 	"properties" : 
 	{
-		"element" : 18,
+		"element" : 26,
 		"x" : 14,
-		"y" : 20
+		"y" : 18
 	}
 }
 {
@@ -298,21 +139,19 @@
 	"name" : "PrintStats",
 	"properties" : 
 	{
-		"element" : 18,
+		"element" : 26,
 		"x" : 14,
-		"y" : 20
+		"y" : 18
 	}
 }
 {
-	"id" : "6",
-	"name" : "Move",
+	"id" : "5",
+	"name" : "LevelUp",
 	"properties" : 
 	{
-		"element" : 18,
+		"element" : 26,
 		"x" : 14,
-		"x2" : 14,
-		"y" : 20,
-		"y2" : 19
+		"y" : 18
 	}
 }
 {
@@ -320,8 +159,8 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 14,
-		"y" : 19
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
@@ -329,9 +168,9 @@
 	"name" : "Possibilities",
 	"properties" : 
 	{
-		"element" : 18,
-		"x" : 14,
-		"y" : 19
+		"element" : 26,
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
@@ -339,21 +178,19 @@
 	"name" : "PrintStats",
 	"properties" : 
 	{
-		"element" : 18,
-		"x" : 14,
-		"y" : 19
+		"element" : 26,
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
-	"id" : "6",
-	"name" : "Move",
+	"id" : "5",
+	"name" : "LevelUp",
 	"properties" : 
 	{
-		"element" : 18,
-		"x" : 14,
-		"x2" : 14,
-		"y" : 19,
-		"y2" : 18
+		"element" : 26,
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
@@ -361,8 +198,8 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 16,
-		"y" : 7
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
@@ -370,9 +207,9 @@
 	"name" : "Possibilities",
 	"properties" : 
 	{
-		"element" : 30,
-		"x" : 16,
-		"y" : 7
+		"element" : 26,
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
@@ -380,63 +217,19 @@
 	"name" : "PrintStats",
 	"properties" : 
 	{
-		"element" : 30,
-		"x" : 16,
-		"y" : 7
+		"element" : 26,
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
-	"id" : "4",
-	"name" : "Attack",
+	"id" : "5",
+	"name" : "LevelUp",
 	"properties" : 
 	{
-		"element" : 30,
-		"unit" : 4,
-		"x" : 16,
-		"x2" : 17,
-		"y" : 7,
-		"y2" : 7
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 17,
-		"y" : 7
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 18,
-		"x" : 17,
-		"y" : 7
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 18,
-		"x" : 17,
-		"y" : 7
-	}
-}
-{
-	"id" : "6",
-	"name" : "Move",
-	"properties" : 
-	{
-		"element" : 18,
-		"x" : 17,
-		"x2" : 17,
-		"y" : 7,
-		"y2" : 8
+		"element" : 26,
+		"x" : 15,
+		"y" : 6
 	}
 }
 {
@@ -444,48 +237,7 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 17,
-		"y" : 8
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 18,
-		"x" : 17,
-		"y" : 8
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 18,
-		"x" : 17,
-		"y" : 8
-	}
-}
-{
-	"id" : "6",
-	"name" : "Move",
-	"properties" : 
-	{
-		"element" : 18,
-		"x" : 17,
-		"x2" : 17,
-		"y" : 8,
-		"y2" : 9
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 16,
+		"x" : 11,
 		"y" : 13
 	}
 }
@@ -495,7 +247,7 @@
 	"properties" : 
 	{
 		"element" : 30,
-		"x" : 16,
+		"x" : 11,
 		"y" : 13
 	}
 }
@@ -505,132 +257,8 @@
 	"properties" : 
 	{
 		"element" : 30,
-		"x" : 16,
+		"x" : 11,
 		"y" : 13
-	}
-}
-{
-	"id" : "4",
-	"name" : "Attack",
-	"properties" : 
-	{
-		"element" : 30,
-		"unit" : 1,
-		"x" : 16,
-		"x2" : 17,
-		"y" : 13,
-		"y2" : 13
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 17,
-		"y" : 13
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 14,
-		"x" : 17,
-		"y" : 13
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 14,
-		"x" : 17,
-		"y" : 13
-	}
-}
-{
-	"id" : "6",
-	"name" : "Move",
-	"properties" : 
-	{
-		"element" : 14,
-		"x" : 17,
-		"x2" : 17,
-		"y" : 13,
-		"y2" : 12
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 17,
-		"y" : 12
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 14,
-		"x" : 17,
-		"y" : 12
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 14,
-		"x" : 17,
-		"y" : 12
-	}
-}
-{
-	"id" : "6",
-	"name" : "Move",
-	"properties" : 
-	{
-		"element" : 14,
-		"x" : 17,
-		"x2" : 17,
-		"y" : 12,
-		"y2" : 11
-	}
-}
-{
-	"id" : "1",
-	"name" : "CaseIdentifier",
-	"properties" : 
-	{
-		"x" : 13,
-		"y" : 20
-	}
-}
-{
-	"id" : "2",
-	"name" : "Possibilities",
-	"properties" : 
-	{
-		"element" : 30,
-		"x" : 13,
-		"y" : 20
-	}
-}
-{
-	"id" : "3",
-	"name" : "PrintStats",
-	"properties" : 
-	{
-		"element" : 30,
-		"x" : 13,
-		"y" : 20
 	}
 }
 {
@@ -640,10 +268,10 @@
 	{
 		"element" : 30,
 		"unit" : 3,
-		"x" : 13,
-		"x2" : 14,
-		"y" : 20,
-		"y2" : 20
+		"x" : 11,
+		"x2" : 12,
+		"y" : 13,
+		"y2" : 14
 	}
 }
 {
@@ -651,8 +279,8 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 14,
-		"y" : 20
+		"x" : 12,
+		"y" : 14
 	}
 }
 {
@@ -661,8 +289,8 @@
 	"properties" : 
 	{
 		"element" : 22,
-		"x" : 14,
-		"y" : 20
+		"x" : 12,
+		"y" : 14
 	}
 }
 {
@@ -671,8 +299,8 @@
 	"properties" : 
 	{
 		"element" : 22,
-		"x" : 14,
-		"y" : 20
+		"x" : 12,
+		"y" : 14
 	}
 }
 {
@@ -681,9 +309,92 @@
 	"properties" : 
 	{
 		"element" : 22,
+		"x" : 12,
+		"x2" : 11,
+		"y" : 14,
+		"y2" : 14
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 11,
+		"y" : 14
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 11,
+		"y" : 14
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 11,
+		"y" : 14
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 11,
+		"x2" : 10,
+		"y" : 14,
+		"y2" : 14
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
 		"x" : 14,
-		"x2" : 14,
-		"y" : 20,
+		"y" : 19
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 14,
+		"y" : 19
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 14,
+		"y" : 19
+	}
+}
+{
+	"id" : "4",
+	"name" : "Attack",
+	"properties" : 
+	{
+		"element" : 30,
+		"unit" : 4,
+		"x" : 14,
+		"x2" : 15,
+		"y" : 19,
 		"y2" : 19
 	}
 }
@@ -692,7 +403,48 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 14,
+		"x" : 15,
+		"y" : 19
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 18,
+		"x" : 15,
+		"y" : 19
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 18,
+		"x" : 15,
+		"y" : 19
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 18,
+		"x" : 15,
+		"x2" : 15,
+		"y" : 19,
+		"y2" : 18
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 15,
 		"y" : 18
 	}
 }
@@ -702,7 +454,7 @@
 	"properties" : 
 	{
 		"element" : 18,
-		"x" : 14,
+		"x" : 15,
 		"y" : 18
 	}
 }
@@ -712,7 +464,7 @@
 	"properties" : 
 	{
 		"element" : 18,
-		"x" : 14,
+		"x" : 15,
 		"y" : 18
 	}
 }
@@ -722,10 +474,52 @@
 	"properties" : 
 	{
 		"element" : 18,
-		"x" : 14,
+		"x" : 15,
 		"x2" : 15,
 		"y" : 18,
-		"y2" : 18
+		"y2" : 17
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 15,
+		"y" : 7
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 15,
+		"y" : 7
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 15,
+		"y" : 7
+	}
+}
+{
+	"id" : "4",
+	"name" : "Attack",
+	"properties" : 
+	{
+		"element" : 30,
+		"unit" : 1,
+		"x" : 15,
+		"x2" : 16,
+		"y" : 7,
+		"y2" : 7
 	}
 }
 {
@@ -742,7 +536,7 @@
 	"name" : "Possibilities",
 	"properties" : 
 	{
-		"element" : 30,
+		"element" : 14,
 		"x" : 16,
 		"y" : 7
 	}
@@ -752,8 +546,338 @@
 	"name" : "PrintStats",
 	"properties" : 
 	{
-		"element" : 30,
+		"element" : 14,
 		"x" : 16,
+		"y" : 7
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 14,
+		"x" : 16,
+		"x2" : 16,
+		"y" : 7,
+		"y2" : 8
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 16,
+		"y" : 8
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 14,
+		"x" : 16,
+		"y" : 8
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 14,
+		"x" : 16,
+		"y" : 8
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 14,
+		"x" : 16,
+		"x2" : 15,
+		"y" : 8,
+		"y2" : 8
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 11,
+		"y" : 13
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 11,
+		"y" : 13
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 11,
+		"y" : 13
+	}
+}
+{
+	"id" : "4",
+	"name" : "Attack",
+	"properties" : 
+	{
+		"element" : 30,
+		"unit" : 2,
+		"x" : 11,
+		"x2" : 12,
+		"y" : 13,
+		"y2" : 14
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 12,
+		"y" : 14
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 10,
+		"x" : 12,
+		"y" : 14
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 10,
+		"x" : 12,
+		"y" : 14
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 10,
+		"x" : 12,
+		"x2" : 11,
+		"y" : 14,
+		"y2" : 14
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 10,
+		"y" : 14
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 10,
+		"y" : 14
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 10,
+		"y" : 14
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 10,
+		"x2" : 9,
+		"y" : 14,
+		"y2" : 14
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 14,
+		"y" : 19
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 14,
+		"y" : 19
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 14,
+		"y" : 19
+	}
+}
+{
+	"id" : "4",
+	"name" : "Attack",
+	"properties" : 
+	{
+		"element" : 30,
+		"unit" : 3,
+		"x" : 14,
+		"x2" : 15,
+		"y" : 19,
+		"y2" : 19
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 15,
+		"y" : 19
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 15,
+		"y" : 19
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 15,
+		"y" : 19
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 22,
+		"x" : 15,
+		"x2" : 15,
+		"y" : 19,
+		"y2" : 18
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 15,
+		"y" : 17
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 18,
+		"x" : 15,
+		"y" : 17
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 18,
+		"x" : 15,
+		"y" : 17
+	}
+}
+{
+	"id" : "6",
+	"name" : "Move",
+	"properties" : 
+	{
+		"element" : 18,
+		"x" : 15,
+		"x2" : 15,
+		"y" : 17,
+		"y2" : 16
+	}
+}
+{
+	"id" : "1",
+	"name" : "CaseIdentifier",
+	"properties" : 
+	{
+		"x" : 15,
+		"y" : 7
+	}
+}
+{
+	"id" : "2",
+	"name" : "Possibilities",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 15,
+		"y" : 7
+	}
+}
+{
+	"id" : "3",
+	"name" : "PrintStats",
+	"properties" : 
+	{
+		"element" : 30,
+		"x" : 15,
 		"y" : 7
 	}
 }
@@ -764,8 +888,8 @@
 	{
 		"element" : 30,
 		"unit" : 2,
-		"x" : 16,
-		"x2" : 17,
+		"x" : 15,
+		"x2" : 16,
 		"y" : 7,
 		"y2" : 7
 	}
@@ -775,8 +899,8 @@
 	"name" : "CaseIdentifier",
 	"properties" : 
 	{
-		"x" : 17,
-		"y" : 7
+		"x" : 15,
+		"y" : 8
 	}
 }
 {
@@ -784,9 +908,9 @@
 	"name" : "Possibilities",
 	"properties" : 
 	{
-		"element" : 10,
-		"x" : 17,
-		"y" : 7
+		"element" : 14,
+		"x" : 15,
+		"y" : 8
 	}
 }
 {
@@ -794,9 +918,9 @@
 	"name" : "PrintStats",
 	"properties" : 
 	{
-		"element" : 10,
-		"x" : 17,
-		"y" : 7
+		"element" : 14,
+		"x" : 15,
+		"y" : 8
 	}
 }
 {
@@ -804,10 +928,10 @@
 	"name" : "Move",
 	"properties" : 
 	{
-		"element" : 10,
-		"x" : 17,
-		"x2" : 17,
-		"y" : 7,
+		"element" : 14,
+		"x" : 15,
+		"x2" : 14,
+		"y" : 8,
 		"y2" : 8
 	}
 }

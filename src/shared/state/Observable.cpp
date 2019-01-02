@@ -130,3 +130,11 @@ std::vector<int> Observable::getRessurectionId(){
 void Observable::setRessurectionId(std::vector<int> reId){
    this->ressurectionId=reId;
 }
+
+std::vector<std::unique_ptr<Element>>& Observable::getUnitsMapPrev(){
+  return this->unitsMapPrev;
+}
+
+void Observable::setUnitsMapPrev(std::vector<std::unique_ptr<Element>>& unitsMapPrev){
+   this->unitsMapPrev=move(unitsMapPrev);
+}

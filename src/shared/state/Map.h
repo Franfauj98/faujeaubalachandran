@@ -61,6 +61,7 @@ namespace state {
     void beginRecord ();
     void constructMap ();
     void beginReplay ();
+    void setUnitsMap (std::vector<std::unique_ptr<Element>>& unitsMap);
     // Setters and Getters
   };
 

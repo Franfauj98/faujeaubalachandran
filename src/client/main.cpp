@@ -11,7 +11,7 @@
 #include "ai.h"
 #include "renderTest.h"
 #include "stateTest.h"
-
+#include<thread>
 
 using namespace std;
 using namespace state;
@@ -727,7 +727,7 @@ int main(int argc,char* argv[])
     if (event.type == sf::Event::Closed)
         window.close();
     }
-    if(timeCounter<50){
+    if(timeCounter<150){
         timeCounter++;
         if (counter>=0 && counter <=2){
           id = 0;
@@ -1124,7 +1124,7 @@ int main(int argc,char* argv[])
   engine.replay(*principalMap);
 
   // string gold, wood, food;
-  
+
   Empire* empire1 = principalMap->getAllMaps().getEmpires()[0].get();
   Empire* empire2 = principalMap->getAllMaps().getEmpires()[1].get();
   Empire* empire3 = principalMap->getAllMaps().getEmpires()[2].get();
@@ -1171,6 +1171,8 @@ int main(int argc,char* argv[])
     map.update(*principalMap,"","","","");
     map.drawMap(window);
   }
+
+} else if (argv[1] &&!strcmp(argv[1],"thread")) {
 
 } else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;

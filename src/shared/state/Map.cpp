@@ -418,3 +418,7 @@ void Map::setSelectedMap(std::vector<unique_ptr<state::Element>>& selectedMap){
 std::vector<unique_ptr<state::Empire>>& Map::getEmpires(){
   return this->Empires;
 }
+
+void Map::setUnitsMap(std::vector<unique_ptr<state::Element>>& unitsMap){
+  this->unitsMap=move(unitsMap);
+}
