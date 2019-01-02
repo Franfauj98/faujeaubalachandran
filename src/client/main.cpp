@@ -1124,14 +1124,13 @@ int main(int argc,char* argv[])
   engine.replay(*principalMap);
 
   // string gold, wood, food;
-  
+
   Empire* empire1 = principalMap->getAllMaps().getEmpires()[0].get();
   Empire* empire2 = principalMap->getAllMaps().getEmpires()[1].get();
   Empire* empire3 = principalMap->getAllMaps().getEmpires()[2].get();
 
   // int counter = 0;
 
-  Empire* empire;
   int play;
   while (window.isOpen())
   {

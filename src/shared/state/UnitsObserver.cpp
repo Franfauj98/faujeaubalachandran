@@ -20,7 +20,6 @@ int position, int action, int position2){
     if(i==position2) break;
   }
   Position* pos2 = new Position(x2,y2);
-  int unitLife=0;
   Map& map = mapToChange.getAllMaps();
   Units* unitToChange = (Units *)map.getUnitsMap()[position].get();
   Units* unitToChange2 = (Units *)map.getUnitsMap()[position2].get();
@@ -202,7 +201,7 @@ int position, int action, int position2){
           int x3=-1;
           for(int j = 0; j < (25*25); j++){
             if(j%25 == 0) x3+=1;
-            if(j==i) break;
+            if(j==(int)i) break;
           }
           mapMatrix[x3][y3] = 2;
           counter++;
@@ -233,7 +232,6 @@ int position, int action, int position2){
     if(i%25 == 0) x2+=1;
     if(i==position2) break;
   }
-  Position* pos2 = new Position(x2,y2);
   Position* pos = new Position(x,y);
   Map& map = mapToChange.getAllMaps();
   Units* unitToChange = (Units *)map.getUnitsMap()[position].get();

@@ -583,7 +583,6 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
     }
 
     int element=principalMap.getAllMaps().getMapMatrix()[unitsPosition[indexMinimumDist].getX()][unitsPosition[indexMinimumDist].getY()];
-    Units* currentUnit = (Units*) principalMap.getAllMaps().getUnitsMap()[unitsPosition[indexMinimumDist].getX()*25 + (unitsPosition[indexMinimumDist].getY())].get();
 
 
 /////////////////////////////////////////////// ASTAR ////////////////////////////////////////////////
@@ -599,8 +598,6 @@ std::vector<int> moveAvailable(Observable& principalMap, int id){
     std::vector<std::vector<int> > mapMatrix = principalMap.getAllMaps().getMapMatrix();
     for (int i =0 ; i<principalMap.getAllMaps().getSize(); i++ ){
       for (int j = 0 ; j<principalMap.getAllMaps().getSize(); j++){
-        Units* un =(Units*) principalMap.getAllMaps().getUnitsMap()[i*25+j].get();
-        // if(mapMatrix[i][j]!=2 && mapMatrix[i][j]!=10 && mapMatrix[i][j]!=14 && mapMatrix[i][j]!=18 && mapMatrix[i][j]!=22)
         if(mapMatrix[i][j]!=2)
         {
             Vec2i collision;
@@ -816,13 +813,6 @@ std::vector<int> max(std::vector<int> array, size_t begin, size_t end){
 ////////////////////////////////////////////////////////////
 
 bool performAction(engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id, int i){
-  Empire* empire=principalMap.getAllMaps().getEmpires()[0].get();
-  for (int i=1;i<3;i++){
-    if (principalMap.getAllMaps().getEmpires()[i].get()->getId()==id){
-      empire=principalMap.getAllMaps().getEmpires()[i].get();
-    }
-  }
-
   std::vector<int> empireWeights;
   empireWeights = weightUpdate(principalMap, id);
   switch (i) {
@@ -877,7 +867,6 @@ bool performAction(engine::Engine& engine, Observable& principalMap, int& counte
 
 std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
 
-  int actionToPerform = 0; // 4 --> levelup   3 --> createUnit   1 --> move   2 --> attack
   std::vector<int> state2;
   std::vector<int> state3;
   std::vector<int> state4;
@@ -943,7 +932,7 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
   }
   toAdd = max(state2, 0, 4);
 
-  actionToPerform = toAdd[1];
+  // int actionToPerform = toAdd[1];  // 4 --> levelup   3 --> createUnit   1 --> move   2 --> attack
 
   return toAdd;
 
