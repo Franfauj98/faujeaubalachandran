@@ -189,22 +189,13 @@ int position, int action, int position2){
               unitsPrev.push_back(std::move(unitToChange2bis));
               break;
           }
-<<<<<<< HEAD
           if (uni.getIdUnits()==id){
-            map.getUnitsMap()[i] = std::move(std::unique_ptr<Element> (new Units()));
-            int y3 = i%25;
-            int x3=-1;
-            for(int j = 0; j < (25*25); j++){
-              if(j%25 == 0) x3+=1;
-              if(j==i) break;
-=======
           map.getUnitsMap()[i] = std::move(std::unique_ptr<Element> (new Units()));
           int y3 = i%25;
           int x3=-1;
           for(int j = 0; j < (25*25); j++){
             if(j%25 == 0) x3+=1;
             if(j==(int)i) break;
->>>>>>> d160c125fb007065cd1fb73f44c6441158e239bc
           }
           mapMatrix[x3][y3] = 2;
           }
