@@ -1131,7 +1131,6 @@ int main(int argc,char* argv[])
 
   // int counter = 0;
 
-  Empire* empire;
   int play;
   while (window.isOpen())
   {

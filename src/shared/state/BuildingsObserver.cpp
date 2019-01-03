@@ -135,7 +135,7 @@ int position, int action, int unitToDestroy, int position2){
     if(i%25 == 0) x2+=1;
     if(i==position2) break;
   }
-  Position* pos2 = new Position(x2,y2);
+  // Position* pos2 = new Position(x2,y2);
 
   int level = build->getLevel();
 

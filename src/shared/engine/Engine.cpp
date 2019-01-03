@@ -18,16 +18,18 @@ using namespace std;
 using namespace render;
 
 //global jsonFile for engine.
-std::ofstream outputFileJson, outputFileTxt;
-std::ifstream inputFileTxt;
-
+std::ofstream outputFileJson;
+std::ifstream inputFileJson;
+Json::StyledStreamWriter writer;
+std::vector<std::string> vectTest;
+string commands;
 Engine::Engine (){
+  commands = "\"commands\" : [";
 }
 
 void Engine::openFiles(){
   if(this->record){
-    outputFileJson.open("cmdJson.json");
-    outputFileTxt.open("cmdTxt.txt", ios::app);
+    outputFileJson.open("cmdJson.json", ios::app);
   }
 }
 
@@ -41,24 +43,12 @@ void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
 }
 
 void Engine::execute(state::Observable& principalMap){
-  Json::Reader reader;
-  Json::Value value, value2;
-  Json::StyledStreamWriter writer;
-
   while(!this->commandList.empty()){
     switch(commandListId.front()){
       case 1:{
         CaseIdentifier* ci = (CaseIdentifier*) commandList.front().get();
         if(this->record){
-          value["name"]="CaseIdentifier";
-          value["id"]="1";
-          value2["x"]=ci->getX();
-          value2["y"]=ci->getY();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"1;"+to_string(ci->getX())+";"+to_string(ci->getY())+"\n";
-          }
+          commands+=("{\"name\": \"CaseIdentifier\",\"id\": 1,\"x\": "+to_string(ci->getX())+",\"y\": "+to_string(ci->getY())+"},\n");
         }
         ci->execute(principalMap);
         break;
@@ -66,16 +56,7 @@ void Engine::execute(state::Observable& principalMap){
       case 2:{
         Possibilities* ps = (Possibilities*) commandList.front().get();
         if(this->record){
-          value["name"]="Possibilities";
-          value["id"]="2";
-          value2["x"]=ps->getX();
-          value2["y"]=ps->getY();
-          value2["element"]=ps->getElement();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"2;"+to_string(ps->getX())+";"+to_string(ps->getY()) +";"+ to_string(ps->getElement())+"\n";
-          }
+          commands+=("{\"name\": \"Possibilities\",\"id\": 2,\"x\": "+to_string(ps->getX())+",\"y\": "+to_string(ps->getY())+",\"element\": "+to_string(ps->getElement())+"},\n");
         }
         ps->execute(principalMap);
         break;
@@ -83,16 +64,7 @@ void Engine::execute(state::Observable& principalMap){
       case 3:{
         PrintStats* pst = (PrintStats*) commandList.front().get();
         if(this->record){
-          value["name"]="PrintStats";
-          value["id"]="3";
-          value2["x"]=pst->getX();
-          value2["y"]=pst->getY();
-          value2["element"]=pst->getElement();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"3;"+to_string(pst->getX())+";"+to_string(pst->getY()) +";"+ to_string(pst->getElement())+"\n";
-          }
+          commands+=("{\"name\": \"PrintStats\",\"id\": 3,\"x\": "+to_string(pst->getX())+",\"y\": "+to_string(pst->getY())+", \"element\": "+to_string(pst->getElement())+"},\n");
         }
         pst->execute(principalMap);
         break;
@@ -101,17 +73,7 @@ void Engine::execute(state::Observable& principalMap){
       case 6:{
         Move* mv = (Move*) commandList.front().get();
         if(this->record){
-          value["name"]="Move";
-          value["id"]="6";
-          value2["x"]=mv->getX();
-          value2["y"]=mv->getY();
-          value2["x2"]=mv->getX2();
-          value2["y2"]=mv->getY2();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"6;"+to_string(mv->getX())+";"+to_string(mv->getY()) + ";" +to_string(mv->getX2())+";"+to_string(mv->getY2())+"\n";
-          }
+          commands+=("{\"name\": \"Move\",\"id\": 6,\"x\": "+to_string(mv->getX())+",\"y\": "+to_string(mv->getY())+",\"x2\": "+to_string(mv->getX2())+",\"y2\": "+to_string(mv->getY2())+"},\n");
         }
         mv->execute(principalMap);
         break;
@@ -119,17 +81,7 @@ void Engine::execute(state::Observable& principalMap){
       case 7:{
         Attack* at = (Attack*) commandList.front().get();
         if(this->record){
-          value["name"]="Attack";
-          value["id"]="7";
-          value2["x"]=at->getX();
-          value2["y"]=at->getY();
-          value2["x2"]=at->getX2();
-          value2["y2"]=at->getY2();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"7;"+to_string(at->getX())+";"+to_string(at->getY()) + ";" +to_string(at->getX2())+";"+to_string(at->getY2())+"\n";
-          }
+          commands+=("{\"name\": \"Attack\",\"id\": 7,\"x\": "+to_string(at->getX())+",\"y\": "+to_string(at->getY())+",\"x2\": "+to_string(at->getX2())+",\"y2\": "+to_string(at->getY2())+"},\n");
         }
         at->execute(principalMap);
         break;
@@ -137,15 +89,7 @@ void Engine::execute(state::Observable& principalMap){
       case 5:{
         LevelUp* lu = (LevelUp*) commandList.front().get();
         if(this->record){
-          value["name"]="LevelUp";
-          value["id"]="5";
-          value2["x"]=lu->getX();
-          value2["y"]=lu->getY();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"5;"+to_string(lu->getX())+";"+to_string(lu->getY())+"\n";
-          }
+          commands+=("{\"name\": \"LevelUp\",\"id\": 5,\"x\": "+to_string(lu->getX())+",\"y\": "+to_string(lu->getY())+"},\n");
         }
         lu->execute(principalMap);
         break;
@@ -153,32 +97,18 @@ void Engine::execute(state::Observable& principalMap){
       case 4:{
         CreateUnit* cu = (CreateUnit*) commandList.front().get();
         if(this->record){
-          value["name"]="Attack";
-          value["id"]="4";
-          value2["x"]=cu->getX();
-          value2["y"]=cu->getY();
-          value2["x2"]=cu->getX2();
-          value2["y2"]=cu->getY2();
-          value2["unit"]=cu->getUnit();
-          value["properties"]=value2;
-
-          if(outputFileTxt.is_open()){
-            outputFileTxt<<"4;"+to_string(cu->getX())+";"+to_string(cu->getY()) + ";" +to_string(cu->getX2())+";"+to_string(cu->getY2()) +";"+ to_string(cu->getUnit())+"\n";
-          }
+          commands+=("{\"name\": \"CreateUnit\",\"id\": 4,\"x\": "+to_string(cu->getX())+",\"y\": "+to_string(cu->getY())+",\"x2\": "+to_string(cu->getX2())+",\"y2\": "+to_string(cu->getY2())+
+          ",\"unit\": " +to_string(cu->getUnit())+"},\n");
         }
         cu->execute(principalMap);
         break;
       }
       default: break;
     }
-    //usleep(500000);
     this->commandListPrev.push_back(std::move(commandList.front()));
     this->commandListIdPrev.push_back(commandListId.front());
     this->commandList.pop();
     this->commandListId.pop();
-    if(this->record){
-      writer.write(outputFileJson, value);
-    }
   }
 }
 
@@ -274,67 +204,47 @@ void Engine::rollback (state::Observable& principalMap){
   }
 }
 
-
-vector<string> explode2(string const & s, const char& c){
-  string buff{""};
-  vector<string> v;
-  for(auto n:s){
-    if(n!=c) buff+=n;
-    else if(n==c && buff != "") {
-      v.push_back(buff);
-      buff="";
-    }
-  }
-  if(buff!="") v.push_back(buff);
-  return v;
-}
-
-
 void Engine::replay(state::Observable& principalMap){
-  inputFileTxt.open("cmdTxt.txt");
-  string tmp;
-  if(inputFileTxt.is_open()){
-    while(getline(inputFileTxt, tmp)){
-      vector<string> commands = explode2(tmp, ';');
-      if(commands.size()<7){
-        switch(stoi(commands[0], nullptr, 10)){
-          case 1:{
-            addCommand((unique_ptr<Command> (new CaseIdentifier(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10)))),1);
-            break;
-          }
-          case 2:{
-            addCommand(unique_ptr<Command> (new Possibilities(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10))),2);
-            break;
-          }
-          case 3:{
-            addCommand(unique_ptr<Command> (new PrintStats(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10))),3);
-            break;
-          }
-
-          case 6:{
-            addCommand((unique_ptr<Command> (new Move(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10),stoi(commands[4], nullptr, 10)))),6);
-            break;
-          }
-          case 7:{
-            addCommand((unique_ptr<Command> (new Attack(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10),stoi(commands[4], nullptr, 10)))),7);
-            break;
-          }
-          case 5:{
-            addCommand((unique_ptr<Command> (new LevelUp(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10)))),5);
-            break;
-          }
-          case 4:{
-            addCommand((unique_ptr<Command> (new CreateUnit(stoi(commands[1], nullptr, 10),stoi(commands[2], nullptr, 10),stoi(commands[3], nullptr, 10),stoi(commands[4], nullptr, 10),stoi(commands[5], nullptr, 10)))),4);
-            break;
-          }
-          default: break;
-        }
-
+  inputFileJson.open("cmdJson.json");
+  Json::Value commands;
+  Json::Reader reader1;
+  reader1.parse(inputFileJson, commands);
+  Json::Value myCommand = commands["commands"];
+  for(int i = 0; i < (int)myCommand.size(); i++){
+    int id = myCommand[i]["id"].asInt();
+    switch(id){
+      case 1:{
+        addCommand((unique_ptr<Command> (new CaseIdentifier(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt()))),1);
+        break;
       }
+      case 2:{
+        addCommand(unique_ptr<Command> (new Possibilities(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["element"].asInt())),2);
+        break;
+      }
+      case 3:{
+        addCommand(unique_ptr<Command> (new PrintStats(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["element"].asInt())),3);
+        break;
+      }
+      case 6:{
+        addCommand((unique_ptr<Command> (new Move(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["x2"].asInt(), myCommand[i]["y2"].asInt()))),6);
+        break;
+      }
+      case 7:{
+        addCommand((unique_ptr<Command> (new Attack(myCommand[i]["x"].asInt(),myCommand[i]["y"].asInt(),myCommand[i]["x2"].asInt(),myCommand[i]["y2"].asInt()))),7);
+        break;
+      }
+      case 5:{
+        addCommand((unique_ptr<Command> (new LevelUp(myCommand[i]["x"].asInt(),myCommand[i]["y"].asInt()))),5);
+        break;
+      }
+      case 4:{
+        addCommand((unique_ptr<Command> (new CreateUnit(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["x2"].asInt(), myCommand[i]["y2"].asInt(), myCommand[i]["unit"].asInt()))),4);
+        break;
+      }
+      default: break;
     }
-
-    inputFileTxt.close();
   }
+  inputFileJson.close();
 }
 
 int Engine::execReplay(state::Observable& principalMap){
@@ -402,7 +312,11 @@ std::deque<int> Engine::getCommandListIdPrev(){
 
 Engine::~Engine (){
   if(this->record){
+    commands.pop_back();
+    commands.pop_back();
+    commands+="]\n}";
+    outputFileJson<<commands;
     outputFileJson.close();
-    outputFileTxt.close();
   }
+
 }

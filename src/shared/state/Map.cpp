@@ -6,6 +6,7 @@
 #include <string>
 #include <cstdlib>
 #include <stdio.h>
+#include "../../extern/jsoncpp-1.8.0/json/json.h"
 
 using namespace state;
 using namespace std;
@@ -27,22 +28,8 @@ bool compare(int map[25][25],int positionX,int positionY,int rangeX,int rangeY, 
   return boolean;
 }
 
-vector<string> explode(string const & s, const char& c){
-  string buff{""};
-  vector<string> v;
-  for(auto n:s){
-    if(n!=c) buff+=n;
-    else if(n==c && buff != "") {
-      v.push_back(buff);
-      buff="";
-    }
-  }
-  if(buff!="") v.push_back(buff);
-  return v;
-}
-
-std::ofstream outputFileTxtToWrite;
-std::ifstream inputFileTxtToRead;
+std::ofstream outputFileJSONToWrite;
+std::ifstream inputFileJSONToRead;
 
 void Map::beginRecord(){
   this->record = true;
@@ -55,40 +42,33 @@ void Map::beginReplay(){
 Map::Map(){}
 
 void Map::constructMap(){
-  // if(this->record){
   srand(time(NULL));
-  //   outputFileTxt.close();
-  // }
 
   if(this->replay){
-    inputFileTxtToRead.open("cmdTxt.txt");
-    string tmp;
-    if(inputFileTxtToRead.is_open()){
-      getline(inputFileTxtToRead, tmp);
-      vector<string> map = explode(tmp, ';');
+    inputFileJSONToRead.open("cmdJson.json");
+    if(inputFileJSONToRead.is_open()){
+      Json::Value root;
+      Json::Reader reader;
+      reader.parse(inputFileJSONToRead, root);
+      Json::Value map = root["map"];
       int x=0;
       int y=0;
-      int mapTest[25][25];
-      for(size_t i = 0; i<map.size(); i++){
+      int mapTmp[25][25];
+      for(int i = 0; i<(int)map.size(); i++){
         if(i%25==0&& i!=0) x++;
         if(y%25==0&& y!=0) y = 0;
-        mapTest[x][y]=stoi(map[i], nullptr, 10);
+        mapTmp[x][y]=map[i].asInt();
         y++;
       }
-
       vector <vector <int> > matrixcp(this->size,vector<int> (this->size,0));
       for (int i=0;i<this->size;i++){
         for (int j=0;j<this->size;j++){
-          matrixcp[i][j]=mapTest[i][j];
+          matrixcp[i][j]=mapTmp[i][j];
         }
       }
-
       this->mapMatrix = matrixcp;
-
-
-      inputFileTxtToRead.close();
+      inputFileJSONToRead.close();
     }
-
   } else {
     // Create sea
     this->size=25;
@@ -201,20 +181,21 @@ void Map::constructMap(){
     this->mapMatrix = matrix;
 
     if(this->record){
-      outputFileTxtToWrite.open("cmdTxt.txt");
-      if(outputFileTxtToWrite.is_open()){
+      outputFileJSONToWrite.open("cmdJson.json");
+      if(outputFileJSONToWrite.is_open()){
+        std::string map = "{\"map\": [";
         for (int i=0;i<this->size;i++){
           for (int j=0;j<this->size;j++){
-            outputFileTxtToWrite<<to_string(this->mapMatrix[i][j])+";";
+            if(i==24&&j==24) map += to_string(this->mapMatrix[i][j]);
+            else map += to_string(this->mapMatrix[i][j])+", ";
           }
         }
-        outputFileTxtToWrite<<"\n";
+        map+="],\n";
+        outputFileJSONToWrite<<map;
+        outputFileJSONToWrite.close();
       }
-      outputFileTxtToWrite.close();
     }
-
   }
-
 
   //Map Init
   for(int i = 0; i<this->size; i++){

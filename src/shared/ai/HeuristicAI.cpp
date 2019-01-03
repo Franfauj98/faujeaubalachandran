@@ -230,7 +230,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     } else if (verifUnits(principalMap,id)){
 
       // select empire to Attack
-      int toAttack = 0;
 
       Position posToAttack;
 
@@ -244,7 +243,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             if(building2->getIdBuilding() != id && building2->getIdBuilding() != 0 && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
               if(building->distance(building->getPosition(), building2->getPosition()) < distance){
                 distance = (building->distance(building->getPosition(), building2->getPosition()));
-                toAttack = j;
                 posToAttack = building2->getPosition();
               }
             }
