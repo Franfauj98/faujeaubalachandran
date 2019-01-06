@@ -9,6 +9,7 @@
 #include "render.h"
 #include "engine.h"
 #include "ai.h"
+#include"client.h"
 #include "renderTest.h"
 #include "stateTest.h"
 #include<thread>
@@ -18,6 +19,7 @@ using namespace state;
 using namespace render;
 using namespace engine;
 using namespace ai;
+using namespace client;
 
 
 int main(int argc,char* argv[])
@@ -1172,6 +1174,10 @@ int main(int argc,char* argv[])
   }
 
 } else if (argv[1] &&!strcmp(argv[1],"thread")) {
+
+  Client client;
+  client.run();
+
 
 } else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
