@@ -1114,7 +1114,7 @@ int main(int argc,char* argv[])
     map.update(*principalMap,gold,wood,food,"");
     map.drawMap(window);
   }
-} else if(argv[1] &&!strcmp(argv[1],"replay")){
+} else if(argv[1] &&!strcmp(argv[1],"play")){
   Observable* principalMap = new Observable(false, true);
   RenderMap map;
   Engine engine;
