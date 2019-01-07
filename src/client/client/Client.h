@@ -31,8 +31,6 @@ namespace client {
   class Client {
     // Associations
     // Attributes
-  public:
-    std::condition_variable renderCV;
   private:
     engine::Engine engine;
     std::unique_ptr<state::Observable> principalMap;
@@ -40,7 +38,6 @@ namespace client {
     ai::HeuristicAI heuristic;
     std::mutex engineMutex;
     std::mutex renderMutex;
-    std::condition_variable engineCV;
     // Operations
   public:
     Client ();

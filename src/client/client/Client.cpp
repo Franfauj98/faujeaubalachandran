@@ -10,6 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include<thread>
+#include<condition_variable>
 using namespace ai;
 using namespace render;
 using namespace state;
@@ -18,7 +19,8 @@ using namespace engine;
 using namespace client;
 
 
-
+std::condition_variable renderCV;
+std::condition_variable engineCV;
 // engine::Engine engine;
 // ai::HeuristicAI ai;
 // state::Observable principalMap;
@@ -88,6 +90,7 @@ void Client::run (){
 void Client::engineUpdating (sf::RenderWindow& window, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, int& id, int& idPalace, string& gold, string& wood, string& food, state::Empire* empire1, state::Empire* empire2, state::Empire* empire3, int& stop){
   std::unique_lock<std::mutex> lock(this->renderMutex);
   //this->renderMutex.lock();
+  cout<<"coucou1"<<endl;
   if (counter>=0 && counter <=2){
     id = 0;
     idPalace=1;
@@ -247,9 +250,9 @@ void Client::engineUpdating (sf::RenderWindow& window, bool& canPlay1, bool& can
   }
 
 //  engineUpdated ();
-  this->renderCV.notify_one();
+  renderCV.notify_one();
   std::unique_lock<std::mutex> lock2(this->engineMutex);
-  this->engineCV.wait(lock2);
+  engineCV.wait(lock2);
   Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
   gold= to_string(empire->getGoldRessource());
   wood= to_string(empire->getWoodRessource());
@@ -258,17 +261,20 @@ void Client::engineUpdating (sf::RenderWindow& window, bool& canPlay1, bool& can
   this->map.drawMap(window);
 
   //this->renderMutex.unlock();
+  cout<<"coucou1"<<endl;
 }
 
 
 void Client::engineUpdated (){
-  //this->engineMutex.lock();
+  //this->renderMutex.lock();
+  cout<<"coucou2"<<endl;
   std::unique_lock<std::mutex> lock(this->renderMutex);
-  this->renderCV.wait(lock);
+  renderCV.wait(lock);
   std::unique_lock<std::mutex> lock2(this->engineMutex);
   this->engine.execute(*(this->principalMap));
-  this->engineCV.notify_one(lock2);
-  //this->engineMutex.unlock();
+  engineCV.notify_one();
+  this->renderMutex.unlock();
+  cout<<"coucou2"<<endl;
 }
 
 ai::HeuristicAI Client::getHeuristic(){
