@@ -86,8 +86,8 @@ void Client::run (){
 
 
 void Client::engineUpdating (sf::RenderWindow& window, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, int& id, int& idPalace, string& gold, string& wood, string& food, state::Empire* empire1, state::Empire* empire2, state::Empire* empire3, int& stop){
-  //std::unique_lock<std::mutex> lock(this->renderMutex);
-  this->renderMutex.lock();
+  std::unique_lock<std::mutex> lock(this->renderMutex);
+  //this->renderMutex.lock();
   if (counter>=0 && counter <=2){
     id = 0;
     idPalace=1;
@@ -247,9 +247,9 @@ void Client::engineUpdating (sf::RenderWindow& window, bool& canPlay1, bool& can
   }
 
 //  engineUpdated ();
-//  this->renderCV.notify_one();
-//  std::unique_lock<std::mutex> lock2(this->engineMutex);
-//  this->engineCV.wait(lock2);
+  this->renderCV.notify_one();
+  std::unique_lock<std::mutex> lock2(this->engineMutex);
+  this->engineCV.wait(lock2);
   Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
   gold= to_string(empire->getGoldRessource());
   wood= to_string(empire->getWoodRessource());
@@ -257,17 +257,17 @@ void Client::engineUpdating (sf::RenderWindow& window, bool& canPlay1, bool& can
   this->map.update(*(this->principalMap),gold,wood,food,"");
   this->map.drawMap(window);
 
-  this->renderMutex.unlock();
+  //this->renderMutex.unlock();
 }
 
 
 void Client::engineUpdated (){
   //this->engineMutex.lock();
-  //std::unique_lock<std::mutex> lock(this->renderMutex);
-//  this->renderCV.wait(lock);
-  //std::unique_lock<std::mutex> lock2(this->engineMutex);
+  std::unique_lock<std::mutex> lock(this->renderMutex);
+  this->renderCV.wait(lock);
+  std::unique_lock<std::mutex> lock2(this->engineMutex);
   this->engine.execute(*(this->principalMap));
-//  this->engineCV.notify_one(lock2);
+  this->engineCV.notify_one(lock2);
   //this->engineMutex.unlock();
 }
 
