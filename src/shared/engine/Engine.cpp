@@ -27,6 +27,164 @@ Engine::Engine (){
   commands = "\"commands\" : [";
 }
 
+void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
+  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, string& gold,
+  string& wood,string& food, int& stop){
+  if (counter>=0 && counter <=2){
+    id = 0;
+    idPalace=1;
+    for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
+      Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
+      if (building!=nullptr){
+        int idBuilding=building->getIdBuilding();
+        if (idBuilding==idPalace){
+          palace1=true;
+          break;
+        } else {
+          palace1=false;
+        }
+      }
+    }
+    if (palace1){
+      empire1.setShot(1);
+      empire2.setShot(0);
+      empire3.setShot(0);
+
+      canPlay1 = true;
+      canPlay2 = false;
+      canPlay3 = false;
+    } else {
+      counter=3;
+    }
+
+  }
+  else if (counter>=3 && counter <=5){
+    id = 1;
+    idPalace=2;
+    for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
+      Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
+      if (building!=nullptr){
+        int idBuilding=building->getIdBuilding();
+        if (idBuilding==idPalace){
+          palace2=true;
+          break;
+        } else {
+          palace2=false;
+        }
+      }
+    }
+    if (palace2){
+      empire1.setShot(0);
+      empire2.setShot(1);
+      empire3.setShot(0);
+
+      canPlay1 = false;
+      canPlay2 = true;
+      canPlay3 = false;
+    } else {
+      counter=6;
+    }
+  }
+  else if (counter>=6 && counter <=8){
+    id = 2;
+    idPalace=3;
+    for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
+      Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
+      if (building!=nullptr){
+        int idBuilding=building->getIdBuilding();
+        if (idBuilding==idPalace){
+          palace3=true;
+          break;
+        } else {
+          palace3=false;
+        }
+      }
+    }
+    if (palace3){
+      empire1.setShot(0);
+      empire2.setShot(0);
+      empire3.setShot(1);
+
+      canPlay1 = false;
+      canPlay2 = false;
+      canPlay3 = true;
+    } else {
+      counter=9;
+    }
+  }
+
+  if(counter>=9){
+    idPalace = 1;
+    for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
+      Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
+      if (building!=nullptr){
+        int idBuilding=building->getIdBuilding();
+        if (idBuilding==idPalace){
+          palace1=true;
+          break;
+        } else {
+          palace1=false;
+        }
+      }
+    }
+    idPalace = 2;
+
+    for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
+      Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
+      if (building!=nullptr){
+        int idBuilding=building->getIdBuilding();
+        if (idBuilding==idPalace){
+          palace2=true;
+          break;
+        } else {
+          palace2=false;
+        }
+      }
+    }
+    idPalace = 3;
+
+    for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
+      Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
+      if (building!=nullptr){
+        int idBuilding=building->getIdBuilding();
+        if (idBuilding==idPalace){
+          palace3=true;
+          break;
+        } else {
+          palace3=false;
+        }
+      }
+    }
+    if (palace1){
+      empire1.updateRessource((principalMap).getAllMaps().getBuildingsMap());
+
+    }
+    if (palace2){
+      empire2.updateRessource((principalMap).getAllMaps().getBuildingsMap());
+    }
+    if (palace3){
+      empire3.updateRessource((principalMap).getAllMaps().getBuildingsMap());
+    }
+    if ((palace1==true && palace2==false && palace3==false) || (palace1==false && palace2==true && palace3==false) || (palace1==false && palace2==false && palace3==true)){
+      stop=1;
+    }
+    else {
+      counter=0;
+      canPlay1 = true;
+      canPlay2 = false;
+      canPlay3 = false;
+      id = 0;
+      idPalace=1;
+    }
+
+  }
+
+  Empire* empire = (principalMap).getAllMaps().getEmpires()[id].get();
+  gold= to_string(empire->getGoldRessource());
+  wood= to_string(empire->getWoodRessource());
+  food= to_string(empire->getFoodRessource());
+}
+
 void Engine::openFiles(){
   if(this->record){
     outputFileJson.open("replay.json", ios::app);

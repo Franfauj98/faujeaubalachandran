@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <mutex>
+#include <string>
 
 namespace engine {
   class Engine;
@@ -34,14 +35,14 @@ namespace client {
     std::unique_ptr<state::Observable> principalMap;
     render::RenderMap map;
     ai::HeuristicAI heuristic;
-    std::mutex engineMutex;
-    std::mutex renderMutex;
+    std::mutex m;
     // Operations
   public:
     Client ();
     void run ();
-    void engineUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3);
-    void engineUpdated ();
+    void aiUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3);
+    void engineUpdating ();
+    void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, std::string& gold, std::string& wood, std::string& food, int& stop);
     // Setters and Getters
   };
 
