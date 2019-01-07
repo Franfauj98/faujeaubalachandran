@@ -43,11 +43,12 @@ namespace engine {
     std::queue<int> commandListId;
     std::deque<int> commandListIdPrev;
     bool record     = false;
+    std::string message;
     // Operations
   public:
     Engine ();
     ~Engine ();
-    void run (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, std::string& gold, std::string& wood, std::string& food, int& stop);
+    void run (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, std::string& gold, std::string& wood, std::string& food, std::string& text, int& stop);
     void addCommand (std::unique_ptr<Command> cmd, int commandId);
     void execute (state::Observable& principalMap);
     void rollback (state::Observable& principalMap);
@@ -57,6 +58,8 @@ namespace engine {
     void openFiles ();
     void replay (state::Observable& principalMap);
     int execReplay (state::Observable& principalMap);
+    void setMessage (std::string message);
+    std::string getMessage ();
     // Setters and Getters
   };
 

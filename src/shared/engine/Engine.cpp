@@ -25,11 +25,14 @@ std::vector<std::string> vectTest;
 string commands;
 Engine::Engine (){
   commands = "\"commands\" : [";
+  this->message="";
 }
 
 void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
   bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, string& gold,
-  string& wood,string& food, int& stop){
+  string& wood,string& food, string& text, int& stop){
+
+  string player="";
   if (counter>=0 && counter <=2){
     id = 0;
     idPalace=1;
@@ -53,6 +56,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay1 = true;
       canPlay2 = false;
       canPlay3 = false;
+      player="Player 1: ";
     } else {
       counter=3;
     }
@@ -81,6 +85,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay1 = false;
       canPlay2 = true;
       canPlay3 = false;
+      player="Player 2: ";
     } else {
       counter=6;
     }
@@ -108,6 +113,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay1 = false;
       canPlay2 = false;
       canPlay3 = true;
+      player="Player 3: ";
     } else {
       counter=9;
     }
@@ -175,6 +181,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay3 = false;
       id = 0;
       idPalace=1;
+      player="Player 1: ";
     }
 
   }
@@ -183,6 +190,8 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
   gold= to_string(empire->getGoldRessource());
   wood= to_string(empire->getWoodRessource());
   food= to_string(empire->getFoodRessource());
+  text =player+this->message;
+  setMessage("");
 }
 
 void Engine::openFiles(){
@@ -468,6 +477,14 @@ std::queue<int> Engine::getCommandListId(){
 
 std::deque<int> Engine::getCommandListIdPrev(){
   return this->commandListIdPrev;
+}
+
+void Engine::setMessage(std::string message){
+  this->message=message;
+}
+
+std::string Engine::getMessage(){
+  return this->message;
 }
 
 Engine::~Engine (){

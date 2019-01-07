@@ -514,7 +514,7 @@ int main(int argc,char* argv[])
     if (event.type == sf::Event::Closed)
         window.close();
     }
-
+    
     if (counter>=0 && counter <=2){
       id = 0;
       idPalace=1;

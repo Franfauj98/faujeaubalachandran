@@ -40,9 +40,9 @@ namespace client {
   public:
     Client ();
     void run ();
-    void aiUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3);
-    void engineUpdating ();
-    void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, std::string& gold, std::string& wood, std::string& food, int& stop);
+    void aiUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3, int& controller);
+    void engineUpdating (int& controller);
+    void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, std::string& gold, std::string& wood, std::string& food, std::string& text, int& stop, int& controller);
     // Setters and Getters
   };
 
