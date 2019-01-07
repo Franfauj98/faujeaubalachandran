@@ -29,7 +29,7 @@ Engine::Engine (){
 
 void Engine::openFiles(){
   if(this->record){
-    outputFileJson.open("cmdJson.json", ios::app);
+    outputFileJson.open("replay.json", ios::app);
   }
 }
 
@@ -205,46 +205,48 @@ void Engine::rollback (state::Observable& principalMap){
 }
 
 void Engine::replay(state::Observable& principalMap){
-  inputFileJson.open("cmdJson.json");
-  Json::Value commands;
-  Json::Reader reader1;
-  reader1.parse(inputFileJson, commands);
-  Json::Value myCommand = commands["commands"];
-  for(int i = 0; i < (int)myCommand.size(); i++){
-    int id = myCommand[i]["id"].asInt();
-    switch(id){
-      case 1:{
-        addCommand((unique_ptr<Command> (new CaseIdentifier(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt()))),1);
-        break;
+  inputFileJson.open("replay.json");
+  if(inputFileJson.is_open()){
+    Json::Value commands;
+    Json::Reader reader1;
+    reader1.parse(inputFileJson, commands);
+    Json::Value myCommand = commands["commands"];
+    for(int i = 0; i < (int)myCommand.size(); i++){
+      int id = myCommand[i]["id"].asInt();
+      switch(id){
+        case 1:{
+          addCommand((unique_ptr<Command> (new CaseIdentifier(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt()))),1);
+          break;
+        }
+        case 2:{
+          addCommand(unique_ptr<Command> (new Possibilities(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["element"].asInt())),2);
+          break;
+        }
+        case 3:{
+          addCommand(unique_ptr<Command> (new PrintStats(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["element"].asInt())),3);
+          break;
+        }
+        case 6:{
+          addCommand((unique_ptr<Command> (new Move(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["x2"].asInt(), myCommand[i]["y2"].asInt()))),6);
+          break;
+        }
+        case 7:{
+          addCommand((unique_ptr<Command> (new Attack(myCommand[i]["x"].asInt(),myCommand[i]["y"].asInt(),myCommand[i]["x2"].asInt(),myCommand[i]["y2"].asInt()))),7);
+          break;
+        }
+        case 5:{
+          addCommand((unique_ptr<Command> (new LevelUp(myCommand[i]["x"].asInt(),myCommand[i]["y"].asInt()))),5);
+          break;
+        }
+        case 4:{
+          addCommand((unique_ptr<Command> (new CreateUnit(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["x2"].asInt(), myCommand[i]["y2"].asInt(), myCommand[i]["unit"].asInt()))),4);
+          break;
+        }
+        default: break;
       }
-      case 2:{
-        addCommand(unique_ptr<Command> (new Possibilities(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["element"].asInt())),2);
-        break;
-      }
-      case 3:{
-        addCommand(unique_ptr<Command> (new PrintStats(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["element"].asInt())),3);
-        break;
-      }
-      case 6:{
-        addCommand((unique_ptr<Command> (new Move(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["x2"].asInt(), myCommand[i]["y2"].asInt()))),6);
-        break;
-      }
-      case 7:{
-        addCommand((unique_ptr<Command> (new Attack(myCommand[i]["x"].asInt(),myCommand[i]["y"].asInt(),myCommand[i]["x2"].asInt(),myCommand[i]["y2"].asInt()))),7);
-        break;
-      }
-      case 5:{
-        addCommand((unique_ptr<Command> (new LevelUp(myCommand[i]["x"].asInt(),myCommand[i]["y"].asInt()))),5);
-        break;
-      }
-      case 4:{
-        addCommand((unique_ptr<Command> (new CreateUnit(myCommand[i]["x"].asInt(), myCommand[i]["y"].asInt(), myCommand[i]["x2"].asInt(), myCommand[i]["y2"].asInt(), myCommand[i]["unit"].asInt()))),4);
-        break;
-      }
-      default: break;
     }
+    inputFileJson.close();
   }
-  inputFileJson.close();
 }
 
 int Engine::execReplay(state::Observable& principalMap){
@@ -315,8 +317,10 @@ Engine::~Engine (){
     commands.pop_back();
     commands.pop_back();
     commands+="]\n}";
-    outputFileJson<<commands;
-    outputFileJson.close();
+    if(outputFileJson.is_open()){
+      outputFileJson<<commands;
+      outputFileJson.close();
+    }
   }
 
 }

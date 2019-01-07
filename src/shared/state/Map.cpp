@@ -45,7 +45,7 @@ void Map::constructMap(){
   srand(time(NULL));
 
   if(this->replay){
-    inputFileJSONToRead.open("cmdJson.json");
+    inputFileJSONToRead.open("replay.json");
     if(inputFileJSONToRead.is_open()){
       Json::Value root;
       Json::Reader reader;
@@ -181,7 +181,7 @@ void Map::constructMap(){
     this->mapMatrix = matrix;
 
     if(this->record){
-      outputFileJSONToWrite.open("cmdJson.json");
+      outputFileJSONToWrite.open("replay.json");
       if(outputFileJSONToWrite.is_open()){
         std::string map = "{\"map\": [";
         for (int i=0;i<this->size;i++){
