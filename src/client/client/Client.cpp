@@ -7,6 +7,7 @@
 #include "string.h"
 #include <unistd.h>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include<SFML/Window.hpp>
 #include<thread>
 using namespace ai;
@@ -52,6 +53,12 @@ void Client::run (){
   string text= "";
   int controller=1;
   int renderSignal=0;
+
+  sf::Music music;
+  music.openFromFile("res/music1.ogg");
+  music.setLoop(true);
+  music.play();
+
   while (window.isOpen())
   {
     sf::Event event;
