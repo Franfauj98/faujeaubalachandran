@@ -120,7 +120,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
     }
   }
 
-  if(counter>=9){
+  else if(counter>=9){
     idPalace = 1;
     for (unsigned int i=0;i<(principalMap).getAllMaps().getBuildingsMap().size();i++){
       Palace* building = dynamic_cast<Palace*> ((principalMap).getAllMaps().getBuildingsMap()[i].get());
