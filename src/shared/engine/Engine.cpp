@@ -30,10 +30,9 @@ Engine::Engine (){
 }
 
 void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
-  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, string& gold,
-  string& wood,string& food, string& text, int& stop){
+  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, int& stop){
 
-  string player="";
+
   if (counter>=0 && counter <=2){
     id = 0;
     idPalace=1;
@@ -57,7 +56,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay1 = true;
       canPlay2 = false;
       canPlay3 = false;
-      player="Player 1: ";
+
     } else {
       counter=3;
     }
@@ -86,7 +85,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay1 = false;
       canPlay2 = true;
       canPlay3 = false;
-      player="Player 2: ";
+
     } else {
       counter=6;
     }
@@ -114,7 +113,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay1 = false;
       canPlay2 = false;
       canPlay3 = true;
-      player="Player 3: ";
+
     } else {
       counter=9;
     }
@@ -182,16 +181,10 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       canPlay3 = false;
       id = 0;
       idPalace=1;
-      player="Player 1: ";
+
     }
 
   }
-
-  Empire* empire = (principalMap).getAllMaps().getEmpires()[id].get();
-  gold= to_string(empire->getGoldRessource());
-  wood= to_string(empire->getWoodRessource());
-  food= to_string(empire->getFoodRessource());
-  text =player+this->message;
 
 }
 
@@ -212,6 +205,7 @@ void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
 
 void Engine::execute(state::Observable& principalMap){
   while(!this->commandList.empty()){
+    usleep(500000);
     switch(commandListId.front()){
       case 1:{
         CaseIdentifier* ci = (CaseIdentifier*) commandList.front().get();
@@ -282,6 +276,7 @@ void Engine::execute(state::Observable& principalMap){
 
 void Engine::rollback (state::Observable& principalMap){
   if(commandListPrev.size()>0){
+    usleep(1000000);
     switch(commandListIdPrev.back()){
       case 6:{
         Move* mv = (Move*) commandListPrev.back().get();
@@ -300,7 +295,6 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         ps->execute(principalMap);
         pst->execute(principalMap);
-        usleep(500000);
         break;
       }
       case 7:{
@@ -320,7 +314,6 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         ps->execute(principalMap);
         pst->execute(principalMap);
-        usleep(500000);
         break;
       }
       case 5:{
@@ -340,7 +333,6 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         ps->execute(principalMap);
         pst->execute(principalMap);
-        usleep(500000);
         break;
       }
       case 4:{
@@ -360,7 +352,6 @@ void Engine::rollback (state::Observable& principalMap){
         ci->execute(principalMap);
         ps->execute(principalMap);
         pst->execute(principalMap);
-        usleep(500000);
         break;
       }
       default: break;

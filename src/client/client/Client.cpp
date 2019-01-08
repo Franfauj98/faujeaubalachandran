@@ -7,9 +7,8 @@
 #include "string.h"
 #include <unistd.h>
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Network.hpp>
-#include <thread>
+#include<SFML/Window.hpp>
+#include<thread>
 using namespace ai;
 using namespace render;
 using namespace state;
@@ -18,73 +17,6 @@ using namespace engine;
 using namespace client;
 
 Client::Client (){
-}
-
-void Client::connect (){
-  sf::Http http;
-  http.setHost("http://localhost",8080);
-
-  sf::Http::Request request;
-  request.setMethod(sf::Http::Request::Get);
-  request.setUri("/player/1");
-  request.setHttpVersion(1, 0); // HTTP 1.0
-  request.setField("From", "me");
-  request.setField("Content-Type", "application/json; charset=utf-8");
-  request.setBody("");
-
-  sf::Http::Response response = http.sendRequest(request);
-  std::cout << "begining : " << std::endl;
-  std::cout << "status: " << response.getStatus() << std::endl;
-  std::cout << "body: " << response.getBody() << std::endl;
-
-  sf::Http::Request requestPut;
-  requestPut.setMethod(sf::Http::Request::Put);
-  requestPut.setUri("/player");
-  requestPut.setHttpVersion(1, 1); // HTTP 1.0
-  requestPut.setField("From", "me");
-  requestPut.setField("Content-Type", "application/x-www-form-urlencoded");
-  requestPut.setBody("{\"name\": \"moi\", \"type\": 0}");
-  response = http.sendRequest(requestPut);
-
-  sf::Http::Request requestGetAfterAdd;
-  requestGetAfterAdd.setMethod(sf::Http::Request::Get);
-  requestGetAfterAdd.setUri("/player/1");
-  requestGetAfterAdd.setHttpVersion(1, 0); // HTTP 1.0
-  requestGetAfterAdd.setField("From", "me");
-  requestGetAfterAdd.setField("Content-Type", "application/json; charset=utf-8");
-  requestGetAfterAdd.setBody("");
-  response = http.sendRequest(requestGetAfterAdd);
-
-  std::cout << "Added to the game : " << std::endl;
-  std::cout << "status: " << response.getStatus() << std::endl;
-  std::cout << "body: " << response.getBody() << std::endl;
-
-  cout << "Pressez <entrée> pour sortir" << endl;
-  (void) getc(stdin);
-
-  sf::Http::Request requestDelete;
-  requestDelete.setMethod(sf::Http::Request::Delete);
-  requestDelete.setUri("/player/2");
-  requestDelete.setHttpVersion(1, 1); // HTTP 1.0
-  requestDelete.setField("From", "me");
-  requestDelete.setField("Content-Type", "application/x-www-form-urlencoded");
-  requestDelete.setBody("");
-  response = http.sendRequest(requestDelete);
-
-  sf::Http::Request requestGetAfterDelete;
-  requestGetAfterDelete.setMethod(sf::Http::Request::Get);
-  requestGetAfterDelete.setUri("/player/2");
-  requestGetAfterDelete.setHttpVersion(1, 0); // HTTP 1.0
-  requestGetAfterDelete.setField("From", "me");
-  requestGetAfterDelete.setField("Content-Type", "application/json; charset=utf-8");
-  requestGetAfterDelete.setBody("");
-  response = http.sendRequest(requestGetAfterDelete);
-
-  std::cout << "Deleted : " << std::endl;
-  std::cout << "status: " << response.getStatus() << std::endl;
-  std::cout << "body: " << response.getBody() << std::endl;
-
-
 }
 
 void Client::run (){
@@ -129,11 +61,9 @@ void Client::run (){
     if (event.type == sf::Event::Closed)
         window.close();
     }
-    thread th1(&Client::engineUpdating,this,ref(renderSignal));
+    thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text));
     thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller));
-    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(gold),ref(wood),ref(food),ref(text),ref(stop),ref(controller));
-    //if(controller==4){
-      //this->m.lock();
+    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller));
       if (stop==1){
           Layer endGame("res/endgame.png");
           endGame.drawSprite(window);
@@ -146,9 +76,6 @@ void Client::run (){
         this->map.drawMap(window);
         renderSignal=0;
       }
-      //this->m.unlock();
-      //controller=1;
-    //}
 
     th1.join();
     th2.join();
@@ -173,23 +100,22 @@ void Client::run (){
 
  }
 
-void Client::engineUpdating (int& renderSignal){
-  //if (controller==3){
-    //this->m.lock();
+void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text){
     this->engine.execute(*(this->principalMap));
+    Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
+    gold= to_string(empire->getGoldRessource());
+    wood= to_string(empire->getWoodRessource());
+    food= to_string(empire->getFoodRessource());
+    text =this->engine.getMessage();
     renderSignal=1;
-    //this->m.unlock();
-    //controller=4;
-  //}
 
 }
 
 void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
-  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, string& gold,
-  string& wood,string& food,string& text, int& stop,int& controller){
+  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& stop,int& controller){
     if (controller==1){
       this->m.lock();
-      this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace,gold,wood,food,text, stop);
+      this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace, stop);
       this->m.unlock();
       controller=2;
     }
