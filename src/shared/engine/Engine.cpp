@@ -191,7 +191,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
   wood= to_string(empire->getWoodRessource());
   food= to_string(empire->getFoodRessource());
   text =player+this->message;
-  setMessage("");
+  
 }
 
 void Engine::openFiles(){
