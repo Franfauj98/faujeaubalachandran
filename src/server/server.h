@@ -6,8 +6,8 @@
 #include "server/AbstractService.h"
 #include "server/ServiceException.h"
 #include "server/ServicesManager.h"
-#include "server/User.h"
-#include "server/UserDB.h"
-#include "server/UserService.h"
+#include "server/Player.h"
+#include "server/PlayerDB.h"
+#include "server/PlayerService.h"
 #include "server/VersionService.h"
 #endif

@@ -1,4 +1,4 @@
-/** 
+/**
  * @file User.hpp
  * @author Philippe-Henri Gosselin
  * @date 9 décembre 2015
@@ -12,7 +12,6 @@
 
 using std::string;
 
-#include "User.h"
+#include "Player.h"
 
 #endif
-

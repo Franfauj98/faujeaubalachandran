@@ -1,13 +1,13 @@
 /**
- * @file User.cpp
+ * @file Player.cpp
  * @author Philippe-Henri Gosselin
  * @date 9 décembre 2015
  * @copyright CNRS
  */
 
-#include "User.hpp"
+#include "Player.hpp"
 using namespace server;
 
-User::User (string name, int age) : name(name),age(age) {
+Player::Player (string name, int type) : name(name),type(type) {
 
 }
