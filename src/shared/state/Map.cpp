@@ -6,7 +6,8 @@
 #include <string>
 #include <cstdlib>
 #include <stdio.h>
-#include "../../extern/jsoncpp-1.8.0/json/json.h"
+// #include "../../extern/jsoncpp-1.8.0/json/json.h"
+#include <json/json.h>
 
 using namespace state;
 using namespace std;

@@ -8,9 +8,10 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
-#include "../../extern/jsoncpp-1.8.0/json/json-forwards.h"
-#include "../../extern/jsoncpp-1.8.0/json/json.h"
-#include "../../extern/jsoncpp-1.8.0/jsoncpp.cpp"
+// #include "../../extern/jsoncpp-1.8.0/json/json-forwards.h"
+// #include "../../extern/jsoncpp-1.8.0/json/json.h"
+// #include "../../extern/jsoncpp-1.8.0/jsoncpp.cpp"
+#include <json/json.h>
 
 using namespace engine;
 using namespace state;
@@ -191,7 +192,7 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
   wood= to_string(empire->getWoodRessource());
   food= to_string(empire->getFoodRessource());
   text =player+this->message;
-  
+
 }
 
 void Engine::openFiles(){
