@@ -1,6 +1,6 @@
 #include "ServicesManager.hpp"
 #include "VersionService.hpp"
-#include "UserService.hpp"
+#include "PlayerService.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -124,21 +124,22 @@ int main(int argc, char *const *argv)
         //        servicesManager.registerService(make_unique<VersionService>());
         servicesManager.registerService(make_unique<VersionService>());
 
-        UserDB userDB;
-        userDB.addUser(make_unique<User>("Paul",23));
-        servicesManager.registerService(make_unique<UserService>(std::ref(userDB)));
-//        servicesManager.registerService(make_unique<UserService>(std::ref(userDB)));
+        PlayerDB playerDB;
+        playerDB.addPlayer(make_unique<Player>("Player1",1));
+        servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
+//        servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 
         struct MHD_Daemon *d;
         if (argc != 2) {
-            printf("%s PORT\n", argv[0]);
+            printf("wait for listen\n");
             return 1;
         }
+        int port = 8080;
         d = MHD_start_daemon(// MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG | MHD_USE_POLL,
                 MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG,
                 // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG | MHD_USE_POLL,
                 // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG,
-                atoi(argv[1]),
+                port,
                 NULL, NULL,
                 &main_handler, (void*) &servicesManager,
                 MHD_OPTION_NOTIFY_COMPLETED, request_completed, NULL,

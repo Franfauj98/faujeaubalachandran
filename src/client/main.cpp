@@ -514,7 +514,7 @@ int main(int argc,char* argv[])
     if (event.type == sf::Event::Closed)
         window.close();
     }
-    
+
     if (counter>=0 && counter <=2){
       id = 0;
       idPalace=1;
@@ -1177,6 +1177,12 @@ int main(int argc,char* argv[])
 
   Client client;
   client.run();
+
+
+} else if (argv[1] &&!strcmp(argv[1],"network")) {
+
+  Client client;
+  client.connect();
 
 
 } else {
