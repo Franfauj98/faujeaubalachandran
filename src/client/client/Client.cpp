@@ -86,7 +86,7 @@ void Client::run (){
 }
 
  void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller){
-   if (controller==2){
+   if (controller==1){
      this->m.lock();
      if(canPlay1){
        this->heuristic.run(this->engine,*(this->principalMap),counter,canPlay1, 1);
@@ -96,7 +96,7 @@ void Client::run (){
        this->heuristic.run(this->engine,*(this->principalMap),counter,canPlay3, 3);
      }
      this->m.unlock();
-     controller=3;
+     controller=2;
    }
 
  }
@@ -114,11 +114,11 @@ void Client::engineUpdating (int& controller){
 void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
   bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, string& gold,
   string& wood,string& food,string& text, int& stop,int& controller){
-    if (controller==1){
+    if (controller==2){
       this->m.lock();
       this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace,gold,wood,food,text, stop);
       this->m.unlock();
-      controller=2;
+      controller=3;
     }
 
 }
