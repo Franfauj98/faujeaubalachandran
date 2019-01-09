@@ -7,9 +7,9 @@
 #include "string.h"
 #include <unistd.h>
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Network.hpp>
-#include <thread>
+#include <SFML/Audio.hpp>
+#include<SFML/Window.hpp>
+#include<thread>
 using namespace ai;
 using namespace render;
 using namespace state;
@@ -118,6 +118,12 @@ void Client::run (){
   string text= "";
   int controller=1;
   int renderSignal=0;
+
+  sf::Music music;
+  music.openFromFile("res/music1.ogg");
+  music.setLoop(true);
+  music.play();
+
   while (window.isOpen())
   {
     sf::Event event;
@@ -127,11 +133,9 @@ void Client::run (){
     if (event.type == sf::Event::Closed)
         window.close();
     }
-    thread th1(&Client::engineUpdating,this,ref(renderSignal));
+    thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text));
     thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller));
-    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(gold),ref(wood),ref(food),ref(text),ref(stop),ref(controller));
-    //if(controller==4){
-      //this->m.lock();
+    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller));
       if (stop==1){
           Layer endGame("res/endgame.png");
           endGame.drawSprite(window);
@@ -144,9 +148,6 @@ void Client::run (){
         this->map.drawMap(window);
         renderSignal=0;
       }
-      //this->m.unlock();
-      //controller=1;
-    //}
 
     th1.join();
     th2.join();
@@ -171,23 +172,22 @@ void Client::run (){
 
  }
 
-void Client::engineUpdating (int& renderSignal){
-  //if (controller==3){
-    //this->m.lock();
+void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text){
     this->engine.execute(*(this->principalMap));
+    Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
+    gold= to_string(empire->getGoldRessource());
+    wood= to_string(empire->getWoodRessource());
+    food= to_string(empire->getFoodRessource());
+    text =this->engine.getMessage();
     renderSignal=1;
-    //this->m.unlock();
-    //controller=4;
-  //}
 
 }
 
 void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
-  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, string& gold,
-  string& wood,string& food,string& text, int& stop,int& controller){
+  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& stop,int& controller){
     if (controller==1){
       this->m.lock();
-      this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace,gold,wood,food,text, stop);
+      this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace, stop);
       this->m.unlock();
       controller=2;
     }
