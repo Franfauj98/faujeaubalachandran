@@ -205,7 +205,7 @@ void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
 
 void Engine::execute(state::Observable& principalMap){
   while(!this->commandList.empty()){
-    usleep(500000);
+    usleep(250000);
     switch(commandListId.front()){
       case 1:{
         CaseIdentifier* ci = (CaseIdentifier*) commandList.front().get();

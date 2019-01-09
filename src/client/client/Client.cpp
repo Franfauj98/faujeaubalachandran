@@ -170,7 +170,6 @@ void Client::run (){
      this->m.unlock();
      controller=1;
    }
-
  }
 
 void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text){
