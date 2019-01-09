@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include<SFML/Window.hpp>
+#include <SFML/Network.hpp>
 #include<thread>
 using namespace ai;
 using namespace render;
@@ -18,6 +19,71 @@ using namespace engine;
 using namespace client;
 
 Client::Client (){
+}
+
+void Client::connect (){
+  sf::Http http;
+  http.setHost("http://localhost",8080);
+
+  sf::Http::Request request;
+  request.setMethod(sf::Http::Request::Get);
+  request.setUri("/player/1");
+  request.setHttpVersion(1, 0); // HTTP 1.0
+  request.setField("From", "me");
+  request.setField("Content-Type", "application/json; charset=utf-8");
+  request.setBody("");
+
+  sf::Http::Response response = http.sendRequest(request);
+  std::cout << "begining : " << std::endl;
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+
+  sf::Http::Request requestPut;
+  requestPut.setMethod(sf::Http::Request::Put);
+  requestPut.setUri("/player");
+  requestPut.setHttpVersion(1, 1); // HTTP 1.0
+  requestPut.setField("From", "me");
+  requestPut.setField("Content-Type", "application/x-www-form-urlencoded");
+  requestPut.setBody("{\"name\": \"moi\", \"type\": 0}");
+  response = http.sendRequest(requestPut);
+
+  sf::Http::Request requestGetAfterAdd;
+  requestGetAfterAdd.setMethod(sf::Http::Request::Get);
+  requestGetAfterAdd.setUri("/player/1");
+  requestGetAfterAdd.setHttpVersion(1, 0); // HTTP 1.0
+  requestGetAfterAdd.setField("From", "me");
+  requestGetAfterAdd.setField("Content-Type", "application/json; charset=utf-8");
+  requestGetAfterAdd.setBody("");
+  response = http.sendRequest(requestGetAfterAdd);
+
+  std::cout << "Added to the game : " << std::endl;
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+
+  cout << "Pressez <entrée> pour sortir" << endl;
+  (void) getc(stdin);
+
+  sf::Http::Request requestDelete;
+  requestDelete.setMethod(sf::Http::Request::Delete);
+  requestDelete.setUri("/player/2");
+  requestDelete.setHttpVersion(1, 1); // HTTP 1.0
+  requestDelete.setField("From", "me");
+  requestDelete.setField("Content-Type", "application/x-www-form-urlencoded");
+  requestDelete.setBody("");
+  response = http.sendRequest(requestDelete);
+
+  sf::Http::Request requestGetAfterDelete;
+  requestGetAfterDelete.setMethod(sf::Http::Request::Get);
+  requestGetAfterDelete.setUri("/player/2");
+  requestGetAfterDelete.setHttpVersion(1, 0); // HTTP 1.0
+  requestGetAfterDelete.setField("From", "me");
+  requestGetAfterDelete.setField("Content-Type", "application/json; charset=utf-8");
+  requestGetAfterDelete.setBody("");
+  response = http.sendRequest(requestGetAfterDelete);
+
+  std::cout << "Deleted : " << std::endl;
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
 }
 
 void Client::run (){

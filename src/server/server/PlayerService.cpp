@@ -21,8 +21,8 @@ HttpStatus PlayerService::get (Json::Value& out, int id) const {
   // out["type"] = player->type;
   // out["name"] = player->name;
   // return HttpStatus::OK;
-  std::cout << "/* message */" << '\n';
-  std::cout << playerDB.getAllPlayer() << '\n';
+  // std::cout << "/* message */" << '\n';
+  // std::cout << playerDB.getAllPlayer() << '\n';
   out["players"] = playerDB.getAllPlayer();
   return HttpStatus::OK;
 }
