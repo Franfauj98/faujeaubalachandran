@@ -29,7 +29,7 @@ post_iterator(void *cls,
         const char *transfer_encoding,
         const char *data, uint64_t off, size_t size)
 {
-    return MHD_NO;
+    return MHD_YES;
 }
 
 // Détruit les données d'une requête
