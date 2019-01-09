@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include<SFML/Window.hpp>
+#include <SFML/Network.hpp>
 #include<thread>
 using namespace ai;
 using namespace render;
