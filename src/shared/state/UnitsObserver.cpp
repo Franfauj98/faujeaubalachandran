@@ -290,14 +290,14 @@ int position, int action, int position2){
           mapMatrix[x2][y2] = map.getBuildingsMap()[position2]->getType();
           mapMatrix[x2][y2-1] = map.getBuildingsMap()[position2-1]->getType();
           mapMatrix[x2][y2+1] = map.getBuildingsMap()[position2+1]->getType();
-          int counter=reId.back();
-          Barrack* barrack =(Barrack*) map.getBuildingsMap()[position2+1].get();
+          // int counter=reId.back();
+          // Barrack* barrack =(Barrack*) map.getBuildingsMap()[position2+1].get();
           std::vector<std::unique_ptr<Element>> re2= move(mapToChange.getUnitsMapPrev());
           map.setUnitsMap(re2);
           reId.pop_back();
           mapToChange.setRessurectionId(reId);
-          for (size_t x=0;x<map.getSize();x++){
-            for (size_t y=0;y<map.getSize();y++){
+          for (int x=0;x<map.getSize();x++){
+            for (int y=0;y<map.getSize();y++){
               if((map.getUnitsMap()[y+25*x]->getType())!=0){
                 mapMatrix[x][y]=map.getUnitsMap()[y+25*x]->getType();
               }
