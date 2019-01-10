@@ -1176,7 +1176,7 @@ int main(int argc,char* argv[])
 } else if (argv[1] &&!strcmp(argv[1],"thread")) {
 
   Client client;
-  client.run();
+  client.run(0);
 
 
 } else if (argv[1] &&!strcmp(argv[1],"network")) {

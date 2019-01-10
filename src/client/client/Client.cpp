@@ -84,7 +84,7 @@ void Client::connect (){
   std::cout << "body: " << response.getBody() << std::endl;
 }
 
-void Client::run (){
+void Client::run (int player){
   std::unique_ptr<Observable> principalMap2 (new Observable(false,false));
   this->principalMap = move(principalMap2);
   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
@@ -95,64 +95,119 @@ void Client::run (){
   this->map.update(*(this->principalMap),"","","","");
   this->map.drawMap(window);
 
-  bool canPlay1 = true;
-  bool canPlay2 = false;
-  bool canPlay3 = false;
-  bool palace1=false;
-  bool palace2=false;
-  bool palace3=false;
+  if(player==0){
+
+    bool canPlay1 = true;
+    bool canPlay2 = false;
+    bool canPlay3 = false;
+    bool palace1=false;
+    bool palace2=false;
+    bool palace3=false;
 
 
-  int counter=0;
-  int stop=0;
-  Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
-  Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
-  Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
+    int counter=0;
+    int stop=0;
+    Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
+    Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
+    Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
 
-  int id = 0;
-  int idPalace=1;
-  string gold= "";
-  string wood= "";
-  string food= "";
-  string text= "";
-  int controller=1;
-  int renderSignal=0;
+    int id = 0;
+    int idPalace=1;
+    string gold= "";
+    string wood= "";
+    string food= "";
+    string text= "";
+    int controller=1;
+    int renderSignal=0;
 
-  sf::Music music;
-  music.openFromFile("res/music1.ogg");
-  music.setLoop(true);
-  music.play();
-
-  while (window.isOpen())
-  {
+    sf::Music music;
+    music.openFromFile("res/music1.ogg");
+    music.setLoop(true);
+    music.play();
     sf::Event event;
-    while (window.pollEvent(event))
+
+    while (window.isOpen())
     {
-  // évènement "fermeture demandée" : on ferme la fenêtre
-    if (event.type == sf::Event::Closed)
-        window.close();
-    }
-    thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text));
-    thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller));
-    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller));
-    if (stop==1){
-        Layer endGame("res/endgame.png");
-        endGame.drawSprite(window);
-        window.display();
-        usleep(10000000);
-        break;
+
+      while (window.pollEvent(event))
+      {
+    // évènement "fermeture demandée" : on ferme la fenêtre
+      if (event.type == sf::Event::Closed)
+          window.close();
       }
-    if(renderSignal==1){
-      this->map.update(*(this->principalMap),gold,wood,food,text);
-      this->map.drawMap(window);
-      renderSignal=0;
+      thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text));
+      thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller));
+      thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),0);
+      if (stop==1){
+          Layer endGame("res/endgame.png");
+          endGame.drawSprite(window);
+          window.display();
+          usleep(10000000);
+          break;
+        }
+      if(renderSignal==1){
+        this->map.update(*(this->principalMap),gold,wood,food,text);
+        this->map.drawMap(window);
+        renderSignal=0;
+      }
+
+      th1.join();
+      th2.join();
+      th3.join();
     }
+  } else if (player==1) {
 
-    th1.join();
-    th2.join();
-    th3.join();
+
+      bool firstC = true;
+      bool secondC = false;
+      bool thirdC = false;
+
+      bool canPlay1 = false;
+      bool canPlay2 = false;
+      bool canPlay3 = false;
+      bool palace1=false;
+      bool palace2=false;
+      bool palace3=false;
+
+
+      int counter=0;
+      int stop=0;
+      Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
+      Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
+      Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
+
+      int id = 0;
+      int idPalace=1;
+      string gold= "";
+      string wood= "";
+      string food= "";
+      string text= "";
+      int controller=1;
+      int renderSignal=0;
+
+      sf::Music music;
+      music.openFromFile("res/music1.ogg");
+      music.setLoop(true);
+      music.play();
+      sf::Event event;
+
+      while (window.isOpen())
+      {
+
+
+        map.handle(window, *principalMap, engine, event,firstC,secondC,thirdC,counter);
+
+        engine.execute(*principalMap);
+
+        Empire* empire = principalMap->getAllMaps().getEmpires()[id].get();
+        gold= to_string(empire->getGoldRessource());
+        wood= to_string(empire->getWoodRessource());
+        food= to_string(empire->getFoodRessource());
+        map.update(*principalMap,gold,wood,food,"");
+        map.drawMap(window);
+      }
+
   }
-
 }
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller){
@@ -181,11 +236,13 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
 }
 
 void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
-  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& stop,int& controller){
-  if (controller==1){
-    this->m.lock();
-    this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace, stop);
-    this->m.unlock();
-    controller=2;
+  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& stop,int& controller,int player){
+  if(player==0){
+    if (controller==1){
+      this->m.lock();
+      this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace, stop,0);
+      this->m.unlock();
+      controller=2;
+    }
   }
 }
