@@ -1186,7 +1186,7 @@ int main(int argc,char* argv[])
 
 
 } else {
-    cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
+    cout << "Please type : \n'hello' or \n'state' or \n'render' or \n'engine' or \n'random_ai' or \n'heuristic_ai' or \n'deep_ai' or \n'record' or \n'play' or \n'thread'" << endl;
     // Engine engine;
   }
 
