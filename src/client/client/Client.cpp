@@ -126,7 +126,7 @@ void Client::run (int player){
     music.openFromFile("res/music1.ogg");
     music.setLoop(true);
     music.play();
-    sf::Event event;
+    sf::Event event; 
 
     while (window.isOpen())
     {
