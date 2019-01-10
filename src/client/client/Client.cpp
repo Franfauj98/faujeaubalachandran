@@ -173,6 +173,7 @@ void Client::run (){
 
 }
 
+<<<<<<< HEAD
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller){
   if (controller==2){
     this->m.lock();
@@ -187,6 +188,22 @@ void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canP
     controller=1;
   }
 }
+=======
+ void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller){
+   if (controller==2){
+     this->m.lock();
+     if(canPlay1){
+       this->heuristic.run(this->engine,*(this->principalMap),counter,canPlay1, 1);
+     } else if(canPlay2){
+       this->heuristic.run(this->engine,*(this->principalMap),counter,canPlay2, 2);
+     } else if(canPlay3){
+       this->heuristic.run(this->engine,*(this->principalMap),counter,canPlay3, 3);
+     }
+     this->m.unlock();
+     controller=1;
+   }
+ }
+>>>>>>> 3f95962daa8d7442899659430ce3000a3dd7132d
 
 void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text){
   this->engine.execute(*(this->principalMap));
