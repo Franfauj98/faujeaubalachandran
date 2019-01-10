@@ -140,24 +140,27 @@ void Client::run (){
   music.openFromFile("res/music1.ogg");
   music.setLoop(true);
   music.play();
-
   while (window.isOpen())
   {
     sf::Event event;
+    thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text));
+    thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller));
+    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller));
+
     while (window.pollEvent(event))
     {
   // évènement "fermeture demandée" : on ferme la fenêtre
     if (event.type == sf::Event::Closed)
         window.close();
     }
-    thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text));
-    thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller));
-    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller));
     if (stop==1){
         Layer endGame("res/endgame.png");
         endGame.drawSprite(window);
         window.display();
         usleep(10000000);
+        th1.join();
+        th2.join();
+        th3.join();
         break;
       }
     if(renderSignal==1){
@@ -165,12 +168,10 @@ void Client::run (){
       this->map.drawMap(window);
       renderSignal=0;
     }
-
     th1.join();
     th2.join();
     th3.join();
   }
-
 }
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller){

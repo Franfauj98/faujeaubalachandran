@@ -1177,7 +1177,7 @@ int main(int argc,char* argv[])
 
   Client client;
   client.run();
-
+  return 1;
 
 } else if (argv[1] &&!strcmp(argv[1],"network")) {
 
