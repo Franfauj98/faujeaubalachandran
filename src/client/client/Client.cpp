@@ -126,7 +126,7 @@ void Client::run (int player){
     music.openFromFile("res/music1.ogg");
     music.setLoop(true);
     music.play();
-    sf::Event event; 
+    sf::Event event;
 
     while (window.isOpen())
     {
@@ -145,6 +145,9 @@ void Client::run (int player){
           endGame.drawSprite(window);
           window.display();
           usleep(10000000);
+          th1.join();
+          th2.join();
+          th3.join();
           break;
         }
       if(renderSignal==1){
@@ -200,6 +203,9 @@ void Client::run (int player){
             endGame.drawSprite(window);
             window.display();
             usleep(10000000);
+            th1.join();
+            th2.join();
+            th3.join();
             break;
           }
 
