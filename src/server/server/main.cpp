@@ -20,17 +20,17 @@ public:
 };
 
 // Fonction pour gérer les données imporantes en upload (non implanté ici)
-static int
-post_iterator(void *cls,
-        enum MHD_ValueKind kind,
-        const char *key,
-        const char *filename,
-        const char *content_type,
-        const char *transfer_encoding,
-        const char *data, uint64_t off, size_t size)
-{
-    return MHD_YES;
-}
+// static int
+// post_iterator(void *cls,
+//         enum MHD_ValueKind kind,
+//         const char *key,
+//         const char *filename,
+//         const char *content_type,
+//         const char *transfer_encoding,
+//         const char *data, uint64_t off, size_t size)
+// {
+//     return MHD_YES;
+// }
 
 // Détruit les données d'une requête
 static void
@@ -65,11 +65,11 @@ main_handler (void *cls,
         *ptr = request;
         if (strcmp(method, MHD_HTTP_METHOD_POST) == 0
          || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {
-            request->pp = MHD_create_post_processor(connection,1024,&post_iterator,request);
-            if (!request->pp) {
-                cerr << "Failed to setup post processor for " << url << endl;
-                return MHD_NO;
-            }
+            // request->pp = MHD_create_post_processor(connection,1024,&post_iterator,request);
+            // if (!request->pp) {
+            //     cerr << "Failed to setup post processor for " << url << endl;
+            //     return MHD_NO;
+            // }
         }
         return MHD_YES;
     }
@@ -77,7 +77,7 @@ main_handler (void *cls,
     // Cas où il faut récupérer les données envoyés par l'utilisateur
     if (strcmp(method, MHD_HTTP_METHOD_POST) == 0
      || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {
-        MHD_post_process(request->pp,upload_data,*upload_data_size);
+        // MHD_post_process(request->pp,upload_data,*upload_data_size);
         if (*upload_data_size != 0) {
             request->data = upload_data;
             *upload_data_size = 0;
@@ -126,6 +126,8 @@ int main(int argc, char *const *argv)
 
         PlayerDB playerDB;
         playerDB.addPlayer(make_unique<Player>("Player1",1));
+        playerDB.addPlayer(make_unique<Player>("Player2",1));
+        // playerDB.addPlayer(make_unique<Player>("Player3",1));
         servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 //        servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 

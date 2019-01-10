@@ -8,9 +8,11 @@
 #include <unistd.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include<SFML/Window.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Network.hpp>
-#include<thread>
+#include <thread>
+#include <json/json.h>
+
 using namespace ai;
 using namespace render;
 using namespace state;
@@ -36,7 +38,7 @@ sf::Http::Request sendPut(std::string uri, std::string body){
   request.setMethod(sf::Http::Request::Put);
   request.setUri(uri);
   request.setHttpVersion(1, 1); // HTTP 1.0
-  request.setField("Content-Type", "application/x-www-form-urlencoded");
+  request.setField("Content-Type", "application/json; charset=utf-8");
   request.setBody(body);
   return request;
 }
@@ -56,16 +58,32 @@ void Client::connect (){
   sf::Http http;
   http.setHost("http://localhost",8080);
 
-  sf::Http::Request request = sendGet("/player/1");
+  Json::Value body;
+  Json::Reader reader;
+
+  sf::Http::Request request = sendGet("/player");
   sf::Http::Response response = http.sendRequest(request);
+  reader.parse(response.getBody(), body);
   std::cout << "begining : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
+  if(body["players"].size()>2){
+    std::cerr << "cannot join this game, already 3 players there" << '\n';
+    return;
+  }
+
   request = sendPut("/player", "{\"name\": \"moi\", \"type\": 0}");
   response = http.sendRequest(request);
 
-  request = sendGet("/player/1");
+  reader.parse(response.getBody(), body);
+  int idPlayer = body["id"].asInt();
+
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  std::cout << "id: " << idPlayer << std::endl;
+
+  request = sendGet("/player");
   response = http.sendRequest(request);
   std::cout << "Added to the game : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
@@ -74,10 +92,10 @@ void Client::connect (){
   cout << "Pressez <entrée> pour sortir" << endl;
   (void) getc(stdin);
 
-  request = sendDelete("/player/2");
+  request = sendDelete("/player/"+to_string(idPlayer));
   response = http.sendRequest(request);
 
-  request = sendGet("/player/1");
+  request = sendGet("/player");
   response = http.sendRequest(request);
   std::cout << "Deleted : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;

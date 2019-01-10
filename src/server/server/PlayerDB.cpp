@@ -8,6 +8,8 @@
 #include "PlayerDB.hpp"
 #include <iostream>
 #include <string>
+#include <json/json.h>
+
 using namespace server;
 using namespace std;
 
@@ -22,18 +24,28 @@ const Player* PlayerDB::getPlayer (int id) const {
     return ite->second.get();
 }
 
-std::string PlayerDB::getAllPlayer () {
-  std::string allPlayers = "[";
+Json::Value PlayerDB::getAllPlayer () {
+  Json::Value foo, player1;
   for (std::map<int,unique_ptr<Player>>::iterator it=players.begin(); it!=players.end(); ++it){
-    //     std::cout << it->first << " => " << it->second << '\n';
-    // auto ite = allPlayers[i];
     Player *player = it->second.get();
-    allPlayers+=("{\"name\": \""+player->name+"\", \"type\": "+to_string(player->type)+"},");
+    player1["name"] = player->name;
+    player1["type"] = player->type;
+    foo.append(player1);
   }
-  allPlayers.pop_back();
-  allPlayers+= "]";
-  return allPlayers;
+  return foo;
 }
+// std::string PlayerDB::getAllPlayer () {
+//   std::string allPlayers = "{\"players\": [";
+//   for (std::map<int,unique_ptr<Player>>::iterator it=players.begin(); it!=players.end(); ++it){
+//     //     std::cout << it->first << " => " << it->second << '\n';
+//     // auto ite = allPlayers[i];
+//     Player *player = it->second.get();
+//     allPlayers+=("{\"name\": \""+player->name+"\", \"type\": "+to_string(player->type)+"},");
+//   }
+//   allPlayers.pop_back();
+//   allPlayers+= "]}";
+//   return allPlayers;
+// }
 
 int PlayerDB::addPlayer (unique_ptr<Player> player) {
     int id = idseq++;
