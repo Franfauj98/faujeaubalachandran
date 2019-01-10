@@ -241,9 +241,9 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
               counter++;
             }
           }
-          firstC = true;
-          secondC = false;
-          thirdC = false;
+          // firstC = true;
+          // secondC = false;
+          // thirdC = false;
         }
 
         else if ((element==26||element==27||element==28||element==29||element==31)) {
@@ -260,9 +260,9 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
               counter++;
             }
           }
-          firstC = true;
-          secondC = false;
-          thirdC = false;
+          // firstC = true;
+          // secondC = false;
+          // thirdC = false;
         }
         else if (element==30) {
           sf::Vector2i click2 = getClickButton(window, event);
@@ -323,9 +323,9 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           }
         }
 
-        firstC = true;
-        secondC = false;
-        thirdC = false;
+        // firstC = true;
+        // secondC = false;
+        // thirdC = false;
       }
     }
   }

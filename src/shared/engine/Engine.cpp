@@ -30,8 +30,7 @@ Engine::Engine (){
 }
 
 void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
-  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, int& stop,int player){
-
+  bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace, int& stop,int player, bool& firstC, bool& secondC, bool& thirdC){
   if(player==0){
     if (counter>=0 && counter <=2){
       id = 0;
@@ -207,7 +206,11 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         canPlay1 = false;
         canPlay2 = false;
         canPlay3 = false;
-
+        if(secondC==false && thirdC==false){
+          firstC = true;
+          secondC = false;
+          thirdC = false;
+        }
       } else {
         counter=3;
       }
@@ -236,7 +239,9 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         canPlay1 = false;
         canPlay2 = true;
         canPlay3 = false;
-
+        firstC = false;
+        secondC = false;
+        thirdC = false;
       } else {
         counter=6;
       }
@@ -264,6 +269,9 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         canPlay1 = false;
         canPlay2 = false;
         canPlay3 = true;
+        firstC = false;
+        secondC = false;
+        thirdC = false;
 
       } else {
         counter=9;

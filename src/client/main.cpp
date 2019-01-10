@@ -1184,6 +1184,11 @@ int main(int argc,char* argv[])
   Client client;
   client.connect();
 
+} else if (argv[1] &&!strcmp(argv[1],"game")) {
+
+  Client client;
+  client.run(1);
+
 
 } else {
     cout << "Please type 'hello' or 'state' or 'render' or 'engine'" << endl;
