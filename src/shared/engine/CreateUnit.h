@@ -31,6 +31,11 @@ namespace engine {
     void execute (state::Observable& principalMap);
     void rollback (state::Observable& principalMap);
     CreateUnit (int x, int y, int x2, int y2, int unit);
+    int getX () const;
+    int getX2 () const;
+    int getY () const;
+    int getY2 () const;
+    int getUnit () const;
     // Setters and Getters
   };
 

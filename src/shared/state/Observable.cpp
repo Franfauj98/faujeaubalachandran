@@ -11,6 +11,16 @@ Observable::~Observable(){
 Observable::Observable(){
 }
 
+Observable::Observable(bool record, bool replay){
+  if(record){
+    this->allMaps.beginRecord();
+  }
+  if(replay){
+    this->allMaps.beginReplay();
+  }
+  this->allMaps.constructMap();
+}
+
 void Observable::notifyObserver(Observable& observable,
 int position, int id, int action, int unitToCreate, int position2) const{
 
@@ -119,4 +129,12 @@ std::vector<int> Observable::getRessurectionId(){
 
 void Observable::setRessurectionId(std::vector<int> reId){
    this->ressurectionId=reId;
+}
+
+std::vector<std::unique_ptr<Element>>& Observable::getUnitsMapPrev(){
+  return this->unitsMapPrev;
+}
+
+void Observable::setUnitsMapPrev(std::vector<std::unique_ptr<Element>>& unitsMapPrev){
+   this->unitsMapPrev=move(unitsMapPrev);
 }

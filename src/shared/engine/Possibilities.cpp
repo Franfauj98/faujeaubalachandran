@@ -40,6 +40,15 @@ Possibilities::Possibilities (int x, int y, int element){
   this->element = element;
 }
 
+int Possibilities::getX() const{
+  return this->x;
+}
+int Possibilities::getY() const{
+  return this->y;
+}
+int Possibilities::getElement() const{
+  return this->element;
+}
 
 CommandTypeId Possibilities::getTypeId () const{
   return CommandTypeId::POSSIBILITIES;

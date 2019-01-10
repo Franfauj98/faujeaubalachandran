@@ -17,6 +17,22 @@ CreateUnit::CreateUnit (int x, int y, int x2, int y2, int unit){
   this->unit = unit;
 }
 
+int CreateUnit::getX() const{
+  return this->x;
+}
+int CreateUnit::getY() const{
+  return this->y;
+}
+int CreateUnit::getX2() const{
+  return this->x2;
+}
+int CreateUnit::getY2() const{
+  return this->y2;
+}
+int CreateUnit::getUnit() const{
+  return this->unit;
+}
+
 CommandTypeId CreateUnit::getTypeId () const{
   return CommandTypeId::CREATEUNIT;
 }

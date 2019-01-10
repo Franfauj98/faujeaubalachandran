@@ -867,7 +867,6 @@ bool performAction(engine::Engine& engine, Observable& principalMap, int& counte
 
 std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
 
-  int actionToPerform = 0; // 4 --> levelup   3 --> createUnit   1 --> move   2 --> attack
   std::vector<int> state2;
   std::vector<int> state3;
   std::vector<int> state4;
@@ -933,7 +932,7 @@ std::vector<int> minMax(engine::Engine& engine, Observable& principalMap, int& c
   }
   toAdd = max(state2, 0, 4);
 
-  actionToPerform = toAdd[1];
+  // int actionToPerform = toAdd[1];  // 4 --> levelup   3 --> createUnit   1 --> move   2 --> attack
 
   return toAdd;
 

@@ -143,7 +143,21 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y2,element)),3);
       usleep(500000);
+      switch(id){
+        case 1:
+        engine.setMessage("Player 1: Palace LevelUp");
+        break;
+        case 2:
+        engine.setMessage("Player 2: Palace LevelUp");
+        break;
+        case 3:
+        engine.setMessage("Player 3: Palace LevelUp");
+        break;
+        default:break;
+      }
       engine.addCommand((unique_ptr<Command> (new LevelUp(x2,y2))),5);
+
+
       counter++;
       return;
       //level up of the barrack if possible
@@ -154,7 +168,20 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
       usleep(500000);
+      switch(id){
+        case 1:
+        engine.setMessage("Player 1: Barrack LevelUp");
+        break;
+        case 2:
+        engine.setMessage("Player 2: Barrack LevelUp");
+        break;
+        case 3:
+        engine.setMessage("Player 3: Barrack LevelUp");
+        break;
+        default:break;
+      }
       engine.addCommand((unique_ptr<Command> (new LevelUp(x3,y3))),5);
+
       counter++;
       return;
       //level up of the ressource if possible
@@ -165,7 +192,20 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x1,y1,element)),3);
       usleep(500000);
+      switch(id){
+        case 1:
+        engine.setMessage("Player 1: Ressource LevelUp");
+        break;
+        case 2:
+        engine.setMessage("Player 2: Ressource LevelUp");
+        break;
+        case 3:
+        engine.setMessage("Player 3: Ressource LevelUp");
+        break;
+        default:break;
+      }
       engine.addCommand((unique_ptr<Command> (new LevelUp(x1,y1))),5);
+
       counter++;
       return;
       //CreateUnit if enough space in barrack and enough ressource
@@ -180,7 +220,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-      usleep(500000);
       // std::cout << "CreateUnit" << '\n';
       std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
@@ -195,6 +234,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       switch(unitChoice){
         case 1:
         if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
+          switch(id){
+            case 1:
+            engine.setMessage("Player 1: Arrow Created");
+            break;
+            case 2:
+            engine.setMessage("Player 2: Arrow Created");
+            break;
+            case 3:
+            engine.setMessage("Player 3: Arrow Created");
+            break;
+            default:break;
+          }
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
           usleep(500000);
           counter++;
@@ -203,6 +254,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         break;
         case 2:
         if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
+          switch(id){
+            case 1:
+            engine.setMessage("Player 1: Decurion Created");
+            break;
+            case 2:
+            engine.setMessage("Player 2: Decurion Created");
+            break;
+            case 3:
+            engine.setMessage("Player 3: Decurion Created");
+            break;
+            default:break;
+          }
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
           usleep(500000);
           counter++;
@@ -211,6 +274,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         break;
         case 3:
         if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
+          switch(id){
+            case 1:
+            engine.setMessage("Player 1: Cavalier Created");
+            break;
+            case 2:
+            engine.setMessage("Player 2: Cavalier Created");
+            break;
+            case 3:
+            engine.setMessage("Player 3: Cavalier Created");
+            break;
+            default:break;
+          }
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
           usleep(500000);
           counter++;
@@ -219,6 +294,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         break;
         case 4:
         if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
+          switch(id){
+            case 1:
+            engine.setMessage("Player 1: Catapult Created");
+            break;
+            case 2:
+            engine.setMessage("Player 2: Catapult Created");
+            break;
+            case 3:
+            engine.setMessage("Player 3: Catapult Created");
+            break;
+            default:break;
+          }
           engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
           usleep(500000);
           counter++;
@@ -230,7 +317,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     } else if (verifUnits(principalMap,id)){
 
       // select empire to Attack
-      int toAttack = 0;
 
       Position posToAttack;
 
@@ -244,7 +330,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
             if(building2->getIdBuilding() != id && building2->getIdBuilding() != 0 && (building2->getType()== 26 || building2->getType()== 27 || building2->getType()== 28 || building2->getType()== 29)){
               if(building->distance(building->getPosition(), building2->getPosition()) < distance){
                 distance = (building->distance(building->getPosition(), building2->getPosition()));
-                toAttack = j;
                 posToAttack = building2->getPosition();
               }
             }
@@ -267,7 +352,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       //units de l'empire
 
       //distance Unit -> EmpireToAttack
-      int minimumDist=1000000;
+      int minimumDist=50;
       int indexMinimumDist=-1;
       std::vector<int> distanceFromEmpireToAttack;
       for (size_t i=0;i<unitsPosition.size();i++){
@@ -310,7 +395,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       }
 
       if(unitsPositionE.size()>0){
-        int minimumDistE=1000000;
+        int minimumDistE=50;
         int indexMinimumDistE=-1;
         std::vector<int> distanceFromUnitToAttack;
         for (size_t i=0;i<unitsPositionE.size();i++){
@@ -351,6 +436,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        switch(id){
+          case 1:
+          engine.setMessage("Player 1: Unit Attack");
+          break;
+          case 2:
+          engine.setMessage("Player 2: Unit Attack");
+          break;
+          case 3:
+          engine.setMessage("Player 3: Unit Attack");
+          break;
+          default:break;
+        }
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
         usleep(500000);
         counter++;
@@ -361,6 +458,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        switch(id){
+          case 1:
+          engine.setMessage("Player 1: Unit Attack");
+          break;
+          case 2:
+          engine.setMessage("Player 2: Unit Attack");
+          break;
+          case 3:
+          engine.setMessage("Player 3: Unit Attack");
+          break;
+          default:break;
+        }
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
         usleep(500000);
         counter++;
@@ -371,8 +480,19 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(500000);
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
+        switch(id){
+          case 0:
+          engine.setMessage("Player 1: Unit Attack");
+          break;
+          case 1:
+          engine.setMessage("Player 2: Unit Attack");
+          break;
+          case 2:
+          engine.setMessage("Player 3: Unit Attack");
+          break;
+          default:break;
+        }
         usleep(500000);
         counter++;
         return;
@@ -382,7 +502,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
-        usleep(500000);
+        switch(id){
+          case 1:
+          engine.setMessage("Player 1: Unit Attack");
+          break;
+          case 2:
+          engine.setMessage("Player 2: Unit Attack");
+          break;
+          case 3:
+          engine.setMessage("Player 3: Unit Attack");
+          break;
+          default:break;
+        }
         engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
         usleep(500000);
         counter++;
@@ -413,7 +544,7 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
           possibilitiesPos.push_back(pos5);
         }
       }
-      int minimumDistG=1000000;
+      int minimumDistG=50;
       int indexMinimumDistG=-1;
       std::vector<int> distanceFromGToAttack;
       for (size_t i=0;i<possibilitiesPos.size();i++){
@@ -433,6 +564,18 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
         engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
+        switch(id){
+          case 1:
+          engine.setMessage("Player 1: Unit Moved");
+          break;
+          case 2:
+          engine.setMessage("Player 2: Unit Moved");
+          break;
+          case 3:
+          engine.setMessage("Player 3: Unit Moved");
+          break;
+          default:break;
+        }
         engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
         usleep(500000);
         std::vector<state::Position> unitPos;

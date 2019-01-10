@@ -45,7 +45,7 @@ void RenderMap::update(state::Observable& principalMap,string goldText, string w
   Layer gold(fontFile,goldText,22, sf::Color::White, 175, 20);
   Layer wood(fontFile,woodText,22, sf::Color::White,239 , 20);
   Layer food(fontFile,foodText,22, sf::Color::White, 303, 20);
-  Layer message(fontFile,messageText,22, sf::Color::White, 1000, 100);
+  Layer message(fontFile,messageText,22, sf::Color::White, 1100, 100);
 
   this->background=unique_ptr<Layer> (new Layer("res/background.png"));
   this->basicMap=basicMap;

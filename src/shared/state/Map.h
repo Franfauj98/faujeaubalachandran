@@ -19,6 +19,8 @@ namespace state {
   class Map {
     // Associations
     // Attributes
+  public:
+    bool replay     = false;
   private:
     std::vector<std::unique_ptr<Element>> basicMap;
     std::vector<std::unique_ptr<Element>> decorMap;
@@ -29,9 +31,11 @@ namespace state {
     std::vector< std::vector<int> >   mapMatrix;
     std::vector<std::unique_ptr<Empire>> Empires;
     int size     = 25;
+    bool record     = false;
     // Operations
   public:
     Map ();
+    Map (bool record);
     virtual ~Map ();
     void addElement (std::vector<std::unique_ptr<Element>> vect, std::unique_ptr<Element> elt);
     std::vector<std::unique_ptr<Element>>& getBasicMap ();
@@ -54,6 +58,10 @@ namespace state {
     std::vector<int> getStatsMap ();
     std::vector<int> getSelectedMapId ();
     std::vector<std::unique_ptr<Empire>>& getEmpires ();
+    void beginRecord ();
+    void constructMap ();
+    void beginReplay ();
+    void setUnitsMap (std::vector<std::unique_ptr<Element>>& unitsMap);
     // Setters and Getters
   };
 

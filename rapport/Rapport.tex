@@ -229,9 +229,9 @@ Class "Map" : cette classe contient les éléments sur la carte de jeu. Elle per
     \item statsMap : ce tableau de "unique\_ptr" contient les stats associées à chaques bâtiments, unités. 
     \item mapMatrix : ce tableau de "int" contient l'id de chaque type de bâtiments. Il nous permet de créer les autres tableaux pour éviter que les décors, les bâtiments, les unités se chevauchent.
 \end{itemize}
-Il y a ensuite un getter pour chacun de ces tableaux. \\
+Il y a ensuite un getter pour chacun de ces tableaux. \\Pour créer la map nous avons plusieurs possibilités : si on est en "record" on doit créer mapMatrix comme d'habitude mais l'enregistrer dans notre fichier JSON, si on est en "play" on remplit "mapMatrix" avec ce qui est enregistrée dans le JSON et, dans l'autre cas on créé la map normalement. \\
 
-Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs et une méthode "notifyObserveurPrev" pour notifier ses observeurs lors du rollback.  Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver. NotifyObservers appelle ensuite le bon observeur en fonction des paramètre qu'on lui donne. La classe "Observable" contient de plus une méthode "getAllMaps" qui va permettre de récupérer les maps générées par le constructeur de Map. Par la suite, pour créer nos cartes de jeu initiales on créera une instance de "Obsevable".Elle contient aussi en attributs deux listes qui permettent de stocker les unités détruites (ressurectionUnits) ainsi que les empires détruits (ressurectionPalace) qui permettront de remettre ces éléments lors d'un rollback.\\
+Class "Observable" : cette classe permet de réagir au des actions gérées par le moteur de jeu. Par exemple, lorsqu'un joueur souhaite améliorer un bâtiment ou créer une unité sur la carte de jeu, il faut que les cartes contenues dans notre classe Map soient modifées en conséquence.\\ Elle contient une méthode appelée "notifyObserveur" qui va notifier ses observeurs et une méthode "notifyObserveurPrev" pour notifier ses observeurs lors du rollback.  Cet observable est composé de deux observeurs : UnitsObserver et BuildingsObserver. NotifyObservers appelle ensuite le bon observeur en fonction des paramètre qu'on lui donne. La classe "Observable" contient de plus une méthode "getAllMaps" qui va permettre de récupérer les maps générées par le constructeur de Map. Par la suite, pour créer nos cartes de jeu initiales on créera une instance de "Obsevable". Elle contient aussi en attributs deux listes qui permettent de stocker les unités détruites (ressurectionUnits) ainsi que les empires détruits (ressurectionPalace) qui permettront de remettre ces éléments lors d'un rollback. A l'instanciation de cette classe nous allons pouvoir choisir si on souhaite enregistrer la partie (Record), rejouer la partie enregistrée (Play) ou jouer une nouvelle partie sans enregistrer. Dans les cas où nous souhaitons rejouer une partie ou en enregitrer une, l'observable appelle les méthodes "beginRecord" ou "beginReplay". Ces méthodes vont ensuite communiquer avec la class "Map" et lancer la construction de la carte de jeux en fonction de ce qu'on veut.\\
 
 Class "UnitsObserver" : Cette classe est un Observer sur les Units. Elle va permettre de réaliser tous les changements nécessaires sur le state des units demandés par le moteur.
 
@@ -350,8 +350,10 @@ Dans cette étape de conception logiciel nous avons utilisé un pattern command.
     On empile et dépile en même temps dans ces deux conteneurs. 
     \item CommandListPrev : Ce conteneur contiendra la liste des commandes à exécuter. On met en deque toute les commandes qui doivent être exécutées lorsqu'un joueur (physique ou ia) veut réaliser un rollback.
     \item CommandListIdPrev : qui contient l'id de chaque commande mise en deque pour pouvoir caster ses comandes sur leurs bon types et les lancer. 
+De plus, le moteur a un attribut text qui contient le numéro du joueur actuel ainsi que son action en cours. Cet attribut sera affiché lors du rendu.  
 \end{itemize}
-Engine contient de plus une méthode "execute" qui, tant que la queue n'est pas vide, exécute les actions et les dépiles. Le moteur a aussi une méthode rollback qui permet de revenir à un état précédent.
+Engine a une méthode run qui permet de connaître le prochain joueur à jouer ainsi que la mise à jour des ressources à chaque fin de tour et savoir si la partie est terminée.
+Engine contient de plus une méthode "execute" qui, tant que la queue n'est pas vide, exécute les actions et les dépiles. Dans le cas ou on a décidé d'enregistrer les commandes, elles sont ajoutées à une chaine de caractères et enregistrées au format JSON à l'exécution du destructeur. Le moteur a une méthode rollback qui permet de revenir à un état précédent. Méthode "replay" : cette méthode permet de lire toutes les commandes au format json et les ajouter à la FIFO de commandes. Ainsi, la méthode "execReplay" permet d'exécuter toutes les commandes empilées. 
 \\Les différentes commandes sont les suivantes : 
     \begin{itemize}
         \item CaseIdentifier : Permet d'identifier la case sur laquelle on se trouve.
@@ -433,6 +435,7 @@ Pour cette IA, un rollback, qui permet de revenir à un état précédent, a ét
     \item Classe RandomAI : contient une méthode run qui permet à l'intelligence artificielle naïve de lancer ses coups. 
     \item Classe HeuristicAI : contient une méthode run qui permet à l'intelligence artificielle heuristique de lancer ses coups. Elle utilise les heuristiques définies dans la sous section précédente. Pour réaliser le déplacement des unités nous avons besoin d'une "mémoire". En effet, notre carte contient des obstacles. Ainsi, pour les contourner nous avons besoin à chaque mouvement de rechercher la case la plus proche de la cible mais qui n'implique ni un retour en arrière pénalisant ni d'être bloqué par un obstacle. Nous avons donc ajouté un attribut à la classe Units qui s'appelle "canMove" et qui stocke les 3 dernières cases utilisées par l'unité.
     \item Classe DeepAI : Contient une méthode "run" qui fait appel à une fonction minmax. Cette fonction minmax fait appel à une fonction min et une fonction max qui permettent de trouver le min ou le max d'une portion de tableau. La fonction min max réalise de plus des actions avec la méthodes preformActions puis elle les rollback et renvoie le meilleur coup à jouer à la méthode "run". Le poids de chaque action lorsqu'on est en bas de l'arbre est calculé par la fonction weightUpdate. Cette fonction permet de vérifier ce que peut faire le joueur et de renvoyer le poids de chaque action possible ou -1 dans le cas ou l'action ne peut pas être faite. Chaque action renvoie à une heuristique qui vérifie sa faisabilité et l'exécute ensuite. 
+    \item Classe AStar : Cette classe permet d'utiliser l'algorithme AStar qui est un algorithme de recherche du plus court chemin entre deux points. Pour appliquer cette algorithme nous avons empêché que l'algorithme cherche à passer par des obstacles non franchissables.
 \end{itemize}
 \newpage
 
@@ -442,5 +445,70 @@ Pour cette IA, un rollback, qui permet de revenir à un état précédent, a ét
      \caption{Diagramme de classes de l'ia}
 \end{figure}
 
+\newpage
+
+\section{Modularisation}
+
+\subsection{Organisation des modules}
+
+\subsubsection{Serialisation des commandes}
+L'objectif de cette partie est d'être capable d'enregistrer, si l'utilisateur le souhaite, l'ensemble des commandes et des statistiques de jeu de la partie en cours pour pouvoir la rejouer entièrement. Ceci n'est qu'une petite application de la sérialisation de commandes. En effet, son objectif principal est de pouvoir être utilisable par le serveur. La partie serveur de notre application est celle qui contiendra l'intégralité des calculs à savoir le moteur de jeu et les intelligences artificielles qui calculent les coups suivants. Ainsi, pour réaliser les commandes d'un joueur, il faut les envoyer au serveur. Le format utilisé est le format JSON. Il a été choisi pour sa simplicité d'écriture et de lecture. \\
+Pour la partie "record" et "replay" nous devons :
+\begin{itemize}
+    \item Enregistrer la map aléatoire pour pouvoir la regénérer dans le "replay".
+    \item Enregistrer toutes les commandes effectuées par les intelligences artificielles pour pouvoir les rejouer totalement.
+\end{itemize}
+
+Pour l'enregistrement général de notre partie, nous avons décidé d'utiliser un booléen à l'instanciation de notre observable qui dit si nous souhaitons faire un "record", un "replay" ou aucun des deux.\\
+\\Partie "Record" :
+
+Dans cette partie, nous enregistrons tout d'abord la map créée dans la classe "Map" de "State". Puis l'intégralité des commandes dans la classe "Engine" de "Engine". Pour cela, nous crééons une chaîne de caractère contenant les différentes instructions puis nous l'ajoutons au fichier JSON. L'écriture dans le fichier JSON de l'ensemble des commandes est fait dans le destructeur. Ainsi, il faut stopper l'exécution du code en fermant la fenêtre sfml et non en effectuant un "ctrl+c" dans le terminal. Pour réaliser le record il faut taper la commande : ./bin/client record.\\
+\\Partie "Play" : 
+
+Dans cette partie, nous lisons simplement le fichier au format JSON. Tout d'abord, dans le constructeur de la classe "Map" pour reconstituer la carte enregistrée. Puis, dans engine pour exécuter les commandes enregistrées une par une. Pour ceci, nous utilisons la bibliothèque "jsoncpp" qui permet de parser et de lire très facilement des données au format JSON. Cette partie se fait dans le moteur.
+
+\subsubsection{Répartition sur différents threads}
+
+L'objectif est de placer le rendu dans un thread principal et le moteur dans un thread séparé. 
+
+Nous avons en tout quatre threads: 
+\begin{itemize}
+    \item thread principal: il permet d'initialiser au début les différentes variables, la fenêtre puis il gère l'affichage. Ce dernier est mis à jour dès que le moteur exécute une commande. Pour cela, le thread moteur envoie un signal pour informer au thread principal de rafraîchir le rendu.
+    \item thread moteur: il exécute en permanence les commandes dès qu'il peut et émet un signal pour informer le thread principal de la mise à jour du rendu. 
+    \item thread IA: il ajoute des commandes pour le joueur en cours. Il est exécuté après le thread secondaire.
+    \item thread secondaire: il est exécuté avant le thread IA. Il permet de connaître le numéro du joueur à jouer et de faire les mises à jour des ressources.
+    
+\end{itemize}
+Ces deux derniers threads ont un mutex en commun pour éviter l'utilisation de ressources critiques en même temps.
+Nous devons mettre un certain délai entre l'éxecution des différentes commandes pour avoir un affichage et une exécution des commandes synchronisés.
+
+\subsection{Conception logiciel}
+La classe client a les attributs suivants:
+\begin{itemize}
+    \item un moteur
+    \item une observable contenant les états du jeu
+    \item le rendu
+    \item une intelligence artificielle heuristique
+    \item un mutex
+\end{itemize}
+La création d'un client permet donc d'avoir tous les éléments nécessaires pour faire tourner le jeu. 
+
+La classe client a les méthodes suivantes:
+\begin{itemize}
+    \item le constructeur
+    \item une méthode run: elle initialise les différentes variables, la fenêtre d'affichage et le thread principal. Elle lance aussi les différents threads.
+    \item une méthode aiUpdating: elle permet de faire tourner l'IA 
+    \item une méthode engineUpdating: elle permet d'exécuter les commandes et d'envoyer un signal pour mettre à jour le rendu
+    \item une méthode playerUpdating qui met à jour le numéro du joueur à jouer ainsi que les ressources à chaque fin de tour
+    \item une méthode connect qui sera explicitée dans le prochain rapport
+\end{itemize}
+
+Remarque : Nous avons commencé à travailler sur le serveur, c'est pour cela que vous trouverez dès ce tag des fichiers dans le dossier "server" et dans le dia une partie "server". Pour ce tag, nous avons enlevé la compilation du serveur. 
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=1\textwidth]{ressources/module.png}
+     \caption{Diagramme de classes du client}
+\end{figure}
 
 \end{document}

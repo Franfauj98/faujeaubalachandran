@@ -14,6 +14,15 @@ PrintStats::PrintStats(int x, int y, int element){
   this->element = element;
 }
 
+int PrintStats::getX() const{
+  return this->x;
+}
+int PrintStats::getY() const{
+  return this->y;
+}
+int PrintStats::getElement() const{
+  return this->element;
+}
 
 CommandTypeId PrintStats::getTypeId () const{
   return CommandTypeId::PRINTSTATS;

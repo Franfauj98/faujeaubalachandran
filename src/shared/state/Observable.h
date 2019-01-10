@@ -10,6 +10,7 @@ namespace state {
   class Observable;
   class Units;
   class Buildings;
+  class Element;
   class UnitsObserver;
   class BuildingsObserver;
 }
@@ -17,6 +18,7 @@ namespace state {
 #include "Map.h"
 #include "Units.h"
 #include "Buildings.h"
+#include "Element.h"
 #include "UnitsObserver.h"
 #include "BuildingsObserver.h"
 
@@ -31,12 +33,13 @@ namespace state {
     std::vector<std::unique_ptr<Units>> ressurectionUnits;
     std::vector<int> ressurectionId;
     std::vector<std::unique_ptr<Buildings>> ressurectionPalace;
+    std::vector<std::unique_ptr<Element>> unitsMapPrev;
     // Operations
   public:
     ~Observable ();
+    Observable ();
     void notifyObserver (state::Observable& observable, int position, int idToChange, int action, int unitToCreate, int position2) const;
     void notifyObserverPrev (state::Observable& observable, int position, int idToChange, int action, int unitToDestroy, int position2) const;
-    Observable ();
     Map& getAllMaps ();
     std::vector<std::unique_ptr<Units>>& getRessurectionUnits ();
     void setRessurectionUnits (std::vector<std::unique_ptr<Units>>& ressurectionElement);
@@ -44,6 +47,9 @@ namespace state {
     void setRessurectionId (std::vector<int> reId);
     std::vector<std::unique_ptr<Buildings>>& getRessurectionPalace ();
     void setRessurectionPalace (std::vector<std::unique_ptr<Buildings>>& ressurectionElement);
+    Observable (bool record, bool replay);
+    std::vector<std::unique_ptr<Element>>& getUnitsMapPrev ();
+    void setUnitsMapPrev (std::vector<std::unique_ptr<Element>>& unitsMapPrev);
     // Setters and Getters
   };
 

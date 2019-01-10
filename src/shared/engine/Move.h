@@ -30,6 +30,10 @@ namespace engine {
     void execute (state::Observable& principalMap);
     void rollback (state::Observable& principalMap);
     Move (int x, int y, int x2, int y2);
+    int getX () const;
+    int getY () const;
+    int getX2 () const;
+    int getY2 () const;
     // Setters and Getters
   };
 

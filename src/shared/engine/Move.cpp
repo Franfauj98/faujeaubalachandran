@@ -16,6 +16,18 @@ Move::Move (int x, int y, int x2, int y2){
   this->y2 = y2;
 }
 
+int Move::getX() const{
+  return this->x;
+}
+int Move::getY() const{
+  return this->y;
+}
+int Move::getX2() const{
+  return this->x2;
+}
+int Move::getY2() const{
+  return this->y2;
+}
 
 CommandTypeId Move::getTypeId () const{
   return CommandTypeId::MOVE;
