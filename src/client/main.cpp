@@ -1176,13 +1176,18 @@ int main(int argc,char* argv[])
 } else if (argv[1] &&!strcmp(argv[1],"thread")) {
 
   Client client;
-  client.run();
-  return 1;
+  client.run(0);
+
 
 } else if (argv[1] &&!strcmp(argv[1],"network")) {
 
   Client client;
   client.connect();
+
+} else if (argv[1] &&!strcmp(argv[1],"game")) {
+
+  Client client;
+  client.run(1);
 
 
 } else {
