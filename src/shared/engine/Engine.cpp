@@ -206,11 +206,11 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         canPlay1 = false;
         canPlay2 = false;
         canPlay3 = false;
-        if(secondC==false && thirdC==false){
-          firstC = true;
-          secondC = false;
-          thirdC = false;
-        }
+        // if(secondC==false && thirdC==false){
+        //   firstC = true;
+        //   secondC = false;
+        //   thirdC = false;
+        // }
       } else {
         counter=3;
       }
