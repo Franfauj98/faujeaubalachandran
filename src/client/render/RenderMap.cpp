@@ -199,6 +199,7 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
         window.close();
     }
     if((event.type == sf::Event::MouseButtonPressed)){
+      std::cout<<"firstC: "<<firstC<<endl;
       if (firstC){
         sf::Vector2i click = getClick(window,event);
         std::vector<int> lastClick ={click.x,click.y,0,0,0,0};

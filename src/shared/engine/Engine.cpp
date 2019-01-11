@@ -204,9 +204,6 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         id = 0;
         idPalace=1;
         if (player==0){
-          firstC = false;
-          secondC = false;
-          thirdC = false;
           canPlay1 = true;
           canPlay2 = false;
           canPlay3 = false;
