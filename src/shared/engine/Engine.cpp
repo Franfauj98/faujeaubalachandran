@@ -51,16 +51,16 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         empire2.setShot(0);
         empire3.setShot(0);
 
-        canPlay1 = true;
-        canPlay2 = false;
-        canPlay3 = false;
-
         if(player==0){
           firstC=false;
           secondC=false;
           thirdC=false;
+          canPlay1 = true;
+        } else if(player==1 || player==2){
+          canPlay1 = false;
         }
-
+        canPlay2 = false;
+        canPlay3 = false;
 
       } else {
         counter=3;
@@ -87,18 +87,22 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
         empire2.setShot(1);
         empire3.setShot(0);
 
-        canPlay1 = false;
-        canPlay2 = true;
-        canPlay3 = false;
+
 
         if(player==1 || player==0){
           firstC = false;
           secondC = false;
           thirdC = false;
-        } else if (player==2){
-          firstC = true;
-          secondC = false;
-          thirdC = false;
+        }
+
+        if(player==0 || player==1){
+          canPlay1 = false;
+          canPlay2 = true;
+          canPlay3 = false;
+        } else if(player==2){
+          canPlay1 = false;
+          canPlay2 = false;
+          canPlay3 = false;
         }
 
       } else {
@@ -197,20 +201,23 @@ void Engine::run(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool&
       }
       else {
         counter=0;
-        canPlay1 = true;
-        canPlay2 = false;
-        canPlay3 = false;
         id = 0;
         idPalace=1;
         if (player==0){
           firstC = false;
           secondC = false;
           thirdC = false;
+          canPlay1 = true;
+          canPlay2 = false;
+          canPlay3 = false;
         }
         else if (player==1 || player==2){
           firstC = true;
           secondC = false;
           thirdC = false;
+          canPlay1 = false;
+          canPlay2 = false;
+          canPlay3 = false;
         }
       }
     }
