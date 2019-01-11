@@ -61,7 +61,7 @@ void Client::connect (){
   Json::Value body;
   Json::Reader reader;
 
-  sf::Http::Request request = sendGet("/player");
+  sf::Http::Request request = sendGet("/player/");
   sf::Http::Response response = http.sendRequest(request);
   reader.parse(response.getBody(), body);
   std::cout << "begining : " << std::endl;
@@ -83,7 +83,7 @@ void Client::connect (){
   std::cout << "body: " << response.getBody() << std::endl;
   std::cout << "id: " << idPlayer << std::endl;
 
-  request = sendGet("/player");
+  request = sendGet("/player/");
   response = http.sendRequest(request);
   std::cout << "Added to the game : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
@@ -95,7 +95,7 @@ void Client::connect (){
   request = sendDelete("/player/"+to_string(idPlayer));
   response = http.sendRequest(request);
 
-  request = sendGet("/player");
+  request = sendGet("/player/");
   response = http.sendRequest(request);
   std::cout << "Deleted : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;

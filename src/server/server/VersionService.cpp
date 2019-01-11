@@ -17,3 +17,7 @@ HttpStatus VersionService::get (Json::Value& out, int id) const {
   out["minor"] = 0;
   return HttpStatus::OK;
 }
+
+HttpStatus VersionService::getAll (Json::Value& out) const {
+    throw ServiceException(HttpStatus::NOT_IMPLEMENTED,"Non implanté");
+}

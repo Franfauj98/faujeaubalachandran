@@ -28,6 +28,10 @@ HttpStatus AbstractService::get (Json::Value& out, int id) const {
     throw ServiceException(HttpStatus::NOT_IMPLEMENTED,"Non implanté");
 }
 
+HttpStatus AbstractService::getAll (Json::Value& out) const {
+    throw ServiceException(HttpStatus::NOT_IMPLEMENTED,"Non implanté");
+}
+
 HttpStatus AbstractService::post (const Json::Value& in, int id) {
     throw ServiceException(HttpStatus::NOT_IMPLEMENTED,"Non implanté");
 }

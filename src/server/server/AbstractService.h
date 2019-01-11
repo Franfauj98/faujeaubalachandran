@@ -24,6 +24,7 @@ namespace server {
     virtual HttpStatus post (const Json::Value& in, int id);
     virtual HttpStatus put (Json::Value& out, const Json::Value& in);
     virtual HttpStatus remove (int id);
+    virtual HttpStatus getAll (Json::Value& out) const;
     // Setters and Getters
   };
 

@@ -14,16 +14,21 @@ PlayerService::PlayerService (PlayerDB& playerDB) : AbstractService("/player"),
 }
 
 HttpStatus PlayerService::get (Json::Value& out, int id) const {
-  // const Player *player = playerDB.getPlayer(id);
-  // if (!player)
-  //     throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
-  //
-  // out["type"] = player->type;
-  // out["name"] = player->name;
-  // return HttpStatus::OK;
+  const Player *player = playerDB.getPlayer(id);
+  if (!player){
+    throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
+  }
+
+  out["type"] = player->type;
+  out["name"] = player->name;
+  return HttpStatus::OK;
   // std::cout << "/* message */" << '\n';
   // std::cout << playerDB.getAllPlayer() << '\n';
   // out["players"] = playerDB.getAllPlayer();
+  // return HttpStatus::OK;
+}
+
+HttpStatus PlayerService::getAll (Json::Value& out) const {
   out["players"] = playerDB.getAllPlayer();
   return HttpStatus::OK;
 }
