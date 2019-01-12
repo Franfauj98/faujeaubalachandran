@@ -4,6 +4,7 @@
  * @date 9 décembre 2015
  * @copyright CNRS
  */
+//Updates from faujeaubalachandran
 
 #include "PlayerService.hpp"
 using namespace server;
@@ -14,44 +15,20 @@ PlayerService::PlayerService (PlayerDB& playerDB) : AbstractService("/player"),
 }
 
 HttpStatus PlayerService::get (Json::Value& out, int id) const {
-  // const Player *player = playerDB.getPlayer(id);
-  // if (!player)
-  //     throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
-  //
-  // out["type"] = player->type;
-  // out["name"] = player->name;
-  // return HttpStatus::OK;
-  // std::cout << "/* message */" << '\n';
-  // std::cout << playerDB.getAllPlayer() << '\n';
-  // out["players"] = playerDB.getAllPlayer();
-  out["players"] = playerDB.getAllPlayer();
+  const Player *player = playerDB.getPlayer(id);
+  if (!player){
+    throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
+  }
+
+  out["type"] = player->type;
+  out["name"] = player->name;
   return HttpStatus::OK;
 }
 
-// HttpStatus PlayerService::getAll (Json::Value& out) const {
-  // int i = 1;
-  // int j = 1;
-  // while(j){
-  //   const Player *player = playerDB.getPlayer(i);
-  //   if (!player)
-  //       throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
-  //   out[i]["type"] = player->type;
-  //   out[i]["name"] = player->name;
-  //   std::cout << player->type << '\n';
-  //   std::cout << player->name << '\n';
-  //   i++;
-  // const map<int,unique_ptr<Player> > allPlayers = playerDB.getAllPlayer();
-  // for(size_t i = 0; i < allPlayers.size(); i++){
-  //   auto ite = allPlayers[i];
-  //   Player *player = ite->second.get();
-  //   std::cout << player->type << '\n';
-  //   std::cout << player->name << '\n';
-  //   return HttpStatus::OK;
-  // }
-
-//   }
-//   return HttpStatus::OK;
-// }
+HttpStatus PlayerService::getAll (Json::Value& out) const {
+  out["players"] = playerDB.getAllPlayer();
+  return HttpStatus::OK;
+}
 
 HttpStatus PlayerService::post (const Json::Value& in, int id) {
   const Player *player = playerDB.getPlayer(id);
@@ -67,6 +44,10 @@ HttpStatus PlayerService::post (const Json::Value& in, int id) {
 }
 
 HttpStatus PlayerService::put (Json::Value& out,const Json::Value& in) {
+  if(playerDB.getAllPlayer().size()>2) {
+    throw ServiceException(HttpStatus::OK,"Already 3 players in the game");
+    return HttpStatus::OK;
+  }
   string name = in["name"].asString();
   int type = in["type"].asInt();
   out["id"] = playerDB.addPlayer(make_unique<Player>(name,type));

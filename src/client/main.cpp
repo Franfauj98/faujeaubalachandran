@@ -46,36 +46,36 @@ int main(int argc,char* argv[])
 
   } else if (argv[1] &&!strcmp(argv[1],"render")) {
 
-    //tileTest();
-    //tileSetTest();
-    //layerTest();
-  //   RenderMap map;
-  //   sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
-  //   window.setVerticalSyncEnabled(false);
-  //
-  //   while (window.isOpen())
-  //   {
-  // // manage the events
-  //   sf::Event event;
-  //   while (window.pollEvent(event))
-  //   {
-  //     if(event.type == sf::Event::Closed){
-  //     window.close();
-  //     }
-  //   }
-  //
-  // // draw the layers
-  //   window.clear();
-  //
-  //   map.getBackground()->drawSprite(window);
-  //   window.draw(map.getBasicMap());
-  //   window.draw(map.getDecorMap());
-  //   window.draw(map.getBuildingMap());
-  //   window.draw(map.getStatsMap());
-  //
-  //   window.display();
-  //   }
-  //   cout<<"relaunch the render to get a new map"<<endl;
+    tileTest();
+    tileSetTest();
+    layerTest();
+    RenderMap map;
+    sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+    window.setVerticalSyncEnabled(false);
+
+    while (window.isOpen())
+    {
+  // manage the events
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+      if(event.type == sf::Event::Closed){
+      window.close();
+      }
+    }
+
+  // draw the layers
+    window.clear();
+
+    map.getBackground()->drawSprite(window);
+    window.draw(map.getBasicMap());
+    window.draw(map.getDecorMap());
+    window.draw(map.getBuildingMap());
+    window.draw(map.getStatsMap());
+
+    window.display();
+    }
+    cout<<"relaunch the render to get a new map"<<endl;
 
   }
   else if (argv[1] &&!strcmp(argv[1],"engine")) {

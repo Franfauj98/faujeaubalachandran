@@ -28,7 +28,7 @@ namespace server {
     HttpStatus post (const Json::Value& in, int id);
     HttpStatus put (Json::Value& out, const Json::Value& in);
     HttpStatus remove (int id);
-    HttpStatus getAll (Json::Value& out);
+    HttpStatus getAll (Json::Value& out) const;
     // Setters and Getters
     PlayerDB& getPlayerDB() const;
     void setPlayerDB(const PlayerDB&& playerDB);
