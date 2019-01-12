@@ -33,6 +33,16 @@ sf::Http::Request sendGet(std::string uri){
   return request;
 }
 
+sf::Http::Request sendPost(std::string uri, std::string body){
+  sf::Http::Request request;
+  request.setMethod(sf::Http::Request::Post);
+  request.setUri(uri);
+  request.setHttpVersion(1, 1); // HTTP 1.0
+  request.setField("Content-Type", "application/json; charset=utf-8");
+  request.setBody(body);
+  return request;
+}
+
 sf::Http::Request sendPut(std::string uri, std::string body){
   sf::Http::Request request;
   request.setMethod(sf::Http::Request::Put);
@@ -68,12 +78,26 @@ void Client::connect (){
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
+  request = sendPut("/command", "{\"num\": 2, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  request = sendPut("/command", "{\"num\": 3, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  request = sendPut("/command", "{\"num\": 4, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  reader.parse(response.getBody(), body);
+  int idCommand = body["id"].asInt();
+
+
   request = sendPut("/player", "{\"name\": \"moi\", \"type\": 0}");
   response = http.sendRequest(request);
-
   reader.parse(response.getBody(), body);
   int idPlayer = body["id"].asInt();
-
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
   std::cout << "id: " << idPlayer << std::endl;
@@ -95,6 +119,13 @@ void Client::connect (){
   std::cout << "Deleted : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
+
+  request = sendPost("/command/"+to_string(idCommand), "{\"num\": 4, \"id\": 505, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+
+
 }
 
 void Client::run (int player){

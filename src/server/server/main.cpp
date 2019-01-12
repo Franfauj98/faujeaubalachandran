@@ -1,6 +1,7 @@
 #include "ServicesManager.hpp"
 #include "VersionService.hpp"
 #include "PlayerService.hpp"
+#include "CommandService.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -125,41 +126,45 @@ main_handler (void *cls,
 
 int main(int argc, char *const *argv)
 {
-    try {
-        ServicesManager servicesManager;
-        //        servicesManager.registerService(make_unique<VersionService>());
-        servicesManager.registerService(make_unique<VersionService>());
+  try {
+    ServicesManager servicesManager;
+    //        servicesManager.registerService(make_unique<VersionService>());
+    servicesManager.registerService(make_unique<VersionService>());
 
-        PlayerDB playerDB;
-        playerDB.addPlayer(make_unique<Player>("Player1",1));
-        playerDB.addPlayer(make_unique<Player>("Player2",1));
-        // playerDB.addPlayer(make_unique<Player>("Player3",1));
-        servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
+    PlayerDB playerDB;
+    playerDB.addPlayer(make_unique<Player>("Player1",1));
+    playerDB.addPlayer(make_unique<Player>("Player2",1));
+    // playerDB.addPlayer(make_unique<Player>("Player3",1));
+    servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 //        servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 
-        struct MHD_Daemon *d;
-        if (argc != 2) {
-            printf("wait for listen\n");
-            return 1;
-        }
-        int port = 8080;
-        d = MHD_start_daemon(// MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG | MHD_USE_POLL,
-                MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG,
-                // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG | MHD_USE_POLL,
-                // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG,
-                port,
-                NULL, NULL,
-                &main_handler, (void*) &servicesManager,
-                MHD_OPTION_NOTIFY_COMPLETED, request_completed, NULL,
-                MHD_OPTION_END);
-        if (d == NULL)
-            return 1;
-        cout << "Pressez <entrée> pour arrêter le serveur" << endl;
-        (void) getc(stdin);
-        MHD_stop_daemon(d);
+    CommandDB commandDB;
+    commandDB.addCommand(make_unique<Command>(0,1, 1, 1, -1,-1,-1, -1));
+    commandDB.addCommand(make_unique<Command>(1,2, 1, 1, -1,-1,-1, -1));
+    servicesManager.registerService(make_unique<CommandService>(std::ref(commandDB)));
+    struct MHD_Daemon *d;
+    if (argc != 2) {
+        printf("wait for listen\n");
+        return 1;
     }
-    catch(exception& e) {
-        cerr << "Exception: " << e.what() << endl;
-    }
-    return 0;
+    int port = 8080;
+    d = MHD_start_daemon(// MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG | MHD_USE_POLL,
+            MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG,
+            // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG | MHD_USE_POLL,
+            // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG,
+            port,
+            NULL, NULL,
+            &main_handler, (void*) &servicesManager,
+            MHD_OPTION_NOTIFY_COMPLETED, request_completed, NULL,
+            MHD_OPTION_END);
+    if (d == NULL)
+        return 1;
+    cout << "Pressez <entrée> pour arrêter le serveur" << endl;
+    (void) getc(stdin);
+    MHD_stop_daemon(d);
+  }
+  catch(exception& e) {
+    cerr << "Exception: " << e.what() << endl;
+  }
+  return 0;
 }

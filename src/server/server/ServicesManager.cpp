@@ -39,6 +39,13 @@ HttpStatus ServicesManager::queryService (string& out, const string& in, const s
     out = jsonOut.toStyledString();
     return status;
   }
+  if(url == "/command/"){
+    cerr << "Requête GET sur player" << pattern << endl;
+    Json::Value jsonOut;
+    HttpStatus status = service->getAll(jsonOut);
+    out = jsonOut.toStyledString();
+    return status;
+  }
   if (url.size() > pattern.size()) {
     string end = url.substr(pattern.size());
     if (end[0] != '/')
