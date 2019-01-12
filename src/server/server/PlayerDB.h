@@ -2,7 +2,7 @@
 #ifndef SERVER__PLAYERDB__H
 #define SERVER__PLAYERDB__H
 
-#include <string>
+#include <json/json.h>
 
 namespace server {
   class Player;
@@ -26,7 +26,7 @@ namespace server {
     int addPlayer (unique_ptr<Player> player);
     void setPlayer (int id, unique_ptr<Player> player);
     void removePlayer (int id);
-    std::string getAllPlayer ();
+    Json::Value getAllPlayer ();
     // Setters and Getters
     int getIdseq() const;
     void setIdseq(int idseq);
