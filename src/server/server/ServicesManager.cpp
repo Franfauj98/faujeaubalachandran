@@ -4,6 +4,7 @@
  * @date 9 décembre 2015
  * @copyright CNRS
  */
+ //Updates from faujeaubalachandran
 
 #include "ServicesManager.hpp"
 
@@ -32,7 +33,7 @@ HttpStatus ServicesManager::queryService (string& out, const string& in, const s
   const string& pattern(service->getPattern());
   int id = 0;
   if(url == "/player/"){
-    cerr << "Requête GET " << pattern << endl;
+    cerr << "Requête GET sur player" << pattern << endl;
     Json::Value jsonOut;
     HttpStatus status = service->getAll(jsonOut);
     out = jsonOut.toStyledString();

@@ -68,11 +68,6 @@ void Client::connect (){
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
-  if(body["players"].size()>2){
-    std::cerr << "cannot join this game, already 3 players there" << '\n';
-    return;
-  }
-
   request = sendPut("/player", "{\"name\": \"moi\", \"type\": 0}");
   response = http.sendRequest(request);
 
