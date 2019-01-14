@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <mutex>
+#include <SFML/Graphics.hpp>
 #include <string>
 
 namespace engine {
@@ -40,9 +41,9 @@ namespace client {
   public:
     Client ();
     void run (int player);
-    void aiUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3, int& controller);
-    void engineUpdating (int& renderSignal, int& id, std::string& gold, std::string& wood, std::string& food, std::string& text);
-    void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, int& stop, int& controller, int player, bool& firstC, bool& secondC, bool& thirdC);
+    void aiUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3, int& controller, sf::RenderWindow& window, int& stop);
+    void engineUpdating (int& renderSignal, int& id, std::string& gold, std::string& wood, std::string& food, std::string& text, sf::RenderWindow& window, int& stop);
+    void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, int& stop, int& controller, int player, bool& firstC, bool& secondC, bool& thirdC, sf::RenderWindow& window);
     void connect ();
     // Setters and Getters
   };
