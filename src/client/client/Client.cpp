@@ -128,95 +128,105 @@ void Client::connect (){
 
 }
 
-void Client::run (int player){
-  std::unique_ptr<Observable> principalMap2 (new Observable(false,false));
-  this->principalMap = move(principalMap2);
-  sf::RenderWindow window(sf::VideoMode(1500, 1500), "Tilemap");
+void Client::run (){
+  int player=-1;
+  sf::RenderWindow window(sf::VideoMode(1200, 800), "Tilemap");
   window.setVerticalSyncEnabled(false);
 // draw the layers
   window.clear();
-
-  this->map.update(*(this->principalMap),"","","","");
-  this->map.drawMap(window);
-  bool firstC;
-  bool canPlay1;
-  if(player==0){
-    firstC = false;
-    canPlay1=true;
-  } else {
-    firstC = true;
-    canPlay1=false;
-  }
-  bool secondC = false;
-  bool thirdC = false;
-
-  bool canPlay2 = false;
-  bool canPlay3 = false;
-
-  bool palace1=false;
-  bool palace2=false;
-  bool palace3=false;
-
-  int counter=0;
-  int stop=0;
-  Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
-  Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
-  Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
-
-  int id = 0;
-  int idPalace=1;
-  string gold= "";
-  string wood= "";
-  string food= "";
-  string text= "";
-  int controller=1;
-  int renderSignal=0;
-
-  sf::Music music;
-  music.openFromFile("res/music1.ogg");
-  music.setLoop(true);
-  music.play();
   sf::Event event;
-  thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
-  thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller),ref(window),ref(stop));
-  thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),ref(player),ref(firstC),ref(secondC),ref(thirdC),ref(window));
+  this->map.startMenu(window,event,player);
+  cout<<player<<endl;
+  if(player!=-1){
+
+    std::unique_ptr<Observable> principalMap2 (new Observable(false,false));
+    this->principalMap = move(principalMap2);
 
 
-    while (window.isOpen())
-    {
+    this->map.update(*(this->principalMap),"","","","");
+    this->map.drawMap(window);
+
+    bool firstC;
+    bool canPlay1;
     if(player==0){
-      while (window.pollEvent(event))
+      firstC = false;
+      canPlay1=true;
+    } else {
+      firstC = true;
+      canPlay1=false;
+    }
+    bool secondC = false;
+    bool thirdC = false;
+
+    bool canPlay2 = false;
+    bool canPlay3 = false;
+
+    bool palace1=false;
+    bool palace2=false;
+    bool palace3=false;
+
+    int counter=0;
+    int stop=0;
+    Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
+    Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
+    Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
+
+    int id = 0;
+    int idPalace=1;
+    string gold= "";
+    string wood= "";
+    string food= "";
+    string text= "";
+    int controller=1;
+    int renderSignal=0;
+
+    sf::Music music;
+    music.openFromFile("res/music1.ogg");
+    music.setLoop(true);
+    music.play();
+
+    thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
+    thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller),ref(window),ref(stop));
+    thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),ref(player),ref(firstC),ref(secondC),ref(thirdC),ref(window));
+
+      while (window.isOpen())
       {
-    // évènement "fermeture demandée" : on ferme la fenêtre
-      if (event.type == sf::Event::Closed)
-          window.close();
-      }
-    }
-      if(player==1 || player==2){
-        this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
-      }
-      if (stop==1){
-          Layer endGame("res/endgame.png");
-          endGame.drawSprite(window);
-          window.display();
-          usleep(10000000);
-          th1.join();
-          th2.join();
-          th3.join();
-          break;
+
+      if(player==0){
+        while (window.pollEvent(event))
+        {
+      // évènement "fermeture demandée" : on ferme la fenêtre
+          if (event.type == sf::Event::Closed)
+              th1.join();
+              th2.join();
+              th3.join();
+              window.close();
+          }
         }
-      if(renderSignal==1){
-        this->m.lock();
-        this->map.update(*(this->principalMap),gold,wood,food,text);
-        this->map.drawMap(window);
-        renderSignal=0;
-        this->m.unlock();
+
+        if(player==1 || player==2){
+          this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
+        }
+        if (stop==1){
+            Layer endGame("res/endgame.png");
+            endGame.drawSprite(window);
+            window.display();
+            usleep(10000000);
+            th1.join();
+            th2.join();
+            th3.join();
+            break;
+          }
+        if(renderSignal==1){
+          this->m.lock();
+          this->map.update(*(this->principalMap),gold,wood,food,text);
+          this->map.drawMap(window);
+          renderSignal=0;
+          this->m.unlock();
+        }
       }
-    }
-    th1.join();
-    th2.join();
-    th3.join();
   }
+}
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
