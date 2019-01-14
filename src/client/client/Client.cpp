@@ -155,17 +155,6 @@ void Client::run (){
       firstC = true;
       canPlay1=false;
     }
-<<<<<<< HEAD
-      if(player==1 || player==2){
-        this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
-      }
-      if (stop==1){
-          Layer endGame("res/endgame.png");
-          endGame.drawSprite(window);
-          window.display();
-          usleep(10000000);
-          break;
-=======
     bool secondC = false;
     bool thirdC = false;
 
@@ -234,7 +223,6 @@ void Client::run (){
           this->map.drawMap(window);
           renderSignal=0;
           this->m.unlock();
->>>>>>> 073be404cfbf22c7b0e72ef31ba62cc998c735b5
         }
       }
   }
