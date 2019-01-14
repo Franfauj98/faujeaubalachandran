@@ -200,9 +200,6 @@ void Client::run (int player){
           endGame.drawSprite(window);
           window.display();
           usleep(10000000);
-          th1.join();
-          th2.join();
-          th3.join();
           break;
         }
       if(renderSignal==1){
@@ -220,10 +217,8 @@ void Client::run (int player){
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
+    if(stop==1) break;
     this->m.lock();
-    if(stop==1){
-      break;
-    }
     if (controller==2){
       if(canPlay1){
         this->heuristic.run(this->engine,*(this->principalMap),counter,canPlay1, 1);
@@ -240,10 +235,8 @@ void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canP
 
 void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
+    if(stop==1) break;
     this->m.lock();
-    if(stop==1){
-      break;
-    }
     this->engine.execute(*(this->principalMap));
     Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
     gold= to_string(empire->getGoldRessource());
@@ -258,10 +251,8 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
 void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2,
   bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& stop,int& controller,int player, bool& firstC, bool& secondC, bool& thirdC,sf::RenderWindow& window){
     while(window.isOpen()){
+      if(stop==1) break;
       this->m.lock();
-      if(stop==1){
-        break;
-      }
       if (controller==1){
         this->engine.run(principalMap, canPlay1,canPlay2,canPlay3,palace1,palace2,palace3,counter, empire1,empire2, empire3,id,idPalace, stop,player,firstC,secondC,thirdC);
         controller=2;
