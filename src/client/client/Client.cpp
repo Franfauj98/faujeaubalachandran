@@ -135,8 +135,13 @@ void Client::run (){
 // draw the layers
   window.clear();
   sf::Event event;
+  sf::Music music;
+  music.openFromFile("res/intro.ogg");
+  music.setLoop(true);
+  music.play();
   this->map.startMenu(window,event,player);
-  cout<<player<<endl;
+  music.stop();
+
   if(player!=-1){
 
     std::unique_ptr<Observable> principalMap2 (new Observable(false,false));
@@ -180,7 +185,7 @@ void Client::run (){
     int controller=1;
     int renderSignal=0;
 
-    sf::Music music;
+    //sf::Music music;
     music.openFromFile("res/music1.ogg");
     music.setLoop(true);
     music.play();
