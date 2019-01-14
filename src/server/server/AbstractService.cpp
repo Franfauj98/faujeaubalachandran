@@ -4,6 +4,7 @@
  * @date 9 décembre 2015
  * @copyright CNRS
  */
+ //Updates from faujeaubalachandran
 
 #include "AbstractService.hpp"
 using namespace server;
@@ -25,6 +26,10 @@ void AbstractService::setPattern (const string& pattern) {
 }
 
 HttpStatus AbstractService::get (Json::Value& out, int id) const {
+    throw ServiceException(HttpStatus::NOT_IMPLEMENTED,"Non implanté");
+}
+
+HttpStatus AbstractService::getAll (Json::Value& out) const {
     throw ServiceException(HttpStatus::NOT_IMPLEMENTED,"Non implanté");
 }
 

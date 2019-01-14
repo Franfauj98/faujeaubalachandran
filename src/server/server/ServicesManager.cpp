@@ -4,6 +4,7 @@
  * @date 9 décembre 2015
  * @copyright CNRS
  */
+ //Updates from faujeaubalachandran
 
 #include "ServicesManager.hpp"
 
@@ -31,6 +32,20 @@ HttpStatus ServicesManager::queryService (string& out, const string& in, const s
   // Recherche un éventuel id (ex: /mon/service/<id>)
   const string& pattern(service->getPattern());
   int id = 0;
+  if(url == "/player/"){
+    cerr << "Requête GET sur player" << pattern << endl;
+    Json::Value jsonOut;
+    HttpStatus status = service->getAll(jsonOut);
+    out = jsonOut.toStyledString();
+    return status;
+  }
+  if(url == "/command/"){
+    cerr << "Requête GET sur player" << pattern << endl;
+    Json::Value jsonOut;
+    HttpStatus status = service->getAll(jsonOut);
+    out = jsonOut.toStyledString();
+    return status;
+  }
   if (url.size() > pattern.size()) {
     string end = url.substr(pattern.size());
     if (end[0] != '/')
@@ -61,7 +76,6 @@ HttpStatus ServicesManager::queryService (string& out, const string& in, const s
     Json::Reader reader;
     if(!reader.parse(in, jsonIn))
       throw ServiceException(HttpStatus::BAD_REQUEST,"Données invalides: "+reader.getFormattedErrorMessages());
-
     return service->post(jsonIn,id);
   } else if (method == "PUT") {
     cerr << "Requête PUT " << pattern << " avec contenu: " << in << endl;

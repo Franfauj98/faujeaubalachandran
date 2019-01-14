@@ -33,6 +33,16 @@ sf::Http::Request sendGet(std::string uri){
   return request;
 }
 
+sf::Http::Request sendPost(std::string uri, std::string body){
+  sf::Http::Request request;
+  request.setMethod(sf::Http::Request::Post);
+  request.setUri(uri);
+  request.setHttpVersion(1, 1); // HTTP 1.0
+  request.setField("Content-Type", "application/json; charset=utf-8");
+  request.setBody(body);
+  return request;
+}
+
 sf::Http::Request sendPut(std::string uri, std::string body){
   sf::Http::Request request;
   request.setMethod(sf::Http::Request::Put);
@@ -61,29 +71,38 @@ void Client::connect (){
   Json::Value body;
   Json::Reader reader;
 
-  sf::Http::Request request = sendGet("/player");
+  sf::Http::Request request = sendGet("/player/");
   sf::Http::Response response = http.sendRequest(request);
   reader.parse(response.getBody(), body);
   std::cout << "begining : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
-  if(body["players"].size()>2){
-    std::cerr << "cannot join this game, already 3 players there" << '\n';
-    return;
-  }
+  request = sendPut("/command", "{\"num\": 2, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  request = sendPut("/command", "{\"num\": 3, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  request = sendPut("/command", "{\"num\": 4, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+  reader.parse(response.getBody(), body);
+  int idCommand = body["id"].asInt();
+
 
   request = sendPut("/player", "{\"name\": \"moi\", \"type\": 0}");
   response = http.sendRequest(request);
-
   reader.parse(response.getBody(), body);
   int idPlayer = body["id"].asInt();
-
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
   std::cout << "id: " << idPlayer << std::endl;
 
-  request = sendGet("/player");
+  request = sendGet("/player/");
   response = http.sendRequest(request);
   std::cout << "Added to the game : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
@@ -95,11 +114,18 @@ void Client::connect (){
   request = sendDelete("/player/"+to_string(idPlayer));
   response = http.sendRequest(request);
 
-  request = sendGet("/player");
+  request = sendGet("/player/");
   response = http.sendRequest(request);
   std::cout << "Deleted : " << std::endl;
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
+
+  request = sendPost("/command/"+to_string(idCommand), "{\"num\": 4, \"id\": 505, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  response = http.sendRequest(request);
+  std::cout << "status: " << response.getStatus() << std::endl;
+  std::cout << "body: " << response.getBody() << std::endl;
+
+
 }
 
 void Client::run (int player){

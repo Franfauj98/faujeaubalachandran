@@ -4,6 +4,7 @@
  * @date 9 décembre 2015
  * @copyright CNRS
  */
+ //Updates from faujeaubalachandran
 
 #include "PlayerDB.hpp"
 #include <iostream>
@@ -34,18 +35,6 @@ Json::Value PlayerDB::getAllPlayer () {
   }
   return foo;
 }
-// std::string PlayerDB::getAllPlayer () {
-//   std::string allPlayers = "{\"players\": [";
-//   for (std::map<int,unique_ptr<Player>>::iterator it=players.begin(); it!=players.end(); ++it){
-//     //     std::cout << it->first << " => " << it->second << '\n';
-//     // auto ite = allPlayers[i];
-//     Player *player = it->second.get();
-//     allPlayers+=("{\"name\": \""+player->name+"\", \"type\": "+to_string(player->type)+"},");
-//   }
-//   allPlayers.pop_back();
-//   allPlayers+= "]}";
-//   return allPlayers;
-// }
 
 int PlayerDB::addPlayer (unique_ptr<Player> player) {
     int id = idseq++;
