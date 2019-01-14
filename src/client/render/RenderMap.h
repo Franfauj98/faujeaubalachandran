@@ -70,6 +70,7 @@ namespace render {
     void drawMap (sf::RenderWindow& window);
     void handle (sf::RenderWindow& window, state::Observable& principalMap, engine::Engine& engine, sf::Event& event, bool& firstC, bool& secondC, bool& thirdC, int& counter);
     std::vector<int> getLastClicks ();
+    void startMenu (sf::RenderWindow& window, sf::Event& event, int& player);
     // Setters and Getters
   };
 
