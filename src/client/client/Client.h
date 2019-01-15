@@ -4,8 +4,8 @@
 
 #include <memory>
 #include <mutex>
-#include <SFML/Graphics.hpp>
 #include <string>
+#include <SFML/Graphics.hpp>
 
 namespace engine {
   class Engine;
@@ -37,6 +37,7 @@ namespace client {
     render::RenderMap map;
     ai::HeuristicAI heuristic;
     std::mutex m;
+    std::deque<std::string> command;
     // Operations
   public:
     Client ();

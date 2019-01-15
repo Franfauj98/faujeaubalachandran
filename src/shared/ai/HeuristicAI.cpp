@@ -90,10 +90,9 @@ void positionElement(int& x, int& y, int position){
   }
 }
 
-// std::string HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id){
+// //void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, std::deque<std::string>& command){
 //   if(canPlay){
 //     srand(time(NULL));
-//     string command;
 //     std::vector<int> buildings;
 //
 //     for (unsigned int i=0;i<principalMap.getAllMaps().getBuildingsMap().size();i++){
@@ -139,7 +138,7 @@ void positionElement(int& x, int& y, int position){
 //       // std::cout << "LevelUp palace" << '\n';
 //       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
 //       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
-//
+//       command
 //       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
 //       engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y2,element)),3);
 //       usleep(500000);

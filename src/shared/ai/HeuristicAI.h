@@ -24,7 +24,7 @@ namespace ai {
   public:
     HeuristicAI ();
     void run (engine::Engine& engine, state::Observable& principalMap, int& counter, bool& canPlay, int id);
-    std::string runServer (state::Observable& principalMap, bool& canPlay, int id);
+    void runServer (state::Observable& principalMap, bool& canPlay, int id, std::deque<std::string>& command);
     // Setters and Getters
   };
 
