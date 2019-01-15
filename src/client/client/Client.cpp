@@ -130,7 +130,7 @@ void Client::connect (){
 
 void Client::run (){
   int player=-1;
-  sf::RenderWindow window(sf::VideoMode(1200, 800), "ROMAN'S WAR");
+  sf::RenderWindow window(sf::VideoMode(1650, 850), "ROMAN'S WAR");
   window.setVerticalSyncEnabled(false);
 // draw the layers
   window.clear();
