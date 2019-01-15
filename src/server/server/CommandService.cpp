@@ -31,7 +31,7 @@ HttpStatus CommandService::post (const Json::Value& in, int id) {
   if (!command)
     throw ServiceException(HttpStatus::NOT_FOUND,"Invalid command id");
   unique_ptr<Command> newCommand (new Command(*command));
-  if(in.isMember("num")) newCommand->num = in["num"].asInt();
+  // if(in.isMember("num")) newCommand->num = in["num"].asInt();
   if(in.isMember("id")) newCommand->id = in["id"].asInt();
   if(in.isMember("x")) newCommand->x = in["x"].asInt();
   if(in.isMember("y")) newCommand->y = in["y"].asInt();
@@ -45,7 +45,8 @@ HttpStatus CommandService::post (const Json::Value& in, int id) {
 }
 
 HttpStatus CommandService::put (Json::Value& out,const Json::Value& in) {
-  int num = in["num"].asInt();
+  std::cout << commandDB.getIdseq() << '\n';
+  int num = commandDB.getIdseq();
   int id = in["id"].asInt();
   int x = in["x"].asInt();
   int y = in["y"].asInt();

@@ -53,3 +53,7 @@ void CommandDB::removeCommand (int id) {
         return;
     commands.erase(ite);
 }
+
+int CommandDB::getIdseq () const{
+  return this->idseq;
+}
