@@ -78,15 +78,15 @@ void Client::connect (){
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
-  request = sendPut("/command", "{\"num\": 2, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  request = sendPut("/command", "{\"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
   response = http.sendRequest(request);
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
-  request = sendPut("/command", "{\"num\": 3, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  request = sendPut("/command", "{\"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
   response = http.sendRequest(request);
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
-  request = sendPut("/command", "{\"num\": 4, \"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  request = sendPut("/command", "{\"id\": 1, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
   response = http.sendRequest(request);
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
@@ -120,7 +120,7 @@ void Client::connect (){
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
-  request = sendPost("/command/"+to_string(idCommand), "{\"num\": 4, \"id\": 505, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
+  request = sendPost("/command/"+to_string(idCommand), "{\"id\": 505, \"x\": 1, \"y\": 1, \"x2\": 1, \"y2\": 1, \"unit\": 1, \"element\": 1}");
   response = http.sendRequest(request);
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;

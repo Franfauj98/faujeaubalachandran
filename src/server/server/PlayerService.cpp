@@ -22,6 +22,7 @@ HttpStatus PlayerService::get (Json::Value& out, int id) const {
 
   out["type"] = player->type;
   out["name"] = player->name;
+  out["tour"] = player->tour;
   return HttpStatus::OK;
 }
 
@@ -38,6 +39,7 @@ HttpStatus PlayerService::post (const Json::Value& in, int id) {
   unique_ptr<Player> newPlayer (new Player(*player));
   if(in.isMember("name")) newPlayer->name = in["name"].asString();
   if(in.isMember("type")) newPlayer->type = in["type"].asInt();
+  if(in.isMember("tour")) newPlayer->type = in["tour"].asInt();
   playerDB.setPlayer(id,std::move(newPlayer));
   return HttpStatus::NO_CONTENT;
 
@@ -50,7 +52,8 @@ HttpStatus PlayerService::put (Json::Value& out,const Json::Value& in) {
   }
   string name = in["name"].asString();
   int type = in["type"].asInt();
-  out["id"] = playerDB.addPlayer(make_unique<Player>(name,type));
+  int tour = 0;
+  out["id"] = playerDB.addPlayer(make_unique<Player>(name,type,tour));
   return HttpStatus::CREATED;
 }
 

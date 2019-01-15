@@ -27,8 +27,8 @@ namespace server {
     void setCommand (int id, unique_ptr<Command> commmand);
     void removeCommand (int id);
     Json::Value getAllCommand ();
+    int getIdseq () const;
     // Setters and Getters
-    int getIdseq() const;
     void setIdseq(int idseq);
     const map<int,unique_ptr<Command> >& getCommands() const;
     void setCommands(const map<int,unique_ptr<Command> >& commands);

@@ -132,9 +132,9 @@ int main(int argc, char *const *argv)
     servicesManager.registerService(make_unique<VersionService>());
 
     PlayerDB playerDB;
-    //playerDB.addPlayer(make_unique<Player>("Player1",1));
-    //playerDB.addPlayer(make_unique<Player>("Player2",1));
-    // playerDB.addPlayer(make_unique<Player>("Player3",1));
+    // playerDB.addPlayer(make_unique<Player>("Player1",1, 0));
+    // playerDB.addPlayer(make_unique<Player>("Player2",1,0));
+    // playerDB.addPlayer(make_unique<Player>("Player3",1,0));
     servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 //        servicesManager.registerService(make_unique<PlayerService>(std::ref(playerDB)));
 
