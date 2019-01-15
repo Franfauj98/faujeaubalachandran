@@ -32,14 +32,7 @@ HttpStatus ServicesManager::queryService (string& out, const string& in, const s
   // Recherche un éventuel id (ex: /mon/service/<id>)
   const string& pattern(service->getPattern());
   int id = 0;
-  if(url == "/player/"){
-    cerr << "Requête GET sur player" << pattern << endl;
-    Json::Value jsonOut;
-    HttpStatus status = service->getAll(jsonOut);
-    out = jsonOut.toStyledString();
-    return status;
-  }
-  if (url.size() > pattern.size()) {
+  if (url.size() > pattern.size() && url != "/player/") {
     string end = url.substr(pattern.size());
     if (end[0] != '/')
       throw ServiceException(HttpStatus::BAD_REQUEST,"Url malformée (forme attendue: <service>/<nombre>)");
@@ -58,6 +51,13 @@ HttpStatus ServicesManager::queryService (string& out, const string& in, const s
   }
   // Traite les différentes méthodes
   if (method == "GET") {
+    if(url == "/player/"||url == "/player"){
+      cerr << "Requête GET sur " << pattern << endl;
+      Json::Value jsonOut;
+      HttpStatus status = service->getAll(jsonOut);
+      out = jsonOut.toStyledString();
+      return status;
+    }
     cerr << "Requête GET " << pattern << " avec id=" << id << endl;
     Json::Value jsonOut;
     HttpStatus status = service->get(jsonOut, id);
