@@ -36,7 +36,7 @@ Layer::Layer(const std::string& imageFile){
 
   loadTexture(imageFile);
   this->background.setTexture(this->texture);
-  this->background.setScale(1.4f,1.2f);
+  this->background.setScale(1.6f,1.15f);
 
 }
 
