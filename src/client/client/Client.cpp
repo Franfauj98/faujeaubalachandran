@@ -323,43 +323,40 @@ void Client::run (){
       thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
       thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller),ref(window),ref(stop));
       thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),ref(player),ref(firstC),ref(secondC),ref(thirdC),ref(window));
-
-        while (window.isOpen())
-        {
-
+      while (window.isOpen()){
         if(player==0){
           while (window.pollEvent(event))
           {
         // évènement "fermeture demandée" : on ferme la fenêtre
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 th1.join();
                 th2.join();
                 th3.join();
                 window.close();
             }
           }
-
-          if(player==1 || player==2){
-            this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
-          }
-          if (stop==1){
-              Layer endGame("res/endgame.png");
-              endGame.drawSprite(window);
-              window.display();
-              usleep(10000000);
-              th1.join();
-              th2.join();
-              th3.join();
-              break;
-            }
-          if(renderSignal==1){
-            this->m.lock();
-            this->map.update(*(this->principalMap),gold,wood,food,text);
-            this->map.drawMap(window);
-            renderSignal=0;
-            this->m.unlock();
-          }
         }
+        if(player==1 || player==2){
+          this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
+        }
+        if (stop==1){
+            Layer endGame("res/endgame.png");
+            endGame.drawSprite(window);
+            window.display();
+            usleep(10000000);
+            th1.join();
+            th2.join();
+            th3.join();
+            break;
+          }
+        if(renderSignal==1){
+          this->m.lock();
+          this->map.update(*(this->principalMap),gold,wood,food,text);
+          this->map.drawMap(window);
+          renderSignal=0;
+          this->m.unlock();
+        }
+      }
     }
   }
 }
