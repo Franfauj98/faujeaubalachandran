@@ -410,7 +410,7 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
   }
 }
 
-void Client::engineUpdatingServer (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
+void Client::commandRequest(int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
     if(stop==1) break;
     this->m.lock();
