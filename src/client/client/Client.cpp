@@ -125,7 +125,6 @@ void Client::connect (){
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
-
 }
 
 void Client::run (){
@@ -164,7 +163,7 @@ void Client::run (){
         cout<<"not possible to play"<<endl;
       } else {
         int idPlayer = body["id"].asInt();
-        usleep(2000000);
+        usleep(30000000);
 
         request = sendGet("/player/");
         response = http.sendRequest(request);
@@ -210,7 +209,7 @@ void Client::run (){
           this->map.drawMap(window);
 
           int idAI=3;
-          bool firstC=false;
+          bool firstC=true;
           bool secondC=false;
           bool thirdC=false;
           bool canPlay=false;
