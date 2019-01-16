@@ -125,7 +125,6 @@ void Client::connect (){
   std::cout << "status: " << response.getStatus() << std::endl;
   std::cout << "body: " << response.getBody() << std::endl;
 
-
 }
 
 void Client::run (){
