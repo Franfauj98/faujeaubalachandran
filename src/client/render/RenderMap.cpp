@@ -610,7 +610,7 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
         int id = barrack->getIdBuilding();
         if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
           sf::Vector2i click3 = getClick(window, event);
-          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y>=24){
+          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
             std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
             this->lastClicks=lastClick;
             if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
@@ -634,7 +634,7 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
         }
         if (getLastClicks()[2]>= 96 && getLastClicks()[2]<=192 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
           sf::Vector2i click3 = getClick(window, event);
-          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y>=24){
+          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
             std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
             this->lastClicks=lastClick;
 
@@ -659,7 +659,7 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
         }
         if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 192 && getLastClicks()[3]<=256){
           sf::Vector2i click3 = getClick(window, event);
-          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y>=24){
+          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
             std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
             this->lastClicks=lastClick;
 
@@ -685,7 +685,7 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
         }
         if (getLastClicks()[2]>= 96 && getLastClicks()[2]<=192 && getLastClicks()[3]>= 192 && getLastClicks()[3]<=256){
           sf::Vector2i click3 = getClick(window, event);
-          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y>=24){
+          if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
             std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
             this->lastClicks=lastClick;
             if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
