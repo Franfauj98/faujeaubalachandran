@@ -1182,11 +1182,7 @@ int main(int argc,char* argv[])
 } else if (argv[1] &&!strcmp(argv[1],"network")) {
 
   Client client;
-  client.connect();
-
-} else if (argv[1] &&!strcmp(argv[1],"game")) {
-
-  Client client;
+  //client.connect();
   client.run();
 
 } else {
