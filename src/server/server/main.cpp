@@ -10,6 +10,12 @@
 using namespace std;
 using namespace server;
 
+/*
+Add commands API
+commands arguments to -1 if never used
+Add number of command foreach command
+*/
+
 class Request {
 public:
     struct MHD_PostProcessor *pp = nullptr;
