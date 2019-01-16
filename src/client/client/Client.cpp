@@ -390,7 +390,7 @@ void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow&
       this->m.lock();
       if (controller==2){
         if(canPlay){
-          this->heuristic.runServer(*(this->principalMap),canPlay, 1,this->commandList);
+          this->heuristic.runServer(*(this->principalMap),canPlay, 3,this->commandList);
         }
         controller=1;
       }
@@ -502,6 +502,7 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
       }
     }
     previousCmdId=currentCmdId;
+    usleep(200000);
   }
 }
 
@@ -663,6 +664,7 @@ void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bo
           counter=0;
           id = 0;
           idPalace=1;
+          canPlay = false;
         }
       }
     }
