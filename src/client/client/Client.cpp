@@ -242,7 +242,7 @@ void Client::run (){
 
           thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
           thread th2(&Client::aiUpdatingServer,this,ref(canPlay),ref(controller),ref(window),ref(stop),ref(idPlayer));
-          thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(empire1), ref(empire2), ref(empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window));
+          thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(*empire1), ref(*empire2), ref(*empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window));
           thread th4(&Client::commandSend,this,ref(window),ref(this->commandList),ref(stop));
           thread th5(&Client::commandRequest,this,ref(window),ref(stop),ref(counter));
             while (window.isOpen())
@@ -257,7 +257,7 @@ void Client::run (){
                   usleep(10000000);
                   th1.join();
                   th2.join();
-                  // th3.join();
+                  th3.join();
                   th4.join();
                   th5.join();
                   break;
