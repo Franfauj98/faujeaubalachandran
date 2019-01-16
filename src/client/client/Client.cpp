@@ -390,7 +390,7 @@ void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow&
       this->m.lock();
       if (controller==2){
         if(canPlay){
-          this->heuristic.runServer(*(this->principalMap),canPlay, 1,this->commandList);
+          this->heuristic.runServer(*(this->principalMap),canPlay, 3,this->commandList);
         }
         controller=1;
       }
