@@ -161,9 +161,19 @@ void Client::run (){
       reader.parse(response.getBody(), body);
       if(response.getStatus()==200){
         cout<<"not possible to play"<<endl;
+        window.clear();
+        Layer endGame("res/startMenu4.png");
+        endGame.drawSprite(window);
+        window.display();
+        usleep(3000000);
+        return;
       } else {
         int idPlayer = body["id"].asInt();
-        usleep(30000000);
+        window.clear();
+        Layer endGame("res/startMenu3.png");
+        endGame.drawSprite(window);
+        window.display();
+        usleep(10000000);
 
         request = sendGet("/player/");
         response = http.sendRequest(request);
@@ -247,7 +257,7 @@ void Client::run (){
             while (window.isOpen())
             {
               // std::cout << "main" << '\n';
-              this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList);
+              this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList,idPalace, idPlayer);
 
               if (stop==1){
                   Layer endGame("res/endgame.png");
@@ -457,7 +467,10 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
     for (previousCmdId;previousCmdId<currentCmdId;previousCmdId++){
       std::cout << "body : " << body["commands"][previousCmdId]["id"].asInt() << '\n';
       switch(body["commands"][previousCmdId]["id"].asInt()){
-
+        case 0:{
+          this->engine.setMessage(body["commands"][previousCmdId]["element"].asString());
+          break;
+        }
         case 1:{
           this->engine.addCommand(std::unique_ptr<CaseIdentifier> (new CaseIdentifier(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt())),1);
           std::cout << "CaseIdentifier" << '\n';
