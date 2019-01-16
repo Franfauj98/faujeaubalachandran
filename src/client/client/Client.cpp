@@ -331,13 +331,14 @@ void Client::run (){
           while (window.pollEvent(event))
           {
         // évènement "fermeture demandée" : on ferme la fenêtre
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 th1.join();
                 th2.join();
                 th3.join();
                 window.close();
             }
           }
+        }
 
           if(player==1 || player==2){
             this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
@@ -413,7 +414,7 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
   }
 }
 
-void Client::engineUpdatingServer (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
+void Client::commandRequest(int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
     if(stop==1) break;
     this->m.lock();
