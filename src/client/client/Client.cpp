@@ -502,6 +502,7 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
       }
     }
     previousCmdId=currentCmdId;
+    usleep(200000);
   }
 }
 
@@ -663,6 +664,7 @@ void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bo
           counter=0;
           id = 0;
           idPalace=1;
+          canPlay = false;
         }
       }
     }
