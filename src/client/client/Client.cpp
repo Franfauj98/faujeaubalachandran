@@ -145,7 +145,7 @@ void Client::run (){
   if(player!=-1){
 
     if(player==4){
-      std::vector<int> aiPlayer;
+      //std::vector<int> aiPlayer;
       sf::Http http;
       http.setHost("http://localhost",8080);
 
@@ -190,7 +190,7 @@ void Client::run (){
             request = sendPut("/player", "{\"name\": \"player"+to_string(body["players"].size()+1)+"\", \"type\": 1}");
             response = http.sendRequest(request);
             reader.parse(response.getBody(), body);
-            aiPlayer.push_back(body["id"].asInt());
+            //aiPlayer.push_back(body["id"].asInt());
             request = sendGet("/player/");
             response = http.sendRequest(request);
             reader.parse(response.getBody(), body);
@@ -209,7 +209,7 @@ void Client::run (){
           this->map.update(*(this->principalMap),"","","","");
           this->map.drawMap(window);
 
-
+          int idAI=3;
           bool firstC=false;
           bool secondC=false;
           bool thirdC=false;
@@ -242,12 +242,13 @@ void Client::run (){
 
           thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
           thread th2(&Client::aiUpdatingServer,this,ref(canPlay),ref(controller),ref(window),ref(stop),ref(idPlayer));
-          //thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),ref(player),ref(firstC),ref(secondC),ref(thirdC),ref(window));
-
+          thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(empire1), ref(empire2), ref(empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window));
+          thread th4(&Client::commandSend,this,ref(window),ref(this->commandList),ref(stop));
+          thread th5(&Client::commandRequest,this,ref(window),ref(stop),ref(counter));
             while (window.isOpen())
             {
 
-              this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->command);
+              this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList);
 
               if (stop==1){
                   Layer endGame("res/endgame.png");
@@ -256,7 +257,9 @@ void Client::run (){
                   usleep(10000000);
                   th1.join();
                   th2.join();
-                  //th3.join();
+                  // th3.join();
+                  th4.join();
+                  th5.join();
                   break;
                 }
               if(renderSignal==1){
@@ -386,7 +389,7 @@ void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow&
       this->m.lock();
       if (controller==2){
         if(canPlay){
-          this->heuristic.runServer(*(this->principalMap),canPlay, 1,this->command);
+          this->heuristic.runServer(*(this->principalMap),canPlay, 1,this->commandList);
         }
         controller=1;
       }
@@ -410,18 +413,85 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
   }
 }
 
-void Client::commandRequest(int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
+void Client::commandSend(sf::RenderWindow& window, std::deque<std::string>& commandList, int& stop){
+  sf::Http http;
+  http.setHost("http://localhost",8080);
+
+  Json::Value body;
+  Json::Reader reader;
+
+  sf::Http::Request request;
+  sf::Http::Response response;
+
   while(window.isOpen()){
     if(stop==1) break;
-    this->m.lock();
-    this->engine.execute(*(this->principalMap));
-    Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
-    gold= to_string(empire->getGoldRessource());
-    wood= to_string(empire->getWoodRessource());
-    food= to_string(empire->getFoodRessource());
-    text =this->engine.getMessage();
-    renderSignal=1;
-    this->m.unlock();
+    while(!commandList.empty()){
+      this->m.lock();
+      request=sendPut("/command/",this->commandList.front());
+      response=http.sendRequest(request);
+      reader.parse(response.getBody(), body);
+      this->commandList.pop_front();
+      this->m.unlock();
+    }
+  }
+}
+
+void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
+  sf::Http http;
+  http.setHost("http://localhost",8080);
+
+  Json::Value body;
+  Json::Reader reader;
+
+  sf::Http::Request request;
+  sf::Http::Response response;
+  int previousCmdId=0;
+  int currentCmdId=0;
+  while(window.isOpen()){
+    if(stop==1) break;
+    request=sendGet("/command/");
+    response=http.sendRequest(request);
+    reader.parse(response.getBody(), body);
+    currentCmdId=body["commands"].size();
+    for (previousCmdId;previousCmdId<currentCmdId;previousCmdId++){
+      switch(body["command"][previousCmdId]["id"].asInt()){
+        case 1:{
+          this->engine.addCommand(std::unique_ptr<CaseIdentifier> (new CaseIdentifier(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt())),1);
+          break;
+        }
+        case 2:{
+          this->engine.addCommand(std::unique_ptr<Possibilities> (new Possibilities(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt(),body["command"][previousCmdId]["element"].asInt())),2);
+          break;
+        }
+        case 3:{
+          this->engine.addCommand(std::unique_ptr<PrintStats> (new PrintStats(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt(),body["command"][previousCmdId]["element"].asInt())),3);
+          break;
+        }
+
+        case 6:{
+          this->engine.addCommand(std::unique_ptr<Move> (new Move(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt(),body["command"][previousCmdId]["x2"].asInt(),body["command"][previousCmdId]["y2"].asInt())),6);
+          counter++;
+          break;
+        }
+        case 7:{
+          this->engine.addCommand(std::unique_ptr<Attack> (new Attack(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt(),body["command"][previousCmdId]["x2"].asInt(),body["command"][previousCmdId]["y2"].asInt())),7);
+          counter++;
+          break;
+        }
+        case 5:{
+          this->engine.addCommand(std::unique_ptr<LevelUp> (new LevelUp(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt())),5);
+          counter++;
+          break;
+        }
+        case 4:{
+          this->engine.addCommand(std::unique_ptr<CreateUnit> (new CreateUnit(body["command"][previousCmdId]["x"].asInt(),body["command"][previousCmdId]["y"].asInt(),body["command"][previousCmdId]["x2"].asInt(),body["command"][previousCmdId]["y2"].asInt(),body["command"][previousCmdId]["unit"].asInt())),4);
+          counter++;
+          break;
+        }
+        default: break;
+      }
+    }
+    previousCmdId=currentCmdId;
   }
 }
 
@@ -437,3 +507,156 @@ void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canP
       this->m.unlock();
     }
   }
+
+void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& idAI,int& stop,int& controller,sf::RenderWindow& window){
+  while(window.isOpen()){
+    if(stop==1) break;
+    this->m.lock();
+    if (controller==1){
+      if (counter>=0 && counter <=2){
+        id = 0;
+        idPalace=1;
+        for (unsigned int i=0;i<(*(this->principalMap)).getAllMaps().getBuildingsMap().size();i++){
+          Palace* building = dynamic_cast<Palace*> ((*(this->principalMap)).getAllMaps().getBuildingsMap()[i].get());
+          if (building!=nullptr){
+            int idBuilding=building->getIdBuilding();
+            if (idBuilding==idPalace){
+              palace1=true;
+              break;
+            } else {
+              palace1=false;
+            }
+          }
+        }
+        if (palace1){
+          empire1.setShot(1);
+          empire2.setShot(0);
+          empire3.setShot(0);
+          if(idAI==idPalace){
+            canPlay=true;
+          }
+        } else {
+          counter=3;
+        }
+
+      }
+
+      else if (counter>=3 && counter <=5){
+        id = 1;
+        idPalace=2;
+        for (unsigned int i=0;i<(*(this->principalMap)).getAllMaps().getBuildingsMap().size();i++){
+          Palace* building = dynamic_cast<Palace*> ((*(this->principalMap)).getAllMaps().getBuildingsMap()[i].get());
+          if (building!=nullptr){
+            int idBuilding=building->getIdBuilding();
+            if (idBuilding==idPalace){
+              palace2=true;
+              break;
+            } else {
+              palace2=false;
+            }
+          }
+        }
+        if (palace2){
+          empire1.setShot(0);
+          empire2.setShot(1);
+          empire3.setShot(0);
+
+          if(idAI==idPalace){
+            canPlay=true;
+          }
+        } else {
+          counter=6;
+        }
+      } else if (counter>=6 && counter <=8){
+        id = 2;
+        idPalace=3;
+        for (unsigned int i=0;i<(*(this->principalMap)).getAllMaps().getBuildingsMap().size();i++){
+          Palace* building = dynamic_cast<Palace*> ((*(this->principalMap)).getAllMaps().getBuildingsMap()[i].get());
+          if (building!=nullptr){
+            int idBuilding=building->getIdBuilding();
+            if (idBuilding==idPalace){
+              palace3=true;
+              break;
+            } else {
+              palace3=false;
+            }
+          }
+        }
+        if (palace3){
+          empire1.setShot(0);
+          empire2.setShot(0);
+          empire3.setShot(1);
+
+          if(idAI==idPalace){
+            canPlay=true;
+            empire3.setShot(0);
+          }
+        } else {
+          counter=9;
+        }
+      }
+
+      else if(counter>=9){
+        idPalace = 1;
+        for (unsigned int i=0;i<(*(this->principalMap)).getAllMaps().getBuildingsMap().size();i++){
+          Palace* building = dynamic_cast<Palace*> ((*(this->principalMap)).getAllMaps().getBuildingsMap()[i].get());
+          if (building!=nullptr){
+            int idBuilding=building->getIdBuilding();
+            if (idBuilding==idPalace){
+              palace1=true;
+              break;
+            } else {
+              palace1=false;
+            }
+          }
+        }
+        idPalace = 2;
+
+        for (unsigned int i=0;i<(*(this->principalMap)).getAllMaps().getBuildingsMap().size();i++){
+          Palace* building = dynamic_cast<Palace*> ((*(this->principalMap)).getAllMaps().getBuildingsMap()[i].get());
+          if (building!=nullptr){
+            int idBuilding=building->getIdBuilding();
+            if (idBuilding==idPalace){
+              palace2=true;
+              break;
+            } else {
+              palace2=false;
+            }
+          }
+        }
+        idPalace = 3;
+
+        for (unsigned int i=0;i<(*(this->principalMap)).getAllMaps().getBuildingsMap().size();i++){
+          Palace* building = dynamic_cast<Palace*> ((*(this->principalMap)).getAllMaps().getBuildingsMap()[i].get());
+          if (building!=nullptr){
+            int idBuilding=building->getIdBuilding();
+            if (idBuilding==idPalace){
+              palace3=true;
+              break;
+            } else {
+              palace3=false;
+            }
+          }
+        }
+        if (palace1){
+          empire1.updateRessource((*(this->principalMap)).getAllMaps().getBuildingsMap());
+        }
+        if (palace2){
+          empire2.updateRessource((*(this->principalMap)).getAllMaps().getBuildingsMap());
+        }
+        if (palace3){
+          empire3.updateRessource((*(this->principalMap)).getAllMaps().getBuildingsMap());
+        }
+        if ((palace1==true && palace2==false && palace3==false) || (palace1==false && palace2==true && palace3==false) || (palace1==false && palace2==false && palace3==true)){
+          stop=1;
+        } else {
+          counter=0;
+          id = 0;
+          idPalace=1;
+        }
+      }
+    }
+    controller=2;
+    this->m.unlock();
+  }
+}
