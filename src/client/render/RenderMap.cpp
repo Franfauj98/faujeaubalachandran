@@ -721,10 +721,10 @@ void RenderMap::startMenu(sf::RenderWindow& window, sf::Event& event, int& playe
         window.display();
         if((event.type == sf::Event::MouseButtonPressed)){
             sf::Vector2i click = getClickButton(window,event);
-            if(click.x>=535 && click.x<= 845 && click.y>= 460 && click.y<=560){
+            if(click.x>=630 && click.x<= 985 && click.y>= 460 && click.y<=560){
               counter=2;
             }
-            else if(click.x>=535 && click.x<= 845 && click.y>= 635 && click.y<=735){
+            else if(click.x>=630 && click.x<= 985 && click.y>= 635 && click.y<=735){
               player=4;
             }
           }
@@ -735,13 +735,13 @@ void RenderMap::startMenu(sf::RenderWindow& window, sf::Event& event, int& playe
           window.display();
           if((event.type == sf::Event::MouseButtonPressed)){
             sf::Vector2i click = getClickButton(window,event);
-            if(click.x>=490 && click.x<= 765 && click.y>= 440 && click.y<=535){
+            if(click.x>=640 && click.x<= 950 && click.y>= 440 && click.y<=535){
               player=1;
             }
-            else if (click.x>=490 && click.x<= 765 && click.y>= 580 && click.y<=675){
+            else if (click.x>=640 && click.x<= 950 && click.y>= 580 && click.y<=675){
               player=2;
             }
-            else if (click.x>=490 && click.x<= 765 && click.y>= 715 && click.y<=810){
+            else if (click.x>=640 && click.x<= 950 && click.y>= 715 && click.y<=810){
               player=0;
             }
             else if (click.x>=90 && click.x<= 190 && click.y>= 760 && click.y<=820){
