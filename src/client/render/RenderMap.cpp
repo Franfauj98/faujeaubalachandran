@@ -726,6 +726,7 @@ void RenderMap::startMenu(sf::RenderWindow& window, sf::Event& event, int& playe
             }
             else if(click.x>=630 && click.x<= 985 && click.y>= 635 && click.y<=735){
               player=4;
+              return;
             }
           }
         }
@@ -737,12 +738,15 @@ void RenderMap::startMenu(sf::RenderWindow& window, sf::Event& event, int& playe
             sf::Vector2i click = getClickButton(window,event);
             if(click.x>=640 && click.x<= 950 && click.y>= 440 && click.y<=535){
               player=1;
+              return;
             }
             else if (click.x>=640 && click.x<= 950 && click.y>= 580 && click.y<=675){
               player=2;
+              return;
             }
             else if (click.x>=640 && click.x<= 950 && click.y>= 715 && click.y<=810){
               player=0;
+              return;
             }
             else if (click.x>=90 && click.x<= 190 && click.y>= 760 && click.y<=820){
               counter=1;

@@ -210,20 +210,11 @@ void Client::run (){
           this->map.drawMap(window);
 
 
-          bool firstC;
-          bool canPlay1;
-          if(player==0){
-            firstC = false;
-            canPlay1=true;
-          } else {
-            firstC = true;
-            canPlay1=false;
-          }
-          bool secondC = false;
-          bool thirdC = false;
+          bool firstC=false;
+          bool secondC=false;
+          bool thirdC=false;
+          bool canPlay=false;
 
-          bool canPlay2 = false;
-          bool canPlay3 = false;
 
           bool palace1=false;
           bool palace2=false;
@@ -250,27 +241,14 @@ void Client::run (){
           music.play();
 
           thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
-          thread th2(&Client::aiUpdating,this,ref(counter),ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(controller),ref(window),ref(stop));
-          thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),ref(player),ref(firstC),ref(secondC),ref(thirdC),ref(window));
+          thread th2(&Client::aiUpdatingServer,this,ref(canPlay),ref(controller),ref(window),ref(stop),ref(idPlayer));
+          //thread th3(&Client::playerUpdating,this,ref(*(this->principalMap)), ref(canPlay1),ref(canPlay2),ref(canPlay3),ref(palace1),ref(palace2),ref(palace3),ref(counter),ref(*empire1),ref(*empire2),ref(*empire3),ref(id),ref(idPalace),ref(stop),ref(controller),ref(player),ref(firstC),ref(secondC),ref(thirdC),ref(window));
 
             while (window.isOpen())
             {
 
-            if(player==0){
-              while (window.pollEvent(event))
-              {
-            // évènement "fermeture demandée" : on ferme la fenêtre
-                if (event.type == sf::Event::Closed)
-                    th1.join();
-                    th2.join();
-                    th3.join();
-                    window.close();
-                }
-              }
+              this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->command);
 
-              if(player==1 || player==2){
-                this->map.handle(window, *(this->principalMap), this->engine, event,firstC,secondC,thirdC,counter);
-              }
               if (stop==1){
                   Layer endGame("res/endgame.png");
                   endGame.drawSprite(window);
@@ -278,7 +256,7 @@ void Client::run (){
                   usleep(10000000);
                   th1.join();
                   th2.join();
-                  th3.join();
+                  //th3.join();
                   break;
                 }
               if(renderSignal==1){
@@ -404,7 +382,38 @@ void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canP
   }
 }
 
+void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow& window, int& stop, int& idPlayer){
+  if(idPlayer==1){
+    while(window.isOpen()){
+      if(stop==1) break;
+      this->m.lock();
+      if (controller==2){
+        if(canPlay){
+          this->heuristic.runServer(*(this->principalMap),canPlay, 1,this->command);
+        }
+        controller=1;
+      }
+      this->m.unlock();
+    }
+  }
+}
+
 void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
+  while(window.isOpen()){
+    if(stop==1) break;
+    this->m.lock();
+    this->engine.execute(*(this->principalMap));
+    Empire* empire = (this->principalMap)->getAllMaps().getEmpires()[id].get();
+    gold= to_string(empire->getGoldRessource());
+    wood= to_string(empire->getWoodRessource());
+    food= to_string(empire->getFoodRessource());
+    text =this->engine.getMessage();
+    renderSignal=1;
+    this->m.unlock();
+  }
+}
+
+void Client::engineUpdatingServer (int& renderSignal, int& id, string& gold, string& wood, string& food, string& text, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
     if(stop==1) break;
     this->m.lock();
