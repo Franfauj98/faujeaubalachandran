@@ -20,7 +20,10 @@ using namespace std;
 using namespace engine;
 using namespace client;
 
+
+
 Client::Client (){
+
 }
 
 sf::Http::Request sendGet(std::string uri){
@@ -209,77 +212,77 @@ void Client::run (){
           default:break;
         }
 
-          if(player!=1){
+        if(player!=1){
 
-            std::unique_ptr<Observable> principalMap2 (new Observable(false,false));
-            this->principalMap = move(principalMap2);
-
-
-            this->map.update(*(this->principalMap),"","","","");
-            this->map.drawMap(window);
-
-            int idAI=3;
-            bool firstC=true;
-            bool secondC=false;
-            bool thirdC=false;
-            bool canPlay=false;
+          std::unique_ptr<Observable> principalMap2 (new Observable(false,false));
+          this->principalMap = move(principalMap2);
 
 
-            bool palace1=false;
-            bool palace2=false;
-            bool palace3=false;
+          this->map.update(*(this->principalMap),"","","","");
+          this->map.drawMap(window);
 
-            int counter=0;
-            int stop=0;
-            Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
-            Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
-            Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
+          int idAI=3;
+          bool firstC=true;
+          bool secondC=false;
+          bool thirdC=false;
+          bool canPlay=false;
 
-            int id = 0;
-            int idPalace=1;
-            string gold= "";
-            string wood= "";
-            string food= "";
-            string text= "";
-            int controller=1;
-            int renderSignal=0;
 
-            //sf::Music music;
-            music.openFromFile("res/music1.ogg");
-            music.setLoop(true);
-            music.play();
+          bool palace1=false;
+          bool palace2=false;
+          bool palace3=false;
 
-            thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
-            thread th2(&Client::aiUpdatingServer,this,ref(canPlay),ref(controller),ref(window),ref(stop),ref(idPlayer));
-            thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(*empire1), ref(*empire2), ref(*empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window));
-            thread th4(&Client::commandSend,this,ref(window),ref(this->commandList),ref(stop));
-            thread th5(&Client::commandRequest,this,ref(window),ref(stop),ref(counter));
-            while (window.isOpen())
-            {
-              // std::cout << "main" << '\n';
-              this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList,idPalace, idPlayer);
+          int counter=0;
+          int stop=0;
+          Empire* empire1 = (this->principalMap)->getAllMaps().getEmpires()[0].get();
+          Empire* empire2 = (this->principalMap)->getAllMaps().getEmpires()[1].get();
+          Empire* empire3 = (this->principalMap)->getAllMaps().getEmpires()[2].get();
 
-              if (stop==1){
-                  Layer endGame("res/endgame.png");
-                  endGame.drawSprite(window);
-                  window.display();
-                  usleep(10000000);
-                  th1.join();
-                  th2.join();
-                  th3.join();
-                  th4.join();
-                  th5.join();
-                  break;
-                }
-              if(renderSignal==1){
-                this->m.lock();
-                this->map.update(*(this->principalMap),gold,wood,food,text);
-                this->map.drawMap(window);
-                renderSignal=0;
-                this->m.unlock();
+          int id = 0;
+          int idPalace=1;
+          string gold= "";
+          string wood= "";
+          string food= "";
+          string text= "";
+          int controller=1;
+          int renderSignal=0;
+
+          //sf::Music music;
+          music.openFromFile("res/music1.ogg");
+          music.setLoop(true);
+          music.play();
+
+          thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
+          thread th2(&Client::aiUpdatingServer,this,ref(canPlay),ref(controller),ref(window),ref(stop),ref(idPlayer));
+          thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(*empire1), ref(*empire2), ref(*empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window));
+          thread th4(&Client::commandSend,this,ref(window),ref(this->commandList),ref(stop));
+          thread th5(&Client::commandRequest,this,ref(window),ref(stop),ref(counter));
+          while (window.isOpen())
+          {
+            // std::cout << "main" << '\n';
+            this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList,idPalace, idPlayer);
+
+            if (stop==1){
+                Layer endGame("res/endgame.png");
+                endGame.drawSprite(window);
+                window.display();
+                usleep(10000000);
+                th1.join();
+                th2.join();
+                th3.join();
+                th4.join();
+                th5.join();
+                break;
               }
+            if(renderSignal==1){
+              this->m.lock();
+              this->map.update(*(this->principalMap),gold,wood,food,text);
+              this->map.drawMap(window);
+              renderSignal=0;
+              this->m.unlock();
             }
           }
+        }
       }
     }
 
@@ -372,6 +375,7 @@ void Client::run (){
     }
   }
 }
+
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
