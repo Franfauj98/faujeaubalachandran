@@ -18,6 +18,7 @@ HttpStatus CommandService::get (Json::Value& out, int id) const {
   out["y2"] = command->y2;
   out["unit"] = command->unit;
   out["element"] = command->element;
+  out["message"] = command->message;
   return HttpStatus::OK;
 }
 
@@ -39,6 +40,7 @@ HttpStatus CommandService::post (const Json::Value& in, int id) {
   if(in.isMember("y2")) newCommand->y2 = in["y2"].asInt();
   if(in.isMember("unit")) newCommand->unit = in["unit"].asInt();
   if(in.isMember("element")) newCommand->element = in["element"].asInt();
+  if(in.isMember("message")) newCommand->message = in["message"].asString();
   commandDB.setCommand(id,std::move(newCommand));
   return HttpStatus::NO_CONTENT;
 
@@ -54,7 +56,8 @@ HttpStatus CommandService::put (Json::Value& out,const Json::Value& in) {
   int y2 = in["y2"].asInt();
   int unit = in["unit"].asInt();
   int element = in["element"].asInt();
-  out["id"] = commandDB.addCommand(make_unique<Command>(num, id, x, y, x2, y2, unit, element));
+  string message = in["message"].asString();
+  out["id"] = commandDB.addCommand(make_unique<Command>(num, id, x, y, x2, y2, unit, element, message));
   return HttpStatus::CREATED;
 }
 

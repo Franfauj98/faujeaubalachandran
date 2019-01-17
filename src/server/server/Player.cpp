@@ -8,6 +8,6 @@
 #include "Player.hpp"
 using namespace server;
 
-Player::Player (string name, int type, int tour) : name(name),type(type), tour(tour) {
+Player::Player (string name, int type) : name(name),type(type) {
 
 }
