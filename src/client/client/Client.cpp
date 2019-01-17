@@ -69,8 +69,8 @@ sf::Http::Request sendDelete(std::string uri){
 
 void Client::connect (){
   sf::Http http;
-  http.setHost("http://kerosen.ensea.fr",8080);
-  // http.setHost("http://localhost",8080);
+  // http.setHost("http://kerosen.ensea.fr",8080);
+  http.setHost("http://localhost",8080);
 
   Json::Value body;
   Json::Reader reader;
@@ -150,8 +150,8 @@ void Client::run (){
     if(player==4){
       //std::vector<int> aiPlayer;
       sf::Http http;
-      http.setHost("http://kerosen.ensea.fr",8080);
-      // http.setHost("http://localhost",8080);
+      // http.setHost("http://kerosen.ensea.fr",8080);
+      http.setHost("http://localhost",8080);
 
       Json::Value body;
       Json::Reader reader;
@@ -174,6 +174,7 @@ void Client::run (){
         return;
       } else {
         int idPlayer = body["id"].asInt();
+        std::cout << "id player : " << idPlayer << '\n';
         window.clear();
         Layer endGame("res/startMenu3.png");
         endGame.drawSprite(window);
@@ -262,6 +263,8 @@ void Client::run (){
           while (window.isOpen())
           {
             // std::cout << "main" << '\n';
+            std::cout << "idPalace  : " << idPalace << '\n';
+            std::cout << "idPlayer  : " << idPlayer << '\n';
             this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList,idPalace, idPlayer);
 
             if (stop==1){
@@ -278,6 +281,7 @@ void Client::run (){
               }
             if(renderSignal==1){
               this->m.lock();
+              std::cout << "counter : " << counter << '\n';
               this->map.update(*(this->principalMap),gold,wood,food,text);
               this->map.drawMap(window);
               renderSignal=0;
@@ -404,12 +408,12 @@ void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow&
       // std::cout << "aiUpdatingServer" << '\n';
       if(stop==1) break;
       this->m.lock();
-      if (controller==2){
+      // if (controller==2){
         if(canPlay){
           this->heuristic.runServer(*(this->principalMap),canPlay, 3,this->commandList);
         }
         controller=1;
-      }
+      // }
       this->m.unlock();
     }
   }
@@ -432,8 +436,8 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
 
 void Client::commandSend(sf::RenderWindow& window, std::deque<std::string>& commandList, int& stop){
   sf::Http http;
-  http.setHost("http://kerosen.ensea.fr",8080);
-  // http.setHost("http://localhost",8080);
+  // http.setHost("http://kerosen.ensea.fr",8080);
+  http.setHost("http://localhost",8080);
 
   Json::Value body;
   Json::Reader reader;
@@ -456,8 +460,8 @@ void Client::commandSend(sf::RenderWindow& window, std::deque<std::string>& comm
 
 void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
   sf::Http http;
-  http.setHost("http://kerosen.ensea.fr",8080);
-  // http.setHost("http://localhost",8080);
+  // http.setHost("http://kerosen.ensea.fr",8080);
+  http.setHost("http://localhost",8080);
 
   Json::Value body;
   Json::Reader reader;
@@ -544,7 +548,7 @@ void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bo
   while(window.isOpen()){
     if(stop==1) break;
     this->m.lock();
-    if (controller==1){
+    // if (controller==1){
       if (counter>=0 && counter <=2){
         id = 0;
         idPalace=1;
@@ -691,5 +695,5 @@ void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bo
     }
     controller=2;
     this->m.unlock();
-  }
+  // }
 }

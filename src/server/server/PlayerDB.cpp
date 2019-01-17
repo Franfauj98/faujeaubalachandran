@@ -31,7 +31,6 @@ Json::Value PlayerDB::getAllPlayer () {
     Player *player = it->second.get();
     player1["name"] = player->name;
     player1["type"] = player->type;
-    player1["tour"] = player->tour;
     foo.append(player1);
   }
   return foo;

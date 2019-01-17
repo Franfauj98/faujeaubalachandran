@@ -11,10 +11,9 @@ namespace server {
   public:
     string name;
     int type;
-    int tour;
     // Operations
   public:
-    Player (string name, int type, int tour);
+    Player (string name, int type);
     // Setters and Getters
   };
 

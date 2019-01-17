@@ -29,6 +29,7 @@ Json::Value CommandDB::getAllCommand () {
     command1["y2"] = command->y2;
     command1["unit"] = command->unit;
     command1["element"] = command->element;
+    command1["message"] = command->message;
     foo.append(command1);
   }
   return foo;

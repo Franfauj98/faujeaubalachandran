@@ -17,9 +17,10 @@ namespace server {
     int y2;
     int unit;
     int element;
+    string message;
     // Operations
   public:
-    Command (int num, int id, int x, int y, int x2, int y2, int unit, int element);
+    Command (int num, int id, int x, int y, int x2, int y2, int unit, int element, string message);
     // Setters and Getters
   };
 
