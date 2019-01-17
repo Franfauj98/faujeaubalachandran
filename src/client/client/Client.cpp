@@ -480,7 +480,7 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
       std::cout << "body : " << body["commands"][previousCmdId]["id"].asInt() << '\n';
       switch(body["commands"][previousCmdId]["id"].asInt()){
         case 0:{
-          this->engine.setMessage(body["commands"][previousCmdId]["element"].asString());
+          this->engine.setMessage(body["commands"][previousCmdId]["message"].asString());
           break;
         }
         case 1:{
