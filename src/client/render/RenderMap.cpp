@@ -496,15 +496,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                   switch(id){
                     case 1:
                     // engine.setMessage("Player 1: Unit Moved");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Unit Moved }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Unit Moved\" }");
                     break;
                     case 2:
                     //engine.setMessage("Player 2: Unit Moved");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Unit Moved }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Unit Moved\" }");
                     break;
                     case 3:
                     //engine.setMessage("Player 3: Unit Moved");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Unit Moved }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Unit Moved\" }");
                     break;
                     default:break;
                   }
@@ -516,15 +516,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                   switch(id){
                     case 1:
                     //engine.setMessage("Player 1: Unit Attack");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Unit Attack }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Unit Attack\"}");
                     break;
                     case 2:
                     // engine.setMessage("Player 2: Unit Attack");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Unit Attack }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Unit Attack\" }");
                     break;
                     case 3:
                     //engine.setMessage("Player 3: Unit Attack");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Unit Attack }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Unit Attack\" }");
                     break;
                     default:break;
                   }
@@ -553,28 +553,28 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                   case 1:
                   if(element==31){
                     //engine.setMessage("Player 1: Ressource LevelUp");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Ressource LevelUp }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Ressource LevelUp\" }");
                   } else {
                     //engine.setMessage("Player 1: Palace LevelUp");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Palace LevelUp }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Palace LevelUp\"  }");
                   }
                   break;
                   case 2:
                   if(element==31){
                     //engine.setMessage("Player 2: Ressource LevelUp");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Ressource LevelUp }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":  -1,\"message\":\"Player 2: Ressource LevelUp\" }");
                   } else {
                     // engine.setMessage("Player 2: Palace LevelUp");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Palace LevelUp }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Palace LevelUp\"  }");
                   }
                   break;
                   case 3:
                   if(element==31){
                     //engine.setMessage("Player 3: Ressource LevelUp");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Ressource LevelUp }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":  -1,\"message\":\"Player 3: Ressource LevelUp\" }");
                   } else {
                     // engine.setMessage("Player 3: Palace LevelUp");
-                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Palace LevelUp }");
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Palace LevelUp\" }");
                   }
                   break;
                   default:break;
@@ -602,15 +602,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   // engine.setMessage("Player 1: Barrack LevelUp");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Barrack LevelUp }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":-1,\"message\":\"Player 1: Barrack LevelUp\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Barrack LevelUp");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Barrack LevelUp }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Barrack LevelUp\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Barrack LevelUp");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Barrack LevelUp }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Barrack LevelUp\" }");
                   break;
                   default:break;
                 }
@@ -635,15 +635,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   // engine.setMessage("Player 1: Arrow Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1:  Arrow Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":-1,\"message\":\" Player 1: Arrow Created\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Arrow Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2:  Arrow Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 2: Arrow Created\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Arrow Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3:  Arrow Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 3: Arrow Created\" }");
                   break;
                   default:break;
                 }
@@ -663,15 +663,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   //engine.setMessage("Player 1: Decurion Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1:  Decurion Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":-1,\"message\":\" Player 1: Decurion Created\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Decurion Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2:  Decurion Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 2: Decurion Created\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Decurion Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3:  Decurion Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 3: Decurion Created\" }");
                   break;
                   default:break;
                 }
@@ -692,15 +692,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   //engine.setMessage("Player 1: Catapult Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1:  Catapult Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Catapult Created\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Catapult Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2:  Catapult Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Catapult Created\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Catapult Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3:  Catapult Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Catapult Created\" }");
                   break;
                   default:break;
                 }
@@ -719,15 +719,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   //engine.setMessage("Player 1: Cavalier Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1:  Cavalier Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 1: Cavalier Created\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Cavalier Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2:  Cavalier Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 2: Cavalier Created\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Cavalier Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3:  Cavalier Created }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 3: Cavalier Created\" }");
                   break;
                   default:break;
                 }
