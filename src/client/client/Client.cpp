@@ -376,6 +376,7 @@ void Client::run (){
   }
 }
 
+void
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
