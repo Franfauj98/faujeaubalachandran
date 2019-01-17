@@ -66,7 +66,8 @@ sf::Http::Request sendDelete(std::string uri){
 
 void Client::connect (){
   sf::Http http;
-  http.setHost("http://localhost",8080);
+  http.setHost("http://kerosen.ensea.fr",8080);
+  // http.setHost("http://localhost",8080);
 
   Json::Value body;
   Json::Reader reader;
@@ -146,7 +147,8 @@ void Client::run (){
     if(player==4){
       //std::vector<int> aiPlayer;
       sf::Http http;
-      http.setHost("http://localhost",8080);
+      http.setHost("http://kerosen.ensea.fr",8080);
+      // http.setHost("http://localhost",8080);
 
       Json::Value body;
       Json::Reader reader;
@@ -426,7 +428,8 @@ void Client::engineUpdating (int& renderSignal, int& id, string& gold, string& w
 
 void Client::commandSend(sf::RenderWindow& window, std::deque<std::string>& commandList, int& stop){
   sf::Http http;
-  http.setHost("http://localhost",8080);
+  http.setHost("http://kerosen.ensea.fr",8080);
+  // http.setHost("http://localhost",8080);
 
   Json::Value body;
   Json::Reader reader;
@@ -449,7 +452,8 @@ void Client::commandSend(sf::RenderWindow& window, std::deque<std::string>& comm
 
 void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
   sf::Http http;
-  http.setHost("http://localhost",8080);
+  http.setHost("http://kerosen.ensea.fr",8080);
+  // http.setHost("http://localhost",8080);
 
   Json::Value body;
   Json::Reader reader;
@@ -515,7 +519,7 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
       }
     }
     previousCmdId=currentCmdId;
-    usleep(200000);
+    usleep(500000);
   }
 }
 
