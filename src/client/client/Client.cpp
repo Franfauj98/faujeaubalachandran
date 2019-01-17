@@ -174,7 +174,6 @@ void Client::run (){
         return;
       } else {
         int idPlayer = body["id"].asInt();
-        std::cout << "id player : " << idPlayer << '\n';
         window.clear();
         Layer endGame("res/startMenu3.png");
         endGame.drawSprite(window);
@@ -257,14 +256,14 @@ void Client::run (){
 
           thread th1(&Client::engineUpdating,this,ref(renderSignal),ref(id),ref(gold),ref(wood),ref(food),ref(text),ref(window),ref(stop));
           thread th2(&Client::aiUpdatingServer,this,ref(canPlay),ref(controller),ref(window),ref(stop),ref(idPlayer));
-          thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(*empire1), ref(*empire2), ref(*empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window));
+          thread th3(&Client::playerUpdatingServer,this,ref(canPlay), ref(palace1), ref(palace2),ref(palace3), ref(counter), ref(*empire1), ref(*empire2), ref(*empire3), ref(id), ref(idPalace),ref(idAI),ref(stop), ref(controller),ref(window), ref(idPlayer));
           thread th4(&Client::commandSend,this,ref(window),ref(this->commandList),ref(stop));
           thread th5(&Client::commandRequest,this,ref(window),ref(stop),ref(counter));
           while (window.isOpen())
           {
             // std::cout << "main" << '\n';
-            std::cout << "idPalace  : " << idPalace << '\n';
-            std::cout << "idPlayer  : " << idPlayer << '\n';
+            // std::cout << "idPalace  : " << idPalace << '\n';
+            // std::cout << "idPlayer  : " << idPlayer << '\n';
             this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList,idPalace, idPlayer);
 
             if (stop==1){
@@ -281,7 +280,6 @@ void Client::run (){
               }
             if(renderSignal==1){
               this->m.lock();
-              std::cout << "counter : " << counter << '\n';
               this->map.update(*(this->principalMap),gold,wood,food,text);
               this->map.drawMap(window);
               renderSignal=0;
@@ -408,12 +406,12 @@ void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow&
       // std::cout << "aiUpdatingServer" << '\n';
       if(stop==1) break;
       this->m.lock();
-      // if (controller==2){
+      if (controller==2){
         if(canPlay){
           this->heuristic.runServer(*(this->principalMap),canPlay, 3,this->commandList);
         }
         controller=1;
-      // }
+      }
       this->m.unlock();
     }
   }
@@ -477,7 +475,6 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
     reader.parse(response.getBody(), body);
     currentCmdId=body["commands"].size();
     for (previousCmdId;previousCmdId<currentCmdId;previousCmdId++){
-      std::cout << "body : " << body["commands"][previousCmdId]["id"].asInt() << '\n';
       switch(body["commands"][previousCmdId]["id"].asInt()){
         case 0:{
           this->engine.setMessage(body["commands"][previousCmdId]["message"].asString());
@@ -485,41 +482,34 @@ void Client::commandRequest(sf::RenderWindow& window, int& stop, int& counter){
         }
         case 1:{
           this->engine.addCommand(std::unique_ptr<CaseIdentifier> (new CaseIdentifier(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt())),1);
-          std::cout << "CaseIdentifier" << '\n';
           break;
         }
         case 2:{
           this->engine.addCommand(std::unique_ptr<Possibilities> (new Possibilities(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt(),body["commands"][previousCmdId]["element"].asInt())),2);
-          std::cout << "Possibilities" << '\n';
           break;
         }
         case 3:{
           this->engine.addCommand(std::unique_ptr<PrintStats> (new PrintStats(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt(),body["commands"][previousCmdId]["element"].asInt())),3);
-          std::cout << "PrintStats" << '\n';
           break;
         }
 
         case 6:{
           this->engine.addCommand(std::unique_ptr<Move> (new Move(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt(),body["commands"][previousCmdId]["x2"].asInt(),body["commands"][previousCmdId]["y2"].asInt())),6);
-          std::cout << "Move" << '\n';
           counter++;
           break;
         }
         case 7:{
           this->engine.addCommand(std::unique_ptr<Attack> (new Attack(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt(),body["commands"][previousCmdId]["x2"].asInt(),body["commands"][previousCmdId]["y2"].asInt())),7);
-          std::cout << "Attack" << '\n';
           counter++;
           break;
         }
         case 5:{
           this->engine.addCommand(std::unique_ptr<LevelUp> (new LevelUp(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt())),5);
-          std::cout << "Levelup" << '\n';
           counter++;
           break;
         }
         case 4:{
           this->engine.addCommand(std::unique_ptr<CreateUnit> (new CreateUnit(body["commands"][previousCmdId]["x"].asInt(),body["commands"][previousCmdId]["y"].asInt(),body["commands"][previousCmdId]["x2"].asInt(),body["commands"][previousCmdId]["y2"].asInt(),body["commands"][previousCmdId]["unit"].asInt())),4);
-          std::cout << "CreateUnit" << '\n';
           counter++;
           break;
         }
@@ -544,11 +534,11 @@ void Client::playerUpdating(Observable& principalMap, bool& canPlay1, bool& canP
     }
   }
 
-void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& idAI,int& stop,int& controller,sf::RenderWindow& window){
+void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bool& palace3, int& counter, Empire& empire1, Empire& empire2,Empire& empire3, int& id, int& idPalace,int& idAI,int& stop,int& controller,sf::RenderWindow& window, int& idPlayer){
   while(window.isOpen()){
     if(stop==1) break;
     this->m.lock();
-    // if (controller==1){
+    if (controller==1){
       if (counter>=0 && counter <=2){
         id = 0;
         idPalace=1;
@@ -692,8 +682,10 @@ void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bo
           canPlay = false;
         }
       }
+      if(idPlayer==1){
+        controller=2;
+      }
     }
-    controller=2;
     this->m.unlock();
-  // }
+  }
 }

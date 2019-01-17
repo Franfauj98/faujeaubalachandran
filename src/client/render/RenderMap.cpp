@@ -692,15 +692,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   //engine.setMessage("Player 1: Catapult Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Catapult Created\" }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Cavalier Created\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Catapult Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Catapult Created\" }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Cavalier Created\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Catapult Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Catapult Created\" }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Cavalier Created\" }");
                   break;
                   default:break;
                 }
@@ -719,15 +719,15 @@ void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap,
                 switch(id){
                   case 1:
                   //engine.setMessage("Player 1: Cavalier Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 1: Cavalier Created\" }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 1: Catapult Created\" }");
                   break;
                   case 2:
                   //engine.setMessage("Player 2: Cavalier Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 2: Cavalier Created\" }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 2: Catapult Created\" }");
                   break;
                   case 3:
                   //engine.setMessage("Player 3: Cavalier Created");
-                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 3: Cavalier Created\" }");
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 3: Catapult Created\" }");
                   break;
                   default:break;
                 }
