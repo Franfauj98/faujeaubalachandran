@@ -148,7 +148,6 @@ void Client::run (){
   if(player!=-1){
 
     if(player==4){
-      //std::vector<int> aiPlayer;
       sf::Http http;
       // http.setHost("http://kerosen.ensea.fr",8080);
       http.setHost("http://localhost",8080);
@@ -185,18 +184,6 @@ void Client::run (){
         reader.parse(response.getBody(), body);
         switch (body["players"].size()) {
           case 1:{
-            // request = sendPut("/player", "{\"name\": \"player"+to_string(body["players"].size()+1)+"\", \"type\": 1}");
-            // response = http.sendRequest(request);
-            // aiPlayer.push_back(response.getBody()["id"].asInt());
-            // request = sendGet("/player/");
-            // response = http.sendRequest(request);
-            // reader.parse(response.getBody(), body);
-            // request = sendPut("/player", "{\"name\": \"player"+to_string(body["players"].size()+1)+"\", \"type\": 1}");
-            // response = http.sendRequest(request);
-            // aiPlayer.push_back(response.getBody()["id"].asInt());
-            // request = sendGet("/player/");
-            // response = http.sendRequest(request);
-            // reader.parse(response.getBody(), body);
             player=1;
             break;
             }
@@ -204,7 +191,6 @@ void Client::run (){
             request = sendPut("/player", "{\"name\": \"player"+to_string(body["players"].size()+1)+"\", \"type\": 1}");
             response = http.sendRequest(request);
             reader.parse(response.getBody(), body);
-            //aiPlayer.push_back(body["id"].asInt());
             request = sendGet("/player/");
             response = http.sendRequest(request);
             reader.parse(response.getBody(), body);
@@ -261,9 +247,6 @@ void Client::run (){
           thread th5(&Client::commandRequest,this,ref(window),ref(stop),ref(counter));
           while (window.isOpen())
           {
-            // std::cout << "main" << '\n';
-            // std::cout << "idPalace  : " << idPalace << '\n';
-            // std::cout << "idPlayer  : " << idPlayer << '\n';
             this->map.handleServer(window, *(this->principalMap), event,firstC,secondC,thirdC,this->commandList,idPalace, idPlayer);
 
             if (stop==1){
@@ -383,7 +366,6 @@ void Client::run (){
 
 void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canPlay3,int& controller, sf::RenderWindow& window, int& stop){
   while(window.isOpen()){
-    // std::cout << "ai" << '\n';
     if(stop==1) break;
     this->m.lock();
     if (controller==2){
@@ -403,7 +385,6 @@ void Client::aiUpdating (int& counter, bool& canPlay1, bool& canPlay2,bool& canP
 void Client::aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow& window, int& stop, int& idPlayer){
   if(idPlayer==1){
     while(window.isOpen()){
-      // std::cout << "aiUpdatingServer" << '\n';
       if(stop==1) break;
       this->m.lock();
       if (controller==2){
@@ -662,7 +643,7 @@ void Client::playerUpdatingServer(bool& canPlay, bool& palace1, bool& palace2,bo
             } else {
               palace3=false;
             }
-          }
+}
         }
         if (palace1){
           empire1.updateRessource((*(this->principalMap)).getAllMaps().getBuildingsMap());

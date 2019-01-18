@@ -135,26 +135,18 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
     int element;
     //level up of the palace if possible
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      // std::cout << "LevelUp palace" << '\n';
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
-      //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
       command.push_back("{\"id\": 1, \"x\":"+ to_string(x2) +", \"y\":"+to_string(y2)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
       command.push_back("{\"id\": 2, \"x\":"+to_string(x2)+", \"y\":"+to_string(y2)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new PrintStats(x2,y2,element)),3);
       command.push_back("{\"id\": 3, \"x\":"+to_string(x2)+", \"y\":"+to_string(y2)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      // usleep(500000);
       switch(id){
         case 1:
-        //engine.setMessage("Player 1: Palace LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 1: Palace LevelUp\" }");
         break;
         case 2:
-        //engine.setMessage("Player 2: Palace LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Palace LevelUp\"}");
         break;
         case 3:
-        //engine.setMessage("Player 3: Palace LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Palace LevelUp\"}");
         break;
         default:break;
@@ -163,26 +155,18 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
       return;
       //level up of the barrack if possible
     } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      // std::cout << "LevelUp barrack" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
-      //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       command.push_back("{\"id\": 1, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       command.push_back("{\"id\": 2, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
       command.push_back("{\"id\": 3, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //usleep(500000);
       switch(id){
         case 1:
-        //engine.setMessage("Player 1: Barrack LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 1: Barrack LevelUp\" }");
         break;
         case 2:
-        //engine.setMessage("Player 2: Barrack LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Barrack LevelUp\" }");
         break;
         case 3:
-        //engine.setMessage("Player 3: Barrack LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Barrack LevelUp\" }");
         break;
         default:break;
@@ -191,26 +175,18 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
       return;
       //level up of the ressource if possible
     } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      // std::cout << "LevelUp ressource" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
-      //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
       command.push_back("{\"id\": 1, \"x\":"+to_string(x1)+", \"y\":"+to_string(y1)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
       command.push_back("{\"id\": 2, \"x\":"+to_string(x1)+", \"y\":"+to_string(y1)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new PrintStats(x1,y1,element)),3);
       command.push_back("{\"id\": 3, \"x\":"+to_string(x1)+", \"y\":"+to_string(y1)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //usleep(500000);
       switch(id){
         case 1:
-        //engine.setMessage("Player 1: Ressource LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 1: Ressource LevelUp\" }");
         break;
         case 2:
-        //engine.setMessage("Player 2: Ressource LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Ressource LevelUp\" }");
         break;
         case 3:
-        //engine.setMessage("Player 3: Ressource LevelUp");
         command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Ressource LevelUp\" }");
         break;
         default:break;
@@ -226,13 +202,9 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
     )
     ){
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
-      //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       command.push_back("{\"id\": 1, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       command.push_back("{\"id\": 2, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      //engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
       command.push_back("{\"id\": 3, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
-      // std::cout << "CreateUnit" << '\n';
       std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
       int pos=0;
@@ -248,23 +220,17 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
         if (arrowCost[levelUnit-1]<=empire->getFoodRessource() && arrowCost[levelUnit-1]<=empire->getGoldRessource()){
           switch(id){
             case 1:
-            //engine.setMessage("Player 1: Arrow Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Arrow Created, \"message\":\"\" }");
             break;
             case 2:
-            //engine.setMessage("Player 2: Arrow Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Arrow Created, \"message\":\"\" }");
             break;
             case 3:
-            //engine.setMessage("Player 3: Arrow Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Arrow Created, \"message\":\"\" }");
             break;
             default:break;
           }
-          //engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,1))),4);
           command.push_back("{\"id\": 4, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\":"+to_string(x)+", \"y2\":"+to_string(y)+", \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-          //usleep(500000);
-          //counter++;
           return;
         }
         break;
@@ -272,23 +238,17 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
         if(decurionCost[levelUnit-1]<=empire->getFoodRessource() && decurionCost[levelUnit-1]<=empire->getGoldRessource()){
           switch(id){
             case 1:
-            //engine.setMessage("Player 1: Decurion Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 1: Decurion Created, \"message\":\"\" }");
             break;
             case 2:
-            //engine.setMessage("Player 2: Decurion Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 2: Decurion Created, \"message\":\"\" }");
             break;
             case 3:
-            //engine.setMessage("Player 3: Decurion Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": Player 3: Decurion Created, \"message\":\"\" }");
             break;
             default:break;
           }
-          //engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,2))),4);
           command.push_back("{\"id\": 4, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\":"+to_string(x)+", \"y2\":"+to_string(y)+", \"unit\": 2, \"element\": -1, \"message\":\"\"}");
-          // usleep(500000);
-          // counter++;
           return;
         }
         break;
@@ -296,23 +256,17 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
         if(cavalierCost[levelUnit-1]<=empire->getFoodRessource() && cavalierCost[levelUnit-1]<=empire->getGoldRessource()){
           switch(id){
             case 1:
-            // engine.setMessage("Player 1: Cavalier Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 1: Cavalier Created\" }");
             break;
             case 2:
-            //engine.setMessage("Player 2: Cavalier Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 2: Cavalier Created\" }");
             break;
             case 3:
-            // engine.setMessage("Player 3: Cavalier Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 3: Cavalier Created\" }");
             break;
             default:break;
           }
-          //engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,4))),4);
           command.push_back("{\"id\": 4, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\":"+to_string(x)+", \"y2\":"+to_string(y)+", \"unit\": 4, \"element\": -1, \"message\":\"\"}");
-          // usleep(500000);
-          // counter++;
           return;
         }
         break;
@@ -320,23 +274,17 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
         if(catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource()){
           switch(id){
             case 1:
-            //engine.setMessage("Player 1: Catapult Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\" Player 1: Catapult Created\" }");
             break;
             case 2:
-            //engine.setMessage("Player 2: Catapult Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\" Player 2: Catapult Created\" }");
             break;
             case 3:
-            //engine.setMessage("Player 3: Catapult Created");
             command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\" Player 3: Catapult Created\" }");
             break;
             default:break;
           }
-          //engine.addCommand((unique_ptr<Command> (new CreateUnit(x3,y3,x,y,3))),4);
           command.push_back("{\"id\": 4, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\":"+to_string(x)+", \"y2\":"+to_string(y)+", \"unit\": 3, \"element\": -1, \"message\":\"\"}");
-          // usleep(500000);
-          // counter++;
           return;
         }
         break;
@@ -461,118 +409,82 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
 
       if (((topElt == 26 || topElt == 27 || topElt == 28 || topElt == 29) && (currentUnit->getIdUnits() != buildToAttackt->getIdBuilding())) ||
         ( (topElt == 10 || topElt == 14 || topElt == 18 || topElt == 22) && currentUnit->getIdUnits() != unitToAttackt->getIdUnits() )){
-        //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         command.push_back("{\"id\": 1, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         command.push_back("{\"id\": 2, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
         command.push_back("{\"id\": 3, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
         switch(id){
           case 1:
-          //engine.setMessage("Player 1: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 1: Unit Attack\" }");
           break;
           case 2:
-          // engine.setMessage("Player 2: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Unit Attack\" }");
           break;
           case 3:
-          // engine.setMessage("Player 3: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Unit Attack\"}");
           break;
           default:break;
         }
-        //engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()-1))),7);
         command.push_back("{\"id\": 7, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": "+to_string(unitsPosition[indexMinimumDist].getX())+", \"y2\":"+to_string(unitsPosition[indexMinimumDist].getY()-1)+", \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        // usleep(500000);
-        // counter++;
         return;
       }
       else if(( (bottomElt == 26 || bottomElt == 27 || bottomElt == 28 || bottomElt == 29) && (currentUnit->getIdUnits() != buildToAttackb->getIdBuilding())) ||
         ( (bottomElt == 10 || bottomElt == 14 || bottomElt == 18 || bottomElt == 22) && currentUnit->getIdUnits() != unitToAttackb->getIdUnits() )){
-        //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         command.push_back("{\"id\": 1, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         command.push_back("{\"id\": 2, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
         command.push_back("{\"id\": 3, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
         switch(id){
           case 1:
-          // engine.setMessage("Player 1: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 1: Unit Attack\" }");
           break;
           case 2:
-          //engine.setMessage("Player 2: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Unit Attack\" }");
           break;
           case 3:
-          //engine.setMessage("Player 3: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Unit Attack\ }");
           break;
           default:break;
         }
-        //engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()+1))),7);
         command.push_back("{\"id\": 7, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": "+to_string(unitsPosition[indexMinimumDist].getX())+", \"y2\":"+to_string(unitsPosition[indexMinimumDist].getY()+1)+", \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        // usleep(500000);
-        // counter++;
         return;
       }
       else if(( (leftElt == 26 || leftElt == 27 || leftElt == 28 || leftElt == 29) && (currentUnit->getIdUnits() != buildToAttackl->getIdBuilding())) ||
         ( (leftElt == 10 || leftElt == 14 || leftElt == 18 || leftElt == 22) && currentUnit->getIdUnits() != unitToAttackl->getIdUnits() )){
-        //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         command.push_back("{\"id\": 1, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         command.push_back("{\"id\": 2, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
         command.push_back("{\"id\": 3, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
-        //engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()+1,unitsPosition[indexMinimumDist].getY()))),7);
         command.push_back("{\"id\": 7, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": "+to_string(unitsPosition[indexMinimumDist].getX()+1)+", \"y2\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"unit\": 1, \"element\": -1, \"message\":\"\"}");
         switch(id){
           case 0:
-          // engine.setMessage("Player 1: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 1: Unit Attack\"}");
           break;
           case 1:
-          // engine.setMessage("Player 2: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Unit Attack\"}");
           break;
           case 2:
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Unit Attack\"}");
-          // engine.setMessage("Player 3: Unit Attack");
           break;
           default:break;
         }
-        // usleep(500000);
-        // counter++;
         return;
       }
       else if(( (rightElt == 26 || rightElt == 27 || rightElt == 28 || rightElt == 29) && (currentUnit->getIdUnits() != buildToAttackr->getIdBuilding())) ||
         ( (rightElt == 10 || rightElt == 14 || rightElt == 18 || rightElt == 22) && currentUnit->getIdUnits() != unitToAttackr->getIdUnits() )  ){
-        //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         command.push_back("{\"id\": 1, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         command.push_back("{\"id\": 2, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
         command.push_back("{\"id\": 3, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
         switch(id){
           case 1:
-          // engine.setMessage("Player 1: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 1: Unit Attack\"}");
           break;
           case 2:
-          // engine.setMessage("Player 2: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 2: Unit Attack\" }");
           break;
           case 3:
-          // engine.setMessage("Player 3: Unit Attack");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 3: Unit Attack\" }");
           break;
           default:break;
         }
-        //engine.addCommand((unique_ptr<Command> (new Attack(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),unitsPosition[indexMinimumDist].getX()-1,unitsPosition[indexMinimumDist].getY()))),7);
         command.push_back("{\"id\": 7, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": "+to_string(unitsPosition[indexMinimumDist].getX()-1)+", \"y2\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        // usleep(500000);
-        // counter++;
         return;
       }
       std::vector<state::Position> possibilitiesPos;
@@ -617,40 +529,30 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
       }
 
       if (indexMinimumDistG>=0){
-        //engine.addCommand((unique_ptr<Command> (new CaseIdentifier(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY()))),1);
         command.push_back("{\"id\": 1, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new Possibilities(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),2);
         command.push_back("{\"id\": 2, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\":"+to_string(element)+", \"message\":\"\"}");
-        //engine.addCommand(unique_ptr<Command> (new PrintStats(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),element)),3);
         command.push_back("{\"id\": 3, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": -1, \"y2\":-1, \"unit\": 1, \"element\": "+to_string(element)+", \"message\":\"\"}");
         switch(id){
           case 1:
-          // engine.setMessage("Player 1: Unit Moved");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 1: Unit Moved\"}");
           break;
           case 2:
-          // engine.setMessage("Player 2: Unit Moved");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 2: Unit Moved\" }");
           break;
           case 3:
-          // engine.setMessage("Player 3: Unit Moved");
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1 , \"message\":\"Player 3: Unit Moved\"}");
           break;
           default:break;
         }
-        //engine.addCommand((unique_ptr<Command> (new Move(unitsPosition[indexMinimumDist].getX(),unitsPosition[indexMinimumDist].getY(),possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY()))),6);
         command.push_back("{\"id\": 7, \"x\":"+to_string(unitsPosition[indexMinimumDist].getX())+", \"y\":"+to_string(unitsPosition[indexMinimumDist].getY())+", \"x2\": "+to_string(possibilitiesPos[indexMinimumDistG].getX())+", \"y2\":"+to_string(possibilitiesPos[indexMinimumDistG].getY())+", \"unit\": 1, \"element\": -1, \"message\":\"\"}");
-        // usleep(500000);
         std::vector<state::Position> unitPos;
         Position possPos(possibilitiesPos[indexMinimumDistG].getX(),possibilitiesPos[indexMinimumDistG].getY());
         unitPos.push_back(currentUnit->getCanMove()[1]);
         unitPos.push_back(currentUnit->getCanMove()[2]);
         unitPos.push_back(possPos);
         currentUnit->setCanMove(unitPos);
-        //counter++;
         return;
       } else {
-        //counter++;
         return;
       }
     }
@@ -662,7 +564,6 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
 void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& counter, bool& canPlay, int id){
   if(canPlay){
     srand(time(NULL));
-    // std::cout << "/* NewTour */" << '\n';
 
     std::vector<int> buildings;
 
@@ -706,7 +607,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
     int element;
     //level up of the palace if possible
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      // std::cout << "LevelUp palace" << '\n';
       element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x2,y2))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x2,y2,element)),2);
@@ -731,7 +631,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       return;
       //level up of the barrack if possible
     } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      // std::cout << "LevelUp barrack" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
@@ -755,7 +654,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       return;
       //level up of the ressource if possible
     } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      // std::cout << "LevelUp ressource" << '\n';
       int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x1,y1))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x1,y1,element)),2);
@@ -789,7 +687,6 @@ void HeuristicAI::run (engine::Engine& engine, Observable& principalMap, int& co
       engine.addCommand((unique_ptr<Command> (new CaseIdentifier(x3,y3))),1);
       engine.addCommand(unique_ptr<Command> (new Possibilities(x3,y3,element)),2);
       engine.addCommand(unique_ptr<Command> (new PrintStats(x3,y3,element)),3);
-      // std::cout << "CreateUnit" << '\n';
       std::vector<int> positions={y3,(x3+1),y3+1,(x3+1),y3+1,x3,y3+1,(x3-1),y3,(x3-1)};
 
       int pos=0;

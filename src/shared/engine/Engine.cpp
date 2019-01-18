@@ -8,9 +8,6 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
-// #include "../../extern/jsoncpp-1.8.0/json/json-forwards.h"
-// #include "../../extern/jsoncpp-1.8.0/json/json.h"
-// #include "../../extern/jsoncpp-1.8.0/jsoncpp.cpp"
 #include <json/json.h>
 using namespace engine;
 using namespace state;
@@ -237,8 +234,6 @@ void Engine::addCommand(std::unique_ptr<Command> cmd, int commandId){
 }
 
 void Engine::execute(state::Observable& principalMap){
-  // sf::SoundBuffer buffer;
-  // sf::Sound sound;
   while(!this->commandList.empty()){
     switch(commandListId.front()){
       case 1:{
@@ -272,10 +267,6 @@ void Engine::execute(state::Observable& principalMap){
           commands+=("{\"name\": \"Move\",\"id\": 6,\"x\": "+to_string(mv->getX())+",\"y\": "+to_string(mv->getY())+",\"x2\": "+to_string(mv->getX2())+",\"y2\": "+to_string(mv->getY2())+"},\n");
         }
         mv->execute(principalMap);
-        // sound.stop();
-        // buffer.loadFromFile("res/walk.wav");
-        // sound.setBuffer(buffer);
-        // sound.play();
         usleep(250000);
         break;
       }
