@@ -43,7 +43,7 @@ void Map::beginReplay(){
 Map::Map(){}
 
 void Map::constructMap(){
-  srand(5);//);
+  srand(1);//);
 
   if(this->replay){
     inputFileJSONToRead.open("replay.json");
