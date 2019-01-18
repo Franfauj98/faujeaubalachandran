@@ -360,9 +360,6 @@ void Client::run (){
       }
     }
   }
-  th1.join();
-  th2.join();
-  th3.join();
 }
 
 

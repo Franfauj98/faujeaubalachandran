@@ -267,7 +267,7 @@ void Engine::execute(state::Observable& principalMap){
           commands+=("{\"name\": \"Move\",\"id\": 6,\"x\": "+to_string(mv->getX())+",\"y\": "+to_string(mv->getY())+",\"x2\": "+to_string(mv->getX2())+",\"y2\": "+to_string(mv->getY2())+"},\n");
         }
         mv->execute(principalMap);
-        // usleep(500000);
+        usleep(250000);
         break;
       }
       case 7:{
@@ -276,7 +276,7 @@ void Engine::execute(state::Observable& principalMap){
           commands+=("{\"name\": \"Attack\",\"id\": 7,\"x\": "+to_string(at->getX())+",\"y\": "+to_string(at->getY())+",\"x2\": "+to_string(at->getX2())+",\"y2\": "+to_string(at->getY2())+"},\n");
         }
         at->execute(principalMap);
-        // usleep(500000);
+        usleep(250000);
         break;
       }
       case 5:{
@@ -285,7 +285,7 @@ void Engine::execute(state::Observable& principalMap){
           commands+=("{\"name\": \"LevelUp\",\"id\": 5,\"x\": "+to_string(lu->getX())+",\"y\": "+to_string(lu->getY())+"},\n");
         }
         lu->execute(principalMap);
-        // usleep(500000);
+        usleep(250000);
         break;
       }
       case 4:{
@@ -295,7 +295,7 @@ void Engine::execute(state::Observable& principalMap){
           ",\"unit\": " +to_string(cu->getUnit())+"},\n");
         }
         cu->execute(principalMap);
-        // usleep(500000);
+        usleep(250000);
         break;
       }
       default: break;
@@ -304,7 +304,6 @@ void Engine::execute(state::Observable& principalMap){
     this->commandListIdPrev.push_back(commandListId.front());
     this->commandList.pop();
     this->commandListId.pop();
-    usleep(100000);
   }
 }
 

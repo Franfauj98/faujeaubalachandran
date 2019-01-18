@@ -486,13 +486,9 @@ Ces deux derniers threads ont un mutex en commun pour éviter l'utilisation de r
 Nous devons mettre un certain délai entre l'éxecution des différentes commandes pour avoir un affichage et une exécution des commandes synchronisés.
 
 \subsubsection{Répartition sur différentes machines : rassemblement des joueurs}
-<<<<<<< HEAD
-Comme expliqué précedemment, l'objectif global de la partie modularisation est de connecter différents joueurs à un réseau pour qu'ils puissent jouer ensemble. La première étape était de créer et de faire fonctionner la partie client de l'application de manière indépendante en multithread et de sérialiser les commandes. \\Dans cette partie, l'objectif est de créer la partie serveur de l'application et de s'y connecter par l'intermédiaire du client en exécutant des requêtes sur le serveur. Sur le serveur, nous allons écrire des APIs Web de type REST. Les services sont de type CRUD, ils doivent être capables de réaliser des ajouts, lectures, mises à jour et suppression dans des objets qui stockent temporairement les données de la partie en cours.\\Dans un premier temps, l'idée est de réaliser ces différentes requêtes sur un service qui gère les joueurs. Nous détaillerons par la suite le corps de ces requêtes : 
-=======
 Comme expliqué précedemment, l'objectif global de la partie modularisation est de connecter différents joueurs à un réseau pour qu'ils puissent jouer ensemble. La première étape était de créer et de faire fonctionner la partie client de l'application de manière indépendante en multithread et de sérialiser les commandes. \\Dans cette partie, l'objectif est de créer la partie serveur de l'application et de s'y connecter par l'intermédiaire du client en exécutant des requêtes sur le serveur. Sur le serveur, nous allons écrire des APIs Web de type REST. Les services sont de type CRUD, ils doivent être capables de réaliser des ajouts, lectures, mises à jour et suppression dans des objets qui stockent temporairement les données de la partie en cours.\\Dans un premier temps, l'idée est de réaliser ces différentes requêtes sur un service qui gère les joueurs. 
 
 Nous détaillerons par la suite le corps de ces requêtes : 
->>>>>>> 5bb7cbeaacf19c33a391ff6f9924795220afe29a
 
 
 \begin{longtable}{ll}
@@ -609,8 +605,6 @@ Nous détaillerons par la suite le corps de ces requêtes :
 
 \end{longtable}
 
-<<<<<<< HEAD
-=======
 \subsubsection{Répartition sur différentes machines : partie en réseau et échanges de commandes}
 
 Au lancement du jeu, nous avons le choix entre une partie locale (1 joueur, 2 joueurs et une démonstration faite par les IA) et une partie en multijoueur. Lorsque le joueur choisit une partie en multijoueur, il doit attendre 10 secondes pendant lesquelles un autre joueur peut se connecter. Si le joueur est seul sur le serveur, il fera une partie en locale contre deux IA. Sinon, s'il y a un deuxième joueur connecté, la partie est lancée entre les deux joueurs avec une IA. Nous avons décidé pour ce livrable d'avoir une map fixe et non aléatoire pour éviter l'envoi de celle-ci. Si un troisième joueur essaie de se connecter, cela ne sera pas possible.\\
@@ -621,7 +615,6 @@ Nous avons décidé que le serveur sert que de relais pour les commandes, il re�
 L'API pour les commandes suit complètement le fonctionnement de l'API précédente. On peut réaliser toutes les requêtes définies précédemment avec "command" à la place de "player". Les réponses à ces requêtes sont les mêmes. Nous ne recopierons donc pas la doc de l'API précédente en changeant "player" par "command".\\  
 Ainsi lorsqu'un joueur clique sur la map et fait une action ou l'IA fait une action, les commandes associées à cette action sont stockées temporairement dans le client puis envoyées au serveur.  Celui-ci numérote les commandes au fur et à mesure. Le client récupère en permanence les nouvelles commandes ajoutées sur le serveur et les ajoute dans son moteur qui les exécutera. Lorsqu'un joueur a fini son tour, il ne peut plus cliquer sur la map. Le joueur 1 commence bien évidemment la partie et c'est son IA qui joue à la place du troisième joueur.
 
->>>>>>> 5bb7cbeaacf19c33a391ff6f9924795220afe29a
 \subsection{Conception logiciel}
 
 Partie client : \\
@@ -643,31 +636,15 @@ La classe client a les méthodes suivantes:
     \item une méthode aiUpdatingServer: elle permet de faire tourner l'IA qui envoie les commandes dans le deque du client
     \item une méthode engineUpdating: elle permet d'exécuter les commandes et d'envoyer un signal pour mettre à jour le rendu
     \item une méthode playerUpdating qui met à jour le numéro du joueur à jouer ainsi que les ressources à chaque fin de tour
-<<<<<<< HEAD
-    \item une méthode connect : elle permet de tester la connexion au serveur. Ajouter un joueur à une partie, visualiser des joueurs, le supprimer. Cette méthode s'appuie sur les fonctions "sendPut", "sendDelete" et "sendGet" écrites pour éviter de dupliquer du code.
-=======
     \item une méthode playerUpdating qui met à jour le numéro du joueur à jouer ainsi que les ressources à chaque fin de tour lorque nous sommes en réseau
     \item une méthode connect : elle permet de tester la connexion au serveur. Ajouter un joueur à une partie, visualiser des joueurs, le supprimer. Cette méthode s'appuie sur les fonctions "sendPut", "sendDelete" et "sendGet" écrites pour éviter de dupliquer du code.
     \item une méthode commandSend qui envoie les commandes du client dès qu'il y en a 
     \item une méthode commandRequest qui demande s'il y a de nouvelles commandes
->>>>>>> 5bb7cbeaacf19c33a391ff6f9924795220afe29a
 \end{itemize}
 
 \newpage
 Partie serveur : \\
 Pour cette partie nous nous somme appuyés sur le td de moodle qui réalise un serveur REST très simple avec "microHTTPd". Nous avons fait le td et l'avons adapté à notre projet. \\Notre conception contient les éléments suivants : 
-<<<<<<< HEAD
-
-\begin{itemize}
-    \item Méthode "main" : créée et lance le serveur microHTTPd.
-    \item Classe "ServiceManager" : elle permet d'enregistrer de nouveaux services pour communiquer avec le serveur, de trouver les services correspondant aux routes appelées par les clients, et d'interroger ces services en fonction de la méthode qu'ils utilisent (GET, POST, PUT, DELETE).
-    \item Classe Abstract Service : c'est cette classe qui permet au ServiceManager d'instancier n'importe quel service. Cette classe est une classe abstraite qui est héritée par tous les services de notre projet. Elle contient toutes les méthodes (CRUD) qui seront nécessaires à nos différents services et qui seront ré-implémentées grâce au principe du polymorphisme.  
-    \item Classe "PlayerService" : Permet de réaliser les opérations de type CRUD sur la classe PlayerDB qui stocke dans un objet de type "map" les joueurs de la partie en cours. Un joueur est créé en instanciant un nouveau "Player" de la classe "Player". On peut ainsi ajouter, récupérer, modifier ou supprimer très facilement tous les joueurs contenues dans la "map" base de données.
-    \item Classe "VersionService" : permet de connaître la version de l'API en cours. Ceci permet d'éviter des conflits entre versions. 
-    \item Classe "ServiceException" : permet de déterminer et de renvoyer le bon statut à l'issue de chaque requête sur le serveur contenu dans l'énumeration "HttpStatus" ("OK, "BAD\_REQUEST", "CREATED"...).
-\end{itemize}
-=======
->>>>>>> 5bb7cbeaacf19c33a391ff6f9924795220afe29a
 
 \begin{itemize}
     \item Méthode "main" : créée et lance le serveur microHTTPd.
