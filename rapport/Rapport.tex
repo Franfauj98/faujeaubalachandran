@@ -6,6 +6,7 @@
 
 \usepackage[tc]{titlepic}
 
+\usepackage{longtable}
 \usepackage{adjustbox}
 \usepackage{graphicx}
 \usepackage{layout}
@@ -435,6 +436,7 @@ Pour cette IA, un rollback, qui permet de revenir à un état précédent, a ét
     \item Classe RandomAI : contient une méthode run qui permet à l'intelligence artificielle naïve de lancer ses coups. 
     \item Classe HeuristicAI : contient une méthode run qui permet à l'intelligence artificielle heuristique de lancer ses coups. Elle utilise les heuristiques définies dans la sous section précédente. Pour réaliser le déplacement des unités nous avons besoin d'une "mémoire". En effet, notre carte contient des obstacles. Ainsi, pour les contourner nous avons besoin à chaque mouvement de rechercher la case la plus proche de la cible mais qui n'implique ni un retour en arrière pénalisant ni d'être bloqué par un obstacle. Nous avons donc ajouté un attribut à la classe Units qui s'appelle "canMove" et qui stocke les 3 dernières cases utilisées par l'unité.
     \item Classe DeepAI : Contient une méthode "run" qui fait appel à une fonction minmax. Cette fonction minmax fait appel à une fonction min et une fonction max qui permettent de trouver le min ou le max d'une portion de tableau. La fonction min max réalise de plus des actions avec la méthodes preformActions puis elle les rollback et renvoie le meilleur coup à jouer à la méthode "run". Le poids de chaque action lorsqu'on est en bas de l'arbre est calculé par la fonction weightUpdate. Cette fonction permet de vérifier ce que peut faire le joueur et de renvoyer le poids de chaque action possible ou -1 dans le cas ou l'action ne peut pas être faite. Chaque action renvoie à une heuristique qui vérifie sa faisabilité et l'exécute ensuite. 
+    Elle a de plus une méthode runServer qui lance une IA heuristique correspondant aux attentes d'un jeu en réseau.
     \item Classe AStar : Cette classe permet d'utiliser l'algorithme AStar qui est un algorithme de recherche du plus court chemin entre deux points. Pour appliquer cette algorithme nous avons empêché que l'algorithme cherche à passer par des obstacles non franchissables.
 \end{itemize}
 \newpage
@@ -477,12 +479,145 @@ Nous avons en tout quatre threads:
     \item thread moteur: il exécute en permanence les commandes dès qu'il peut et émet un signal pour informer le thread principal de la mise à jour du rendu. 
     \item thread IA: il ajoute des commandes pour le joueur en cours. Il est exécuté après le thread secondaire.
     \item thread secondaire: il est exécuté avant le thread IA. Il permet de connaître le numéro du joueur à jouer et de faire les mises à jour des ressources.
-    
+    \item quatrième thread : Il permet d'envoyer les commandes du client lorsqu'il y en a en réseau
+    \item cinquième thread : Il permet de demander les nouvelles commandes au serveur et les ajoute au moteur du client en réseau
 \end{itemize}
 Ces deux derniers threads ont un mutex en commun pour éviter l'utilisation de ressources critiques en même temps.
 Nous devons mettre un certain délai entre l'éxecution des différentes commandes pour avoir un affichage et une exécution des commandes synchronisés.
 
+\subsubsection{Répartition sur différentes machines : rassemblement des joueurs}
+Comme expliqué précedemment, l'objectif global de la partie modularisation est de connecter différents joueurs à un réseau pour qu'ils puissent jouer ensemble. La première étape était de créer et de faire fonctionner la partie client de l'application de manière indépendante en multithread et de sérialiser les commandes. \\Dans cette partie, l'objectif est de créer la partie serveur de l'application et de s'y connecter par l'intermédiaire du client en exécutant des requêtes sur le serveur. Sur le serveur, nous allons écrire des APIs Web de type REST. Les services sont de type CRUD, ils doivent être capables de réaliser des ajouts, lectures, mises à jour et suppression dans des objets qui stockent temporairement les données de la partie en cours.\\Dans un premier temps, l'idée est de réaliser ces différentes requêtes sur un service qui gère les joueurs. 
+
+Nous détaillerons par la suite le corps de ces requêtes : 
+
+
+\begin{longtable}{ll}
+   Requête GET /player/ &  \\
+   \hline
+   \hline
+   Cas pas de données en entrée &  \\
+   \hline
+   Cas où il y a au moins un player & Statut OK\\
+    & status: 200\\
+    & type : "array"\\
+    & body: \{ \\
+    & \hspace{1cm}"players" : [\\
+    &      \hspace{2cm}\{\\
+    &          \hspace{3cm}"name" : \{type:string\},\\
+    &          \hspace{3cm}"type" : \{type:number,ai:0,human:1\}\\
+    &      \hspace{2cm}\},\\
+    &      \hspace{2cm}\{\\
+    &         \hspace{3cm}"name" : \{type:string\},\\
+    &         \hspace{3cm}"type" : \{type:number,ai:0,human:1\}\\
+    &      \hspace{2cm}\},\\
+    &      \hspace{2cm}\{\\
+    &         \hspace{3cm}"name" : \{type:string\},\\
+    &         \hspace{3cm}"type" : \{type:number,ai:0,human:1\}\\
+    &      \hspace{2cm}\}\\
+    &   \hspace{1cm}]\\
+    & \}\\
+   \hline
+    Cas où il n'y a pas de player & Statut OK\\
+    & status: 200\\
+    & type : "object"\\
+    & body: \{ \\
+    & \hspace{1cm}"players" : null\\
+    & \}\\
+
+    & & \\
+    
+   Requête GET /player/<id> &  \\
+   \hline
+   \hline
+   Cas pas de données en entrée &  \\
+   \hline
+   Cas où il y a au moins un player & Statut OK\\
+    & status: 200\\
+    & type : "object"\\
+    & body: \{ \\
+    &      \hspace{1cm}\{\\
+    &          \hspace{2cm}"name" : \{type:string\},\\
+    &          \hspace{2cm}"type" : \{type:number,ai:0,human:1\}\\
+    &      \hspace{1cm}\}\\
+    & \}\\
+   \hline
+    Cas où il n'y a pas de player & Statut OK\\
+    & status: 200\\
+    & body: \{ \\
+    & \hspace{1cm}null\\
+    & \}\\
+
+    & & \\
+    
+   Requête PUT /player &  \\
+   \hline
+   \hline
+   Données en entrée &  \\
+   \hline
+    type : "object" & \\
+   \{ & \\
+    \hspace{1cm} "name" : \{type:string\}, & \\
+    \hspace{1cm} "type" : \{type:number\} & \\
+   \} & \\
+   \hline
+   Si place libre : & Status CREATED \\
+   & Données sortie :\\ 
+   & type : "object"\\
+   & body: \{\\
+   & \hspace{1cm} "id": \{type:number,minimum:1,maximum:3\},\\
+   & \}\\
+   \hline
+   Si plus de place libre : & Status NOT\_CREATED \\
+   & Données sortie :\\ 
+   & Pas de données de sortie\\
+
+   & & \\
+    
+   Requête POST /player/<id> &  \\
+   \hline
+   \hline
+   Données en entrée &  \\
+   \hline
+    type : "object" & \\
+   \{ & \\
+    \hspace{1cm} "name" : \{type:string\}, & \\
+    \hspace{1cm} "type" : \{type:number\} & \\
+   \} & \\
+   \hline
+   Cas joueur <id> existe : & Status NO\_CONTENT \\
+   & Pas de données en sortie\\
+   \hline
+   Cas joueur <id> n'existe pas : & Status NOT\_FOUND \\
+   & Pas de données en sortie\\
+
+   & & \\
+    
+   Requête DELETE /player/<id> &  \\
+   \hline
+   \hline
+   Pas de données en entrée &  \\
+   \hline
+   Cas joueur <id> existe : & Status NO\_CONTENT \\
+   & Pas de données en sortie\\
+   \hline
+   Cas joueur <id> n'existe pas : & Status NOT\_FOUND \\
+   & Pas de données en sortie\\
+
+\end{longtable}
+
+\subsubsection{Répartition sur différentes machines : partie en réseau et échanges de commandes}
+
+Au lancement du jeu, nous avons le choix entre une partie locale (1 joueur, 2 joueurs et une démonstration faite par les IA) et une partie en multijoueur. Lorsque le joueur choisit une partie en multijoueur, il doit attendre 10 secondes pendant lesquelles un autre joueur peut se connecter. Si le joueur est seul sur le serveur, il fera une partie en locale contre deux IA. Sinon, s'il y a un deuxième joueur connecté, la partie est lancée entre les deux joueurs avec une IA. Nous avons décidé pour ce livrable d'avoir une map fixe et non aléatoire pour éviter l'envoi de celle-ci. Si un troisième joueur essaie de se connecter, cela ne sera pas possible.\\
+
+\\Échanges de commandes:
+
+Nous avons décidé que le serveur sert que de relais pour les commandes, il reçoit les commandes de tous les clients et permet la redistribution à tous les clients. Ainsi chaque client à son propre rendu, calcul du joueur à jouer, moteur ... Ainsi le chemin de l'exécution d'une commande est le suivant : un client envoie une commande au serveur, tous les clients récupèrent la commande, tous les clients l'exécute.\\
+L'API pour les commandes suit complètement le fonctionnement de l'API précédente. On peut réaliser toutes les requêtes définies précédemment avec "command" à la place de "player". Les réponses à ces requêtes sont les mêmes. Nous ne recopierons donc pas la doc de l'API précédente en changeant "player" par "command".\\  
+Ainsi lorsqu'un joueur clique sur la map et fait une action ou l'IA fait une action, les commandes associées à cette action sont stockées temporairement dans le client puis envoyées au serveur.  Celui-ci numérote les commandes au fur et à mesure. Le client récupère en permanence les nouvelles commandes ajoutées sur le serveur et les ajoute dans son moteur qui les exécutera. Lorsqu'un joueur a fini son tour, il ne peut plus cliquer sur la map. Le joueur 1 commence bien évidemment la partie et c'est son IA qui joue à la place du troisième joueur.
+
 \subsection{Conception logiciel}
+
+Partie client : \\
 La classe client a les attributs suivants:
 \begin{itemize}
     \item un moteur
@@ -490,25 +625,52 @@ La classe client a les attributs suivants:
     \item le rendu
     \item une intelligence artificielle heuristique
     \item un mutex
+    \item un deque qui stocke les commandes effectuées par le client (IA ou joueur)
 \end{itemize}
 La création d'un client permet donc d'avoir tous les éléments nécessaires pour faire tourner le jeu. 
-
 La classe client a les méthodes suivantes:
 \begin{itemize}
     \item le constructeur
     \item une méthode run: elle initialise les différentes variables, la fenêtre d'affichage et le thread principal. Elle lance aussi les différents threads.
     \item une méthode aiUpdating: elle permet de faire tourner l'IA 
+    \item une méthode aiUpdatingServer: elle permet de faire tourner l'IA qui envoie les commandes dans le deque du client
     \item une méthode engineUpdating: elle permet d'exécuter les commandes et d'envoyer un signal pour mettre à jour le rendu
     \item une méthode playerUpdating qui met à jour le numéro du joueur à jouer ainsi que les ressources à chaque fin de tour
-    \item une méthode connect qui sera explicitée dans le prochain rapport
+    \item une méthode playerUpdating qui met à jour le numéro du joueur à jouer ainsi que les ressources à chaque fin de tour lorque nous sommes en réseau
+    \item une méthode connect : elle permet de tester la connexion au serveur. Ajouter un joueur à une partie, visualiser des joueurs, le supprimer. Cette méthode s'appuie sur les fonctions "sendPut", "sendDelete" et "sendGet" écrites pour éviter de dupliquer du code.
+    \item une méthode commandSend qui envoie les commandes du client dès qu'il y en a 
+    \item une méthode commandRequest qui demande s'il y a de nouvelles commandes
 \end{itemize}
 
-Remarque : Nous avons commencé à travailler sur le serveur, c'est pour cela que vous trouverez dès ce tag des fichiers dans le dossier "server" et dans le dia une partie "server". Pour ce tag, nous avons enlevé la compilation du serveur. 
+\newpage
+Partie serveur : \\
+Pour cette partie nous nous somme appuyés sur le td de moodle qui réalise un serveur REST très simple avec "microHTTPd". Nous avons fait le td et l'avons adapté à notre projet. \\Notre conception contient les éléments suivants : 
 
+\begin{itemize}
+    \item Méthode "main" : créée et lance le serveur microHTTPd.
+    \item Classe "ServiceManager" : elle permet d'enregistrer de nouveaux services pour communiquer avec le serveur, de trouver les services correspondant aux routes appelées par les clients, et d'interroger ces services en fonction de la méthode qu'ils utilisent (GET, POST, PUT, DELETE).
+    \item Classe Abstract Service : c'est cette classe qui permet au ServiceManager d'instancier n'importe quel service. Cette classe est une classe abstraite qui est héritée par tous les services de notre projet. Elle contient toutes les méthodes (CRUD) qui seront nécessaires à nos différents services et qui seront ré-implémentées grâce au principe du polymorphisme.  
+    \item Classe "PlayerService" : Permet de réaliser les opérations de type CRUD sur la classe PlayerDB qui stocke dans un objet de type "map" les joueurs de la partie en cours. Un joueur est créé en instanciant un nouveau "Player" de la classe "Player". On peut ainsi ajouter, récupérer, modifier ou supprimer très facilement tous les joueurs contenues dans la "map" base de données.
+    \item Classe "Command" : Cette classe permet de créer une commande qui sera enregistrée dans la base de donnée du serveur. 
+    \item Classe "CommandDB" : Cette classe contient la liste des commandes et permet de réaliser toutes les méthodes que l'API REST a défini (GET, POST, PUT, DELETE).
+    \item Classe "CommandService" : Interroge la base de données "CommandDB" pour réaliser les requêtes HTML.
+    \item Classe "VersionService" : permet de connaître la version de l'API en cours. Ceci permet d'éviter des conflits entre versions. 
+    \item Classe "ServiceException" : permet de déterminer et de renvoyer le bon statut à l'issue de chaque requête sur le serveur contenu dans l'énumeration "HttpStatus" ("OK, "BAD\_REQUEST", "CREATED"...).
+\end{itemize}
+\newpage
 \begin{figure}[!ht]
 \centering
     \includegraphics[width=1\textwidth]{ressources/module.png}
      \caption{Diagramme de classes du client}
 \end{figure}
+\newpage
+\section{Conclusion générale du projet}
+Pour conclure, nous avons réussi à rendre chaque livrable terminé à l'heure. Pour chaque livrable nous avons globalement répondu à ce qui était attendu. Plus précisement, pour le livrable 4.final nous avons testé de mettre le jeu en ligne sur le serveur Kerosen.\\ 
+Il y a encore beaucoup d'améliorations possibles pour le projet. Le temps étant très court entre chaque livrable nous avons du rester sur les bases de ce qui est possible pour chaque rendu. Nous pourrions en particulier optimiser et modulariser encore plus le code, améliorer énormément la partie graphique des gameplays et procurer un mode réseau au jeu plus solide pour pouvoir résister à la triche.
+Nous aurons, sans aucun doute progressé énormément en conception logicielle et en programmation.\\
+Nous avons de plus pris du plaisir à réaliser ce projet et nous sommes fiers d'avoir pu arriver au bout.
+\newpage
 
+\section{Remerciements}
+Nous remercions David Picard, Christophe Barès, Luvizon Diogo ainsi que Veronica Belmega pour nous avoir aidés et guidés au cours du projet logiciel transversal.
 \end{document}

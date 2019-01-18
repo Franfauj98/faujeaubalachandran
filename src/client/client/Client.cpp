@@ -164,7 +164,6 @@ void Client::run (){
       response = http.sendRequest(request);
       reader.parse(response.getBody(), body);
       if(response.getStatus()==200){
-        cout<<"not possible to play"<<endl;
         window.clear();
         Layer endGame("res/startMenu4.png");
         endGame.drawSprite(window);

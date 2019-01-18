@@ -132,10 +132,8 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
     Barrack* barrack = (Barrack*) principalMap.getAllMaps().getBuildingsMap()[y3+25*x3].get();
     int levelUnit = barrack->getLevel();
 
-    int element;
     //level up of the palace if possible
     if(palace->getLevel() < 4 && palace->getBuildingCost().getWood()<=empire->getWoodRessource() && palace->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      element=principalMap.getAllMaps().getMapMatrix()[x2][y2];
       command.push_back("{\"id\": 1, \"x\":"+ to_string(x2) +", \"y\":"+to_string(y2)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 2, \"x\":"+to_string(x2)+", \"y\":"+to_string(y2)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 3, \"x\":"+to_string(x2)+", \"y\":"+to_string(y2)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
@@ -155,7 +153,6 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
       return;
       //level up of the barrack if possible
     } else if(barrack->getLevel() < palace->getLevel() && barrack->getBuildingCost().getWood()<=empire->getWoodRessource() && barrack->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       command.push_back("{\"id\": 1, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 2, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 3, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
@@ -175,7 +172,6 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
       return;
       //level up of the ressource if possible
     } else if(ressource->getLevel() < palace->getLevel() && ressource->getBuildingCost().getWood()<=empire->getWoodRessource() && ressource->getBuildingCost().getGold()<=empire->getGoldRessource()){
-      int element=principalMap.getAllMaps().getMapMatrix()[x1][y1];
       command.push_back("{\"id\": 1, \"x\":"+to_string(x1)+", \"y\":"+to_string(y1)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 2, \"x\":"+to_string(x1)+", \"y\":"+to_string(y1)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 3, \"x\":"+to_string(x1)+", \"y\":"+to_string(y1)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
@@ -201,7 +197,6 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
       (catapultCost[levelUnit-1]<=empire->getFoodRessource() && catapultCost[levelUnit-1]<=empire->getGoldRessource())
     )
     ){
-      int element=principalMap.getAllMaps().getMapMatrix()[x3][y3];
       command.push_back("{\"id\": 1, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 2, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
       command.push_back("{\"id\": 3, \"x\":"+to_string(x3)+", \"y\":"+to_string(y3)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"\"}");
@@ -440,7 +435,7 @@ void HeuristicAI::runServer (Observable& principalMap, bool& canPlay, int id, st
           command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 2: Unit Attack\" }");
           break;
           case 3:
-          command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Unit Attack\ }");
+          command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1, \"message\":\"Player 3: Unit Attack\" }");
           break;
           default:break;
         }
