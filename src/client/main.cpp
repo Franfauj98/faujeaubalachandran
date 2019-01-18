@@ -1177,16 +1177,16 @@ int main(int argc,char* argv[])
 
   Client client;
   client.run();
-  return 1;
+
 
 } else if (argv[1] &&!strcmp(argv[1],"network")) {
 
   Client client;
-  client.connect();
-
+  //client.connect();
+  client.run();
 
 } else {
-    cout << "Please type : \n'hello' or \n'state' or \n'render' or \n'engine' or \n'random_ai' or \n'heuristic_ai' or \n'deep_ai' or \n'record' or \n'play' or \n'thread'" << endl;
+    cout << "Please type : \n'hello' or \n'state' or \n'render' or \n'engine' or \n'random_ai' or \n'heuristic_ai' or \n'deep_ai' or \n'record' or \n'play' or \n'thread' or \n'listen' or \n'network'" << endl;
     // Engine engine;
   }
 

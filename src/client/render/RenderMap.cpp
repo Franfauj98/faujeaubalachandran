@@ -234,10 +234,34 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           if(shot==1){
             if(element2==2){
               engine.addCommand((unique_ptr<Command> (new Move(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3]))),6);
+              switch(id){
+                case 1:
+                engine.setMessage("Player 1: Unit Moved");
+                break;
+                case 2:
+                engine.setMessage("Player 2: Unit Moved");
+                break;
+                case 3:
+                engine.setMessage("Player 3: Unit Moved");
+                break;
+                default:break;
+              }
               counter++;
             }
-            if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
+            else if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
               engine.addCommand((unique_ptr<Command> (new Attack(getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3]))),7);
+              switch(id){
+                case 1:
+                engine.setMessage("Player 1: Unit Attack");
+                break;
+                case 2:
+                engine.setMessage("Player 2: Unit Attack");
+                break;
+                case 3:
+                engine.setMessage("Player 3: Unit Attack");
+                break;
+                default:break;
+              }
               counter++;
             }
           }
@@ -257,6 +281,30 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           if(shot==1){
             if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[4]<=192){
               engine.addCommand((unique_ptr<Command> (new LevelUp(getLastClicks()[0],getLastClicks()[1]))),5);
+              switch(id){
+                case 1:
+                if(element==31){
+                  engine.setMessage("Player 1: Ressource LevelUp");
+                } else {
+                  engine.setMessage("Player 1: Palace LevelUp");
+                }
+                break;
+                case 2:
+                if(element==31){
+                  engine.setMessage("Player 2: Ressource LevelUp");
+                } else {
+                  engine.setMessage("Player 2: Palace LevelUp");
+                }
+                break;
+                case 3:
+                if(element==31){
+                  engine.setMessage("Player 3: Ressource LevelUp");
+                } else {
+                  engine.setMessage("Player 3: Palace LevelUp");
+                }
+                break;
+                default:break;
+              }
               counter++;
             }
           }
@@ -276,6 +324,19 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           if(shot==1){
             if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 256 && getLastClicks()[3]<=320){
               engine.addCommand((unique_ptr<Command> (new LevelUp(getLastClicks()[0],getLastClicks()[1]))),5);
+              switch(id){
+                case 1:
+                engine.setMessage("Player 1: Barrack LevelUp");
+                break;
+                case 2:
+                engine.setMessage("Player 2: Barrack LevelUp");
+                break;
+                case 3:
+                engine.setMessage("Player 3: Barrack LevelUp");
+                break;
+                default:break;
+              }
+              counter++;
             }
           }
           firstC = false;
@@ -283,12 +344,26 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
           thirdC = true;
         }
       } else if(thirdC){
+        Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+        int id = barrack->getIdBuilding();
         if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
           sf::Vector2i click3 = getClick(window, event);
           std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
           this->lastClicks=lastClick;
           if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],click3.x,click3.y,1))),4);
+            switch(id){
+              case 1:
+              engine.setMessage("Player 1: Arrow Created");
+              break;
+              case 2:
+              engine.setMessage("Player 2: Arrow Created");
+              break;
+              case 3:
+              engine.setMessage("Player 3: Arrow Created");
+              break;
+              default:break;
+            }
             counter++;
           }
         }
@@ -299,6 +374,18 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
 
           if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],click3.x,click3.y,2))),4);
+            switch(id){
+              case 1:
+              engine.setMessage("Player 1: Decurion Created");
+              break;
+              case 2:
+              engine.setMessage("Player 2: Decurion Created");
+              break;
+              case 3:
+              engine.setMessage("Player 3: Decurion Created");
+              break;
+              default:break;
+            }
             counter++;
           }
         }
@@ -309,6 +396,18 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
 
           if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],click3.x,click3.y,4))),4);
+            switch(id){
+              case 1:
+              engine.setMessage("Player 1: Catapult Created");
+              break;
+              case 2:
+              engine.setMessage("Player 2: Catapult Created");
+              break;
+              case 3:
+              engine.setMessage("Player 3: Catapult Created");
+              break;
+              default:break;
+            }
             counter++;
           }
         }
@@ -319,6 +418,18 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
 
           if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
             engine.addCommand((unique_ptr<Command> (new CreateUnit(getLastClicks()[0],getLastClicks()[1],click3.x,click3.y,3))),4);
+            switch(id){
+              case 1:
+              engine.setMessage("Player 1: Cavalier Created");
+              break;
+              case 2:
+              engine.setMessage("Player 2: Cavalier Created");
+              break;
+              case 3:
+              engine.setMessage("Player 3: Cavalier Created");
+              break;
+              default:break;
+            }
             counter++;
           }
         }
@@ -330,6 +441,321 @@ void RenderMap::handle(sf::RenderWindow& window, Observable& principalMap, engin
     }
   }
 }
+
+
+
+void RenderMap::handleServer(sf::RenderWindow& window, Observable& principalMap, sf::Event& event, bool& firstC, bool& secondC, bool& thirdC, std::deque<std::string>& command,int& idPalace, int& idPlayer){
+  if(idPlayer==idPalace){
+    while (window.pollEvent(event)){
+      if (event.type == sf::Event::Closed){
+          window.close();
+      }
+      if((event.type == sf::Event::MouseButtonPressed)){
+        if (firstC){
+          sf::Vector2i click = getClick(window,event);
+          if(click.x>=0 && click.x<=24 && click.y>=0 && click.y<=24){
+            std::vector<int> lastClick ={click.x,click.y,0,0,0,0};
+            this->lastClicks=lastClick;
+            int element = principalMap.getAllMaps().getMapMatrix()[click.x][click.y];
+            command.push_back("{\"id\": 1, \"x\":"+ to_string(click.x) +", \"y\":"+to_string(click.y)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1}");
+            command.push_back("{\"id\": 2, \"x\":"+ to_string(click.x) +", \"y\":"+to_string(click.y)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":"+to_string(element)+"}");
+            command.push_back("{\"id\": 3, \"x\":"+ to_string(click.x) +", \"y\":"+to_string(click.y)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":"+to_string(element)+"}");
+            if(element == 2 || element == 1 || element == 3 || element == 4 || element == 5 || element == 6 || element == 7 || element == 8){
+              firstC = true;
+              secondC = false;
+              thirdC = false;
+            } else {
+              firstC = false;
+              secondC = true;
+              thirdC = false;
+            }
+          }
+        }
+        else if(secondC){
+
+          int element = principalMap.getAllMaps().getMapMatrix()[getLastClicks()[0]][getLastClicks()[1]];
+          if (element==10||element==14||element==18||element==22) {
+            sf::Vector2i click2 = getClick(window,event);
+            if(click2.x>=0 && click2.x<=24 && click2.y>=0 && click2.y<=24){
+              int element2 = principalMap.getAllMaps().getMapMatrix()[click2.x][click2.y];
+              command.push_back("{\"id\": 1, \"x\":"+ to_string(click2.x) +", \"y\":"+to_string(click2.y)+", \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1}");
+              std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0 };
+              this->lastClicks=lastClick;
+
+              Units* unit =(Units*) principalMap.getAllMaps().getUnitsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+              int id = unit->getIdUnits();
+              int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+              if(shot==1){
+                if(element2==2){
+                  command.push_back("{\"id\": 6, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":"+to_string(getLastClicks()[2])+", \"y2\":"+to_string(getLastClicks()[3])+", \"unit\": -1, \"element\": -1}");
+                  switch(id){
+                    case 1:
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Unit Moved\" }");
+                    break;
+                    case 2:
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Unit Moved\" }");
+                    break;
+                    case 3:
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Unit Moved\" }");
+                    break;
+                    default:break;
+                  }
+                }
+                else if(element2==10||element2==14||element2==18||element2==22||element2==26||element2==27||element2==28||element2==29){
+                  command.push_back("{\"id\": 7, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":"+to_string(getLastClicks()[2])+", \"y2\":"+to_string(getLastClicks()[3])+", \"unit\": -1, \"element\": -1}");
+                  switch(id){
+                    case 1:
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Unit Attack\"}");
+                    break;
+                    case 2:
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Unit Attack\" }");
+                    break;
+                    case 3:
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Unit Attack\" }");
+                    break;
+                    default:break;
+                  }
+                }
+              }
+              firstC = true;
+              secondC = false;
+              thirdC = false;
+            }
+          }
+
+          else if ((element==26||element==27||element==28||element==29||element==31)) {
+            sf::Vector2i click2 = getClickButton(window, event);
+            std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0 };
+            this->lastClicks=lastClick;
+
+            Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+            int id = barrack->getIdBuilding();
+            int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+            if(shot==1){
+              if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[4]<=192){
+                command.push_back("{\"id\": 5, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":-1, \"y2\":-1, \"unit\": -1, \"element\": -1}");
+                switch(id){
+                  case 1:
+                  if(element==31){
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Ressource LevelUp\" }");
+                  } else {
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Palace LevelUp\"  }");
+                  }
+                  break;
+                  case 2:
+                  if(element==31){
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":  -1,\"message\":\"Player 2: Ressource LevelUp\" }");
+                  } else {
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Palace LevelUp\"  }");
+                  }
+                  break;
+                  case 3:
+                  if(element==31){
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":  -1,\"message\":\"Player 3: Ressource LevelUp\" }");
+                  } else {
+                    command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Palace LevelUp\" }");
+                  }
+                  break;
+                  default:break;
+                }
+              }
+            }
+            firstC = true;
+            secondC = false;
+            thirdC = false;
+          }
+          else if (element==30) {
+            sf::Vector2i click2 = getClickButton(window, event);
+            std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],click2.x,click2.y,0,0};
+            this->lastClicks=lastClick;
+
+            Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+            int id = barrack->getIdBuilding();
+            int shot = principalMap.getAllMaps().getEmpires()[id-1]->getShot();
+            std::vector<std::vector<int>> matrix = principalMap.getAllMaps().getMapMatrix();
+            if(shot==1){
+              if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 256 && getLastClicks()[3]<=320){
+                command.push_back("{\"id\": 5, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":-1, \"y2\":-1, \"unit\": -1, \"element\": -1}");
+                switch(id){
+                  case 1:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":-1,\"message\":\"Player 1: Barrack LevelUp\" }");
+                  break;
+                  case 2:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Barrack LevelUp\" }");
+                  break;
+                  case 3:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Barrack LevelUp\" }");
+                  break;
+                  default:break;
+                }
+              }
+            }
+            firstC = false;
+            secondC = false;
+            thirdC = true;
+          }
+        } else if(thirdC){
+          Buildings* barrack =(Buildings*) principalMap.getAllMaps().getBuildingsMap()[getLastClicks()[1]+25*getLastClicks()[0]].get();
+          int id = barrack->getIdBuilding();
+          if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
+            sf::Vector2i click3 = getClick(window, event);
+            if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
+              std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+              this->lastClicks=lastClick;
+              if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+                command.push_back("{\"id\": 4, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":"+to_string(click3.x)+", \"y2\":"+to_string(click3.y)+", \"unit\": 1, \"element\": -1}");
+                switch(id){
+                  case 1:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":-1,\"message\":\" Player 1: Arrow Created\" }");
+                  break;
+                  case 2:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 2: Arrow Created\" }");
+                  break;
+                  case 3:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 3: Arrow Created\" }");
+                  break;
+                  default:break;
+                }
+              }
+            }
+          }
+          if (getLastClicks()[2]>= 96 && getLastClicks()[2]<=192 && getLastClicks()[3]>= 128 && getLastClicks()[3]<=192){
+            sf::Vector2i click3 = getClick(window, event);
+            if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
+              std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+              this->lastClicks=lastClick;
+
+              if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+                command.push_back("{\"id\": 4, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":"+to_string(click3.x)+", \"y2\":"+to_string(click3.y)+", \"unit\": 2, \"element\": -1}");
+                switch(id){
+                  case 1:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\":-1,\"message\":\" Player 1: Decurion Created\" }");
+                  break;
+                  case 2:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 2: Decurion Created\" }");
+                  break;
+                  case 3:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\" Player 3: Decurion Created\" }");
+                  break;
+                  default:break;
+                }
+              }
+            }
+          }
+          if (getLastClicks()[2]>= 0 && getLastClicks()[2]<=96 && getLastClicks()[3]>= 192 && getLastClicks()[3]<=256){
+            sf::Vector2i click3 = getClick(window, event);
+            if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
+              std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+              this->lastClicks=lastClick;
+
+              if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+                command.push_back("{\"id\": 4, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":"+to_string(click3.x)+", \"y2\":"+to_string(click3.y)+", \"unit\": 4, \"element\": -1}");
+                switch(id){
+                  case 1:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 1: Cavalier Created\" }");
+                  break;
+                  case 2:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 2: Cavalier Created\" }");
+                  break;
+                  case 3:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\":\"Player 3: Cavalier Created\" }");
+                  break;
+                  default:break;
+                }
+              }
+            }
+          }
+          if (getLastClicks()[2]>= 96 && getLastClicks()[2]<=192 && getLastClicks()[3]>= 192 && getLastClicks()[3]<=256){
+            sf::Vector2i click3 = getClick(window, event);
+            if(click3.x>= 0 && click3.x<=24 && click3.y>=0 && click3.y<=24){
+              std::vector<int> lastClick ={getLastClicks()[0],getLastClicks()[1],getLastClicks()[2],getLastClicks()[3],click3.x,click3.y};
+              this->lastClicks=lastClick;
+              if(principalMap.getAllMaps().getMapMatrix()[click3.x][click3.y]==2){
+                command.push_back("{\"id\": 4, \"x\":"+ to_string(getLastClicks()[0]) +", \"y\":"+to_string(getLastClicks()[1])+", \"x2\":"+to_string(click3.x)+", \"y2\":"+to_string(click3.y)+", \"unit\": 3, \"element\": -1}");
+                switch(id){
+                  case 1:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 1: Catapult Created\" }");
+                  break;
+                  case 2:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 2: Catapult Created\" }");
+                  break;
+                  case 3:
+                  command.push_back("{\"id\": 0, \"x\": -1, \"y\":-1, \"x2\": -1, \"y2\": -1, \"unit\": -1, \"element\": -1,\"message\": \"Player 3: Catapult Created\" }");
+                  break;
+                  default:break;
+                }
+              }
+            }
+          }
+
+          firstC = true;
+          secondC = false;
+          thirdC = false;
+        }
+      }
+    }
+  }
+}
+
+
+void RenderMap::startMenu(sf::RenderWindow& window, sf::Event& event, int& player){
+  int counter =1;
+  int stop=0;
+  while(player==-1){
+    while (window.pollEvent(event)){
+      if (event.type == sf::Event::Closed){
+          stop=1;
+          window.close();
+      }
+      if (counter==1){
+        Layer startMenu("res/startMenu.png");
+        startMenu.drawSprite(window);
+        window.display();
+        if((event.type == sf::Event::MouseButtonPressed)){
+            sf::Vector2i click = getClickButton(window,event);
+            if(click.x>=630 && click.x<= 985 && click.y>= 460 && click.y<=560){
+              counter=2;
+              window.clear();
+            }
+            else if(click.x>=630 && click.x<= 985 && click.y>= 635 && click.y<=735){
+              player=4;
+              return;
+            }
+          }
+        }
+        else if (counter==2){
+          Layer startMenu("res/startMenu2.png");
+          startMenu.drawSprite(window);
+          window.display();
+          if((event.type == sf::Event::MouseButtonPressed)){
+            sf::Vector2i click = getClickButton(window,event);
+            if(click.x>=640 && click.x<= 950 && click.y>= 440 && click.y<=535){
+              player=1;
+              return;
+            }
+            else if (click.x>=640 && click.x<= 950 && click.y>= 580 && click.y<=675){
+              player=2;
+              return;
+            }
+            else if (click.x>=640 && click.x<= 950 && click.y>= 715 && click.y<=810){
+              player=0;
+              return;
+            }
+            else if (click.x>=90 && click.x<= 190 && click.y>= 760 && click.y<=820){
+              counter=1;
+              window.clear();
+            }
+          }
+        }
+        else if(stop==1){
+          break;
+        }
+      }
+      if(stop==1){
+        break;
+      }
+    }
+  }
 
 
 RenderMap::~RenderMap (){

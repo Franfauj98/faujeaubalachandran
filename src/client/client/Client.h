@@ -6,6 +6,7 @@
 #include <mutex>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <SFML/Graphics.hpp>
 
 namespace engine {
   class Engine;
@@ -37,13 +38,23 @@ namespace client {
     render::RenderMap map;
     ai::HeuristicAI heuristic;
     std::mutex m;
+    std::deque<std::string> commandList;
     // Operations
   public:
     Client ();
     void run ();
     void aiUpdating (int& counter, bool& canPlay1, bool& canPlay2, bool& canPlay3, int& controller, sf::RenderWindow& window, int& stop);
+<<<<<<< HEAD
     void engineUpdating (int& renderSignal, int& id, std::string& gold, std::string& wood, std::string& food, std::string& text, sf::RenderWindow& window, int& stop);
     void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, int& stop, int& controller, sf::RenderWindow& window);
+=======
+    void aiUpdatingServer (bool& canPlay, int& controller, sf::RenderWindow& window, int& stop, int& idPlayer);
+    void engineUpdating (int& renderSignal, int& id, std::string& gold, std::string& wood, std::string& food, std::string& text, sf::RenderWindow& window, int& stop);
+    void playerUpdating (state::Observable& principalMap, bool& canPlay1, bool& canPlay2, bool& canPlay3, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, int& stop, int& controller, int player, bool& firstC, bool& secondC, bool& thirdC, sf::RenderWindow& window);
+    void playerUpdatingServer (bool& canPlay, bool& palace1, bool& palace2, bool& palace3, int& counter, state::Empire& empire1, state::Empire& empire2, state::Empire& empire3, int& id, int& idPalace, int& idAI, int& stop, int& controller, sf::RenderWindow& window, int& idPlayer);
+    void commandSend (sf::RenderWindow& window, std::deque<std::string>& commandList, int& stop);
+    void commandRequest (sf::RenderWindow& window, int& stop, int& counter);
+>>>>>>> 5bb7cbeaacf19c33a391ff6f9924795220afe29a
     void connect ();
     // Setters and Getters
   };

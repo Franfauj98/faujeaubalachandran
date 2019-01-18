@@ -10,4 +10,7 @@
 #include "server/PlayerDB.h"
 #include "server/PlayerService.h"
 #include "server/VersionService.h"
+#include "server/Command.h"
+#include "server/CommandDB.h"
+#include "server/CommandService.h"
 #endif
